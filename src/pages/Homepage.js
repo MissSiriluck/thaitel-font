@@ -1,6 +1,7 @@
 import Footer from "../component/Footer";
 import Header from "../component/Header";
 import SearhchingBar from "../component/SearchingBar";
+import BtnPicRecommand from "../component/BtnPicRecommand";
 
 function Homepage() {
   return (
@@ -9,6 +10,7 @@ function Homepage() {
         <Header />
         <SearhchingBar />
       </div>
+      <BtnPicRecommand />
       <Footer />
     </>
   );
