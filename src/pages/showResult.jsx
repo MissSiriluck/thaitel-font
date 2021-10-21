@@ -1,10 +1,11 @@
-import Search from "../components/Search";
-import HotelCard from "../components/HotelCard";
+import Search from "../component/Search";
+import HotelCard from "../component/HotelCard";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import "../assets/css/Search.css";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+
 function showResult() {
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
