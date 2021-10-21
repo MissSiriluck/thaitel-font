@@ -58,29 +58,38 @@ function DatePicker() {
           renderInput={(startProps, endProps) => (
             <React.Fragment>
               <TextField
-                {...startProps}
+                id='filled-basic'
+                label='Filled'
+                variant='filled'
                 sx={{
                   backgroundColor: "#fff",
-                  borderRadius: 1,
+                  borderRadius: "4px",
                   border: "none",
                   mr: 1,
-                  "&:hover, &:focus": {
-                    border: "3.8px solid #64CEEF",
-                    borderRadius: "4px",
+                  "@ .MuiFilledInput-input": {
+                    border: "none",
+                    "@ :hover": {
+                      backgroundColor: "#fff",
+                      borderRadius: "4px",
+                    },
+                    "@ :action": {
+                      hoverOpacity: 1,
+                    },
                   },
                 }}
+                {...startProps}
               />
               <TextField
-                {...endProps}
+                id='filled-basic'
+                label='Filled'
+                variant='filled'
                 sx={{
                   backgroundColor: "#fff",
-                  borderRadius: 1,
+                  borderRadius: "4px",
                   border: "none",
-                  "&:hover": {
-                    border: "3.8px solid #64CEEF",
-                    borderRadius: "4px",
-                  },
+                  mr: 1,
                 }}
+                {...endProps}
               />
             </React.Fragment>
           )}

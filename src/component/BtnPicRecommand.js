@@ -2,7 +2,7 @@ import chiangmai_pic from "../img/buttons/boudewijn-huysmans-ltEBVNSr-nQ-unsplas
 import khonkaen from "../img/buttons/rob-king-Mcw7iFvOjdQ-unsplash.jpg";
 import pattaya from "../img/buttons/ashwani-verma-Hb6Gvz6Puew-unsplash.jpg";
 import phuket from "../img/buttons/jiho-lee-CIMpyhZ5mn0-unsplash.jpg";
-import { Container, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import React from "react";
 import { styled } from "@mui/material/styles";
@@ -117,7 +117,11 @@ function BtnPicRecommand() {
         }}
       >
         <Typography
-          sx={{ flexGrow: 1, fontFamily: "'Noto Sans Thai', sans-serif" }}
+          sx={{
+            flexGrow: 1,
+            fontFamily: "'Noto Sans Thai', sans-serif",
+            fontSize: "20px",
+          }}
         >
           ที่พักยอดนิยมในจังหวัดต่างๆ
         </Typography>
@@ -149,6 +153,7 @@ function BtnPicRecommand() {
                     p: 4,
                     pt: 2,
                     pb: theme => `calc(${theme.spacing(1)} + 6px)`,
+                    fontFamily: "'Noto Sans Thai', sans-serif",
                   }}
                 >
                   {image.title}

@@ -11,7 +11,7 @@ import { styled } from "@mui/system";
 
 const CustomButtonRoot = styled("span")(`
     background-color: none;
-    padding: 10px 20px;
+    padding: 12px 35px;
     border-radius: 60px;
     color: #fff;
     font-weight: 600;
@@ -42,7 +42,12 @@ function CustomButton(props) {
 
 function SearhchingBar() {
   return (
-    <Box sx={{ flexGrow: 1, m: "100px 200px" }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        m: "100px 200px",
+      }}
+    >
       <AppBar
         position='static'
         sx={{
@@ -50,10 +55,16 @@ function SearhchingBar() {
           borderRadius: 2,
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
           <SearchingBox />
           <DatePicker />
-          <CustomButton sx={{ background: "#03a9f4", color: "#fff" }}>
+          <CustomButton
+            sx={{
+              background: "#03a9f4",
+              color: "#fff",
+              fontFamily: "'Noto Sans Thai', sans-serif",
+            }}
+          >
             Search
           </CustomButton>
         </Toolbar>
