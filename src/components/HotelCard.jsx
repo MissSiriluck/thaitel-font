@@ -27,7 +27,7 @@ function HotelCard() {
           <p className="price-title">3,500 บาท</p>
         </div>
         <div className="background-hotel-left-col3">
-          <button className="detail">ดูตัวเลือกว่างที่เหลืออยู่</button>
+          <button className="detail">จอง และดูรายละเอียดเพิ่มเติม</button>
         </div>
       </div>
     </div>
