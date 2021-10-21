@@ -4,9 +4,48 @@ import { Container, Grid, TextField } from "@mui/material";
 import { FcGoogle } from "react-icons/fc";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
-import UnstyledButtonsSpan from "../service/SubmitButtons";
+import ButtonUnstyled, {
+  buttonUnstyledClasses,
+} from "@mui/core/ButtonUnstyled";
+import { styled } from "@mui/system";
+
+const CustomButtonRoot = styled("span")(`
+    background-color: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 600;
+    font-family: 'Noto Sans Thai', sans-serif;
+    font-size: 14px;
+    transition: all 200ms ease;
+    cursor: pointer;
+    box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 0 rgba(0, 127, 255, 0);
+    border: none;
+
+    &:hover {
+        background-color: #FF0005;
+    }
+
+    &.${buttonUnstyledClasses.active} {
+        background-color: #9a2a2c;
+    }
+
+    &.${buttonUnstyledClasses.focusVisible} {
+        box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 5px rgba(0, 127, 255, 0.5);
+        outline: none;
+    }
+`);
+
+function CustomButton(props) {
+  return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
+}
 
 function OwnerLogin() {
+  const handleSubmit = e => {
+    e.preventDefault();
+    // axios.post('/login', {email, password})
+  };
+
   return (
     <div>
       <Container
@@ -33,16 +72,16 @@ function OwnerLogin() {
             xs={8}
             sm={8}
           >
-            <Grid container justifyContent="start" alignItems="center" xs={10}>
-              <p
-                style={{
-                  fontSize: 40,
-                  justifyContent: "start",
-                  // margin: 0,
-                }}
-              >
+            <Grid
+              container
+              justifyContent="start"
+              alignItems="center"
+              xs={9}
+              sx={{ height: "40px" }}
+            >
+              <Typography variant="h4" component="div" sx={{ fontWeight: 600 }}>
                 เข้าสู่ระบบสำหรับผู้ปล่อยเช่า
-              </p>
+              </Typography>
             </Grid>
           </Box>
           {/*  */}
@@ -54,8 +93,8 @@ function OwnerLogin() {
             sx={{
               padding: 0,
             }}
-            xs={8}
-            md={8}
+            xs={7}
+            md={7}
           >
             <Button
               variant="contained"
@@ -82,7 +121,12 @@ function OwnerLogin() {
               <Grid
                 item
                 xs={12}
-                sx={{ display: "flex", justifyContent: "center" }}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  height: "32px",
+                  alignItems: "center",
+                }}
               >
                 <Typography variant="p">Sign In With Google</Typography>
               </Grid>
@@ -100,6 +144,9 @@ function OwnerLogin() {
             }}
             xs={12}
             md={12}
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
           >
             <Grid
               container
@@ -108,10 +155,10 @@ function OwnerLogin() {
               alignContent="center"
               sx={{
                 padding: 0,
-                marginTop: "10px",
+                marginTop: "0s",
               }}
-              xs={8}
-              md={8}
+              xs={7}
+              md={7}
             >
               <Grid
                 container
@@ -127,16 +174,7 @@ function OwnerLogin() {
                 xs={5}
                 md={5}
               />
-              <p
-                style={{
-                  display: "flex",
-                  backgroundColor: "white",
-                  justifyContent: "center",
-                  margin: 0,
-                }}
-              >
-                or
-              </p>
+              <Typography>or</Typography>
               <Grid
                 container
                 spacing={2}
@@ -166,13 +204,13 @@ function OwnerLogin() {
             >
               <Grid
                 item
-                xs={8}
-                md={8}
+                xs={7}
+                md={7}
                 sx={{
                   padding: 0,
                 }}
               >
-                <p
+                <Typography
                   style={{
                     fontSize: 16,
                     marginBottom: 8,
@@ -180,7 +218,7 @@ function OwnerLogin() {
                   }}
                 >
                   อีเมล์
-                </p>
+                </Typography>
                 <TextField
                   fullWidth
                   id="outlined-textarea fullWidth"
@@ -207,8 +245,8 @@ function OwnerLogin() {
               xs={12}
               md={12}
             >
-              <Grid item xs={8} md={8} sx={{ padding: 0 }}>
-                <p
+              <Grid item xs={7} md={7} sx={{ padding: 0 }}>
+                <Typography
                   style={{
                     fontSize: 16,
                     marginBottom: 8,
@@ -216,7 +254,7 @@ function OwnerLogin() {
                   }}
                 >
                   รหัสผ่าน
-                </p>
+                </Typography>
                 <TextField
                   fullWidth
                   id="outlined-textarea fullWidth"
@@ -246,8 +284,33 @@ function OwnerLogin() {
               xs={12}
               md={12}
             >
-              <Grid item xs={8} md={8}>
-                <UnstyledButtonsSpan>สมัครสมาชิก</UnstyledButtonsSpan>
+              <Grid
+                item
+                xs={8}
+                md={8}
+                sx={{ display: "flex", justifyContent: "center" }}
+              >
+                <CustomButton
+                  sx={{
+                    background: "#c62828",
+                    color: "#fff",
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "80%",
+                    marginTop: "10px",
+                  }}
+                  // onClick={signIn}
+                >
+                  <Typography
+                    style={{
+                      fontSize: 16,
+                      marginBottom: "1px",
+                      justifyContent: "start",
+                    }}
+                  >
+                    เข้าสู่ระบบ
+                  </Typography>
+                </CustomButton>
               </Grid>
 
               <Grid
@@ -261,14 +324,16 @@ function OwnerLogin() {
                 }}
               >
                 <Grid mr={1}>
-                  <p style={{ color: "grey", margin: 0 }}>
+                  <Typography style={{ color: "grey", margin: 0 }}>
                     คุณยังไม่เคยลงทะเบียน
-                  </p>
+                  </Typography>
                 </Grid>
                 <Grid mr={1}>
-                  <p style={{ color: "#16264D", fontWeight: 700, margin: 0 }}>
+                  <Typography
+                    style={{ color: "#16264D", fontWeight: 700, margin: 0 }}
+                  >
                     สมัครสมาชิก
-                  </p>
+                  </Typography>
                 </Grid>
               </Grid>
               <Grid
@@ -283,9 +348,9 @@ function OwnerLogin() {
                 }}
               >
                 <Grid mr={1} sx={{ padding: 0 }}>
-                  <p style={{ color: "#16264D", fontWeight: 700 }}>
+                  <Typography style={{ color: "#16264D", fontWeight: 700 }}>
                     ลืมรหัสผ่าน
-                  </p>
+                  </Typography>
                 </Grid>
               </Grid>
             </Grid>
