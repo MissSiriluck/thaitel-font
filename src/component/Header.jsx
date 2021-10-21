@@ -8,6 +8,7 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
+import BtnLogOut from "./BtnLogOut";
 
 const CustomButtonRoot = styled("span")(`
     background-color: none;
@@ -78,6 +79,7 @@ function Header() {
           >
             เข้าสู่ระบบ
           </Button>
+          <BtnLogOut />
         </Toolbar>
       </AppBar>
     </Box>
