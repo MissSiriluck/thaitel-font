@@ -48,8 +48,8 @@ function DatePicker() {
         }}
       >
         <DateRangePicker
-          startText='Check-in Date'
-          endText='Check-out Date'
+          startText="Check-in Date"
+          endText="Check-out Date"
           value={value}
           renderDay={renderWeekPickerDay}
           onChange={newValue => {
@@ -58,9 +58,9 @@ function DatePicker() {
           renderInput={(startProps, endProps) => (
             <React.Fragment>
               <TextField
-                id='filled-basic'
-                label='Filled'
-                variant='filled'
+                id="filled-basic"
+                label="Filled"
+                variant="filled"
                 sx={{
                   backgroundColor: "#fff",
                   borderRadius: "4px",
@@ -80,9 +80,9 @@ function DatePicker() {
                 {...startProps}
               />
               <TextField
-                id='filled-basic'
-                label='Filled'
-                variant='filled'
+                id="filled-basic"
+                label="Filled"
+                variant="filled"
                 sx={{
                   backgroundColor: "#fff",
                   borderRadius: "4px",

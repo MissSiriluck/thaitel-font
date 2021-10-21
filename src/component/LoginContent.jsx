@@ -9,8 +9,6 @@ import ButtonUnstyled, {
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
 
-
-
 const CustomButtonRoot = styled("span")(`
     background-color: none;
     padding: 10px 20px;
@@ -43,8 +41,7 @@ function CustomButton(props) {
 }
 
 function LoginContent() {
-
-  // export default function SignIn() {
+  // function SignIn() {
   //   const handleSubmit = (event) => {
   //     event.preventDefault();
   //     const data = new FormData(event.currentTarget);
@@ -54,6 +51,12 @@ function LoginContent() {
   //       password: data.get('password'),
   //     });
   //   };
+  // }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    // axios.post('/login', {email, password})
+  };
 
   return (
     <div>
@@ -68,7 +71,7 @@ function LoginContent() {
           alignItems="center"
           justifyContent="center"
           sx={{
-            height: "56vh",
+            height: "60vh",
             display: "flex",
             flexDirection: "column",
             padding: 0,
@@ -130,7 +133,12 @@ function LoginContent() {
               <Grid
                 item
                 xs={12}
-                sx={{ display: "flex", justifyContent: "center" }}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  height: "32px",
+                  alignItems: "center",
+                }}
               >
                 <Typography variant="p">Sign In With Google</Typography>
               </Grid>
@@ -148,6 +156,9 @@ function LoginContent() {
             }}
             xs={12}
             md={12}
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
           >
             <Grid
               container
@@ -300,6 +311,7 @@ function LoginContent() {
                     width: "80%",
                     marginTop: "10px",
                   }}
+                  // onClick={signIn}
                 >
                   <Typography
                     style={{
