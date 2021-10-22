@@ -1,5 +1,5 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme} from "@mui/material/styles";
 import "./App.css";
 import BookingConfirmationPage from "./pages/BookingConfirmationPage";
 import ConfirmInfoPage from "./pages/ConfirmInfoPage";
@@ -12,11 +12,11 @@ import OwnerRegisterPage from "./pages/OwnerRegisterPage";
 import AddCom from "./pages/AddCom";
 
 function App() {
-  const theme = createTheme({
-    typography: {
-      fontFamily: ["Noto Sans Thai", "sans-serif"].join(","),
-    },
-  });
+  // const theme = createTheme({
+  //   typography: {
+  //     fontFamily: ["Noto Sans Thai", "sans-serif"].join(","),
+  //   },
+  // });
 
   return (
     <div className='App'>
