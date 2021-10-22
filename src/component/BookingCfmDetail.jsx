@@ -32,7 +32,7 @@ const CustomButtonRoot = styled("span")(`
     }
 `);
 
-function CustomButton(props) {
+export function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
