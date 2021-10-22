@@ -12,7 +12,41 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import UnstyledButtonsSpan from "../service/SubmitButtons";
+import ButtonUnstyled, {
+  buttonUnstyledClasses,
+} from "@mui/core/ButtonUnstyled";
+import { styled } from "@mui/system";
+
+const CustomButtonRoot = styled("span")(`
+    background-color: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 600;
+    font-family: 'Noto Sans Thai', sans-serif;
+    font-size: 14px;
+    transition: all 200ms ease;
+    cursor: pointer;
+    box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 0 rgba(0, 127, 255, 0);
+    border: none;
+
+    &:hover {
+        background-color: #FF0005;
+    }
+
+    &.${buttonUnstyledClasses.active} {
+        background-color: #9a2a2c;
+    }
+
+    &.${buttonUnstyledClasses.focusVisible} {
+        box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 5px rgba(0, 127, 255, 0.5);
+        outline: none;
+    }
+`);
+
+function CustomButton(props) {
+  return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
+}
 
 function OwnerRegister() {
   return (
@@ -56,7 +90,7 @@ function OwnerRegister() {
                   ข้อมูลผู้ให้บริการที่พัก
                 </Typography>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={5.8} sx={{ padding: 0, marginLeft: "-16px" }}>
                 <Typography style={{ margin: 0, fontSize: "16px" }}>
                   อีเมล์
                 </Typography>
@@ -70,9 +104,10 @@ function OwnerRegister() {
                   autoComplete="email"
                   autoFocus
                   size="small"
+                  sx={{ marginTop: "8px" }}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={5.8}>
                 <Typography style={{ margin: 0, fontSize: "16px" }}>
                   เบอร์โทรศัพท์
                 </Typography>
@@ -83,10 +118,11 @@ function OwnerRegister() {
                   name="password"
                   label="เบอร์โทรศัพท์"
                   size="small"
+                  sx={{ marginTop: "8px" }}
                 />
               </Grid>
 
-              <Grid item xs={6}>
+              <Grid item xs={5.8} sx={{ padding: 0, marginLeft: "-16px" }}>
                 <Typography style={{ margin: 0, fontSize: "16px" }}>
                   รหัสผ่าน
                 </Typography>
@@ -102,10 +138,11 @@ function OwnerRegister() {
                   autoComplete="current-password"
                   autoFocus
                   size="small"
+                  sx={{ marginTop: "8px" }}
                 />
               </Grid>
 
-              <Grid item xs={6}>
+              <Grid item xs={5.8}>
                 <Typography style={{ margin: 0, fontSize: "16px" }}>
                   ยืนยันรหัสผ่าน
                 </Typography>
@@ -114,11 +151,12 @@ function OwnerRegister() {
                   margin="normal"
                   required
                   fullWidth
-                  id="email"
+                  id=""
                   label="รหัสผ่าน"
                   placeholder="กรอกรหัสผ่าน"
                   autoFocus
                   size="small"
+                  sx={{ marginTop: "8px" }}
                 />
               </Grid>
             </Grid>
@@ -129,46 +167,62 @@ function OwnerRegister() {
               sx={{
                 border: "2px solid #cfcfcf",
                 borderRadius: "5px",
-                paddingBottom: "20px",
+                paddingBottom: "30px",
               }}
             >
               <Grid
                 item
-                xs={6}
+                xs={5.8}
                 sx={{ display: "flex", flexDirection: "column" }}
               >
-                <Grid item xs={12}>
+                <Grid
+                  item
+                  xs={12}
+                  sx={{ marginTop: "12px", marginLeft: "4px" }}
+                >
                   <Typography style={{ margin: 0, fontSize: "16px" }}>
-                    อีเมล์
+                    ชื่อผู้ติดต่อ
                   </Typography>
                   <TextField
                     margin="normal"
                     required
                     fullWidth
-                    id="email"
-                    label="อีเมล์"
+                    id=""
+                    label="ชื่อผู้ติดต่อ"
                     name="email"
                     autoComplete="email"
                     autoFocus
                     size="small"
+                    sx={{ marginTop: "8px" }}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid
+                  item
+                  xs={12}
+                  sx={{ marginTop: "12px", marginLeft: "4px" }}
+                >
                   <Typography style={{ margin: 0, fontSize: "16px" }}>
-                    เบอร์โทรศัพท์
+                    นามสกุลผู้ติดต่อ
                   </Typography>
                   <TextField
                     margin="normal"
                     required
                     fullWidth
                     name="password"
-                    label="เบอร์โทรศัพท์"
+                    label="นามสกุลผู้ติดต่อ"
+                    placeholder="กรอกนามสกุลผู้ติดต่อ"
                     size="small"
+                    sx={{ marginTop: "8px" }}
                   />
                 </Grid>
-                <Grid item xs={12}>
+
+                <Grid
+                  item
+                  xs={12}
+                  sx={{ marginTop: "12px", marginLeft: "4px" }}
+                >
                   <Typography style={{ margin: 0, fontSize: "16px" }}>
-                    รหัสผ่าน
+                    หมายเลขบัตรประชาชน
                   </Typography>
 
                   <TextField
@@ -176,16 +230,17 @@ function OwnerRegister() {
                     margin="normal"
                     required
                     fullWidth
-                    label="รหัสผ่าน"
-                    placeholder="กรอกรหัสผ่าน"
+                    label="หมายเลขบัตรประชาชน"
+                    placeholder="กรอกหมายเลขบัตรประชาชน"
                     type="password"
                     autoComplete="current-password"
                     autoFocus
                     size="small"
+                    sx={{ marginTop: "8px" }}
                   />
                 </Grid>
               </Grid>
-              <Grid item xs={5.8} sx={{ display: "flex" }}>
+              <Grid item xs={5.9} sx={{ display: "flex" }}>
                 <Box
                   item
                   xs={12}
@@ -195,11 +250,14 @@ function OwnerRegister() {
                     margin: "5px",
                     alignItems: "center",
                     borderRadius: "5px",
+                    height: "100%",
+                    justifyContent: "center",
                   }}
                 >
                   <Typography
                     style={{
                       display: "flex",
+                      alignItems: "center",
                       justifyContent: "center",
                       height: "100%",
                     }}
@@ -210,10 +268,41 @@ function OwnerRegister() {
                 {/*  */}
               </Grid>
             </Grid>
+            <Grid container xs={12} justifyContent="end">
+              <Grid
+                item
+                xs={3}
+                md={3}
+                sx={{
+                  display: "flex",
+                  justifyContent: "end",
+                  marginBottom: "25px",
+                }}
+              >
+                <CustomButton
+                  sx={{
+                    background: "#c62828",
+                    color: "#fff",
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "92%",
+                    marginTop: "10px",
+                    marginBottom: "50px",
+                  }}
+                >
+                  <Typography
+                    style={{
+                      fontSize: 16,
+                      marginBottom: "1px",
+                      justifyContent: "start",
+                    }}
+                  >
+                    ดำเนินการต่อ
+                  </Typography>
+                </CustomButton>
+              </Grid>
+            </Grid>
           </Box>
-        </Grid>
-        <Grid xs={3}>
-          <UnstyledButtonsSpan> ดำเนินการต่อ </UnstyledButtonsSpan>
         </Grid>
       </Grid>
     </Container>

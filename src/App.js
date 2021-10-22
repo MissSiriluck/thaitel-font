@@ -4,11 +4,15 @@ import "./App.css";
 import BookingConfirmationPage from "./pages/BookingConfirmationPage";
 import ConfirmInfoPage from "./pages/ConfirmInfoPage";
 import Homepage from "./pages/Homepage";
-import ShowResult from "./pages/ShowResult";
+
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import OwnerLoginPage from "./pages/OwnerLoginPage";
 import OwnerRegisterPage from "./pages/OwnerRegisterPage";
+import ShowResult from "./pages/showResult";
+
+import ResidentRegiterPage2Page from "./pages/ResidentRegiterPage2Page";
+import ResidentRegiterPage3Page from "./pages/ResidentRegiterPage3Page";
 
 function App() {
   const theme = createTheme({
@@ -18,7 +22,7 @@ function App() {
   });
 
   return (
-    <div className='App'>
+    <div className="App">
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Homepage} />
@@ -29,10 +33,20 @@ function App() {
           <Route exact path="/showresult" component={ShowResult} />
           <Route
             exact
-            path='/BookingConfirmation'
+            path="/BookingConfirmation"
             component={BookingConfirmationPage}
           />
-          <Route exact path='/ConfirmInformation' component={ConfirmInfoPage} />
+          <Route exact path="/ConfirmInformation" component={ConfirmInfoPage} />
+          <Route
+            exact
+            path="/residentregisterpage2"
+            component={ResidentRegiterPage2Page}
+          />
+          <Route
+            exact
+            path="/residentregisterpage3"
+            component={ResidentRegiterPage3Page}
+          />
         </Switch>
       </BrowserRouter>
     </div>
