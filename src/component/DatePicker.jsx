@@ -48,8 +48,8 @@ function DatePicker() {
         }}
       >
         <DateRangePicker
-          startText="Check-in Date"
-          endText="Check-out Date"
+          startText='Check-in Date'
+          endText='Check-out Date'
           value={value}
           renderDay={renderWeekPickerDay}
           onChange={newValue => {
@@ -58,9 +58,9 @@ function DatePicker() {
           renderInput={(startProps, endProps) => (
             <React.Fragment>
               <TextField
-                id="filled-basic"
-                label="Filled"
-                variant="filled"
+                id='filled-basic'
+                label='Filled'
+                variant='filled'
                 sx={{
                   backgroundColor: "#fff",
                   borderRadius: "4px",
@@ -71,23 +71,32 @@ function DatePicker() {
                     "@ :hover": {
                       backgroundColor: "#fff",
                       borderRadius: "4px",
+                      outline: "64CEEF70 solid 3px",
+                      boxShadow: "#64CEEF 0px 0px 0px 10px",
                     },
                     "@ :action": {
-                      hoverOpacity: 1,
+                      outline: "64CEEF70 solid 3px",
+                      boxShadow: "#64CEEF 0px 0px 0px 10px",
                     },
                   },
                 }}
                 {...startProps}
               />
               <TextField
-                id="filled-basic"
-                label="Filled"
-                variant="filled"
+                id='filled-basic'
+                label='Filled'
+                variant='filled'
                 sx={{
                   backgroundColor: "#fff",
                   borderRadius: "4px",
                   border: "none",
                   mr: 1,
+                  "@ :hover": {
+                    backgroundColor: "#fff",
+                    borderRadius: "4px",
+                    outline: "64CEEF70 solid 3px",
+                    boxShadow: "#64CEEF 0px 0px 0px 10px",
+                  },
                 }}
                 {...endProps}
               />

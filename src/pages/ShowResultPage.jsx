@@ -1,12 +1,13 @@
 import Search from "../component/Search";
 import HotelCard from "../component/HotelCard";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import "../assets/css/Search.css";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
 
-function ShowResult() {
+function ShowResultPage() {
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
@@ -15,19 +16,19 @@ function ShowResult() {
   }));
   return (
     <div>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={3}>
-            <Item>
-              <Search />
-            </Item>
-          </Grid>
-          <Grid item xs={9}>
-            <HotelCard />
-          </Grid>
+      <Header />
+
+      <Grid container sx={{ width: "1200px", alignSelf: "center" }}>
+        <Grid item xs={3}>
+          <Search />
         </Grid>
-      </Box>
+        <Grid item xs={9}>
+          <HotelCard />
+        </Grid>
+      </Grid>
+
+      <Footer />
     </div>
   );
 }
-export default ShowResult;
+export default ShowResultPage;

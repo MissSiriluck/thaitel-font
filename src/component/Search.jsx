@@ -54,31 +54,31 @@ function Search() {
   }
   return (
     <div>
-      <Grid className="search-background">
-        <Typography className="find">ค้นหา</Typography>
-        <Typography className="find-title">จุดหมาย/ชื่อที่พัก</Typography>
+      <Grid className='search-background'>
+        <Typography className='find'>ค้นหา</Typography>
+        <Typography className='find-title'>จุดหมาย/ชื่อที่พัก</Typography>
         {/* <TextField
           sx={{ ml: 1, flex: 1, backgroundColor: "white" }}
           placeholder="จุดหมาย/ชื่อที่พัก"
           inputProps={{ "aria-label": "search google maps" }}
           // className="search-input" //search bar??
         /> */}
-        <Typography className="find-title">วันที่ เช็คอิน</Typography>
+        <Typography className='find-title'>วันที่ เช็คอิน</Typography>
         <Grid style={{ position: "relative", display: "inline-block" }}></Grid>
         <Grid>
           <LocalizationProvider
             dateAdapter={AdapterDateFns}
-            className="date-picker"
+            className='date-picker'
           >
             <DatePicker
-              label="Basic example"
+              label='Basic example'
               value={value}
               onChange={newValue => {
                 setValue(newValue);
               }}
               renderInput={params => <TextField {...params} />}
-              className="date-picker"
-              color="primary"
+              className='date-picker'
+              color='primary'
             />
             {/* <DesktopDatePicker
               label="Date desktop"
@@ -92,13 +92,13 @@ function Search() {
             /> */}
           </LocalizationProvider>
         </Grid>
-        <Grid className="find-title">
+        <Grid className='find-title'>
           <Typography>วันที่ เช็คเอาท์</Typography>
         </Grid>
         <Grid>
           <LocalizationProvider
             dateAdapter={AdapterDateFns}
-            className="date-picker"
+            className='date-picker'
           >
             {/* <DatePicker
               label="Basic example"
@@ -111,27 +111,26 @@ function Search() {
               color="primary"
               sx={{ backgroundColor: "white" }}
             /> */}
-            
           </LocalizationProvider>
         </Grid>
         <Grid style={{ position: "relative", display: "inline-block" }}></Grid>
-        <Typography className="find-title">
+        <Typography className='find-title'>
           จำนวนผู้เข้าพัก และจำนวนห้อง
         </Typography>
 
         <Grid>
           <Button
-            id="basic-button"
-            aria-controls="basic-menu"
-            aria-haspopup="true"
+            id='basic-button'
+            aria-controls='basic-menu'
+            aria-haspopup='true'
             aria-expanded={open ? "true" : undefined}
             onClick={handleClick}
-            className="button-picker"
+            className='button-picker'
           >
             <Typography>จำนวนผู้เข้าพัก และจำนวนห้อง</Typography>
           </Button>
           <Menu
-            id="basic-menu"
+            id='basic-menu'
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
@@ -140,30 +139,30 @@ function Search() {
             }}
           >
             <MenuItem onClick={handleClose}>
-              <span className="type">
+              <span className='type'>
                 <Typography>Guest</Typography>
               </span>
 
               <Box sx={{ "& > :not(style)": { m: 1 } }}>
-                <Fab color="primary" aria-label="minus">
+                <Fab color='primary' aria-label='minus'>
                   <RemoveIcon onClick={handleMinusGuest} />
                 </Fab>
                 <span>
                   <Typography>{guest}</Typography>
                 </span>
-                <Fab color="primary" aria-label="add">
+                <Fab color='primary' aria-label='add'>
                   <AddIcon onClick={handleAddGuest} />
                 </Fab>
               </Box>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <span className="type">Room</span>
+              <span className='type'>Room</span>
               <Box sx={{ "& > :not(style)": { m: 1 } }}>
-                <Fab color="primary" aria-label="minus">
+                <Fab size='small' color='primary' aria-label='minus'>
                   <RemoveIcon onClick={handleMinusRoom} />
                 </Fab>
                 <span>{room}</span>
-                <Fab color="primary" aria-label="add">
+                <Fab size='small' color='primary' aria-label='add'>
                   <AddIcon onClick={handleAddRoom} />
                 </Fab>
               </Box>
@@ -171,7 +170,7 @@ function Search() {
           </Menu>
         </Grid>
         <Grid>
-          <button className="sumbit">Search</button>
+          <button className='sumbit'>Search</button>
         </Grid>
       </Grid>
     </div>

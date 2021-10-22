@@ -34,7 +34,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: theme.spacing(6),
     width: "20vw",
     "&:hover, &:focus": {
-      border: "1px solid #64CEEF",
+      outline: "#64CEEF70 solid 3px",
       borderRadius: "4px",
       boxShadow: "#64CEEF30 0px 0px 0px 3px",
     },

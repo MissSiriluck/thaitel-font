@@ -8,6 +8,7 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
+import BtnGuestnRoom from "./BtnGuestnRoom";
 
 const CustomButtonRoot = styled("span")(`
     background-color: none;
@@ -58,11 +59,13 @@ function SearhchingBar() {
         <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
           <SearchingBox />
           <DatePicker />
+          <BtnGuestnRoom />
           <CustomButton
             sx={{
               background: "#03a9f4",
               color: "#fff",
               fontFamily: "'Noto Sans Thai', sans-serif",
+              ml: 3,
             }}
           >
             Search

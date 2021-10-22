@@ -64,6 +64,7 @@ function BtnLogOut() {
         placement='bottom-start'
         transition
         disablePortal
+        sx={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)" }}
       >
         {({ TransitionProps, placement }) => (
           <Grow
