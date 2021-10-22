@@ -1,16 +1,16 @@
 import React from "react";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
-import ResidentRegiterPage3 from "../component/ResidentRegiterPage3";
+import ResidentRegiterPage2 from "../component/ResidentRegiterPage2";
 
-function ResidentRegiterPage3Page() {
+function ResidentRegiterPage2Page() {
   return (
     <div>
       <Header />
-      <ResidentRegiterPage3 />
+      <ResidentRegiterPage2 />
       <Footer />
     </div>
   );
 }
 
-export default ResidentRegiterPage3Page;
+export default ResidentRegiterPage2Page;

@@ -12,6 +12,7 @@ import OwnerRegisterPage from "./pages/OwnerRegisterPage";
 import ShowResult from "./pages/showResult";
 
 import ResidentRegiterPage2Page from "./pages/ResidentRegiterPage2Page";
+import ResidentRegiterPage3Page from "./pages/ResidentRegiterPage3Page";
 
 function App() {
   const theme = createTheme({
@@ -36,8 +37,16 @@ function App() {
             component={BookingConfirmationPage}
           />
           <Route exact path="/ConfirmInformation" component={ConfirmInfoPage} />
-          <Route exact path="/residentregisterpage2" component={ResidentRegiterPage2Page} />
-          
+          <Route
+            exact
+            path="/residentregisterpage2"
+            component={ResidentRegiterPage2Page}
+          />
+          <Route
+            exact
+            path="/residentregisterpage3"
+            component={ResidentRegiterPage3Page}
+          />
         </Switch>
       </BrowserRouter>
     </div>
