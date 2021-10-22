@@ -1,0 +1,62 @@
+.background-hotel-name {
+  width: 58vw;
+  height: 25vh;
+  border: 1px solid black;
+  margin: auto;
+  margin-top: 40px;
+  border-radius: 10px;
+}
+.addcom-hotel-name {
+  font-size: 35px;
+  margin: 0px;
+  width: 25vw;
+  height: 5vh;
+  margin-left: 2vw;
+  margin-top: 2vh;
+  font-family: '"Noto Sans Thai", sans-serif';
+}
+.addcom-hotel-detail {
+  font-size: 20px;
+  text-align: left;
+  padding: 20px;
+  width: 55vw;
+  height: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: '"Noto Sans Thai", sans-serif';
+}
+.service-in-hotel {
+  width: 58vw;
+  height: 42vh;
+  border: 1px solid black;
+  margin: auto;
+  margin-top: 40px;
+  border-radius: 10px;
+}
+.service-title {
+  font-size: 30px;
+  margin: 0px;
+  width: 20vw;
+  height: 5vh;
+  margin-left: 40px;
+  margin-top: 2vh;
+}
+.icon-title {
+  font-size: 25px;
+  font-weight: bold;
+  margin-left: 20px;
+}
+.icon-background {
+  width: 50vw;
+  height: 22vh;
+  display: flex;
+  flex-wrap: wrap;
+  /* margin-left: auto;
+  margin-right: auto */
+  margin-left: 5vw;
+}
+.icon-divide {
+  margin-top: 10px;
+  margin-left: 25px;
+  margin-right: 10px;
+}

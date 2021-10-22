@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import OwnerLoginPage from "./pages/OwnerLoginPage";
 import OwnerRegisterPage from "./pages/OwnerRegisterPage";
+import AddCom from "./pages/AddCom";
 
 function App() {
   const theme = createTheme({
@@ -27,6 +28,7 @@ function App() {
           <Route exact path="/ownerlogin" component={OwnerLoginPage} />
           <Route exact path="/ownerregister" component={OwnerRegisterPage} />
           <Route exact path="/showresult" component={ShowResult} />
+          <Route exact path="/addcom" component={AddCom} />
           <Route
             exact
             path='/BookingConfirmation'
