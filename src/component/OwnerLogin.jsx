@@ -128,7 +128,12 @@ function OwnerLogin() {
                   alignItems: "center",
                 }}
               >
-                <Typography variant="p">Sign In With Google</Typography>
+                <Typography
+                  variant="p"
+                  sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
+                >
+                  Sign In With Google
+                </Typography>
               </Grid>
             </Button>
           </Grid>
@@ -167,14 +172,14 @@ function OwnerLogin() {
                 alignItems="center"
                 sx={{
                   padding: 0,
-                  borderBottom: "2px solid #cfcfcf",
+                  borderBottom: "2px solid #C4C4C4",
                   height: 15,
                   margin: 0,
                 }}
                 xs={5}
                 md={5}
               />
-              <Typography>or</Typography>
+              <Typography sx={{ color: "#C4C4C4" }}>or</Typography>
               <Grid
                 container
                 spacing={2}
@@ -182,7 +187,7 @@ function OwnerLogin() {
                 alignItems="center"
                 sx={{
                   padding: 0,
-                  borderBottom: "2px solid #cfcfcf",
+                  borderBottom: "2px solid #C4C4C4",
                   height: 15,
                   margin: 0,
                 }}
