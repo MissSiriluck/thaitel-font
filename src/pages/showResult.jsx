@@ -6,7 +6,7 @@ import "../assets/css/Search.css";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 
-function showResult() {
+function ShowResult() {
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
@@ -30,4 +30,4 @@ function showResult() {
     </div>
   );
 }
-export default showResult;
+export default ShowResult;

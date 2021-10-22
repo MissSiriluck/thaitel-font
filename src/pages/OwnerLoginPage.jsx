@@ -1,16 +1,17 @@
 import Footer from "../component/Footer";
 import Header from "../component/Header";
 import LoginContent from "../component/LoginContent";
+import OwnerLogin from "../component/OwnerLogin";
 import OwnerRegister from "../component/OwnerRegister";
 
-function LoginPage() {
+function OwnerLoginPage() {
   return (
     <>
       <Header />
-      <OwnerRegister />
+      <OwnerLogin />
       <Footer />
     </>
   );
 }
 
-export default LoginPage;
+export default OwnerLoginPage;
