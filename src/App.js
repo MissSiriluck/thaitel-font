@@ -1,5 +1,5 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import "./App.css";
 import BookingConfirmationPage from "./pages/BookingConfirmationPage";
 import ConfirmInfoPage from "./pages/ConfirmInfoPage";
@@ -16,13 +16,14 @@ import ResidentRegisterPage5Page from "./pages/ResidentRegisterPage5Page";
 import ResidentRegisterPage6Page from "./pages/ResidentRegisterPage6Page";
 import ResidentRegisterPage7Page from "./pages/ResidentRegisterPage7Page";
 import ResidentRegisterPage8Page from "./pages/ResidentRegisterPage8Page";
+import AddCom from "./pages/AddCom";
 
 function App() {
-  const theme = createTheme({
-    typography: {
-      fontFamily: ["Noto Sans Thai", "sans-serif"].join(","),
-    },
-  });
+  // const theme = createTheme({
+  //   typography: {
+  //     fontFamily: ["Noto Sans Thai", "sans-serif"].join(","),
+  //   },
+  // });
 
   return (
     <div className='App'>
@@ -34,6 +35,7 @@ function App() {
           <Route exact path='/ownerlogin' component={OwnerLoginPage} />
           <Route exact path='/ownerregister' component={OwnerRegisterPage} />
           <Route exact path='/mainmenu' component={ShowResultPage} />
+          <Route exact path='/addcom' component={AddCom} />
           <Route
             exact
             path='/BookingConfirmation'
