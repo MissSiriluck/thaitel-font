@@ -5,42 +5,8 @@ import BusinessIcon from "@mui/icons-material/Business";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import Typography from "@mui/material/Typography";
 import React from "react";
-import ButtonUnstyled, {
-  buttonUnstyledClasses,
-} from "@mui/core/ButtonUnstyled";
 import { height, styled } from "@mui/system";
 import CardResidentRegisterPage2 from "./CardResidentRegisterPage2";
-
-const CustomButtonRoot = styled("span")(`
-    background-color: none;
-    padding: 10px 20px;
-    border-radius: 40px;
-    color: #fff;
-    font-weight: 600;
-    font-family: 'Noto Sans Thai', sans-serif;
-    font-size: 14px;
-    transition: all 200ms ease;
-    cursor: pointer;
-    box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 0 rgba(0, 127, 255, 0);
-    border: none;
-
-    &:hover {
-        background-color: #FF0005;
-    }
-
-    &.${buttonUnstyledClasses.active} {
-        background-color: #9a2a2c;
-    }
-
-    &.${buttonUnstyledClasses.focusVisible} {
-        box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 5px rgba(0, 127, 255, 0.5);
-        outline: none;
-    }
-`);
-
-function CustomButton(props) {
-  return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
-}
 
 const styles = {
   paperContainer: {
