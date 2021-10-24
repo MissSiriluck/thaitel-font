@@ -20,12 +20,6 @@ function ShowResultPage() {
           </Grid>
           <Grid item xs={9}>
             <HotelCard />
-            <HotelCard />
-            <HotelCard />
-            <HotelCard />
-            <HotelCard />
-            <HotelCard />
-            <HotelCard />
           </Grid>
         </Grid>
       </Container>
