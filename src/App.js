@@ -13,6 +13,11 @@ import ShowResult from "./pages/showResult";
 
 import ResidentRegiterPage2Page from "./pages/ResidentRegiterPage2Page";
 import ResidentRegiterPage3Page from "./pages/ResidentRegiterPage3Page";
+import ResidentRegisterPage4Page from "./pages/ResidentRegisterPage4Page";
+import ResidentRegisterPage5Page from "./pages/ResidentRegisterPage5Page";
+import ResidentRegisterPage6Page from "./pages/ResidentRegisterPage6Page";
+import ResidentRegisterPage7Page from "./pages/ResidentRegisterPage7Page";
+import ResidentRegisterPage8Page from "./pages/ResidentRegisterPage8Page";
 
 function App() {
   const theme = createTheme({
@@ -46,6 +51,31 @@ function App() {
             exact
             path="/residentregisterpage3"
             component={ResidentRegiterPage3Page}
+          />
+          <Route
+            exact
+            path="/residentregisterpage4"
+            component={ResidentRegisterPage4Page}
+          />
+          <Route
+            exact
+            path="/residentregisterpage5"
+            component={ResidentRegisterPage5Page}
+          />
+          <Route
+            exact
+            path="/residentregisterpage6"
+            component={ResidentRegisterPage6Page}
+          />
+          <Route
+            exact
+            path="/residentregisterpage7"
+            component={ResidentRegisterPage7Page}
+          />
+          <Route
+            exact
+            path="/residentregisterpage8"
+            component={ResidentRegisterPage8Page}
           />
         </Switch>
       </BrowserRouter>
