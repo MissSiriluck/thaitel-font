@@ -9,7 +9,6 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import OwnerLoginPage from "./pages/OwnerLoginPage";
 import OwnerRegisterPage from "./pages/OwnerRegisterPage";
-import ShowResult from "./pages/showResult";
 
 import ResidentRegiterPage2Page from "./pages/ResidentRegiterPage2Page";
 import ResidentRegiterPage3Page from "./pages/ResidentRegiterPage3Page";
