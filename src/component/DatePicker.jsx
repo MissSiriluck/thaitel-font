@@ -3,10 +3,37 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-// import Box from "@mui/material/Box";
 import DateRangePicker from "@mui/lab/DateRangePicker";
 import MuiDateRangePickerDay from "@mui/lab/DateRangePickerDay";
 import { styled } from "@mui/material/styles";
+import { alpha } from "@mui/system";
+
+//customize input date picker
+const RedditTextField = styled(props => (
+  <TextField InputProps={{ disableUnderline: true }} {...props} />
+))(({ theme }) => ({
+  "& .MuiFilledInput-root": {
+    border: "1px solid #e2e2e1",
+    overflow: "hidden",
+    borderRadius: 4,
+    backgroundColor: "#fff",
+    transition: theme.transitions.create([
+      "border-color",
+      "background-color",
+      "box-shadow",
+    ]),
+    "&:hover": {
+      backgroundColor: "transparent",
+      outline: "#64CEEF70 solid 3px",
+      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+    },
+    "&.Mui-focused": {
+      backgroundColor: "transparent",
+      outline: "#64CEEF70 solid 3px",
+      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+    },
+  },
+}));
 
 // Customized day rendering
 const DateRangePickerDay = styled(MuiDateRangePickerDay)(
@@ -57,7 +84,7 @@ function DatePicker() {
           }}
           renderInput={(startProps, endProps) => (
             <React.Fragment>
-              <TextField
+              <RedditTextField
                 id='filled-basic'
                 label='Filled'
                 variant='filled'
@@ -82,7 +109,7 @@ function DatePicker() {
                 }}
                 {...startProps}
               />
-              <TextField
+              <RedditTextField
                 id='filled-basic'
                 label='Filled'
                 variant='filled'

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import { Box, Fab, Grid, styled } from "@mui/material";
@@ -10,7 +10,6 @@ import ButtonUnstyled, {
 
 // customize button
 const CustomButtonRoot = styled("span")(`
-    padding: 15px 50px;
     border-radius: 4px;   
     font-family: 'Noto Sans Thai', sans-serif;    
     transition: all 200ms ease;
@@ -18,7 +17,7 @@ const CustomButtonRoot = styled("span")(`
 
     &:hover {
         outline: #64CEEF70 solid 3px;
-        box-shadow: "#64CEEF 0px 0px 0px 10px";
+        box-shadow: "#64CEEF 0px 0px 0px 10px",
     }
 
     &.${buttonUnstyledClasses.active} {
@@ -37,7 +36,7 @@ export function CustomButton(props) {
 //customize popover
 const PopoverStyle = {};
 
-function BtnGuestnRoom() {
+function BtnGuestnRoomForSearch() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [room, setRoom] = React.useState(1);
   const [guest, setGuest] = React.useState(1);
@@ -77,12 +76,19 @@ function BtnGuestnRoom() {
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <div>
+    <Grid container sx={{ mb: 5 }}>
       <CustomButton
         aria-describedby={id}
         variant='contained'
         onClick={handleClick}
-        sx={{ background: "#fff", color: "#000", width: "500px" }}
+        sx={{
+          background: "#fff",
+          color: "#000",
+          width: "500px",
+          p: 2,
+          flexGlow: 1,
+          textAlign: "center",
+        }}
       >
         {`จำนวนผู้เข้าพัก ${guest} คน, ${room}  ห้อง`}
       </CustomButton>
@@ -96,9 +102,9 @@ function BtnGuestnRoom() {
           horizontal: "left",
         }}
         style={PopoverStyle}
-        sx={{ width: "100%", mt: "1px", flexGlow: 1 }}
+        sx={{ mt: "1px", flexGlow: 1 }}
       >
-        <Grid container sx={{ width: "280px" }}>
+        <Grid container sx={{ width: "270px" }}>
           <Grid item xs={6}>
             <Box sx={{ flexGlow: 1 }}>
               <span className='type' sx={{ pr: 5, mr: 4 }}>
@@ -161,8 +167,8 @@ function BtnGuestnRoom() {
           </Grid>
         </Grid>
       </Popover>
-    </div>
+    </Grid>
   );
 }
 
-export default BtnGuestnRoom;
+export default BtnGuestnRoomForSearch;

@@ -1,6 +1,5 @@
 import React from "react";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -10,6 +9,7 @@ import ButtonUnstyled, {
 import { styled } from "@mui/system";
 import BtnLogOut from "./BtnLogOut";
 
+//customize button blue
 const CustomButtonRoot = styled("span")(`
     background-color: none;
     padding: 10px 20px;
@@ -43,46 +43,53 @@ function CustomButton(props) {
 
 function Header() {
   return (
-    <Box
+    <AppBar
+      position='fixed'
       sx={{
-        flexGrow: 1,
-        margin: 4,
+        borderRadius: 2,
+        backgroundColor: "#07133C",
+        top: "3%",
+        left: "2%",
+        right: "2%",
+        width: "auto",
+        p: 1,
       }}
     >
-      <AppBar
-        position='static'
-        sx={{
-          borderRadius: 2,
-          backgroundColor: "#07133C",
-        }}
-      >
-        <Toolbar>
-          <Typography
-            variant='h6'
-            component='div'
-            sx={{ flexGrow: 1, fontFamily: "'Noto Sans Thai', sans-serif" }}
-          >
-            THAITEL
-          </Typography>
-          <CustomButton sx={{ background: "#c62828", color: "#fff" }}>
-            ลงทะเบียนที่พักของท่าน
-          </CustomButton>
-          <Button
-            color='inherit'
-            sx={{ marginLeft: 2, fontFamily: "'Noto Sans Thai', sans-serif" }}
-          >
-            สมัครสมาชิก
-          </Button>
-          <Button
-            color='inherit'
-            sx={{ marginLeft: 2, fontFamily: "'Noto Sans Thai', sans-serif" }}
-          >
-            เข้าสู่ระบบ
-          </Button>
-          <BtnLogOut />
-        </Toolbar>
-      </AppBar>
-    </Box>
+      <Toolbar>
+        <Typography
+          variant='h6'
+          component='div'
+          sx={{
+            flexGrow: 1,
+            fontFamily: "'Noto Sans Thai', sans-serif",
+          }}
+        >
+          THAITEL
+        </Typography>
+        <CustomButton sx={{ background: "#c62828", color: "#fff" }}>
+          ลงทะเบียนที่พักของท่าน
+        </CustomButton>
+        <Button
+          color='inherit'
+          sx={{
+            marginLeft: 2,
+            fontFamily: "'Noto Sans Thai', sans-serif",
+          }}
+        >
+          สมัครสมาชิก
+        </Button>
+        <Button
+          color='inherit'
+          sx={{
+            marginLeft: 2,
+            fontFamily: "'Noto Sans Thai', sans-serif",
+          }}
+        >
+          เข้าสู่ระบบ
+        </Button>
+        <BtnLogOut />
+      </Toolbar>
+    </AppBar>
   );
 }
 

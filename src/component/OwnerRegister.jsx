@@ -16,7 +16,10 @@ import UnstyledButtonsSpan from "../service/SubmitButtons";
 
 function OwnerRegister() {
   return (
-    <Container maxWidth="lg" sx={{ justifyContent: "center", display: "flex" }}>
+    <Container
+      maxWidth='lg'
+      sx={{ justifyContent: "center", display: "flex", mt: 14 }}
+    >
       <Grid
         container
         spacing={2}
@@ -32,7 +35,7 @@ function OwnerRegister() {
         </Grid>
         <Grid item sx={{ width: "90%" }}>
           <Box
-            component="form"
+            component='form'
             noValidate
             sx={{
               alignContent: "center",
@@ -61,15 +64,15 @@ function OwnerRegister() {
                   อีเมล์
                 </Typography>
                 <TextField
-                  margin="normal"
+                  margin='normal'
                   required
                   fullWidth
-                  id="email"
-                  label="อีเมล์"
-                  name="email"
-                  autoComplete="email"
+                  id='email'
+                  label='อีเมล์'
+                  name='email'
+                  autoComplete='email'
                   autoFocus
-                  size="small"
+                  size='small'
                 />
               </Grid>
               <Grid item xs={6}>
@@ -77,12 +80,12 @@ function OwnerRegister() {
                   เบอร์โทรศัพท์
                 </Typography>
                 <TextField
-                  margin="normal"
+                  margin='normal'
                   required
                   fullWidth
-                  name="password"
-                  label="เบอร์โทรศัพท์"
-                  size="small"
+                  name='password'
+                  label='เบอร์โทรศัพท์'
+                  size='small'
                 />
               </Grid>
 
@@ -93,15 +96,15 @@ function OwnerRegister() {
 
                 <TextField
                   spacing={2}
-                  margin="normal"
+                  margin='normal'
                   required
                   fullWidth
-                  label="รหัสผ่าน"
-                  placeholder="กรอกรหัสผ่าน"
-                  type="password"
-                  autoComplete="current-password"
+                  label='รหัสผ่าน'
+                  placeholder='กรอกรหัสผ่าน'
+                  type='password'
+                  autoComplete='current-password'
                   autoFocus
-                  size="small"
+                  size='small'
                 />
               </Grid>
 
@@ -111,14 +114,14 @@ function OwnerRegister() {
                 </Typography>
 
                 <TextField
-                  margin="normal"
+                  margin='normal'
                   required
                   fullWidth
-                  id="email"
-                  label="รหัสผ่าน"
-                  placeholder="กรอกรหัสผ่าน"
+                  id='email'
+                  label='รหัสผ่าน'
+                  placeholder='กรอกรหัสผ่าน'
                   autoFocus
-                  size="small"
+                  size='small'
                 />
               </Grid>
             </Grid>
@@ -142,15 +145,15 @@ function OwnerRegister() {
                     อีเมล์
                   </Typography>
                   <TextField
-                    margin="normal"
+                    margin='normal'
                     required
                     fullWidth
-                    id="email"
-                    label="อีเมล์"
-                    name="email"
-                    autoComplete="email"
+                    id='email'
+                    label='อีเมล์'
+                    name='email'
+                    autoComplete='email'
                     autoFocus
-                    size="small"
+                    size='small'
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -158,12 +161,12 @@ function OwnerRegister() {
                     เบอร์โทรศัพท์
                   </Typography>
                   <TextField
-                    margin="normal"
+                    margin='normal'
                     required
                     fullWidth
-                    name="password"
-                    label="เบอร์โทรศัพท์"
-                    size="small"
+                    name='password'
+                    label='เบอร์โทรศัพท์'
+                    size='small'
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -173,15 +176,15 @@ function OwnerRegister() {
 
                   <TextField
                     spacing={2}
-                    margin="normal"
+                    margin='normal'
                     required
                     fullWidth
-                    label="รหัสผ่าน"
-                    placeholder="กรอกรหัสผ่าน"
-                    type="password"
-                    autoComplete="current-password"
+                    label='รหัสผ่าน'
+                    placeholder='กรอกรหัสผ่าน'
+                    type='password'
+                    autoComplete='current-password'
                     autoFocus
-                    size="small"
+                    size='small'
                   />
                 </Grid>
               </Grid>

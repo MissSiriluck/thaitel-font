@@ -1,179 +1,206 @@
-import * as React from "react";
-import { useState } from "react";
-import "../assets/css/Search.css";
-import Box from "@mui/material/Box";
-import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
+import React from "react";
 import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DatePicker from "@mui/lab/DatePicker";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
-// import SearchIcon from "@mui/icons-material/Search";
-import InputBase from "@mui/material/InputBase";
-import { styled, alpha } from "@mui/material/styles";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Grid, Typography } from "@mui/material";
+import DateRangePicker from "@mui/lab/DateRangePicker";
+import MuiDateRangePickerDay from "@mui/lab/DateRangePickerDay";
+import Stack from "@mui/material/Stack";
+import { useState } from "react";
+import { CustomButton } from "./BookingCfmDetail";
+import { Container, Grid, InputBase, Typography } from "@mui/material";
+import { alpha, Box, styled } from "@mui/system";
+import BtnGuestnRoomForSearch from "./BtnGuestnRoomForSearch";
 
-// import { createMuiTheme } from "@material-ui/core";
-// import DateFnsUtils from '@date-io/date-fns'
+//customize input box hover focus styles
+const BootstrapInput = styled(InputBase)(({ theme }) => ({
+  "& .MuiInputBase-input": {
+    borderRadius: 4,
+    border: "1px solid #ced4da",
+    fontSize: 16,
+    padding: "10px 12px",
+    transition: theme.transitions.create([
+      "border-color",
+      "background-color",
+      "box-shadow",
+    ]),
+    "&:hover": {
+      outline: "#64CEEF70 solid 3px",
+      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+    },
+    "&:focus": {
+      outline: "#64CEEF70 solid 3px",
+      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+    },
+  },
+}));
+
+//customize input date picker
+const RedditTextField = styled(props => (
+  <TextField InputProps={{ disableUnderline: true }} {...props} />
+))(({ theme }) => ({
+  "& .MuiFilledInput-root": {
+    border: "1px solid #e2e2e1",
+    overflow: "hidden",
+    borderRadius: 4,
+    backgroundColor: "#fff",
+    transition: theme.transitions.create([
+      "border-color",
+      "background-color",
+      "box-shadow",
+    ]),
+    "&:hover": {
+      backgroundColor: "transparent",
+      outline: "#64CEEF70 solid 3px",
+      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+    },
+    "&.Mui-focused": {
+      backgroundColor: "transparent",
+      outline: "#64CEEF70 solid 3px",
+      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+    },
+  },
+}));
+
+//customize date picker paper
+const DateRangePickerDay = styled(MuiDateRangePickerDay)(
+  ({ theme, isHighlighting, isStartOfHighlighting, isEndOfHighlighting }) => ({
+    ...(isHighlighting && {
+      borderRadius: 0,
+      backgroundColor: "#64CEEF",
+      color: theme.palette.common.white,
+      "&:hover, &:focus": {
+        backgroundColor: "#64CEEF",
+      },
+    }),
+    ...(isStartOfHighlighting && {
+      borderTopLeftRadius: "50%",
+      borderBottomLeftRadius: "50%",
+    }),
+    ...(isEndOfHighlighting && {
+      borderTopRightRadius: "50%",
+      borderBottomRightRadius: "50%",
+    }),
+  })
+);
 
 function Search() {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [value, setValue] = useState(null);
-  const [value2, setValue2] = useState(null);
-  const [room, setRoom] = useState(1);
-  const [guest, setGuest] = useState(1);
+  const [value, setValue] = useState([null, null]);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const renderWeekPickerDay = (date, dateRangePickerDayProps) => {
+    return <DateRangePickerDay {...dateRangePickerDayProps} />;
+  };
+
   const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  function handleAddGuest() {
-    setGuest(current => current + 1);
-  }
-  function handleMinusGuest() {
-    if (guest > 0) {
-      setGuest(current => current - 1);
-    }
-  }
-  function handleAddRoom() {
-    setRoom(current => current + 1);
-  }
-  function handleMinusRoom() {
-    if (room > 0) {
-      setRoom(current => current - 1);
-    }
-  }
   return (
-    <div>
-      <Grid className='search-background'>
-        <Typography className='find'>ค้นหา</Typography>
-        <Typography className='find-title'>จุดหมาย/ชื่อที่พัก</Typography>
-        {/* <TextField
-          sx={{ ml: 1, flex: 1, backgroundColor: "white" }}
-          placeholder="จุดหมาย/ชื่อที่พัก"
-          inputProps={{ "aria-label": "search google maps" }}
-          // className="search-input" //search bar??
-        /> */}
-        <Typography className='find-title'>วันที่ เช็คอิน</Typography>
-        <Grid style={{ position: "relative", display: "inline-block" }}></Grid>
-        <Grid>
-          <LocalizationProvider
-            dateAdapter={AdapterDateFns}
-            className='date-picker'
-          >
-            <DatePicker
-              label='Basic example'
-              value={value}
-              onChange={newValue => {
-                setValue(newValue);
+    <Grid container xs={2.3} sx={{ position: "fixed" }}>
+      <Grid item xs={11}>
+        <Typography
+          sx={{ mb: 2 }}
+        >{`หน้าหลัก > ผลการค้นหา > ที่พักทั้งหมด`}</Typography>
+        <Box sx={{ background: "#07133C", flexGlow: 1, borderRadius: 2 }}>
+          <Grid item sx={{ p: 4 }}>
+            <Typography sx={{ color: "#fff", fontSize: "20px", pb: 2 }}>
+              ค้นหา
+            </Typography>
+            <Typography sx={{ color: "#fff", pb: 1 }}>
+              จุดหมาย/ชื่อที่พัก
+            </Typography>
+            <BootstrapInput
+              defaultValue=''
+              id='bootstrap-input'
+              fullWidth
+              placeholder='เลือกจุดหมายที่คุณต้องการ'
+              size='small'
+              sx={{
+                padding: 0,
+                background: "#fff",
+                borderRadius: "4px",
+                mb: 2,
               }}
-              renderInput={params => <TextField {...params} />}
-              className='date-picker'
-              color='primary'
             />
-            {/* <DesktopDatePicker
-              label="Date desktop"
-              inputFormat="MM/dd/yyyy"
-              value={value}
-              onChange={newValue => {
-                setValue(newValue);
-              }}
-              renderInput={params => <TextField {...params} />}
-              sx={{ backgroundColor: "white" }}
-            /> */}
-          </LocalizationProvider>
-        </Grid>
-        <Grid className='find-title'>
-          <Typography>วันที่ เช็คเอาท์</Typography>
-        </Grid>
-        <Grid>
-          <LocalizationProvider
-            dateAdapter={AdapterDateFns}
-            className='date-picker'
-          >
-            {/* <DatePicker
-              label="Basic example"
-              value={value2}
-              onChange={newValue => {
-                setValue2(newValue);
-              }}
-              renderInput={params => <TextField {...params} />}
-              className="date-picker"
-              color="primary"
-              sx={{ backgroundColor: "white" }}
-            /> */}
-          </LocalizationProvider>
-        </Grid>
-        <Grid style={{ position: "relative", display: "inline-block" }}></Grid>
-        <Typography className='find-title'>
-          จำนวนผู้เข้าพัก และจำนวนห้อง
-        </Typography>
 
-        <Grid>
-          <Button
-            id='basic-button'
-            aria-controls='basic-menu'
-            aria-haspopup='true'
-            aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
-            className='button-picker'
-          >
-            <Typography>จำนวนผู้เข้าพัก และจำนวนห้อง</Typography>
-          </Button>
-          <Menu
-            id='basic-menu'
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              "aria-labelledby": "basic-button",
-            }}
-          >
-            <MenuItem onClick={handleClose}>
-              <span className='type'>
-                <Typography>Guest</Typography>
-              </span>
+            <Typography sx={{ color: "#fff", pb: 1 }}>
+              วันที่เช็คอิน / เช็คเอาท์
+            </Typography>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <Stack
+                spacing={1}
+                sx={{
+                  flexGlow: 1,
+                  mb: 2,
+                }}
+              >
+                <DateRangePicker
+                  startText='Check-in'
+                  endText='Check-out'
+                  value={value}
+                  renderDay={renderWeekPickerDay}
+                  onChange={newValue => {
+                    setValue(newValue);
+                  }}
+                  renderInput={(startProps, endProps) => (
+                    <React.Fragment>
+                      <RedditTextField
+                        id='filled-basic'
+                        label='Filled'
+                        variant='filled'
+                        sx={{
+                          backgroundColor: "#fff",
+                          borderRadius: "4px",
+                          border: "none",
+                          mr: 1,
+                          "@ .MuiFilledInput-input": {
+                            border: "none",
+                            "@ :hover": {
+                              backgroundColor: "#fff",
+                              borderRadius: "4px",
+                            },
+                            "@ :action": {
+                              outline: "64CEEF70 solid 3px",
+                              boxShadow: "#64CEEF 0px 0px 0px 10px",
+                            },
+                          },
+                        }}
+                        {...startProps}
+                      />
+                      <RedditTextField
+                        id='filled-basic'
+                        label='Filled'
+                        variant='filled'
+                        sx={{
+                          backgroundColor: "#fff",
+                          borderRadius: "4px",
+                          border: "none",
+                          "@ :hover": {
+                            backgroundColor: "#fff",
+                            borderRadius: "4px",
+                            outline: "64CEEF70 solid 3px",
+                            boxShadow: "#64CEEF 0px 0px 0px 10px",
+                          },
+                        }}
+                        {...endProps}
+                      />
+                    </React.Fragment>
+                  )}
+                />
+              </Stack>
+            </LocalizationProvider>
 
-              <Box sx={{ "& > :not(style)": { m: 1 } }}>
-                <Fab color='primary' aria-label='minus'>
-                  <RemoveIcon onClick={handleMinusGuest} />
-                </Fab>
-                <span>
-                  <Typography>{guest}</Typography>
-                </span>
-                <Fab color='primary' aria-label='add'>
-                  <AddIcon onClick={handleAddGuest} />
-                </Fab>
-              </Box>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <span className='type'>Room</span>
-              <Box sx={{ "& > :not(style)": { m: 1 } }}>
-                <Fab size='small' color='primary' aria-label='minus'>
-                  <RemoveIcon onClick={handleMinusRoom} />
-                </Fab>
-                <span>{room}</span>
-                <Fab size='small' color='primary' aria-label='add'>
-                  <AddIcon onClick={handleAddRoom} />
-                </Fab>
-              </Box>
-            </MenuItem>
-          </Menu>
-        </Grid>
-        <Grid>
-          <button className='sumbit'>Search</button>
-        </Grid>
+            <Typography sx={{ color: "#fff", pb: 1 }}>ผู้เข้าพัก</Typography>
+            <BtnGuestnRoomForSearch />
+
+            <Container sx={{ textAlign: "center", mb: 3 }}>
+              <CustomButton sx={{ background: "#c62828", color: "#fff" }}>
+                Search
+              </CustomButton>
+            </Container>
+          </Grid>
+        </Box>
       </Grid>
-    </div>
+    </Grid>
   );
 }
 export default Search;

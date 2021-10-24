@@ -49,15 +49,15 @@ function OwnerLogin() {
   return (
     <div>
       <Container
-        maxWidth="md"
-        justifyContent="center"
-        alignItems="center"
-        direction="column"
-        sx={{ padding: 0 }}
+        maxWidth='md'
+        justifyContent='center'
+        alignItems='center'
+        direction='column'
+        sx={{ padding: 0, mt: 20 }}
       >
         <Box
-          alignItems="center"
-          justifyContent="center"
+          alignItems='center'
+          justifyContent='center'
           sx={{
             height: "60vh",
             display: "flex",
@@ -66,20 +66,20 @@ function OwnerLogin() {
           }}
         >
           <Box
-            alignItems="center"
-            justifyContent="center"
+            alignItems='center'
+            justifyContent='center'
             sx={{ width: "80%", display: "flex" }}
             xs={8}
             sm={8}
           >
             <Grid
               container
-              justifyContent="start"
-              alignItems="center"
+              justifyContent='start'
+              alignItems='center'
               xs={9}
               sx={{ height: "40px" }}
             >
-              <Typography variant="h4" component="div" sx={{ fontWeight: 600 }}>
+              <Typography variant='h4' component='div' sx={{ fontWeight: 600 }}>
                 เข้าสู่ระบบสำหรับผู้ปล่อยเช่า
               </Typography>
             </Grid>
@@ -88,8 +88,8 @@ function OwnerLogin() {
 
           <Grid
             container
-            justifyContent="center"
-            alignContent="center"
+            justifyContent='center'
+            alignContent='center'
             sx={{
               padding: 0,
             }}
@@ -97,7 +97,7 @@ function OwnerLogin() {
             md={7}
           >
             <Button
-              variant="contained"
+              variant='contained'
               sx={{
                 width: "100%",
                 display: "flex",
@@ -128,7 +128,7 @@ function OwnerLogin() {
                   alignItems: "center",
                 }}
               >
-                <Typography variant="p">Sign In With Google</Typography>
+                <Typography variant='p'>Sign In With Google</Typography>
               </Grid>
             </Button>
           </Grid>
@@ -136,23 +136,23 @@ function OwnerLogin() {
           <Grid
             container
             spacing={2}
-            justifyContent="center"
-            alignItems="center"
+            justifyContent='center'
+            alignItems='center'
             sx={{
               padding: 0,
               margin: 0,
             }}
             xs={12}
             md={12}
-            component="form"
+            component='form'
             onSubmit={handleSubmit}
             noValidate
           >
             <Grid
               container
               spacing={2}
-              justifyContent="space-around"
-              alignContent="center"
+              justifyContent='space-around'
+              alignContent='center'
               sx={{
                 padding: 0,
                 marginTop: "0s",
@@ -163,8 +163,8 @@ function OwnerLogin() {
               <Grid
                 container
                 spacing={2}
-                justifyContent="center"
-                alignItems="center"
+                justifyContent='center'
+                alignItems='center'
                 sx={{
                   padding: 0,
                   borderBottom: "2px solid #cfcfcf",
@@ -178,8 +178,8 @@ function OwnerLogin() {
               <Grid
                 container
                 spacing={2}
-                justifyContent="center"
-                alignItems="center"
+                justifyContent='center'
+                alignItems='center'
                 sx={{
                   padding: 0,
                   borderBottom: "2px solid #cfcfcf",
@@ -194,8 +194,8 @@ function OwnerLogin() {
             <Grid
               container
               spacing={2}
-              justifyContent="center"
-              alignItems="center"
+              justifyContent='center'
+              alignItems='center'
               sx={{
                 padding: 0,
               }}
@@ -221,11 +221,11 @@ function OwnerLogin() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id="outlined-textarea fullWidth"
-                  label="อีเมล์"
-                  placeholder="กรอกอีเมล์"
+                  id='outlined-textarea fullWidth'
+                  label='อีเมล์'
+                  placeholder='กรอกอีเมล์'
                   multiline
-                  size="small"
+                  size='small'
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
@@ -236,8 +236,8 @@ function OwnerLogin() {
             <Grid
               container
               spacing={2}
-              justifyContent="center"
-              alignItems="center"
+              justifyContent='center'
+              alignItems='center'
               sx={{
                 padding: 0,
                 marginBottom: "3px",
@@ -257,11 +257,11 @@ function OwnerLogin() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id="outlined-textarea fullWidth"
-                  label="รหัสผ่าน"
-                  placeholder="กรอกรหัสผ่าน"
+                  id='outlined-textarea fullWidth'
+                  label='รหัสผ่าน'
+                  placeholder='กรอกรหัสผ่าน'
                   multiline
-                  size="small"
+                  size='small'
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
@@ -276,8 +276,8 @@ function OwnerLogin() {
             <Grid
               container
               spacing={2}
-              justifyContent="center"
-              alignItems="center"
+              justifyContent='center'
+              alignItems='center'
               sx={{
                 padding: 0,
               }}

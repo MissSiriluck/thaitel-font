@@ -9,7 +9,6 @@ import ButtonUnstyled, {
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
 
-
 const CustomButtonRoot = styled("span")(`
     background-color: none;
     padding: 10px 20px;
@@ -42,7 +41,6 @@ function CustomButton(props) {
 }
 
 function RegisterContent() {
-
   // export default function SignUp() {
   //   const handleSubmit = (event) => {
   //     event.preventDefault();
@@ -57,15 +55,15 @@ function RegisterContent() {
   return (
     <div>
       <Container
-        maxWidth="md"
-        justifyContent="center"
-        alignItems="center"
-        direction="column"
-        sx={{ padding: 0 }}
+        maxWidth='md'
+        justifyContent='center'
+        alignItems='center'
+        direction='column'
+        sx={{ padding: 0, mt: 23 }}
       >
         <Box
-          alignItems="center"
-          justifyContent="center"
+          alignItems='center'
+          justifyContent='center'
           sx={{
             height: "60vh",
             display: "flex",
@@ -74,13 +72,13 @@ function RegisterContent() {
           }}
         >
           <Box
-            alignItems="center"
-            justifyContent="center"
+            alignItems='center'
+            justifyContent='center'
             sx={{ width: "80%", display: "flex" }}
             xs={8}
             sm={8}
           >
-            <Grid container justifyContent="start" alignItems="center" xs={10}>
+            <Grid container justifyContent='start' alignItems='center' xs={10}>
               <Typography
                 style={{
                   fontSize: 40,
@@ -97,8 +95,8 @@ function RegisterContent() {
           <Grid
             container
             spacing={2}
-            justifyContent="center"
-            alignItems="center"
+            justifyContent='center'
+            alignItems='center'
             sx={{
               padding: 0,
             }}
@@ -108,8 +106,8 @@ function RegisterContent() {
             <Grid
               container
               spacing={2}
-              justifyContent="center"
-              alignItems="center"
+              justifyContent='center'
+              alignItems='center'
               sx={{
                 padding: 0,
               }}
@@ -135,13 +133,13 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id="outlined-textarea fullWidth"
-                  label="ชื่อจริง"
-                  placeholder="กรอกชื่อจริง"
+                  id='outlined-textarea fullWidth'
+                  label='ชื่อจริง'
+                  placeholder='กรอกชื่อจริง'
                   multiline
-                  size="small"
-                  justifyContent="center"
-                  alignItems="center"
+                  size='small'
+                  justifyContent='center'
+                  alignItems='center'
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
@@ -168,13 +166,13 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id="outlined-textarea fullWidth"
-                  label="นามสกุล"
-                  placeholder="กรอกนามสกุล"
+                  id='outlined-textarea fullWidth'
+                  label='นามสกุล'
+                  placeholder='กรอกนามสกุล'
                   multiline
-                  size="small"
-                  justifyContent="center"
-                  alignItems="center"
+                  size='small'
+                  justifyContent='center'
+                  alignItems='center'
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
@@ -185,8 +183,8 @@ function RegisterContent() {
             <Grid
               container
               spacing={2}
-              justifyContent="center"
-              alignItems="center"
+              justifyContent='center'
+              alignItems='center'
               sx={{
                 padding: 0,
                 marginBottom: "3px",
@@ -213,11 +211,11 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id="outlined-textarea fullWidth"
-                  label="อีเมล์"
-                  placeholder="กรอกอีเมล์"
+                  id='outlined-textarea fullWidth'
+                  label='อีเมล์'
+                  placeholder='กรอกอีเมล์'
                   multiline
-                  size="small"
+                  size='small'
                   sx={{
                     padding: 0,
                   }}
@@ -242,11 +240,11 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id="outlined-textarea fullWidth"
-                  label="เบอร์โทรศัพท์"
-                  placeholder="กรอกเบอร์โทรศัพท์"
+                  id='outlined-textarea fullWidth'
+                  label='เบอร์โทรศัพท์'
+                  placeholder='กรอกเบอร์โทรศัพท์'
                   multiline
-                  size="small"
+                  size='small'
                   sx={{
                     padding: 0,
                   }}
@@ -256,8 +254,8 @@ function RegisterContent() {
             <Grid
               container
               spacing={2}
-              justifyContent="center"
-              alignItems="center"
+              justifyContent='center'
+              alignItems='center'
               sx={{
                 padding: 0,
               }}
@@ -283,11 +281,11 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id="outlined-textarea fullWidth"
-                  label="รหัสผ่าน"
-                  placeholder="กรอกรหัสผ่าน"
+                  id='outlined-textarea fullWidth'
+                  label='รหัสผ่าน'
+                  placeholder='กรอกรหัสผ่าน'
                   multiline
-                  size="small"
+                  size='small'
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
@@ -298,8 +296,8 @@ function RegisterContent() {
             <Grid
               container
               spacing={2}
-              justifyContent="center"
-              alignItems="center"
+              justifyContent='center'
+              alignItems='center'
               sx={{
                 padding: 0,
                 marginBottom: "3px",
@@ -319,11 +317,11 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id="outlined-textarea fullWidth"
-                  label="ยืนยันรหัสผ่าน"
-                  placeholder="ยืนยันรหัสผ่าน"
+                  id='outlined-textarea fullWidth'
+                  label='ยืนยันรหัสผ่าน'
+                  placeholder='ยืนยันรหัสผ่าน'
                   multiline
-                  size="small"
+                  size='small'
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
@@ -334,8 +332,8 @@ function RegisterContent() {
             <Grid
               container
               spacing={2}
-              justifyContent="center"
-              alignItems="center"
+              justifyContent='center'
+              alignItems='center'
               sx={{
                 padding: 0,
               }}

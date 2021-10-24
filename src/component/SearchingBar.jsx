@@ -46,7 +46,7 @@ function SearhchingBar() {
     <Box
       sx={{
         flexGrow: 1,
-        m: "100px 200px",
+        m: "12% 10%",
       }}
     >
       <AppBar
