@@ -1,7 +1,6 @@
 import "../assets/css/HotelCard.css";
 import hottel1 from "../assets/images/hotel-1.jpeg";
 import Rating from "@mui/material/Rating";
-// import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { Grid, Typography } from "@mui/material";
 

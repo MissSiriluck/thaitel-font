@@ -25,3 +25,7 @@
   height: 40px;
   margin: 0;
 }
+
+.container_resident_residregister {
+  background-image: url(../src/assets/images/bg_container_residentregisterpage2.jpeg);
+}
