@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -8,8 +9,9 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
+import axios from "../config/axios";
 
-const CustomButtonRoot = styled("span")(`
+const CustomButtonRoot = styled("button")(`
     background-color: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -37,25 +39,28 @@ const CustomButtonRoot = styled("span")(`
 `);
 
 function CustomButton(props) {
-  return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
+  return (
+    // <ButtonUnstyled {...props} component={CustomButtonRoot} type="submit" />
+    <ButtonUnstyled {...props} component={CustomButtonRoot} />
+  );
 }
 
 function LoginContent() {
-  // function SignIn() {
-  //   const handleSubmit = (event) => {
-  //     event.preventDefault();
-  //     const data = new FormData(event.currentTarget);
-  //     // eslint-disable-next-line no-console
-  //     console.log({
-  //       email: data.get('email'),
-  //       password: data.get('password'),
-  //     });
-  //   };
-  // }
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    // axios.post('/login', {email, password})
+  const handleSubmit = async event => {
+    
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
+    const values = {
+      email: data.get("email"),
+      password: data.get("password"),
+      role: "user"
+    };
+    const res = await axios.post("/", values);
+    
   };
 
   return (
@@ -150,7 +155,7 @@ function LoginContent() {
             </Button>
           </Grid>
 
-          <Grid
+          <Box
             container
             spacing={2}
             justifyContent="center"
@@ -158,6 +163,7 @@ function LoginContent() {
             sx={{
               padding: 0,
               margin: 0,
+              width: "100%",
             }}
             xs={12}
             md={12}
@@ -165,6 +171,20 @@ function LoginContent() {
             onSubmit={handleSubmit}
             noValidate
           >
+            {/* <CustomButton
+              sx={{
+                background: "#c62828",
+                color: "#fff",
+                display: "flex",
+                justifyContent: "center",
+                width: "80%",
+                marginTop: "10px",
+              }}
+              type="submit"
+            >
+              Test
+            </CustomButton> */}
+
             <Grid
               container
               spacing={2}
@@ -177,6 +197,7 @@ function LoginContent() {
               xs={7}
               md={7}
             >
+              {/*  */}
               <Grid
                 container
                 spacing={2}
@@ -207,6 +228,7 @@ function LoginContent() {
                 md={5}
               />
             </Grid>
+            {/*  */}
 
             <Grid
               container
@@ -238,9 +260,10 @@ function LoginContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id="outlined-textarea fullWidth"
                   label="อีเมล์"
                   placeholder="กรอกอีเมล์"
+                  id="email"
+                  name="email"
                   multiline
                   size="small"
                   sx={{
@@ -274,9 +297,10 @@ function LoginContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id="outlined-textarea fullWidth"
                   label="รหัสผ่าน"
                   placeholder="กรอกรหัสผ่าน"
+                  id="password"
+                  name="password"
                   multiline
                   size="small"
                   sx={{
@@ -316,7 +340,7 @@ function LoginContent() {
                     width: "80%",
                     marginTop: "10px",
                   }}
-                  // onClick={signIn}
+                  type="submit"
                 >
                   <Typography
                     style={{
@@ -345,33 +369,19 @@ function LoginContent() {
                     คุณยังไม่เคยลงทะเบียน
                   </Typography>
                 </Grid>
+
                 <Grid mr={1}>
-                  <Typography
-                    style={{ color: "#16264D", fontWeight: 700, margin: 0 }}
-                  >
-                    สมัครสมาชิก
-                  </Typography>
-                </Grid>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                md={12}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: 0,
-                }}
-              >
-                <Grid mr={1} sx={{ padding: 0 }}>
-                  <Typography style={{ color: "#16264D", fontWeight: 700 }}>
-                    ลืมรหัสผ่าน
-                  </Typography>
+                  <Link to="/register">
+                    <Typography
+                      style={{ color: "#16264D", fontWeight: 700, margin: 0 }}
+                    >
+                      สมัครสมาชิก
+                    </Typography>
+                  </Link>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
+          </Box>
           {/*  */}
         </Box>
       </Container>

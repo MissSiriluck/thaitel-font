@@ -1,16 +1,17 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { Container, Grid, TextField } from "@mui/material";
-import styledButtonsSubmit from "../service/SubmitButtons";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
+import axios from "../config/axios";
 
 
-const CustomButtonRoot = styled("span")(`
+const CustomButtonRoot = styled("button")(`
     background-color: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -42,7 +43,6 @@ function CustomButton(props) {
 }
 
 function RegisterContent() {
-
   // export default function SignUp() {
   //   const handleSubmit = (event) => {
   //     event.preventDefault();
@@ -53,6 +53,38 @@ function RegisterContent() {
   //       password: data.get('password'),
   //     });
   //   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    // eslint-disable-next-line no-console
+    const values = {
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
+      email: data.get("email"),
+      password: data.get("password"),
+      phone: data.get("phone"),
+      role: "user"
+    };
+    const res = await axios.post("/", values);
+  };
+
+
+  // const [values, setValues] = React.useState({
+  //   firstName: "",
+  //   lastName: "",
+  //   email: "",
+  //   password: "",
+  //   confirmPassword: "",
+  //   phone: "",
+  //   google_user_id: "",
+  //   // role:"",
+  //   showPassword: false,
+  // });
+
+  // const handleChange = prop => event => {
+  //   setValues({ ...values, [prop]: event.target.value });
+  // };
 
   return (
     <div>
@@ -94,7 +126,9 @@ function RegisterContent() {
             </Grid>
           </Box>
           {/*  */}
-          <Grid
+          <Box
+             component="form"
+             onSubmit={handleSubmit}
             container
             spacing={2}
             justifyContent="center"
@@ -135,10 +169,13 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id="outlined-textarea fullWidth"
                   label="ชื่อจริง"
                   placeholder="กรอกชื่อจริง"
+                  id="firstName"
+                  name="firstName"
                   multiline
+                  // value={values.firstName}
+                  // onChange={handleChange("firstName")}
                   size="small"
                   justifyContent="center"
                   alignItems="center"
@@ -168,10 +205,13 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id="outlined-textarea fullWidth"
                   label="นามสกุล"
                   placeholder="กรอกนามสกุล"
+                  id="lastName"
+                  name="lastName"
                   multiline
+                  // value={values.lastName}
+                  // onChange={handleChange("lastName")}
                   size="small"
                   justifyContent="center"
                   alignItems="center"
@@ -213,10 +253,13 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id="outlined-textarea fullWidth"
                   label="อีเมล์"
                   placeholder="กรอกอีเมล์"
+                  id="email"
+                  name="email"
                   multiline
+                  // value={values.email}
+                  // onChange={handleChange("email")}
                   size="small"
                   sx={{
                     padding: 0,
@@ -245,7 +288,11 @@ function RegisterContent() {
                   id="outlined-textarea fullWidth"
                   label="เบอร์โทรศัพท์"
                   placeholder="กรอกเบอร์โทรศัพท์"
+                  id="phone"
+                  name="phone"
                   multiline
+                  // value={values.phone}
+                  // onChange={handleChange("phone")}
                   size="small"
                   sx={{
                     padding: 0,
@@ -287,6 +334,10 @@ function RegisterContent() {
                   label="รหัสผ่าน"
                   placeholder="กรอกรหัสผ่าน"
                   multiline
+                  id="password"
+                  name="password"
+                  // value={values.password}
+                  // onChange={handleChange("password")}
                   size="small"
                   sx={{
                     padding: 0,
@@ -322,7 +373,11 @@ function RegisterContent() {
                   id="outlined-textarea fullWidth"
                   label="ยืนยันรหัสผ่าน"
                   placeholder="ยืนยันรหัสผ่าน"
+                  id="confirmPassword"
+                  name="confirmPassword"
                   multiline
+                  // value={values.confirmPassword}
+                  // onChange={handleChange("confirmPassword")}
                   size="small"
                   sx={{
                     padding: 0,
@@ -381,15 +436,17 @@ function RegisterContent() {
                   </Typography>
                 </Grid>
                 <Grid mr={1}>
-                  <Typography
-                    style={{ color: "#16264D", fontWeight: 700, margin: "0" }}
-                  >
-                    เข้าสู่ระบบ
-                  </Typography>
+                  <Link to="/login">
+                    <Typography
+                      style={{ color: "#16264D", fontWeight: 700, margin: "0" }}
+                    >
+                      เข้าสู่ระบบ
+                    </Typography>
+                  </Link>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
+          </Box>
           {/*  */}
         </Box>
       </Container>

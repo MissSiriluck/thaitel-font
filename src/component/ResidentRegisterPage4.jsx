@@ -11,9 +11,11 @@ import Select from "@mui/material/Select";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
+import { padding } from "@mui/system";
 
 const CustomButtonRoot = styled("span")(`
     background-color: none;
@@ -49,13 +51,40 @@ function CustomButton(props) {
 function ResidentRegisterPage4() {
   const [age, setAge] = React.useState("");
 
-  const handleChange = event => {
-    setAge(event.target.value);
-  };
+  // const handleChange = event => {
+  //   setAge(event.target.value);
+  // };
 
   const Input = styled("input")({
     display: "none",
   });
+
+  const [values, setValues] = React.useState({
+    name: "",
+    rateStar: "",
+    address: "",
+    subDistrict: "",
+    province: "",
+    postalCode: "",
+    description: "",
+    showPassword: false,
+  });
+
+  const handleChange = prop => event => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
+
   return (
     <Container maxWidth="md">
       <Grid Container sx={{ marginTop: "20px", marginBottom: "5px" }}>
@@ -95,6 +124,7 @@ function ResidentRegisterPage4() {
                 id="outlined-password-input"
                 label="ชื่อที่พักที่ให้บริการ"
                 size="small"
+                value={values.name}
                 sx={{ width: "100%", alignItems: "stretch" }}
               />
             </Grid>
@@ -112,6 +142,7 @@ function ResidentRegisterPage4() {
                 label="ระดับดาว"
                 size="small"
                 sx={{ width: "100%", alignItems: "stretch" }}
+                value={values.rateStar}
               />
             </Grid>
           </Grid>
@@ -125,7 +156,7 @@ function ResidentRegisterPage4() {
             }}
             xs={11}
           >
-            <Grid item xs={5.5}>
+            <Grid item xs={7.7}>
               <Typography
                 style={{
                   fontSize: 18,
@@ -139,22 +170,24 @@ function ResidentRegisterPage4() {
                 label="ชื่อที่พักที่ให้บริการ"
                 size="small"
                 sx={{ width: "100%", alignItems: "stretch" }}
+                value={values.address}
               />
             </Grid>
-            <Grid item xs={5.5}>
+            <Grid item xs={3.5}>
               <Typography
                 style={{
                   fontSize: 18,
                   marginTop: "10px",
                 }}
               >
-                เมือง
+                ตำบล/แขวง
               </Typography>
               <TextField
                 id="outlined-password-input"
                 label="ระดับดาว"
                 size="small"
                 sx={{ width: "100%", alignItems: "stretch" }}
+                value={values.subDistrict}
               />
             </Grid>
           </Grid>
@@ -168,7 +201,24 @@ function ResidentRegisterPage4() {
             }}
             xs={11}
           >
-            <Grid item xs={5.5}>
+            <Grid item xs={3.5}>
+              <Typography
+                style={{
+                  fontSize: 18,
+                  marginTop: "10px",
+                }}
+              >
+                อำเภอ/เขต
+              </Typography>
+              <TextField
+                id="outlined-password-input"
+                label="ชื่อที่พักที่ให้บริการ"
+                size="small"
+                sx={{ width: "100%", alignItems: "stretch" }}
+                value={values.district}
+              />
+            </Grid>
+            <Grid item xs={3.5}>
               <Typography
                 style={{
                   fontSize: 18,
@@ -182,9 +232,10 @@ function ResidentRegisterPage4() {
                 label="ชื่อที่พักที่ให้บริการ"
                 size="small"
                 sx={{ width: "100%", alignItems: "stretch" }}
+                value={values.province}
               />
             </Grid>
-            <Grid item xs={5.5}>
+            <Grid item xs={3.5}>
               <Typography
                 style={{
                   fontSize: 18,
@@ -198,11 +249,51 @@ function ResidentRegisterPage4() {
                 label="ระดับดาว"
                 size="small"
                 sx={{ width: "100%", alignItems: "stretch" }}
+                value={values.postalCode}
               />
+            </Grid>
+          </Grid>
+          <Grid>
+            <Grid
+              item
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+              xs={12}
+            >
+              <Grid item xs={11}>
+                <Typography
+                  style={{
+                    fontSize: 18,
+                    marginTop: "10px",
+                  }}
+                >
+                  รายละเอียดที่พัก
+                </Typography>
+                <Grid xs={11.4}>
+                  <TextareaAutosize
+                    maxRows={4}
+                    aria-label="maximum height"
+                    placeholder="กรุณาใส่รายละเอียดที่พักของคุณ โดยระบุไม่เกิน 300 ตัวอักษร"
+                    style={{
+                      width: "100%",
+                      border: "2px solid #c4c4c4",
+                      borderRadius: "5px",
+                      padding: "18px",
+                      fontFamily: '"Noto Sans Thai", sans-serif',
+                      fontSize: "16px",
+                    }}
+                    value={values.postalCode}
+                  />
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
+
       <Grid Container sx={{ marginTop: "20px", marginBottom: "5px" }}>
         <Typography sx={{ fontSize: "30px" }}>นโยบายข้อห้าม</Typography>
       </Grid>
@@ -224,26 +315,77 @@ function ResidentRegisterPage4() {
               item
               sx={{
                 display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
+                flexDirection: "column",
               }}
               xs={12}
             >
               <Grid item xs={12}>
-                <Typography
-                  style={{
-                    fontSize: 18,
-                    marginTop: "10px",
-                  }}
-                >
-                  วันที่เช็คอิน
-                </Typography>
-                <TextField
-                  id="outlined-password-input"
-                  label="วันที่เช็คอิน"
-                  size="small"
-                  sx={{ width: "100%", alignItems: "stretch" }}
-                />
+                <Grid>
+                  <Typography
+                    style={{
+                      fontSize: 24,
+                      marginBottom: "10px",
+                    }}
+                  >
+                    เวลาที่เช็คอิน
+                  </Typography>
+                </Grid>
+                <Grid>
+                  <Grid item sx={{ display: "flex" }}>
+                    <Grid xs={3}>
+                      <Typography
+                        style={{
+                          fontSize: 18,
+                          marginBottom: "10px",
+                        }}
+                      >
+                        ตั้งแต่ :
+                      </Typography>
+                    </Grid>
+                    <Grid xs={9}>
+                      <TextField
+                        id="outlined-password-input"
+                        label="วันที่เช็คอิน"
+                        size="small"
+                        sx={{
+                          width: "100%",
+                          alignItems: "stretch",
+                          marginBottom: "12px",
+                        }}
+                        value={values.startCheckIn}
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={12}>
+                <Grid>
+                  <Grid item sx={{ display: "flex" }}>
+                    <Grid xs={3}>
+                      <Typography
+                        style={{
+                          fontSize: 18,
+                          marginBottom: "10px",
+                        }}
+                      >
+                        ถึง :
+                      </Typography>
+                    </Grid>
+                    <Grid xs={9}>
+                      <TextField
+                        id="outlined-password-input"
+                        label="วันที่เช็คอิน"
+                        size="small"
+                        sx={{
+                          width: "100%",
+                          alignItems: "stretch",
+                          marginBottom: "12px",
+                        }}
+                        value={values.endCheckIn}
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
@@ -265,31 +407,81 @@ function ResidentRegisterPage4() {
               item
               sx={{
                 display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
+                flexDirection: "column",
               }}
               xs={12}
             >
               <Grid item xs={12}>
-                <Typography
-                  style={{
-                    fontSize: 18,
-                    marginTop: "10px",
-                  }}
-                >
-                  วันที่เช็คเอาท์
-                </Typography>
-                <TextField
-                  id="outlined-password-input"
-                  label="วันที่เช็คเอาท์"
-                  size="small"
-                  sx={{ width: "100%", alignItems: "stretch" }}
-                />
+                <Grid>
+                  <Typography
+                    style={{
+                      fontSize: 24,
+                      marginBottom: "10px",
+                    }}
+                  >
+                    เวลาที่เช็คเอาท์
+                  </Typography>
+                </Grid>
+                <Grid>
+                  <Grid item sx={{ display: "flex" }}>
+                    <Grid xs={3}>
+                      <Typography
+                        style={{
+                          fontSize: 18,
+                          marginBottom: "10px",
+                        }}
+                      >
+                        ตั้งแต่ :
+                      </Typography>
+                    </Grid>
+                    <Grid xs={9}>
+                      <TextField
+                        id="outlined-password-input"
+                        label="วันที่เช็คอิน"
+                        size="small"
+                        sx={{
+                          width: "100%",
+                          alignItems: "stretch",
+                          marginBottom: "12px",
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={12}>
+                <Grid>
+                  <Grid item sx={{ display: "flex" }}>
+                    <Grid xs={3}>
+                      <Typography
+                        style={{
+                          fontSize: 18,
+                          marginBottom: "10px",
+                        }}
+                      >
+                        ถึง :
+                      </Typography>
+                    </Grid>
+                    <Grid xs={9}>
+                      <TextField
+                        id="outlined-password-input"
+                        label="วันที่เช็คอิน"
+                        size="small"
+                        sx={{
+                          width: "100%",
+                          alignItems: "stretch",
+                          marginBottom: "12px",
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
+
       <Grid>
         <Typography
           style={{
