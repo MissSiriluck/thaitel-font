@@ -1,6 +1,6 @@
+import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { createTheme } from "@mui/material/styles";
-import "./App.css";
 import BookingConfirmationPage from "./pages/BookingConfirmationPage";
 import ConfirmInfoPage from "./pages/ConfirmInfoPage";
 import Homepage from "./pages/Homepage";

@@ -105,7 +105,7 @@ function HotelCardList() {
                       mt: 1.5,
                     }}
                   >
-                    ดูห้องว่างที่เหลืออยู่
+                    ดูที่พักว่างที่เหลืออยู่
                   </CustomButton>
                 </Grid>
               </Grid>
