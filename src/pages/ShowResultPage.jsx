@@ -3,8 +3,7 @@ import Search from "../component/Search";
 import HotelCard from "../component/HotelCard";
 import Footer from "../component/Footer";
 import Grid from "@mui/material/Grid";
-import { AppBar, Container } from "@mui/material";
-import { Box } from "@mui/system";
+import { Container } from "@mui/material";
 import SpaceforHead from "../component/SpaceforHead";
 
 function ShowResultPage() {
