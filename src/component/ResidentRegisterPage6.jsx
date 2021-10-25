@@ -43,15 +43,15 @@ function CustomButton(props) {
 
 function ResidentRegisterPage6() {
   return (
-    <Container maxWidth="md">
-      <Grid container direction="column">
+    <Container maxWidth='md' sx={{ mt: 18 }}>
+      <Grid container direction='column'>
         <Grid item>
           <Typography sx={{ fontSize: "36px", marginBottom: "5px" }}>
             บริการภายในโรงแรม
           </Typography>
         </Grid>
         <Stack
-          direction="column"
+          direction='column'
           spacing={2}
           sx={{
             border: "2px solid #c4c4c4",
@@ -60,7 +60,7 @@ function ResidentRegisterPage6() {
           }}
         >
           <Stack
-            direction="row"
+            direction='row'
             spacing={4}
             xs={12}
             sx={{ justifyContent: "start", alignItems: "center" }}
@@ -80,10 +80,10 @@ function ResidentRegisterPage6() {
               <Grid xs={12}>
                 <FormControlLabel
                   control={<Checkbox />}
-                  label="บริการฟรี"
+                  label='บริการฟรี'
                   sx={{ marginRight: "50px" }}
                 />
-                <FormControlLabel control={<Checkbox />} label="มีค่าบริการ" />
+                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
               </Grid>
 
               <Grid
@@ -96,16 +96,16 @@ function ResidentRegisterPage6() {
               >
                 <TextField
                   xs={3}
-                  id="outlined-password-input"
-                  label="(บาท)"
-                  size="small"
+                  id='outlined-password-input'
+                  label='(บาท)'
+                  size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
                 />
               </Grid>
             </Grid>
           </Stack>
           <Stack
-            direction="row"
+            direction='row'
             spacing={4}
             sx={{ justifyContent: "start", alignItems: "center" }}
           >
@@ -124,10 +124,10 @@ function ResidentRegisterPage6() {
               <Grid xs={12}>
                 <FormControlLabel
                   control={<Checkbox />}
-                  label="บริการฟรี"
+                  label='บริการฟรี'
                   sx={{ marginRight: "50px" }}
                 />
-                <FormControlLabel control={<Checkbox />} label="มีค่าบริการ" />
+                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
               </Grid>
               <Grid
                 item
@@ -139,16 +139,16 @@ function ResidentRegisterPage6() {
               >
                 <TextField
                   xs={3}
-                  id="outlined-password-input"
-                  label="(บาท)"
-                  size="small"
+                  id='outlined-password-input'
+                  label='(บาท)'
+                  size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
                 />
               </Grid>
             </Grid>
           </Stack>
           <Stack
-            direction="row"
+            direction='row'
             spacing={4}
             sx={{ justifyContent: "start", alignItems: "center" }}
           >
@@ -167,10 +167,10 @@ function ResidentRegisterPage6() {
               <Grid xs={12}>
                 <FormControlLabel
                   control={<Checkbox />}
-                  label="บริการฟรี"
+                  label='บริการฟรี'
                   sx={{ marginRight: "50px" }}
                 />
-                <FormControlLabel control={<Checkbox />} label="มีค่าบริการ" />
+                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
               </Grid>
               <Grid
                 item
@@ -182,9 +182,9 @@ function ResidentRegisterPage6() {
               >
                 <TextField
                   xs={3}
-                  id="outlined-password-input"
-                  label="(บาท)"
-                  size="small"
+                  id='outlined-password-input'
+                  label='(บาท)'
+                  size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
                 />
               </Grid>
@@ -192,7 +192,7 @@ function ResidentRegisterPage6() {
           </Stack>
 
           <Stack
-            direction="row"
+            direction='row'
             spacing={4}
             sx={{ justifyContent: "start", alignItems: "center" }}
           >
@@ -211,10 +211,10 @@ function ResidentRegisterPage6() {
               <Grid xs={12}>
                 <FormControlLabel
                   control={<Checkbox />}
-                  label="บริการฟรี"
+                  label='บริการฟรี'
                   sx={{ marginRight: "50px" }}
                 />
-                <FormControlLabel control={<Checkbox />} label="มีค่าบริการ" />
+                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
               </Grid>
               <Grid
                 item
@@ -226,9 +226,9 @@ function ResidentRegisterPage6() {
               >
                 <TextField
                   xs={3}
-                  id="outlined-password-input"
-                  label="(บาท)"
-                  size="small"
+                  id='outlined-password-input'
+                  label='(บาท)'
+                  size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
                 />
               </Grid>
@@ -236,7 +236,7 @@ function ResidentRegisterPage6() {
           </Stack>
 
           <Stack
-            direction="row"
+            direction='row'
             spacing={4}
             sx={{ justifyContent: "start", alignItems: "center" }}
           >
@@ -255,10 +255,10 @@ function ResidentRegisterPage6() {
               <Grid xs={12}>
                 <FormControlLabel
                   control={<Checkbox />}
-                  label="บริการฟรี"
+                  label='บริการฟรี'
                   sx={{ marginRight: "50px" }}
                 />
-                <FormControlLabel control={<Checkbox />} label="มีค่าบริการ" />
+                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
               </Grid>
               <Grid
                 item
@@ -270,16 +270,16 @@ function ResidentRegisterPage6() {
               >
                 <TextField
                   xs={3}
-                  id="outlined-password-input"
-                  label="(บาท)"
-                  size="small"
+                  id='outlined-password-input'
+                  label='(บาท)'
+                  size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
                 />
               </Grid>
             </Grid>
           </Stack>
           <Stack
-            direction="row"
+            direction='row'
             spacing={4}
             sx={{ justifyContent: "start", alignItems: "center" }}
           >
@@ -298,10 +298,10 @@ function ResidentRegisterPage6() {
               <Grid xs={12}>
                 <FormControlLabel
                   control={<Checkbox />}
-                  label="บริการฟรี"
+                  label='บริการฟรี'
                   sx={{ marginRight: "50px" }}
                 />
-                <FormControlLabel control={<Checkbox />} label="มีค่าบริการ" />
+                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
               </Grid>
               <Grid
                 item
@@ -313,16 +313,16 @@ function ResidentRegisterPage6() {
               >
                 <TextField
                   xs={3}
-                  id="outlined-password-input"
-                  label="(บาท)"
-                  size="small"
+                  id='outlined-password-input'
+                  label='(บาท)'
+                  size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
                 />
               </Grid>
             </Grid>
           </Stack>
           <Stack
-            direction="row"
+            direction='row'
             spacing={4}
             sx={{ justifyContent: "start", alignItems: "center" }}
           >
@@ -343,10 +343,10 @@ function ResidentRegisterPage6() {
               <Grid xs={12}>
                 <FormControlLabel
                   control={<Checkbox />}
-                  label="บริการฟรี"
+                  label='บริการฟรี'
                   sx={{ marginRight: "50px" }}
                 />
-                <FormControlLabel control={<Checkbox />} label="มีค่าบริการ" />
+                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
               </Grid>
               <Grid
                 item
@@ -358,16 +358,16 @@ function ResidentRegisterPage6() {
               >
                 <TextField
                   xs={3}
-                  id="outlined-password-input"
-                  label="(บาท)"
-                  size="small"
+                  id='outlined-password-input'
+                  label='(บาท)'
+                  size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
                 />
               </Grid>
             </Grid>
           </Stack>
           <Stack
-            direction="row"
+            direction='row'
             spacing={4}
             sx={{ justifyContent: "start", alignItems: "center" }}
           >
@@ -386,10 +386,10 @@ function ResidentRegisterPage6() {
               <Grid xs={12}>
                 <FormControlLabel
                   control={<Checkbox />}
-                  label="บริการฟรี"
+                  label='บริการฟรี'
                   sx={{ marginRight: "50px" }}
                 />
-                <FormControlLabel control={<Checkbox />} label="มีค่าบริการ" />
+                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
               </Grid>
               <Grid
                 item
@@ -401,16 +401,16 @@ function ResidentRegisterPage6() {
               >
                 <TextField
                   xs={3}
-                  id="outlined-password-input"
-                  label="(บาท)"
-                  size="small"
+                  id='outlined-password-input'
+                  label='(บาท)'
+                  size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
                 />
               </Grid>
             </Grid>
           </Stack>
           <Stack
-            direction="row"
+            direction='row'
             spacing={4}
             sx={{ justifyContent: "start", alignItems: "center" }}
           >
@@ -429,10 +429,10 @@ function ResidentRegisterPage6() {
               <Grid xs={12}>
                 <FormControlLabel
                   control={<Checkbox />}
-                  label="บริการฟรี"
+                  label='บริการฟรี'
                   sx={{ marginRight: "50px" }}
                 />
-                <FormControlLabel control={<Checkbox />} label="มีค่าบริการ" />
+                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
               </Grid>
               <Grid
                 item
@@ -444,9 +444,9 @@ function ResidentRegisterPage6() {
               >
                 <TextField
                   xs={3}
-                  id="outlined-password-input"
-                  label="(บาท)"
-                  size="small"
+                  id='outlined-password-input'
+                  label='(บาท)'
+                  size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
                 />
               </Grid>
@@ -456,7 +456,7 @@ function ResidentRegisterPage6() {
       </Grid>
 
       <Grid item sx={{ display: "flex", justifyContent: "end" }}>
-        <Grid container xs={12} justifyContent="end">
+        <Grid container xs={12} justifyContent='end'>
           <Grid
             item
             xs={3}

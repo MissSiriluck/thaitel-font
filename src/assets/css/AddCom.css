@@ -1,0 +1,133 @@
+.background-hotel-name {
+  width: 58vw;
+  height: 25vh;
+  border: 1px solid #bfbfbf;
+
+  /* margin: auto; */
+  /* margin-top: 40px; */
+  border-radius: 10px;
+  position: relative;
+  margin-top: 40px;
+}
+.background-left {
+  width: 30vw;
+  height: 100vh;
+  display: inline-block;
+}
+.background-right {
+  width: 58vw;
+  height: 100vh;
+  display: inline-block;
+  position: absolute;
+}
+.background {
+  width: 100vw;
+  height: 100vh;
+}
+.addcom-hotel-name {
+  font-size: 35px;
+  margin: 0px;
+  width: 25vw;
+  height: 5vh;
+  margin-left: 2vw;
+  margin-top: 2vh;
+  font-family: '"Noto Sans Thai", sans-serif';
+  position: absolute;
+}
+.addcom-hotel-detail {
+  font-size: 20px;
+  text-align: left;
+  padding: 20px;
+  width: 55vw;
+  height: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 7vh;
+  font-family: '"Noto Sans Thai", sans-serif';
+  position: absolute;
+}
+.service-in-hotel {
+  width: 58vw;
+  height: 42vh;
+  border: 1px solid #bfbfbf;
+  /* margin: auto; */
+  margin-top: 40px;
+  border-radius: 10px;
+  margin-bottom: 40px;
+}
+.service-title {
+  font-size: 30px;
+  margin: 0px;
+  width: 20vw;
+  height: 5vh;
+  margin-left: 40px;
+  margin-top: 2vh;
+}
+.icon-title {
+  font-size: 25px;
+  font-weight: bold;
+  margin-left: 20px;
+  width: 5vw;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+}
+.icon-background {
+  width: 50vw;
+  height: 22vh;
+  display: flex;
+  flex-wrap: wrap;
+  /* margin-left: auto;
+  margin-right: auto */
+  margin-left: auto;
+}
+.icon-divide {
+  margin-top: 10px;
+  margin-left: 25px;
+  margin-right: 10px;
+  width: 12vw;
+  height: 10vh;
+  margin-bottom: 10px;
+  display: flex;
+}
+.bed-background {
+  width: 58vw;
+  height: 42vh;
+  border: 1px solid #bfbfbf;
+  border-radius: 10px;
+  margin-top: 40px;
+  position: relative;
+}
+.bed-pic {
+  margin-left: 2vw;
+  height: 35vh;
+  width: 10vw;
+  margin-top: 5vh;
+}
+.room-title {
+  position: absolute;
+  /* font-size: 20px; */
+  top: 5vh;
+  left: 15vw;
+  font-size: 30px;
+}
+.reserve-button {
+  position: absolute;
+  width: 10vw;
+  height: 5.5vh;
+  top: 15vh;
+  left: 40vw;
+  font-size: 20px;
+  background-color: rgb(7, 19, 60);
+  color: white;
+  border-radius: 10px;
+}
+.detail-room-background{
+  position: absolute;
+  top: 25vh;
+  left: 30vw;
+  font-size: 20px;
+}
+.detail-room{
+  margin-bottom: 20px;
+}
