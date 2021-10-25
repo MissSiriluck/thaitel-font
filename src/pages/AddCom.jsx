@@ -20,8 +20,8 @@ import iconpillow from "../assets/images/ICON-PILLOW.png";
 import iconsmoking from "../assets/images/ICON-SMOKING.png";
 import iconswim from "../assets/images/ICON-SWIM.png";
 import iconwifi from "../assets/images/ICON-WIFI.png";
-import bed1 from "../assets/images/bed1.png";
-import bed2 from "../assets/images/bed2.png";
+import bed1 from "../assets/images/bed1.PNG";
+import bed2 from "../assets/images/bed2.PNG";
 // import hottel1 from "../assets/images/hotel-1.jpeg";
 import { Typography } from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
@@ -48,17 +48,17 @@ function AddCom() {
   });
   const classes = useStyles();
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setRoom(event.target.value);
   };
   return (
-    <div className='background'>
-      <div className='background-left'> </div>
-      <div className='background-right'>
+    <div className="background">
+      <div className="background-left"> </div>
+      <div className="background-right">
         <Carousel />
-        <div className='background-hotel-name'>
-          <p className='addcom-hotel-name'>PARADISE TREE HOSTEL</p>
-          <p className='addcom-hotel-detail'>
+        <div className="background-hotel-name">
+          <p className="addcom-hotel-name">PARADISE TREE HOSTEL</p>
+          <p className="addcom-hotel-detail">
             The Newnormal House ตั้งอยู่ในจังหวัดเชียงใหม่
             อยู่ห่างจากตลาดช้างเผือก 200 ม. มีห้องอาหาร บาร์และวิวเมือง
             โรงแรมระดับ 3 ดาวนี้มีโต๊ะบริการทัวร์และบริการตั๋ว
@@ -68,80 +68,80 @@ function AddCom() {
             เครื่องเป่าผมและมีเครื่องใช้ในห้องน้ำฟรี
           </p>
         </div>
-        <div className='service-in-hotel'>
-          <p className='service-title'>บริการภายในโรงแรม</p>
-          <div className='icon-background'>
-            <div className='icon-divide'>
+        <div className="service-in-hotel">
+          <p className="service-title">บริการภายในโรงแรม</p>
+          <div className="icon-background">
+            <div className="icon-divide">
               <img
                 src={iconbar}
-                alt=''
+                alt=""
                 style={{ width: "5vw", height: "10vh" }}
               />
-              <span className='icon-title'>Bar</span>
+              <span className="icon-title">Bar</span>
             </div>
-            <div className='icon-divide'>
+            <div className="icon-divide">
               <img
                 src={iconbed}
-                alt=''
+                alt=""
                 style={{ width: "5vw", height: "10vh" }}
               />
-              <span className='icon-title'>Bed</span>
+              <span className="icon-title">Bed</span>
             </div>
-            <div className='icon-divide'>
+            <div className="icon-divide">
               <img
                 src={iconbreakfast}
-                alt=''
+                alt=""
                 style={{ width: "5vw", height: "10vh" }}
               />
-              <span className='icon-title'>Breakfast</span>
+              <span className="icon-title">Breakfast</span>
             </div>
-            <div className='icon-divide'>
+            <div className="icon-divide">
               <img
                 src={iconcarpark}
-                alt=''
+                alt=""
                 style={{ width: "5vw", height: "10vh" }}
               />
-              <span className='icon-title'>Carpark</span>
+              <span className="icon-title">Carpark</span>
             </div>
-            <div className='icon-divide'>
+            <div className="icon-divide">
               <img
                 src={iconexercise}
-                alt=''
+                alt=""
                 style={{ width: "5vw", height: "10vh" }}
               />
-              <span className='icon-title'>Exercise</span>
+              <span className="icon-title">Exercise</span>
             </div>
-            <div className='icon-divide'>
+            <div className="icon-divide">
               <img
                 src={iconpillow}
-                alt=''
+                alt=""
                 style={{ width: "5vw", height: "10vh" }}
               />
-              <span className='icon-title'>Pillow</span>
+              <span className="icon-title">Pillow</span>
             </div>
-            <div className='icon-divide'>
+            <div className="icon-divide">
               <img
                 src={iconsmoking}
-                alt=''
+                alt=""
                 style={{ width: "5vw", height: "10vh" }}
               />
-              <span className='icon-title'>Smoking</span>
+              <span className="icon-title">Smoking</span>
             </div>
-            <div className='icon-divide'>
+            <div className="icon-divide">
               <img
                 src={iconswim}
-                alt=''
+                alt=""
                 style={{ width: "5vw", height: "10vh" }}
               />
-              <span className='icon-title'>Swim</span>
+              <span className="icon-title">Swim</span>
             </div>
-            <div className='icon-divide'>
+            <div className="icon-divide">
               <img
                 src={iconwifi}
-                alt=''
+                alt=""
                 style={{ width: "5vw", height: "10vh" }}
               />
-              <span className='icon-title'>Wifi</span>
+              <span className="icon-title">Wifi</span>
             </div>
           </div>
         </div>
@@ -244,17 +244,17 @@ function AddCom() {
             </Box>
           </Box>
         </Box>
-        <div className='bed-background'>
-          <img src={bed1} alt='' className='bed-pic' />
-          <p className='room-title'>ห้องมาตราฐานเตียงเดี่ยว</p>
+        <div className="bed-background">
+          <img src={bed1} alt="" className="bed-pic" />
+          <p className="room-title">ห้องมาตราฐานเตียงเดี่ยว</p>
           <Box className={classes.root}>
             <FormControl fullWidth>
-              <InputLabel id='demo-simple-select-label'>จำนวนห้อง</InputLabel>
+              <InputLabel id="demo-simple-select-label">จำนวนห้อง</InputLabel>
               <Select
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
                 value={room}
-                label='จำนวนห้อง'
+                label="จำนวนห้อง"
                 onChange={handleChange}
               >
                 <MenuItem value={1}>1</MenuItem>
@@ -263,24 +263,24 @@ function AddCom() {
               </Select>
             </FormControl>
           </Box>
-          <button className='reserve-button'>Reserve</button>
-          <div className='detail-room-background'>
-            <p className='detail-room'>Room size : 3.5 ฟุต x 6.5 ฟุต</p>
-            <p className='detail-room'>Price : 1500 BATH</p>
-            <p className='detail-room'>Remaining Room : 10 Rooms</p>
+          <button className="reserve-button">Reserve</button>
+          <div className="detail-room-background">
+            <p className="detail-room">Room size : 3.5 ฟุต x 6.5 ฟุต</p>
+            <p className="detail-room">Price : 1500 BATH</p>
+            <p className="detail-room">Remaining Room : 10 Rooms</p>
           </div>
         </div>
-        <div className='bed-background'>
-          <img src={bed2} alt='' className='bed-pic' />
-          <p className='room-title'>ห้องมาตราฐานเตียงเดี่ยว</p>
+        <div className="bed-background">
+          <img src={bed2} alt="" className="bed-pic" />
+          <p className="room-title">ห้องมาตราฐานเตียงเดี่ยว</p>
           <Box className={classes.root}>
             <FormControl fullWidth>
-              <InputLabel id='demo-simple-select-label'>จำนวนห้อง</InputLabel>
+              <InputLabel id="demo-simple-select-label">จำนวนห้อง</InputLabel>
               <Select
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
                 value={room}
-                label='จำนวนห้อง'
+                label="จำนวนห้อง"
                 onChange={handleChange}
               >
                 <MenuItem value={1}>1</MenuItem>
@@ -289,11 +289,11 @@ function AddCom() {
               </Select>
             </FormControl>
           </Box>
-          <button className='reserve-button'>Reserve</button>
-          <div className='detail-room-background'>
-            <p className='detail-room'>Room size : 3.5 ฟุต x 6.5 ฟุต</p>
-            <p className='detail-room'>Price : 1500 BATH</p>
-            <p className='detail-room'>Remaining Room : 10 Rooms</p>
+          <button className="reserve-button">Reserve</button>
+          <div className="detail-room-background">
+            <p className="detail-room">Room size : 3.5 ฟุต x 6.5 ฟุต</p>
+            <p className="detail-room">Price : 1500 BATH</p>
+            <p className="detail-room">Remaining Room : 10 Rooms</p>
           </div>
         </div>
       </div>

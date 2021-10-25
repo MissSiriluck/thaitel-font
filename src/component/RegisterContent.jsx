@@ -10,12 +10,7 @@ import ButtonUnstyled, {
 import { styled } from "@mui/system";
 import axios from "../config/axios";
 
-<<<<<<< HEAD
-const CustomButtonRoot = styled("span")(`
-=======
-
 const CustomButtonRoot = styled("button")(`
->>>>>>> edit_feature_residentregister
     background-color: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -59,20 +54,25 @@ function RegisterContent() {
   //   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    const values = {
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-      phone: data.get("phone"),
-      role: "user"
-    };
-    const res = await axios.post("/", values);
-  };
+    try {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      // eslint-disable-next-line no-console
+      const values = {
+        firstName: data.get("firstName"),
+        lastName: data.get("lastName"),
+        email: data.get("email"),
+        password: data.get("password"),
+        telephone: data.get("phone"),
+        role: "user",
+      };
 
+      const res = await axios.post("/users/register", values);
+      console.log(res);
+    } catch (err) {
+      console.dir(err);
+    }
+  };
 
   // const [values, setValues] = React.useState({
   //   firstName: "",
@@ -93,15 +93,15 @@ function RegisterContent() {
   return (
     <div>
       <Container
-        maxWidth='md'
-        justifyContent='center'
-        alignItems='center'
-        direction='column'
+        maxWidth="md"
+        justifyContent="center"
+        alignItems="center"
+        direction="column"
         sx={{ padding: 0, mt: 23 }}
       >
         <Box
-          alignItems='center'
-          justifyContent='center'
+          alignItems="center"
+          justifyContent="center"
           sx={{
             height: "60vh",
             display: "flex",
@@ -110,13 +110,13 @@ function RegisterContent() {
           }}
         >
           <Box
-            alignItems='center'
-            justifyContent='center'
+            alignItems="center"
+            justifyContent="center"
             sx={{ width: "80%", display: "flex" }}
             xs={8}
             sm={8}
           >
-            <Grid container justifyContent='start' alignItems='center' xs={10}>
+            <Grid container justifyContent="start" alignItems="center" xs={10}>
               <Typography
                 style={{
                   fontSize: 40,
@@ -131,12 +131,12 @@ function RegisterContent() {
           </Box>
           {/*  */}
           <Box
-             component="form"
-             onSubmit={handleSubmit}
+            component="form"
+            onSubmit={handleSubmit}
             container
             spacing={2}
-            justifyContent='center'
-            alignItems='center'
+            justifyContent="center"
+            alignItems="center"
             sx={{
               padding: 0,
             }}
@@ -146,8 +146,8 @@ function RegisterContent() {
             <Grid
               container
               spacing={2}
-              justifyContent='center'
-              alignItems='center'
+              justifyContent="center"
+              alignItems="center"
               sx={{
                 padding: 0,
               }}
@@ -173,15 +173,6 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-<<<<<<< HEAD
-                  id='outlined-textarea fullWidth'
-                  label='ชื่อจริง'
-                  placeholder='กรอกชื่อจริง'
-                  multiline
-                  size='small'
-                  justifyContent='center'
-                  alignItems='center'
-=======
                   label="ชื่อจริง"
                   placeholder="กรอกชื่อจริง"
                   id="firstName"
@@ -192,7 +183,6 @@ function RegisterContent() {
                   size="small"
                   justifyContent="center"
                   alignItems="center"
->>>>>>> edit_feature_residentregister
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
@@ -219,15 +209,6 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-<<<<<<< HEAD
-                  id='outlined-textarea fullWidth'
-                  label='นามสกุล'
-                  placeholder='กรอกนามสกุล'
-                  multiline
-                  size='small'
-                  justifyContent='center'
-                  alignItems='center'
-=======
                   label="นามสกุล"
                   placeholder="กรอกนามสกุล"
                   id="lastName"
@@ -238,7 +219,6 @@ function RegisterContent() {
                   size="small"
                   justifyContent="center"
                   alignItems="center"
->>>>>>> edit_feature_residentregister
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
@@ -249,8 +229,8 @@ function RegisterContent() {
             <Grid
               container
               spacing={2}
-              justifyContent='center'
-              alignItems='center'
+              justifyContent="center"
+              alignItems="center"
               sx={{
                 padding: 0,
                 marginBottom: "3px",
@@ -277,13 +257,6 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-<<<<<<< HEAD
-                  id='outlined-textarea fullWidth'
-                  label='อีเมล์'
-                  placeholder='กรอกอีเมล์'
-                  multiline
-                  size='small'
-=======
                   label="อีเมล์"
                   placeholder="กรอกอีเมล์"
                   id="email"
@@ -292,7 +265,6 @@ function RegisterContent() {
                   // value={values.email}
                   // onChange={handleChange("email")}
                   size="small"
->>>>>>> edit_feature_residentregister
                   sx={{
                     padding: 0,
                   }}
@@ -317,13 +289,6 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-<<<<<<< HEAD
-                  id='outlined-textarea fullWidth'
-                  label='เบอร์โทรศัพท์'
-                  placeholder='กรอกเบอร์โทรศัพท์'
-                  multiline
-                  size='small'
-=======
                   id="outlined-textarea fullWidth"
                   label="เบอร์โทรศัพท์"
                   placeholder="กรอกเบอร์โทรศัพท์"
@@ -333,7 +298,6 @@ function RegisterContent() {
                   // value={values.phone}
                   // onChange={handleChange("phone")}
                   size="small"
->>>>>>> edit_feature_residentregister
                   sx={{
                     padding: 0,
                   }}
@@ -343,8 +307,8 @@ function RegisterContent() {
             <Grid
               container
               spacing={2}
-              justifyContent='center'
-              alignItems='center'
+              justifyContent="center"
+              alignItems="center"
               sx={{
                 padding: 0,
               }}
@@ -370,19 +334,15 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id='outlined-textarea fullWidth'
-                  label='รหัสผ่าน'
-                  placeholder='กรอกรหัสผ่าน'
+                  id="outlined-textarea fullWidth"
+                  label="รหัสผ่าน"
+                  placeholder="กรอกรหัสผ่าน"
                   multiline
-<<<<<<< HEAD
-                  size='small'
-=======
                   id="password"
                   name="password"
                   // value={values.password}
                   // onChange={handleChange("password")}
                   size="small"
->>>>>>> edit_feature_residentregister
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
@@ -393,8 +353,8 @@ function RegisterContent() {
             <Grid
               container
               spacing={2}
-              justifyContent='center'
-              alignItems='center'
+              justifyContent="center"
+              alignItems="center"
               sx={{
                 padding: 0,
                 marginBottom: "3px",
@@ -414,13 +374,6 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-<<<<<<< HEAD
-                  id='outlined-textarea fullWidth'
-                  label='ยืนยันรหัสผ่าน'
-                  placeholder='ยืนยันรหัสผ่าน'
-                  multiline
-                  size='small'
-=======
                   id="outlined-textarea fullWidth"
                   label="ยืนยันรหัสผ่าน"
                   placeholder="ยืนยันรหัสผ่าน"
@@ -430,7 +383,6 @@ function RegisterContent() {
                   // value={values.confirmPassword}
                   // onChange={handleChange("confirmPassword")}
                   size="small"
->>>>>>> edit_feature_residentregister
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
@@ -441,8 +393,8 @@ function RegisterContent() {
             <Grid
               container
               spacing={2}
-              justifyContent='center'
-              alignItems='center'
+              justifyContent="center"
+              alignItems="center"
               sx={{
                 padding: 0,
               }}
@@ -459,6 +411,7 @@ function RegisterContent() {
                     width: "92%",
                     marginTop: "10px",
                   }}
+                  type="submit"
                 >
                   <Typography
                     style={{
