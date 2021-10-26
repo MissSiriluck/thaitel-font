@@ -1,15 +1,16 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { Container, Grid, TextField } from "@mui/material";
-import styledButtonsSubmit from "../service/SubmitButtons";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
+import axios from "../config/axios";
 
-const CustomButtonRoot = styled("span")(`
+const CustomButtonRoot = styled("button")(`
     background-color: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -52,18 +53,55 @@ function RegisterContent() {
   //     });
   //   };
 
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      // eslint-disable-next-line no-console
+      const values = {
+        firstName: data.get("firstName"),
+        lastName: data.get("lastName"),
+        email: data.get("email"),
+        password: data.get("password"),
+        telephone: data.get("phone"),
+        role: "user",
+      };
+
+      const res = await axios.post("/users/register", values);
+      console.log(res);
+    } catch (err) {
+      console.dir(err);
+    }
+  };
+
+  // const [values, setValues] = React.useState({
+  //   firstName: "",
+  //   lastName: "",
+  //   email: "",
+  //   password: "",
+  //   confirmPassword: "",
+  //   phone: "",
+  //   google_user_id: "",
+  //   // role:"",
+  //   showPassword: false,
+  // });
+
+  // const handleChange = prop => event => {
+  //   setValues({ ...values, [prop]: event.target.value });
+  // };
+
   return (
     <div>
       <Container
-        maxWidth='md'
-        justifyContent='center'
-        alignItems='center'
-        direction='column'
+        maxWidth="md"
+        justifyContent="center"
+        alignItems="center"
+        direction="column"
         sx={{ padding: 0, mt: 23 }}
       >
         <Box
-          alignItems='center'
-          justifyContent='center'
+          alignItems="center"
+          justifyContent="center"
           sx={{
             height: "60vh",
             display: "flex",
@@ -72,13 +110,13 @@ function RegisterContent() {
           }}
         >
           <Box
-            alignItems='center'
-            justifyContent='center'
+            alignItems="center"
+            justifyContent="center"
             sx={{ width: "80%", display: "flex" }}
             xs={8}
             sm={8}
           >
-            <Grid container justifyContent='start' alignItems='center' xs={10}>
+            <Grid container justifyContent="start" alignItems="center" xs={10}>
               <Typography
                 style={{
                   fontSize: 40,
@@ -92,11 +130,13 @@ function RegisterContent() {
             </Grid>
           </Box>
           {/*  */}
-          <Grid
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
             container
             spacing={2}
-            justifyContent='center'
-            alignItems='center'
+            justifyContent="center"
+            alignItems="center"
             sx={{
               padding: 0,
             }}
@@ -106,8 +146,8 @@ function RegisterContent() {
             <Grid
               container
               spacing={2}
-              justifyContent='center'
-              alignItems='center'
+              justifyContent="center"
+              alignItems="center"
               sx={{
                 padding: 0,
               }}
@@ -133,13 +173,16 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id='outlined-textarea fullWidth'
-                  label='ชื่อจริง'
-                  placeholder='กรอกชื่อจริง'
+                  label="ชื่อจริง"
+                  placeholder="กรอกชื่อจริง"
+                  id="firstName"
+                  name="firstName"
                   multiline
-                  size='small'
-                  justifyContent='center'
-                  alignItems='center'
+                  // value={values.firstName}
+                  // onChange={handleChange("firstName")}
+                  size="small"
+                  justifyContent="center"
+                  alignItems="center"
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
@@ -166,13 +209,16 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id='outlined-textarea fullWidth'
-                  label='นามสกุล'
-                  placeholder='กรอกนามสกุล'
+                  label="นามสกุล"
+                  placeholder="กรอกนามสกุล"
+                  id="lastName"
+                  name="lastName"
                   multiline
-                  size='small'
-                  justifyContent='center'
-                  alignItems='center'
+                  // value={values.lastName}
+                  // onChange={handleChange("lastName")}
+                  size="small"
+                  justifyContent="center"
+                  alignItems="center"
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
@@ -183,8 +229,8 @@ function RegisterContent() {
             <Grid
               container
               spacing={2}
-              justifyContent='center'
-              alignItems='center'
+              justifyContent="center"
+              alignItems="center"
               sx={{
                 padding: 0,
                 marginBottom: "3px",
@@ -211,11 +257,14 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id='outlined-textarea fullWidth'
-                  label='อีเมล์'
-                  placeholder='กรอกอีเมล์'
+                  label="อีเมล์"
+                  placeholder="กรอกอีเมล์"
+                  id="email"
+                  name="email"
                   multiline
-                  size='small'
+                  // value={values.email}
+                  // onChange={handleChange("email")}
+                  size="small"
                   sx={{
                     padding: 0,
                   }}
@@ -240,11 +289,15 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id='outlined-textarea fullWidth'
-                  label='เบอร์โทรศัพท์'
-                  placeholder='กรอกเบอร์โทรศัพท์'
+                  id="outlined-textarea fullWidth"
+                  label="เบอร์โทรศัพท์"
+                  placeholder="กรอกเบอร์โทรศัพท์"
+                  id="phone"
+                  name="phone"
                   multiline
-                  size='small'
+                  // value={values.phone}
+                  // onChange={handleChange("phone")}
+                  size="small"
                   sx={{
                     padding: 0,
                   }}
@@ -254,8 +307,8 @@ function RegisterContent() {
             <Grid
               container
               spacing={2}
-              justifyContent='center'
-              alignItems='center'
+              justifyContent="center"
+              alignItems="center"
               sx={{
                 padding: 0,
               }}
@@ -281,11 +334,15 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id='outlined-textarea fullWidth'
-                  label='รหัสผ่าน'
-                  placeholder='กรอกรหัสผ่าน'
+                  id="outlined-textarea fullWidth"
+                  label="รหัสผ่าน"
+                  placeholder="กรอกรหัสผ่าน"
                   multiline
-                  size='small'
+                  id="password"
+                  name="password"
+                  // value={values.password}
+                  // onChange={handleChange("password")}
+                  size="small"
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
@@ -296,8 +353,8 @@ function RegisterContent() {
             <Grid
               container
               spacing={2}
-              justifyContent='center'
-              alignItems='center'
+              justifyContent="center"
+              alignItems="center"
               sx={{
                 padding: 0,
                 marginBottom: "3px",
@@ -317,11 +374,15 @@ function RegisterContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  id='outlined-textarea fullWidth'
-                  label='ยืนยันรหัสผ่าน'
-                  placeholder='ยืนยันรหัสผ่าน'
+                  id="outlined-textarea fullWidth"
+                  label="ยืนยันรหัสผ่าน"
+                  placeholder="ยืนยันรหัสผ่าน"
+                  id="confirmPassword"
+                  name="confirmPassword"
                   multiline
-                  size='small'
+                  // value={values.confirmPassword}
+                  // onChange={handleChange("confirmPassword")}
+                  size="small"
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
@@ -332,8 +393,8 @@ function RegisterContent() {
             <Grid
               container
               spacing={2}
-              justifyContent='center'
-              alignItems='center'
+              justifyContent="center"
+              alignItems="center"
               sx={{
                 padding: 0,
               }}
@@ -350,6 +411,7 @@ function RegisterContent() {
                     width: "92%",
                     marginTop: "10px",
                   }}
+                  type="submit"
                 >
                   <Typography
                     style={{
@@ -379,15 +441,17 @@ function RegisterContent() {
                   </Typography>
                 </Grid>
                 <Grid mr={1}>
-                  <Typography
-                    style={{ color: "#16264D", fontWeight: 700, margin: "0" }}
-                  >
-                    เข้าสู่ระบบ
-                  </Typography>
+                  <Link to="/login">
+                    <Typography
+                      style={{ color: "#16264D", fontWeight: 700, margin: "0" }}
+                    >
+                      เข้าสู่ระบบ
+                    </Typography>
+                  </Link>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
+          </Box>
           {/*  */}
         </Box>
       </Container>
