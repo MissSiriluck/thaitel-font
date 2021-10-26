@@ -9,7 +9,7 @@ import ButtonUnstyled, {
 import { styled } from "@mui/system";
 import BtnLogOut from "./BtnLogOut";
 
-//customize button blue
+//customize button red
 const CustomButtonRoot = styled("span")(`
     background-color: none;
     padding: 10px 20px;
