@@ -9,7 +9,8 @@ import ButtonUnstyled, {
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
 import BtnGuestnRoom from "./BtnGuestnRoom";
-
+import { useState } from "react";
+import axios from "axios";
 const CustomButtonRoot = styled("span")(`
     background-color: none;
     padding: 12px 35px;
@@ -42,6 +43,16 @@ function CustomButton(props) {
 }
 
 function SearhchingBar() {
+  const [resident, setResident] = useState("");
+  const [checkIn, setCheckIn] = useState([null, null]);
+  // const [checkOut, setCheckOut] = useState("");
+  const [guest, setGuest] = useState(1);
+
+  function handleGetData() {
+    axios.get(
+      `http://localhost:7777/search/?resident=${resident}&&checkin=${checkIn}&&guest=${guest}`
+    );
+  }
   return (
     <Box
       sx={{
@@ -50,16 +61,16 @@ function SearhchingBar() {
       }}
     >
       <AppBar
-        position='static'
+        position="static"
         sx={{
           backgroundColor: "#ffffff60",
           borderRadius: 2,
         }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
-          <SearchingBox />
-          <DatePicker />
-          <BtnGuestnRoom />
+          <SearchingBox value={resident} setResident={setResident} />
+          <DatePicker checkIn={checkIn} setCheckIn={setCheckIn} />
+          <BtnGuestnRoom guest={guest} setGuest={setGuest}/>
           <CustomButton
             sx={{
               background: "#03a9f4",
@@ -67,6 +78,7 @@ function SearhchingBar() {
               fontFamily: "'Noto Sans Thai', sans-serif",
               ml: 3,
             }}
+            onClick={handleGetData}
           >
             Search
           </CustomButton>

@@ -1,6 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Button from "@mui/material/Button";
+import { BrowserRouter as Link } from "react-router-dom";
+// import Button from "@mui/material/Button";
 import { Container, Grid, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -9,6 +9,9 @@ import ButtonUnstyled, {
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
 import axios from "../config/axios";
+import { useHistory } from "react-router";
+import { useState } from "react";
+import isEmail from "validator/lib/isEmail";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -52,27 +55,80 @@ function RegisterContent() {
   //       password: data.get('password'),
   //     });
   //   };
+  const history = useHistory();
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    telephone: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [error, setError] = useState({});
 
-  const handleSubmit = async (event) => {
-    try {
-      event.preventDefault();
-      const data = new FormData(event.currentTarget);
-      // eslint-disable-next-line no-console
-      const values = {
-        firstName: data.get("firstName"),
-        lastName: data.get("lastName"),
-        email: data.get("email"),
-        password: data.get("password"),
-        telephone: data.get("phone"),
-        role: "user",
-      };
+  function validate(e) {
+    /// email ห้ามซ้ำ
 
-      const res = await axios.post("/users/register", values);
-      console.log(res);
-    } catch (err) {
-      console.dir(err);
+    if (e.target.value !== formData.password) {
+      setError({ confirmPassword: "INVALID PASSWORD" });
+    } else {
+      setError({});
     }
-  };
+  }
+  function validateName(e) {
+    if (e.target.value === "") {
+      if (e.target.name === "name") {
+        setError({ name: "INVALID FIRSTNAME" });
+      }
+      if (e.target.name === "lastname") {
+        setError({ lastname: "INVALID LASTNAME" });
+      }
+    } else {
+      setError({});
+    }
+  }
+  function validateEmail(e) {
+    if (!isEmail(e.target.value)) {
+      setError({ email: "INVALID EMAIL" });
+    } else {
+      setError({});
+    }
+  }
+  function Submit() {
+    // validate();
+    if (Object.keys(error).length === 0) {
+      axios
+        .post("http://localhost:7777/register", formData)
+        .then(() => {
+          history.push("/Login");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else setError({ confirmPassword: "INVALID PASSWORD" });
+    console.log(Object.keys(error).length);
+  }
+
+  // const handleSubmit = async (event) => {
+  //   try {
+  //     event.preventDefault();
+  //     const data = new FormData(event.currentTarget);
+  //     // eslint-disable-next-line no-console
+  //     const values = {
+  //       firstName: data.get("firstName"),
+  //       lastName: data.get("lastName"),
+  //       email: data.get("email"),
+  //       password: data.get("password"),
+  //       telephone: data.get("phone"),
+  //       role: "user",
+  //     };
+  //     console.log(values);
+  //     const res = await axios.post("/users/register", values);
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.dir(err);
+  //   }
+  // };
 
   // const [values, setValues] = React.useState({
   //   firstName: "",
@@ -132,7 +188,7 @@ function RegisterContent() {
           {/*  */}
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            // onSubmit={Submit}
             container
             spacing={2}
             justifyContent="center"
@@ -171,6 +227,9 @@ function RegisterContent() {
                 >
                   ชื่อจริง
                 </Typography>
+                {error.name && (
+                  <h1 style={{ color: "red", margin: 0 }}>{error.name}</h1>
+                )}
                 <TextField
                   fullWidth
                   label="ชื่อจริง"
@@ -180,6 +239,12 @@ function RegisterContent() {
                   multiline
                   // value={values.firstName}
                   // onChange={handleChange("firstName")}
+                  value={formData.firstName}
+                  onChange={(e) => {
+                    // validateName(e);
+                    validateName(e);
+                    setFormData({ ...formData, firstName: e.target.value });
+                  }}
                   size="small"
                   justifyContent="center"
                   alignItems="center"
@@ -222,6 +287,12 @@ function RegisterContent() {
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
+                  }}
+                  value={formData.lastName}
+                  onChange={(e) => {
+                    // validateName(e);
+                    validateName(e);
+                    setFormData({ ...formData, lastName: e.target.value });
                   }}
                 />
               </Grid>
@@ -268,6 +339,12 @@ function RegisterContent() {
                   sx={{
                     padding: 0,
                   }}
+                  value={formData.email}
+                  onChange={(e) => {
+                    // validateEmail(e);
+                    validateEmail(e);
+                    setFormData({ ...formData, email: e.target.value });
+                  }}
                 />
               </Grid>
               <Grid
@@ -292,7 +369,7 @@ function RegisterContent() {
                   id="outlined-textarea fullWidth"
                   label="เบอร์โทรศัพท์"
                   placeholder="กรอกเบอร์โทรศัพท์"
-                  id="phone"
+                  // id="phone"
                   name="phone"
                   multiline
                   // value={values.phone}
@@ -300,6 +377,11 @@ function RegisterContent() {
                   size="small"
                   sx={{
                     padding: 0,
+                  }}
+                  value={formData.telephone}
+                  onChange={(e) => {
+                    // validate(e);
+                    setFormData({ ...formData, telephone: e.target.value });
                   }}
                 />
               </Grid>
@@ -338,7 +420,7 @@ function RegisterContent() {
                   label="รหัสผ่าน"
                   placeholder="กรอกรหัสผ่าน"
                   multiline
-                  id="password"
+                  // id="password"
                   name="password"
                   // value={values.password}
                   // onChange={handleChange("password")}
@@ -346,6 +428,14 @@ function RegisterContent() {
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
+                  }}
+                  value={formData.password}
+                  onChange={(e) => {
+                    validate(e);
+                    setFormData({
+                      ...formData,
+                      password: e.target.value,
+                    });
                   }}
                 />
               </Grid>
@@ -377,11 +467,19 @@ function RegisterContent() {
                   id="outlined-textarea fullWidth"
                   label="ยืนยันรหัสผ่าน"
                   placeholder="ยืนยันรหัสผ่าน"
-                  id="confirmPassword"
+                  // id="confirmPassword"
                   name="confirmPassword"
                   multiline
                   // value={values.confirmPassword}
                   // onChange={handleChange("confirmPassword")}
+                  value={formData.confirmPassword}
+                  onChange={(e) => {
+                    validate(e);
+                    setFormData({
+                      ...formData,
+                      confirmPassword: e.target.value,
+                    });
+                  }}
                   size="small"
                   sx={{
                     padding: 0,
@@ -411,7 +509,6 @@ function RegisterContent() {
                     width: "92%",
                     marginTop: "10px",
                   }}
-                  type="submit"
                 >
                   <Typography
                     style={{
@@ -419,6 +516,7 @@ function RegisterContent() {
                       marginBottom: "1px",
                       justifyContent: "start",
                     }}
+                    onClick={Submit}
                   >
                     สมัครสมาชิก
                   </Typography>

@@ -37,10 +37,10 @@ export function CustomButton(props) {
 //customize popover
 const PopoverStyle = {};
 
-function BtnGuestnRoom() {
+function BtnGuestnRoom(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [room, setRoom] = React.useState(1);
-  const [guest, setGuest] = React.useState(1);
+  // const [guest, setGuest] = React.useState(1);
 
   //popover
   const handleClick = event => {
@@ -53,12 +53,13 @@ function BtnGuestnRoom() {
 
   //add number of guest
   function handleAddGuest() {
-    setGuest(current => current + 1);
+    // setGuest(current => current + 1);
+    props.setGuest(current => current + 1)
   }
 
   function handleMinusGuest() {
     if (guest > 1) {
-      setGuest(current => current - 1);
+      props.setGuest(current => current - 1);
     }
   }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -9,7 +9,7 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
-import axios from "../config/axios";
+// import axios from "../config/axios";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -53,13 +53,14 @@ function LoginContent() {
     //   email: data.get("email"),
     //   password: data.get("password"),
     // });
-    const values = {
-      email: data.get("email"),
-      password: data.get("password"),
-      // role: "user",
-    };
-    const res = await axios.post("/users/login", values);
+    // const values = {
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    //   // role: "user",
+    // };
+    // const res = await axios.post("/users/login", values);
   };
+  
 
   return (
     <div>
