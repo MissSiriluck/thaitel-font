@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
-import { styled } from "@mui/material/styles";
+import React, { useContext } from "react";
+//Material 
 import { Container, Grid, TextField, Typography, Box } from "@mui/material";
-import Stack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
@@ -12,9 +12,11 @@ import Select from "@mui/material/Select";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
+import { padding } from "@mui/system";
 import { CreateResidentContext } from "../context/createResidentContext";
 
 const CustomButtonRoot = styled("span")(`
@@ -44,391 +46,565 @@ const CustomButtonRoot = styled("span")(`
     }
 `);
 
-
-
-
 function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-
 function ResidentRegisterPage3() {
-
-  const {values, setValues} = useContext(CreateResidentContext)
-
-  const [showImg, setShowImg] = useState("")
-
-  const [file, setFile] = useState(null)
-  // console.log(file)
-
-  const handleChangeFile = e => {
-    setFile(e.target.files[0])
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      //   console.log(reader.result);
-      setShowImg(reader.result);
-    };
-    reader.readAsDataURL(e.target.files[0]);
-  }
-
-  const handleOnChangeCheckNoSmoking = ( props, event) => {
-    const clone = { ...values };
-    clone.noSmoking = !clone.noSmoking;
-    setValues({ ...values, [props]: event.target.value });
-  };
-
-  const handleOnChangeCheckPetAllow = ( props, event) => {
-    const clone = { ...values };
-    clone.petAllow = !clone.petAllow;
-    setValues({ ...values, [props]: event.target.value });
-  };
-
-  const handleChange = ( props, event) => {
-    setValues({ ...values, [props]: event.target.value });
-  };
-
-
+  
   const Input = styled("input")({
     display: "none",
   });
 
+  const {values, setValues} = useContext(CreateResidentContext)
+
+console.log(values)
+
+  const handleChange = (props, event) => {
+    setValues({ ...values, [props]: event.target.value });
+  };
+
   return (
-    <Container maxWidth="md" sx={{ padding: 0, mt: 18 }}>
-      <Grid container direction="column" sx={8} spacing={2}>
-        <Grid item sx={{ display: "flex", flexDirection: "column" }}>
-          <Typography
-            style={{
-              fontSize: 40,
+    <Container maxWidth="md"  sx={{ mt: 18 }}>
+      <Box 
+      component="form"
+            // onSubmit={handleSubmit}
+      >
+      <Grid Container sx={{ marginTop: "20px", marginBottom: "5px" }}>
+        <Typography sx={{ fontSize: "36px" }}>รายละเอียดที่พัก</Typography>
+      </Grid>
+      <Grid
+        Container
+        sx={{
+          flexDirection: "column",
+          border: "2px solid #c4c4c4",
+          borderRadius: "5px",
+          padding: "20px",
+          width: "100%",
+        }}
+      >
+        <Grid item>
+          <Grid
+            item
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginLeft: "40px",
             }}
+            xs={11}
           >
-            รูปแบบ และ ราคา
-          </Typography>
-        </Grid>
-        <Grid item sx={{ display: "flex", flexDirection: "column" }}>
-          <Grid item sx={{ display: "flex", flexDirection: "column" }}>
-            <Grid
-              item
-              sx={{ display: "flex", flexDirection: "column", flexgrow: "1" }}
-            >
+            <Grid item xs={5.5}>
               <Typography
                 style={{
-                  fontSize: 27,
+                  fontSize: 18,
+                  marginTop: "10px",
                 }}
               >
-                โปรดเลือก
+                ชื่อที่พักที่ให้บริการ
               </Typography>
-              <Grid
-                item
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  border: "2px solid #c4c4c4",
-                  borderRadius: "5px",
-                  padding: "20px",
-                  width: "100%",
+              <TextField
+                id="outlined-password-input"
+                label="ชื่อที่พักที่ให้บริการ"
+                size="small"
+                value={values.name}
+                onChange={e => handleChange('name',e)}
+                sx={{ width: "100%", alignItems: "stretch" }}
+              />
+            </Grid>
+            <Grid item xs={5.5}>
+              <Typography
+                style={{
+                  fontSize: 18,
+                  marginTop: "10px",
                 }}
-                spacing={2}
-                xs={12}
               >
-                <Grid
-                  item
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-
-                    width: "100%",
-                    alignItems: "flex-end",
-                  }}
-                  xs={12}
-                >
-                  <Grid
-                    item
-                    xs={12}
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <Typography
-                      style={{
-                        fontSize: 18,
-                        marginTop: "10px",
-                      }}
-                    >
-                      ประเภทห้องพัก
-                    </Typography>
-                    <TextField
-                      id="outlined-password-input"
-                      label="ประเภทห้องพัก"
-                      size="small"
-                      sx={{ width: "100%" }}
-                      value={values.roomTypeOf}
-                      onChange={e => handleChange('roomTypeOf', e)}
-                    />
-                  </Grid>
-                </Grid>
-                <Stack
-                  item
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Grid item xs={3.5}>
-                      <Typography
-                        style={{
-                          fontSize: 18,
-                          marginTop: "10px",
-                        }}
-                      >
-                        จำนวนของห้องพัก
-                      </Typography>
-                      <TextField
-                        id="outlined-password-input"
-                        label="จำนวนของห้องพัก"
-                        size="small"
-                        sx={{ width: "100%", alignItems: "stretch" }}
-                        value={values.roomAmount}
-                        onChange={e => handleChange('roomAmount', e)}
-                      />
-                    </Grid>
-
-                    <Grid
-                      item
-                      xs={3.5}
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "flex-end",
-                      }}
-                    >
-                      <Typography
-                        style={{
-                          fontSize: 18,
-                          marginTop: "10px",
-                        }}
-                      >
-                        ขนาดห้องพัก
-                      </Typography>
-                      <TextField
-                        id="outlined-password-input"
-                        label="ประเภทห้องพัก"
-                        size="small"
-                        sx={{ width: "100%", alignItems: "stretch" }}
-                        value={values.roomSize}
-                        onChange={e => handleChange('roomSize', e)}
-                      />
-                    </Grid>
-
-                  <Grid item xs={3.8}>
-                    <Typography
-                      style={{
-                        fontSize: 18,
-                        marginTop: "10px",
-                      }}
-                    >
-                      จำนวนแขกสูงสุด
-                    </Typography>
-                    <TextField
-                      id="outlined-password-input"
-                      label="ประเภทห้องพัก"
-                      size="small"
-                      xs={5}
-                      sx={{ width: "100%" }}
-                    />
-                  </Grid>
-                </Stack>
-                <Grid item xs={12}>
-                  <Grid item xs={12}>
-                    <Typography
-                      style={{
-                        fontSize: 18,
-                        marginTop: "10px",
-                      }}
-                    >
-                      รายละเอียดห้องพักเพิ่มเติม
-                    </Typography>
-                    <TextField
-                      id="outlined-password-input"
-                      label="รายละเอียดห้องพักเพิ่มเติม"
-                      size="small"
-                      sx={{ width: "100%" }}
-                      value={values.optionRoomDetail}
-                      onChange={e => handleChange('optionRoomDetail', e)}
-                    />
-                  </Grid>
-                </Grid>
-              </Grid>
+                ระดับดาว(ถ้ามี)
+              </Typography>
+              <TextField
+                id="outlined-password-input"
+                label="ระดับดาว"
+                size="small"
+                sx={{ width: "100%", alignItems: "stretch" }}
+                value={values.rateStar}
+                onChange={e => handleChange('rateStar',e)}
+              />
             </Grid>
           </Grid>
           <Grid
             item
             sx={{
-              border: "2px solid #c4c4c4",
-              borderRadius: "5px",
-              marginTop: "20px",
-              padding: "12px",
               display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginLeft: "40px",
             }}
+            xs={11}
           >
-            <Grid item xs={7} sx={{ display: "flex", paddingBottom: "3px" }}>
-              <Box
-                item
-                xs={12}
-                sx={{
-                  border: "2px dotted #cfcfcf",
-                  width: "100%",
-                  margin: "5px",
-                  height: "35vh",
-                  alignItems: "center",
-                  borderRadius: "5px",
-                  justifyContent: "center",
-                  backgroundImage: `url(${showImg})`,
-                  backgroundSize: 'contain',
-                  backgroundRepeat: 'no-repeat'
+            <Grid item xs={7.7}>
+              <Typography
+                style={{
+                  fontSize: 18,
+                  marginTop: "10px",
                 }}
               >
-                { showImg ? null : <Typography
-                  style={{
-                    fontSize: "18px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: "100%",
-                  }}
-                >
-                  อัพโหลดรูปห้องพักจำนวน 1 รูป
-                </Typography>}
-                
-              </Box>
+                บ้านเลขที่ ซอย ถนน
+              </Typography>
+              <TextField
+                id="outlined-password-input"
+                label="บ้านเลขที่ ซอย ถนน"
+                size="small"
+                sx={{ width: "100%", alignItems: "stretch" }}
+                value={values.address}
+                onChange={e => handleChange('address',e)}
+              />
             </Grid>
+            <Grid item xs={3.5}>
+              <Typography
+                style={{
+                  fontSize: 18,
+                  marginTop: "10px",
+                }}
+              >
+                ตำบล/แขวง
+              </Typography>
+              <TextField
+                id="outlined-password-input"
+                label="ตำบล/แขวง"
+                size="small"
+                sx={{ width: "100%", alignItems: "stretch" }}
+                value={values.subDistrict}
+                onChange={e => handleChange('subDistrict',e)}
+              />
+            </Grid>
+          </Grid>
+          <Grid
+            item
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginLeft: "40px",
+            }}
+            xs={11}
+          >
+            <Grid item xs={3.5}>
+              <Typography
+                style={{
+                  fontSize: 18,
+                  marginTop: "10px",
+                }}
+              >
+                อำเภอ/เขต
+              </Typography>
+              <TextField
+                id="outlined-password-input"
+                label="อำเภอ/เขต"
+                size="small"
+                sx={{ width: "100%", alignItems: "stretch" }}
+                value={values.district}
+                onChange={e => handleChange('district',e)}
+              />
+            </Grid>
+            <Grid item xs={3.5}>
+              <Typography
+                style={{
+                  fontSize: 18,
+                  marginTop: "10px",
+                }}
+              >
+                จังหวัด
+              </Typography>
+              <TextField
+                id="outlined-password-input"
+                label="จังหวัด"
+                size="small"
+                sx={{ width: "100%", alignItems: "stretch" }}
+                value={values.province}
+                onChange={e=>handleChange('province',e)}
+              />
+            </Grid>
+            <Grid item xs={3.5}>
+              <Typography
+                style={{
+                  fontSize: 18,
+                  marginTop: "10px",
+                }}
+              >
+                รหัสไปรษณีย์
+              </Typography>
+              <TextField
+                id="outlined-password-input"
+                label="รหัสไปรษณีย์"
+                size="small"
+                sx={{ width: "100%", alignItems: "stretch" }}
+                value={values.postalCode}
+                onChange={e => handleChange('postalCode',e)}
+              />
+            </Grid>
+          </Grid>
+          <Grid>
             <Grid
               item
-              xs={5}
               sx={{
                 display: "flex",
+                flexDirection: "row",
                 justifyContent: "center",
-                alignItems: "center",
               }}
+              xs={12}
             >
-              <label htmlFor="contained-button-file">
-                <Input
-                  accept="image/*"
-                  id="contained-button-file"
-                  multiple
-                  type="file"
-                  onChange={handleChangeFile}
-                />
-                <Button variant="contained" component="span">
-                  กดเพื่อเพิ่มรูปภาพห้องพักของคุณ
-                </Button>
-              </label>
-            </Grid>
-          </Grid>
-          <Grid item sx={{ marginBottom: "50px", marginTop: "15px" }}>
-            <Grid container sx={{ justifyContent: "space-between" }}>
-              <Grid
-                item
-                xs={5.8}
-                sx={{
-                  border: "2px solid #c4c4c4",
-                  borderRadius: "5px",
-                  padding: "20px",
-                }}
-              >
-                <Typography sx={{ fontSize: "18px" }}>
-                  นโยบายข้อห้าม และ ข้อกำหนด
-                </Typography>
-                <Grid item sx={{ display: "flex", flexDirection: "column" }}>
-                  <FormControlLabel
-                    control={<Checkbox />}
-                    label="ห้ามสูบบุหรี่"
-                    value={values.noSmoking}
-                    onChange={e => handleOnChangeCheckNoSmoking('noSmoking', e)}
-                  />
-                  <FormControlLabel
-                    control={<Checkbox />}
-                    label="ห้ามนำสัตว์เลี้ยงเข้ามา"
-                    value={values.petAllow}
-                    onChange={e => handleOnChangeCheckPetAllow('petAllow', e)}
-
-                  />
-                </Grid>
-              </Grid>
-              <Grid
-                item
-                xs={5.8}
-                sx={{
-                  border: "2px solid #c4c4c4",
-                  borderRadius: "5px",
-                  padding: "20px",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                }}
-              >
-                <Grid
-                  item
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Typography sx={{ fontSize: "18px" }}>ราคาต่อคืน</Typography>
-                  <TextField
-                    id="outlined-password-input"
-                    label="ราคาต่อคืน(บาท)"
-                    size="small"
-                    sx={{ width: "100%" }}
-                    value={values.roomAmount}
-                    onChange={e => handleChange('roomAmount', e)}
-
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item sx={{ display: "flex", justifyContent: "end" }}>
-          <Grid container xs={12} justifyContent="end">
-            <Grid
-              item
-              xs={3}
-              md={3}
-              sx={{
-                display: "flex",
-                justifyContent: "end",
-                marginBottom: "25px",
-              }}
-            >
-              <CustomButton
-                sx={{
-                  background: "#c62828",
-                  color: "#fff",
-                  display: "flex",
-                  justifyContent: "center",
-                  width: "90%",
-                  marginBottom: "50px",
-                  marginTop: "-30px",
-
-                  height: "20px",
-                }}
-              >
+              <Grid item xs={11}>
                 <Typography
                   style={{
-                    fontSize: 16,
-                    justifyContent: "start",
+                    fontSize: 18,
+                    marginTop: "10px",
                   }}
                 >
-                  ดำเนินการต่อ
+                  รายละเอียดที่พัก
                 </Typography>
-              </CustomButton>
+                <Grid xs={11.4}>
+                  <TextareaAutosize
+                    maxRows={4}
+                    aria-label="maximum height"
+                    placeholder="กรุณาใส่รายละเอียดที่พักของคุณ โดยระบุไม่เกิน 300 ตัวอักษร"
+                    style={{
+                      width: "100%",
+                      border: "2px solid #c4c4c4",
+                      borderRadius: "5px",
+                      padding: "18px",
+                      fontFamily: '"Noto Sans Thai", sans-serif',
+                      fontSize: "16px",
+                    }}
+                    value={values.optionRoomDetail}
+                    onChange={e=>handleChange('optionRoomDetail',e)}
+                  />
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
+
+      <Grid Container sx={{ marginTop: "20px", marginBottom: "5px" }}>
+        <Typography sx={{ fontSize: "30px" }}>นโยบายข้อห้าม</Typography>
+      </Grid>
+      <Grid Container sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Grid
+          item
+          xs={5.8}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            border: "2px solid #c4c4c4",
+            borderRadius: "5px",
+            padding: "20px",
+            width: "100%",
+          }}
+        >
+          <Grid>
+            <Grid
+              item
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+              xs={12}
+            >
+              <Grid item xs={12}>
+                <Grid>
+                  <Typography
+                    style={{
+                      fontSize: 24,
+                      marginBottom: "10px",
+                    }}
+                  >
+                    เวลาที่เช็คอิน
+                  </Typography>
+                </Grid>
+                <Grid>
+                  <Grid item sx={{ display: "flex" }}>
+                    <Grid xs={3}>
+                      <Typography
+                        style={{
+                          fontSize: 18,
+                          marginBottom: "10px",
+                        }}
+                      >
+                        ตั้งแต่ :
+                      </Typography>
+                    </Grid>
+                    <Grid xs={9}>
+                      <TextField
+                        id="outlined-password-input"
+                        label="วันที่เช็คอิน"
+                        size="small"
+                        sx={{
+                          width: "100%",
+                          alignItems: "stretch",
+                          marginBottom: "12px",
+                        }}
+                        value={values.timeCheckInToStart}
+                        onChange={e=>handleChange('timeCheckInToStart',e)}
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+              
+              <Grid item xs={12}>
+                <Grid>
+                  <Grid item sx={{ display: "flex" }}>
+                    <Grid xs={3}>
+                      <Typography
+                        style={{
+                          fontSize: 18,
+                          marginBottom: "10px",
+                        }}
+                      >
+                        ถึง :
+                      </Typography>
+                    </Grid>
+                    <Grid xs={9}>
+                      <TextField
+                        id="outlined-password-input"
+                        label="วันที่เช็คอิน"
+                        size="small"
+                        sx={{
+                          width: "100%",
+                          alignItems: "stretch",
+                          marginBottom: "12px",
+                        }}
+                        value={values.timeCheckInToEnd}
+                        onChange={e=> handleChange('timeCheckInToEnd',e)}
+                      />
+                      <Typography
+                        style={{
+                          fontSize: 14,
+                          marginBottom: "10px",
+                          color: '#c4c4c4'
+                        }}
+                      >
+                        ตัวอย่างการกรอกรายละเอียด เช่น 9.00
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid
+          item
+          xs={5.8}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            border: "2px solid #c4c4c4",
+            borderRadius: "5px",
+            padding: "20px",
+            width: "100%",
+          }}
+        >
+          <Grid>
+            <Grid
+              item
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+              xs={12}
+            >
+              <Grid item xs={12}>
+                <Grid>
+                  <Typography
+                    style={{
+                      fontSize: 24,
+                      marginBottom: "10px",
+                    }}
+                  >
+                    เวลาที่เช็คเอาท์
+                  </Typography>
+                </Grid>
+                <Grid>
+                  <Grid item sx={{ display: "flex" }}>
+                    <Grid xs={3}>
+                      <Typography
+                        style={{
+                          fontSize: 18,
+                          marginBottom: "10px",
+                        }}
+                      >
+                        ตั้งแต่ :
+                      </Typography>
+                    </Grid>
+                    <Grid xs={9}>
+                      <TextField
+                        id="outlined-password-input"
+                        label="วันที่เช็คอิน"
+                        size="small"
+                        sx={{
+                          width: "100%",
+                          alignItems: "stretch",
+                          marginBottom: "12px",
+                        }}
+                        value={values.timeCheckOutToStart}
+                        onChange={e=>handleChange('timeCheckOutToStart',e)}
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={12}>
+                <Grid>
+                  <Grid item sx={{ display: "flex" }}>
+                    <Grid xs={3}>
+                      <Typography
+                        style={{
+                          fontSize: 18,
+                          marginBottom: "10px",
+                        }}
+                      >
+                        ถึง :
+                      </Typography>
+                    </Grid>
+                    <Grid xs={9}>
+                      <TextField
+                        id="outlined-password-input"
+                        label="วันที่เช็คอิน"
+                        size="small"
+                        sx={{
+                          width: "100%",
+                          alignItems: "stretch",
+                          marginBottom: "12px",
+                        }}
+                        value={values.timeCheckOutToEnd}
+                        onChange={e=>handleChange('timeCheckOutToEnd',e)}
+                      />
+                      <Typography
+                        style={{
+                          fontSize: 14,
+                          marginBottom: "10px",
+                          color: '#c4c4c4'
+                        }}
+                      >
+                        ตัวอย่างการกรอกรายละเอียด เช่น 16.00
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+
+      <Grid>
+        <Typography
+          style={{
+            fontSize: "30px",
+            marginTop: "20px",
+            marginBottom: "5px",
+          }}
+        >
+          การยกเลิกการจอง
+        </Typography>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          border: "2px solid #c4c4c4",
+          borderRadius: "5px",
+
+          padding: "20px",
+          width: "100%",
+        }}
+      >
+        <Grid>
+          <Grid
+            item
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+            xs={12}
+          >
+            <Grid item xs={12}>
+              <Grid
+                Container
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Grid item xs={10}>
+                  <Typography>
+                    สามารถยกเลิกการจองได้โดยมีเสียค่าธรรมเนียมก่อน :
+                  </Typography>
+                </Grid>
+                <Grid xs={12}>
+                  <Grid item xs={12}>
+                  <TextField
+                        id="outlined-password-input"
+                        label="สามารถยกเลิกการจองได้โดยมีเสียค่าธรรมเนียมก่อน (วัน)"
+                        size="small"
+                        sx={{
+                          width: "100%",
+                          alignItems: "stretch",
+                          marginBottom: "12px",
+                        }}
+                        value={values.cancelDate}
+                        onChange={e=>handleChange('cancelDate',e)}
+                      />
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item sx={{ display: "flex", justifyContent: "end" }}>
+        <Grid container xs={12} justifyContent="end">
+          <Grid
+            item
+            xs={3}
+            md={3}
+            sx={{
+              display: "flex",
+              justifyContent: "end",
+              marginBottom: "25px",
+            }}
+          >
+            <CustomButton
+              sx={{
+                background: "#c62828",
+                color: "#fff",
+                display: "flex",
+                justifyContent: "center",
+                width: "90%",
+                marginBottom: "50px",
+                marginTop: "20px",
+
+                height: "20px",
+              }}
+            >
+              <Typography
+                style={{
+                  fontSize: 16,
+                  justifyContent: "start",
+                }}
+              >
+                ดำเนินการต่อ
+              </Typography>
+            </CustomButton>
+          </Grid>
+        </Grid>
+      </Grid>
+      </Box>
     </Container>
   );
 }

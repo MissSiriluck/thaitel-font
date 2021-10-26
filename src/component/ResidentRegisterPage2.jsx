@@ -1,5 +1,5 @@
 import { Grid, Box } from "@mui/material";
-// import { BackgroundContainer } from "../assets/images/bg_container_residentregisterpage2.jpeg";
+//Material 
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import BusinessIcon from "@mui/icons-material/Business";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";

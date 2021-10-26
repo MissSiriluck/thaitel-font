@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
-import ResidentRegisterPage4 from "../component/ResidentRegisterPage4";
+import ResidentRegisterPage4 from "../component/ResidentRegisterPage3";
 
 
 function ResidentRegisterPage4Page() {

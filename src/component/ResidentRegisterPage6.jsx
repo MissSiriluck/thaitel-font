@@ -177,7 +177,7 @@ const handleChangePricePerNightForGym = e => {
           }}
         >
 
-<Stack
+          <Stack
             direction='row'
             spacing={4}
             xs={12}
@@ -264,10 +264,10 @@ const handleChangePricePerNightForGym = e => {
                   defaultValue={breakfast.isfree}
                   sx={{ display: 'flex', flexDirection: 'row'}}
                 >
-                  <FormControlLabel value={true} control={<Radio />} onChange={e=>setBreakfast(cur=>{
+                  <FormControlLabel value={true} control={<Radio />} onChange={e=> setBreakfast(cur=>{
                     return {...cur,isfree:true}
                   })} label="บริการฟรี" />
-                  <FormControlLabel value={false} onChange={e=>setBreakfast(cur=>{
+                  <FormControlLabel value={false} onChange={e=> setBreakfast(cur=>{
                     return {...cur,isfree:false}
                   })} control={<Radio />} label="มีค่าบริการ" />
                 </RadioGroup>
@@ -426,7 +426,7 @@ const handleChangePricePerNightForGym = e => {
           >
             <FormControl component="fieldset" sx={{ display:'flex', flexDirection:'row' , width: '100%'}}>
             <Grid xs={3}>
-            <FormLabel component="legend"><Typography sx={{ fontSize: "20px" }}>แผนกต้อนรับส่วนหน้า 24 ชั่วโมง</Typography></FormLabel>
+            <FormLabel component="legend"><Typography sx={{ fontSize: "20px", paddingRight: '25px' }}>แผนกต้อนรับส่วนหน้า 24 ชั่วโมง</Typography></FormLabel>
             </Grid>
 
             <Grid
@@ -601,10 +601,11 @@ const handleChangePricePerNightForGym = e => {
             spacing={4}
             xs={12}
             sx={{ justifyContent: "start", alignItems: "center" }}
-          >
+          >  
+
             <FormControl component="fieldset" sx={{ display:'flex', flexDirection:'row' , width: '100%'}}>
             <Grid xs={3}>
-            <FormLabel component="legend" ><Typography sx={{ fontSize: "20px", padding: '20px'}}>Room service</Typography></FormLabel>
+            <FormLabel component="legend" ><Typography sx={{ fontSize: "20px" }}>Room service</Typography></FormLabel>
             </Grid>
 
             <Grid
@@ -623,11 +624,11 @@ const handleChangePricePerNightForGym = e => {
                   sx={{ display: 'flex', flexDirection: 'row'}}
                   defaultValue={roomService.isfree}
                 >
-                  <FormControlLabel value={true} control={<Radio />} onChange={e=>setRoomService(cur=>{
-                    return {...cur,isfree:true}
+                  <FormControlLabel value={true} control={<Radio />} onChange={e=> setRoomService(cur=>{
+                    return {...cur, isfree:true}
                   })} label="บริการฟรี" />
-                  <FormControlLabel value={false} onChange={e=>setRoomService(cur=>{
-                    return {...cur,isfree:false}
+                  <FormControlLabel value={false} onChange={e=> setRoomService(cur=>{
+                    return {...cur, isfree:false}
                   })} control={<Radio />} label="มีค่าบริการ" />
                 </RadioGroup>
 
