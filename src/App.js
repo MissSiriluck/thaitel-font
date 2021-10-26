@@ -9,8 +9,8 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import OwnerLoginPage from "./pages/OwnerLoginPage";
 import OwnerRegisterPage from "./pages/OwnerRegisterPage";
-import ResidentRegiterPage2Page from "./pages/ResidentRegiterPage2Page";
-import ResidentRegiterPage3Page from "./pages/ResidentRegiterPage3Page";
+import ResidentRegisterPage2Page from "./pages/ResidentRegisterPage2Page";
+import ResidentRegisterPage3Page from "./pages/ResidentRegisterPage3Page";
 import ResidentRegisterPage4Page from "./pages/ResidentRegisterPage4Page";
 import ResidentRegisterPage5Page from "./pages/ResidentRegisterPage5Page";
 import ResidentRegisterPage6Page from "./pages/ResidentRegisterPage6Page";
@@ -45,12 +45,12 @@ function App() {
           <Route
             exact
             path='/residentregisterpage2'
-            component={ResidentRegiterPage2Page}
+            component={ResidentRegisterPage2Page}
           />
           <Route
             exact
             path='/residentregisterpage3'
-            component={ResidentRegiterPage3Page}
+            component={ResidentRegisterPage3Page}
           />
           <Route
             exact

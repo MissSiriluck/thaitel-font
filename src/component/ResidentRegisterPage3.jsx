@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { styled } from "@mui/material/styles";
 import { Container, Grid, TextField, Typography, Box } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -15,6 +15,7 @@ import Checkbox from "@mui/material/Checkbox";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
+import { CreateResidentContext } from "../context/createResidentContext";
 
 const CustomButtonRoot = styled("span")(`
     background-color: none;
@@ -43,23 +44,56 @@ const CustomButtonRoot = styled("span")(`
     }
 `);
 
+
+
+
 function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function ResidentRegiterPage3() {
-  const [age, setAge] = React.useState("");
 
-  const handleChange = event => {
-    setAge(event.target.value);
+function ResidentRegisterPage3() {
+
+  const {values, setValues} = useContext(CreateResidentContext)
+
+  const [showImg, setShowImg] = useState("")
+
+  const [file, setFile] = useState(null)
+  // console.log(file)
+
+  const handleChangeFile = e => {
+    setFile(e.target.files[0])
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      //   console.log(reader.result);
+      setShowImg(reader.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  }
+
+  const handleOnChangeCheckNoSmoking = ( props, event) => {
+    const clone = { ...values };
+    clone.noSmoking = !clone.noSmoking;
+    setValues({ ...values, [props]: event.target.value });
   };
+
+  const handleOnChangeCheckPetAllow = ( props, event) => {
+    const clone = { ...values };
+    clone.petAllow = !clone.petAllow;
+    setValues({ ...values, [props]: event.target.value });
+  };
+
+  const handleChange = ( props, event) => {
+    setValues({ ...values, [props]: event.target.value });
+  };
+
 
   const Input = styled("input")({
     display: "none",
   });
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" sx={{ padding: 0, mt: 18 }}>
       <Grid container direction="column" sx={8} spacing={2}>
         <Grid item sx={{ display: "flex", flexDirection: "column" }}>
           <Typography
@@ -109,7 +143,7 @@ function ResidentRegiterPage3() {
                 >
                   <Grid
                     item
-                    xs={11}
+                    xs={12}
                     sx={{
                       display: "flex",
                       flexDirection: "column",
@@ -128,19 +162,20 @@ function ResidentRegiterPage3() {
                       label="ประเภทห้องพัก"
                       size="small"
                       sx={{ width: "100%" }}
+                      value={values.roomTypeOf}
+                      onChange={e => handleChange('roomTypeOf', e)}
                     />
                   </Grid>
-                  <Grid
-                    item
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      marginLeft: "40px",
-                    }}
-                    xs={11}
-                  >
-                    <Grid item xs={5.5}>
+                </Grid>
+                <Stack
+                  item
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Grid item xs={3.5}>
                       <Typography
                         style={{
                           fontSize: 18,
@@ -154,11 +189,14 @@ function ResidentRegiterPage3() {
                         label="จำนวนของห้องพัก"
                         size="small"
                         sx={{ width: "100%", alignItems: "stretch" }}
+                        value={values.roomAmount}
+                        onChange={e => handleChange('roomAmount', e)}
                       />
                     </Grid>
+
                     <Grid
                       item
-                      xs={5.5}
+                      xs={3.5}
                       sx={{
                         display: "flex",
                         flexDirection: "column",
@@ -178,72 +216,12 @@ function ResidentRegiterPage3() {
                         label="ประเภทห้องพัก"
                         size="small"
                         sx={{ width: "100%", alignItems: "stretch" }}
+                        value={values.roomSize}
+                        onChange={e => handleChange('roomSize', e)}
                       />
                     </Grid>
-                  </Grid>
-                </Grid>
-                <Stack
-                  item
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Grid item xs={5.8}>
-                    <Typography
-                      style={{
-                        fontSize: 18,
-                        marginTop: "10px",
-                      }}
-                    >
-                      รายละเอียดห้องพัก
-                    </Typography>
-                    <FormControl sx={{ width: "100%" }}>
-                      <InputLabel
-                        id="demo-simple-select-helper-label"
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          paddingTop: "-15px",
-                        }}
-                      >
-                        รายละเอียดห้องพัก
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-helper-label"
-                        id="demo-simple-select-helper"
-                        value={age}
-                        label="Age"
-                        onChange={handleChange}
-                        size="small"
-                        sx={{
-                          display: "flex",
-                          width: "100%",
-                          //   backgroundColor: "yellow",
-                          justifyContent: "center",
-                          alignContent: "center",
-                        }}
-                      >
-                        <MenuItem value="" sx={{ justifyContent: "center" }}>
-                          <Typography
-                            style={{
-                              fontSize: 18,
-                              marginTop: "10px",
-                            }}
-                          >
-                            เลือกรายละเอียดห้องของท่าน
-                          </Typography>
-                        </MenuItem>
-                        <MenuItem value={10}>วิวสะว่ายน้ำ</MenuItem>
-                        <MenuItem value={20}>ริมทางเดิน</MenuItem>
-                        <MenuItem value={30}>ห้องเดี่ยว</MenuItem>
-                      </Select>
-                      {/* <FormHelperText>With label + helper text</FormHelperText> */}
-                    </FormControl>
-                  </Grid>
-                  <Grid item xs={5.8}>
+
+                  <Grid item xs={3.8}>
                     <Typography
                       style={{
                         fontSize: 18,
@@ -273,9 +251,11 @@ function ResidentRegiterPage3() {
                     </Typography>
                     <TextField
                       id="outlined-password-input"
-                      label="ประเภทห้องพัก"
+                      label="รายละเอียดห้องพักเพิ่มเติม"
                       size="small"
                       sx={{ width: "100%" }}
+                      value={values.optionRoomDetail}
+                      onChange={e => handleChange('optionRoomDetail', e)}
                     />
                   </Grid>
                 </Grid>
@@ -304,9 +284,12 @@ function ResidentRegiterPage3() {
                   alignItems: "center",
                   borderRadius: "5px",
                   justifyContent: "center",
+                  backgroundImage: `url(${showImg})`,
+                  backgroundSize: 'contain',
+                  backgroundRepeat: 'no-repeat'
                 }}
               >
-                <Typography
+                { showImg ? null : <Typography
                   style={{
                     fontSize: "18px",
                     display: "flex",
@@ -316,7 +299,8 @@ function ResidentRegiterPage3() {
                   }}
                 >
                   อัพโหลดรูปห้องพักจำนวน 1 รูป
-                </Typography>
+                </Typography>}
+                
               </Box>
             </Grid>
             <Grid
@@ -334,6 +318,7 @@ function ResidentRegiterPage3() {
                   id="contained-button-file"
                   multiple
                   type="file"
+                  onChange={handleChangeFile}
                 />
                 <Button variant="contained" component="span">
                   กดเพื่อเพิ่มรูปภาพห้องพักของคุณ
@@ -359,10 +344,15 @@ function ResidentRegiterPage3() {
                   <FormControlLabel
                     control={<Checkbox />}
                     label="ห้ามสูบบุหรี่"
+                    value={values.noSmoking}
+                    onChange={e => handleOnChangeCheckNoSmoking('noSmoking', e)}
                   />
                   <FormControlLabel
                     control={<Checkbox />}
                     label="ห้ามนำสัตว์เลี้ยงเข้ามา"
+                    value={values.petAllow}
+                    onChange={e => handleOnChangeCheckPetAllow('petAllow', e)}
+
                   />
                 </Grid>
               </Grid>
@@ -392,6 +382,9 @@ function ResidentRegiterPage3() {
                     label="ราคาต่อคืน(บาท)"
                     size="small"
                     sx={{ width: "100%" }}
+                    value={values.roomAmount}
+                    onChange={e => handleChange('roomAmount', e)}
+
                   />
                 </Grid>
               </Grid>
@@ -418,7 +411,7 @@ function ResidentRegiterPage3() {
                   justifyContent: "center",
                   width: "90%",
                   marginBottom: "50px",
-                  marginTop: "-20px",
+                  marginTop: "-30px",
 
                   height: "20px",
                 }}
@@ -440,4 +433,4 @@ function ResidentRegiterPage3() {
   );
 }
 
-export default ResidentRegiterPage3;
+export default ResidentRegisterPage3;

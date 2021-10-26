@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Grid, TextField, Typography, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import InputLabel from "@mui/material/InputLabel";
@@ -16,6 +16,7 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { padding } from "@mui/system";
+import { CreateResidentContext } from "../context/createResidentContext";
 
 const CustomButtonRoot = styled("span")(`
     background-color: none;
@@ -49,44 +50,29 @@ function CustomButton(props) {
 }
 
 function ResidentRegisterPage4() {
-  const [age, setAge] = React.useState("");
-
-  // const handleChange = event => {
-  //   setAge(event.target.value);
-  // };
-
+  
   const Input = styled("input")({
     display: "none",
   });
 
-  const [values, setValues] = React.useState({
-    name: "",
-    rateStar: "",
-    address: "",
-    subDistrict: "",
-    province: "",
-    postalCode: "",
-    description: "",
-    showPassword: false,
-  });
+  const {values, setValues} = useContext(CreateResidentContext)
 
-  const handleChange = prop => event => {
-    setValues({ ...values, [prop]: event.target.value });
+console.log(values)
+
+  const handleChange =( props, event) => {
+
+    setValues({ ...values, [props]: event.target.value });
   };
 
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
 
-  const handleMouseDownPassword = event => {
-    event.preventDefault();
-  };
+
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md"  sx={{ mt: 18 }}>
+      <Box 
+      component="form"
+            // onSubmit={handleSubmit}
+      >
       <Grid Container sx={{ marginTop: "20px", marginBottom: "5px" }}>
         <Typography sx={{ fontSize: "36px" }}>รายละเอียดที่พัก</Typography>
       </Grid>
@@ -125,6 +111,7 @@ function ResidentRegisterPage4() {
                 label="ชื่อที่พักที่ให้บริการ"
                 size="small"
                 value={values.name}
+                onChange={e=>handleChange('name',e)}
                 sx={{ width: "100%", alignItems: "stretch" }}
               />
             </Grid>
@@ -143,6 +130,8 @@ function ResidentRegisterPage4() {
                 size="small"
                 sx={{ width: "100%", alignItems: "stretch" }}
                 value={values.rateStar}
+                onChange={e=>handleChange('rateStar',e)}
+
               />
             </Grid>
           </Grid>
@@ -171,6 +160,7 @@ function ResidentRegisterPage4() {
                 size="small"
                 sx={{ width: "100%", alignItems: "stretch" }}
                 value={values.address}
+                onChange={e=>handleChange('address',e)}
               />
             </Grid>
             <Grid item xs={3.5}>
@@ -188,6 +178,7 @@ function ResidentRegisterPage4() {
                 size="small"
                 sx={{ width: "100%", alignItems: "stretch" }}
                 value={values.subDistrict}
+                onChange={e=>handleChange('subDistrict',e)}
               />
             </Grid>
           </Grid>
@@ -216,6 +207,8 @@ function ResidentRegisterPage4() {
                 size="small"
                 sx={{ width: "100%", alignItems: "stretch" }}
                 value={values.district}
+                onChange={e=>handleChange('district',e)}
+
               />
             </Grid>
             <Grid item xs={3.5}>
@@ -233,6 +226,7 @@ function ResidentRegisterPage4() {
                 size="small"
                 sx={{ width: "100%", alignItems: "stretch" }}
                 value={values.province}
+                onChange={e=>handleChange('province',e)}
               />
             </Grid>
             <Grid item xs={3.5}>
@@ -250,6 +244,7 @@ function ResidentRegisterPage4() {
                 size="small"
                 sx={{ width: "100%", alignItems: "stretch" }}
                 value={values.postalCode}
+                onChange={e=>handleChange('postalCode',e)}
               />
             </Grid>
           </Grid>
@@ -285,7 +280,9 @@ function ResidentRegisterPage4() {
                       fontFamily: '"Noto Sans Thai", sans-serif',
                       fontSize: "16px",
                     }}
-                    value={values.postalCode}
+                    value={values.optionRoomDetail}
+                    onChange={e=>handleChange('optionRoomDetail',e)}
+
                   />
                 </Grid>
               </Grid>
@@ -352,7 +349,9 @@ function ResidentRegisterPage4() {
                           alignItems: "stretch",
                           marginBottom: "12px",
                         }}
-                        value={values.startCheckIn}
+                        value={values.timeCheckInToStart}
+                    onChange={e=>handleChange('timeCheckInToStart',e)}
+
                       />
                     </Grid>
                   </Grid>
@@ -381,7 +380,9 @@ function ResidentRegisterPage4() {
                           alignItems: "stretch",
                           marginBottom: "12px",
                         }}
-                        value={values.endCheckIn}
+                        value={values.timeCheckInToEnd}
+                    onChange={e=>handleChange('timeCheckInToEnd',e)}
+
                       />
                     </Grid>
                   </Grid>
@@ -444,6 +445,9 @@ function ResidentRegisterPage4() {
                           alignItems: "stretch",
                           marginBottom: "12px",
                         }}
+                        value={values.timeCheckOutToStart}
+                    onChange={e=>handleChange('timeCheckOutToStart',e)}
+
                       />
                     </Grid>
                   </Grid>
@@ -472,6 +476,9 @@ function ResidentRegisterPage4() {
                           alignItems: "stretch",
                           marginBottom: "12px",
                         }}
+                        value={values.timeCheckOutToEnd}
+                    onChange={e=>handleChange('timeCheckOutToEnd',e)}
+
                       />
                     </Grid>
                   </Grid>
@@ -532,50 +539,19 @@ function ResidentRegisterPage4() {
                 </Grid>
                 <Grid xs={12}>
                   <Grid item xs={12}>
-                    <FormControl sx={{ width: "100%" }}>
-                      <InputLabel
-                        id="demo-simple-select-helper-label"
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          paddingTop: "-15px",
-                        }}
-                      >
-                        จำนวนวันก่อนวันเช็คอิน
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-helper-label"
-                        id="demo-simple-select-helper"
-                        value={age}
-                        label="Age"
-                        onChange={handleChange}
+                  <TextField
+                        id="outlined-password-input"
+                        label="สามารถยกเลิกการจองได้โดยมีเสียค่าธรรมเนียมก่อน (วัน)"
                         size="small"
                         sx={{
-                          display: "flex",
                           width: "100%",
-                          justifyContent: "center",
-                          alignContent: "center",
+                          alignItems: "stretch",
+                          marginBottom: "12px",
                         }}
-                        xs={5.8}
-                      >
-                        <MenuItem value="" sx={{ justifyContent: "center" }}>
-                          <Typography
-                            style={{
-                              fontSize: 18,
-                              marginTop: "10px",
-                              backgroundColor: "pink",
-                            }}
-                          >
-                            เลือกรายละเอียดห้องของท่าน
-                          </Typography>
-                        </MenuItem>
-                        <MenuItem value={10}>วิวสะว่ายน้ำ</MenuItem>
-                        <MenuItem value={20}>ริมทางเดิน</MenuItem>
-                        <MenuItem value={30}>ห้องเดี่ยว</MenuItem>
-                      </Select>
-                      {/* <FormHelperText>With label + helper text</FormHelperText> */}
-                    </FormControl>
+                        value={values.cancelDate}
+                    onChange={e=>handleChange('cancelDate',e)}
+
+                      />
                   </Grid>
                 </Grid>
               </Grid>
@@ -620,6 +596,7 @@ function ResidentRegisterPage4() {
           </Grid>
         </Grid>
       </Grid>
+      </Box>
     </Container>
   );
 }

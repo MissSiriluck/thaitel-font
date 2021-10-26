@@ -1,5 +1,5 @@
-import React from "react";
-import { Container, Grid, Box, Typography, TextField } from "@mui/material";
+import React, { useContext, useState } from "react";
+import { Container, Grid, Box, Typography, TextField, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -12,6 +12,7 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import axios from "../config/axios";
+import { CreateResidentContext } from "../context/createResidentContext";
 
 
 const CustomButtonRoot = styled("span")(`
@@ -41,15 +42,35 @@ const CustomButtonRoot = styled("span")(`
     }
 `);
 
+
 function CustomButton(props) {
+
+  
+  
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
 function ResidentRegisterPage8() {
-  const [age, setAge] = React.useState("");
 
-  const handleChange = event => {
-    setAge(event.target.value);
+  const {values, setValues} = useContext(CreateResidentContext)
+  
+  const [showingImgBank, setshowingImgBank] = useState("")
+  const [fileBank, setFileBank] = useState(null)
+  const [bankacc, setBankacc] = React.useState("");
+
+  const handleChangeFile = e => {
+
+    setFileBank(e.target.files[0])
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      //   console.log(reader.result);
+      setshowingImgBank(reader.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  }
+  
+  const handleChange = ( props, event) => {
+    setValues({ ...values, [props]: event.target.value });
   };
 
   const Input = styled("input")({
@@ -57,7 +78,7 @@ function ResidentRegisterPage8() {
   });
 
   return (
-    <Container>
+    <Container maxWidth="md" sx={{ mt: 18 }}>
       <Grid
         container
         sx={{
@@ -95,7 +116,7 @@ function ResidentRegisterPage8() {
               justifyContent: "center",
             }}
           >
-            <Typography>ค่าคอมมิชชั่่น 15 %</Typography>
+            <Typography>ค่าคอมมิชชั่น 15 %</Typography>
             <Typography>ค่าดำเนินธุรกรรม 2.1 %</Typography>
           </Grid>
           <Grid xs={12} sx={{ marginTop: "10px" }}>
@@ -140,6 +161,8 @@ function ResidentRegisterPage8() {
                 label="ชื่อหน้าบัญชี"
                 size="small"
                 sx={{ width: "100%", alignItems: "stretch" }}
+                value={values.accName}
+                onChange={e => handleChange('accName', e)}
               />
             </Grid>
           </Grid>
@@ -160,6 +183,9 @@ function ResidentRegisterPage8() {
                 label="ระบุเลขบัญชี"
                 size="small"
                 sx={{ width: "100%", alignItems: "stretch" }}
+                value={values.accNumber}
+                onChange={e => handleChange('accNumber', e)}
+
               />
             </Grid>
           </Grid>
@@ -185,14 +211,14 @@ function ResidentRegisterPage8() {
                     paddingTop: "-15px",
                   }}
                 >
-                  จำนวนวันก่อนวันเช็คอิน
+                  ธนาคาร
                 </InputLabel>
                 <Select
                   labelId="demo-simple-select-helper-label"
                   id="demo-simple-select-helper"
-                  value={age}
+                  // value={bankacc}
                   label="Age"
-                  onChange={handleChange}
+                  // onChange={handleChange}
                   size="small"
                   sx={{
                     display: "flex",
@@ -210,12 +236,15 @@ function ResidentRegisterPage8() {
                         backgroundColor: "pink",
                       }}
                     >
-                      เลือกรายละเอียดห้องของท่าน
+                      เลือกธนาคาร
                     </Typography>
                   </MenuItem>
-                  <MenuItem value={10}>วิวสะว่ายน้ำ</MenuItem>
-                  <MenuItem value={20}>ริมทางเดิน</MenuItem>
-                  <MenuItem value={30}>ห้องเดี่ยว</MenuItem>
+
+                  <MenuItem value={10}>ธนาคารไทยพาณิชย์</MenuItem>
+                  <MenuItem value={20}>ธนาคารออมสิน</MenuItem>
+                  <MenuItem value={30}>ธนาคารกรุงไทย</MenuItem>
+                  <MenuItem value={30}>ธนาคารกรุงศรี</MenuItem>
+                  
                 </Select>
                 {/* <FormHelperText>With label + helper text</FormHelperText> */}
               </FormControl>
@@ -233,30 +262,58 @@ function ResidentRegisterPage8() {
               borderRadius: "5px",
               height: "100%",
               justifyContent: "center",
+              backgroundImage: `url(${showingImgBank})`,
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat'
             }}
           >
-            <Typography
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "100%",
-              }}
-            >
-              อัพโหลดรูปบัตรประชาชน
-            </Typography>
+            
+            { showingImgBank ? null : <Typography
+                  style={{
+                    fontSize: "18px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "100%",
+                  }}
+                >
+                  อัพโหลดรูปห้องพักจำนวน 1 รูป
+              </Typography> }
           </Box>
           {/*  */}
         </Grid>
+        <Grid
+              item
+              xs={12}
+              sx={{
+                display: "flex",
+                justifyContent: "end",
+                alignItems: "center",
+                margin: '20px'
+              }}
+            >
+              <label htmlFor="contained-button-file">
+                <Input
+                  accept="image/*"
+                  id="contained-button-file"
+                  multiple
+                  type="file"
+                  onChange={handleChangeFile}
+                />
+                <Button variant="contained" component="span">
+                  กดเพื่อเพิ่มรูปภาพห้องพักของคุณ
+                </Button>
+              </label>
+            </Grid>
       </Grid>
-      <Grid container xs={12} justifyContent="end">
+      <Grid container xs={12} justifyContent="center">
         <Grid
           item
-          xs={3}
-          md={3}
+          xs={6}
+          md={6}
           sx={{
             display: "flex",
-            justifyContent: "end",
+            justifyContent: "center",
             marginBottom: "25px",
           }}
         >
@@ -266,7 +323,7 @@ function ResidentRegisterPage8() {
               color: "#fff",
               display: "flex",
               justifyContent: "center",
-              width: "92%",
+              width: "100%",
               marginTop: "20px",
               marginBottom: "50px",
             }}
@@ -278,7 +335,7 @@ function ResidentRegisterPage8() {
                 justifyContent: "start",
               }}
             >
-              ดำเนินการต่อ
+              ลงทะเบียน และ เปิดรับการจองทันที
             </Typography>
           </CustomButton>
         </Grid>

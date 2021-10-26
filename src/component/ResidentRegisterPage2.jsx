@@ -14,9 +14,9 @@ const styles = {
   },
 };
 
-function ResidentRegiterPage2() {
+function ResidentRegisterPage2() {
   return (
-    <Grid container xs={12}>
+    <Grid container xs={12} sx={{ mt: 18 }}>
       <Grid
         item
         sx={{
@@ -42,4 +42,4 @@ function ResidentRegiterPage2() {
   );
 }
 
-export default ResidentRegiterPage2;
+export default ResidentRegisterPage2;

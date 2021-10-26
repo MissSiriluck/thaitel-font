@@ -74,22 +74,6 @@ function RegisterContent() {
     }
   };
 
-  // const [values, setValues] = React.useState({
-  //   firstName: "",
-  //   lastName: "",
-  //   email: "",
-  //   password: "",
-  //   confirmPassword: "",
-  //   phone: "",
-  //   google_user_id: "",
-  //   // role:"",
-  //   showPassword: false,
-  // });
-
-  // const handleChange = prop => event => {
-  //   setValues({ ...values, [prop]: event.target.value });
-  // };
-
   return (
     <div>
       <Container
@@ -97,7 +81,7 @@ function RegisterContent() {
         justifyContent="center"
         alignItems="center"
         direction="column"
-        sx={{ padding: 0, mt: 23 }}
+        sx={{ padding: 0, mt: 18 }}
       >
         <Box
           alignItems="center"
@@ -130,6 +114,9 @@ function RegisterContent() {
             </Grid>
           </Box>
           {/*  */}
+
+          <Grid container sx={{width: '100%'}}>
+
           <Box
             component="form"
             onSubmit={handleSubmit}
@@ -139,6 +126,7 @@ function RegisterContent() {
             alignItems="center"
             sx={{
               padding: 0,
+              width:'100%'
             }}
             xs={12}
             md={12}
@@ -408,7 +396,7 @@ function RegisterContent() {
                     color: "#fff",
                     display: "flex",
                     justifyContent: "center",
-                    width: "92%",
+                    width: "100%",
                     marginTop: "10px",
                   }}
                   type="submit"
@@ -453,7 +441,10 @@ function RegisterContent() {
             </Grid>
           </Box>
           {/*  */}
+          </Grid>
+
         </Box>
+        
       </Container>
     </div>
   );

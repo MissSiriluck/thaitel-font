@@ -4,12 +4,18 @@ import App from "./App";
 import theme from "./component/theme";
 import { ThemeProvider } from "@material-ui/core/styles";
 import reportWebVitals from "./reportWebVitals";
+import { CreateResidentProvider } from "./context/createResidentContext";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
+    <CreateResidentProvider>
+
     {/* <React.StrictMode> */}
     <App />
     {/* </React.StrictMode> */}
+
+    </CreateResidentProvider>
+
   </ThemeProvider>,
   document.getElementById("root")
 );

@@ -169,20 +169,7 @@ function LoginContent() {
             onSubmit={handleSubmit}
             noValidate
           >
-            {/* <CustomButton
-              sx={{
-                background: "#c62828",
-                color: "#fff",
-                display: "flex",
-                justifyContent: "center",
-                width: "80%",
-                marginTop: "10px",
-              }}
-              type="submit"
-            >
-              Test
-            </CustomButton> */}
-
+            <Grid container justifyContent="center">
             <Grid
               container
               spacing={2}
@@ -270,6 +257,7 @@ function LoginContent() {
                   }}
                 />
               </Grid>
+            </Grid>
             </Grid>
             <Grid
               container
