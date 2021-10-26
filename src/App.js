@@ -17,6 +17,7 @@ import ResidentRegisterPage6Page from "./pages/ResidentRegisterPage6Page";
 import ResidentRegisterPage7Page from "./pages/ResidentRegisterPage7Page";
 import ResidentRegisterPage8Page from "./pages/ResidentRegisterPage8Page";
 import AddCom from "./pages/AddCom";
+import UserHistoryPage from "./pages/UserHistoryPage";
 
 function App() {
   // const theme = createTheme({
@@ -36,6 +37,7 @@ function App() {
           <Route exact path='/ownerregister' component={OwnerRegisterPage} />
           <Route exact path='/mainmenu' component={ShowResultPage} />
           <Route exact path='/addcom' component={AddCom} />
+          <Route exact path='/history' component={UserHistoryPage} />
           <Route
             exact
             path='/BookingConfirmation'

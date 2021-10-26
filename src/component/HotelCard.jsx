@@ -6,7 +6,7 @@ function HotelCard() {
     <Grid container>
       <Grid item>
         <Typography
-          sx={{ mb: 2 }}
+          sx={{ mb: 4 }}
         >{`ที่พักทั้งหมด ：พบที่พัก 200 แห่ง`}</Typography>
       </Grid>
       <HotelCardList />
