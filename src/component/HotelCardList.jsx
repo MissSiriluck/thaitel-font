@@ -1,10 +1,11 @@
 import { Grid, Rating, Typography } from "@mui/material";
-import { residents } from "../mocks/residents";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
 import { useHistory } from "react-router";
+import { useContext } from "react";
+import { ResidentContext } from "../context/ResidentContext";
 
 //customize button blue
 const CustomButtonRoot = styled("span")(`
@@ -39,7 +40,9 @@ function CustomButton(props) {
 }
 
 function HotelCardList({ resident }) {
-  const result = resident.Rooms?.reduce(
+  const { residents, setResidents } = useContext(ResidentContext);
+
+  const result = residents.Rooms?.reduce(
     (acc, cur, index) => {
       if (index === 0) {
         return [cur.pricePerNight, cur.pricePerNight];
