@@ -8,6 +8,7 @@ import ButtonUnstyled, {
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
 import BtnLogOut from "./BtnLogOut";
+import { Link } from "react-router-dom";
 
 //customize button red
 const CustomButtonRoot = styled("span")(`
@@ -66,27 +67,35 @@ function Header() {
         >
           THAITEL
         </Typography>
-        <CustomButton sx={{ background: "#c62828", color: "#fff" }}>
-          ลงทะเบียนที่พักของท่าน
-        </CustomButton>
-        <Button
-          color='inherit'
-          sx={{
-            marginLeft: 2,
-            fontFamily: "'Noto Sans Thai', sans-serif",
-          }}
-        >
-          สมัครสมาชิก
-        </Button>
-        <Button
-          color='inherit'
-          sx={{
-            marginLeft: 2,
-            fontFamily: "'Noto Sans Thai', sans-serif",
-          }}
-        >
-          เข้าสู่ระบบ
-        </Button>
+        <Link to='/ownerlogin' style={{ textDecoration: "none" }}>
+          <CustomButton sx={{ background: "#c62828", color: "#fff" }}>
+            ลงทะเบียนที่พักของท่าน
+          </CustomButton>
+        </Link>
+        <Link to='/register' style={{ textDecoration: "none" }}>
+          <Button
+            color='inherit'
+            sx={{
+              marginLeft: 2,
+              fontFamily: "'Noto Sans Thai', sans-serif",
+              color: "#fff",
+            }}
+          >
+            สมัครสมาชิก
+          </Button>
+        </Link>
+        <Link to='/login' style={{ textDecoration: "none" }}>
+          <Button
+            color='inherit'
+            sx={{
+              marginLeft: 2,
+              fontFamily: "'Noto Sans Thai', sans-serif",
+              color: "#fff",
+            }}
+          >
+            เข้าสู่ระบบ
+          </Button>
+        </Link>
         <BtnLogOut />
       </Toolbar>
     </AppBar>

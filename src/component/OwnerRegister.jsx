@@ -1,5 +1,7 @@
 import * as React from "react";
+import { useContext, useState } from "react";
 import "../App.css";
+//Material Ui
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -16,6 +18,7 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
+import { CreateResidentContext } from "../context/createResidentContext";
 
 const CustomButtonRoot = styled("span")(`
     background-color: none;
@@ -49,6 +52,31 @@ function CustomButton(props) {
 }
 
 function OwnerRegister() {
+
+  const {values, setValues} = useContext(CreateResidentContext)
+  
+  const [showImg, setShowImg] = useState("")
+
+  const [file, setFile] = useState(null)
+
+  const handleChange = (props, event) => {
+    setValues({ ...values, [props]: event.target.value });
+  };
+
+  const Input = styled("input")({
+    display: "none",
+  });
+
+  const handleChangeFile = e => {
+    setFile(e.target.files[0])
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      //   console.log(reader.result);
+      setShowImg(reader.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  }
+
   return (
     <Container
       maxWidth='lg'
@@ -63,6 +91,7 @@ function OwnerRegister() {
         <Grid item>
           <Typography
             style={{ margin: 0, fontSize: "36px", marginBottom: "20px" }}
+            xs={12}
           >
             กรุณาระบุรายละเอียดข้อมูลของคุณ
           </Typography>
@@ -108,6 +137,8 @@ function OwnerRegister() {
                   autoFocus
                   size='small'
                   sx={{ marginTop: "8px" }}
+                  value={values.email}
+                  onChange={e => handleChange('email', e)}
                 />
               </Grid>
               <Grid item xs={5.8}>
@@ -118,10 +149,12 @@ function OwnerRegister() {
                   margin='normal'
                   required
                   fullWidth
-                  name='password'
+                  name='phone'
                   label='เบอร์โทรศัพท์'
                   size='small'
                   sx={{ marginTop: "8px" }}
+                  value={values.phone}
+                  onChange={e => handleChange('phone', e)}
                 />
               </Grid>
 
@@ -142,6 +175,8 @@ function OwnerRegister() {
                   autoFocus
                   size='small'
                   sx={{ marginTop: "8px" }}
+                  value={values.password}
+                  onChange={e => handleChange('password', e)}
                 />
               </Grid>
 
@@ -160,6 +195,8 @@ function OwnerRegister() {
                   autoFocus
                   size='small'
                   sx={{ marginTop: "8px" }}
+                  value={values.confirmPassword}
+                  onChange={e => handleChange('confirmPassword', e)}
                 />
               </Grid>
             </Grid>
@@ -197,6 +234,8 @@ function OwnerRegister() {
                     autoFocus
                     size='small'
                     sx={{ marginTop: "8px" }}
+                    value={values.firstName}
+                    onChange={e => handleChange('firstName', e)}
                   />
                 </Grid>
                 <Grid
@@ -216,6 +255,8 @@ function OwnerRegister() {
                     placeholder='กรอกนามสกุลผู้ติดต่อ'
                     size='small'
                     sx={{ marginTop: "8px" }}
+                    value={values.lastName}
+                    onChange={e => handleChange('lastName', e)}
                   />
                 </Grid>
 
@@ -240,10 +281,11 @@ function OwnerRegister() {
                     autoFocus
                     size='small'
                     sx={{ marginTop: "8px" }}
+                    value={values.idCard}
                   />
                 </Grid>
               </Grid>
-              <Grid item xs={5.9} sx={{ display: "flex" }}>
+              <Grid item xs={5.9} sx={{ display: "flex", flexDirection:"column" }}>
                 <Box
                   item
                   xs={12}
@@ -255,19 +297,47 @@ function OwnerRegister() {
                     borderRadius: "5px",
                     height: "100%",
                     justifyContent: "center",
+                    backgroundImage: `url(${showImg})`,
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat'
                   }}
                 >
-                  <Typography
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      height: "100%",
-                    }}
-                  >
-                    อัพโหลดรูปบัตรประชาชน
-                  </Typography>
+                  { showImg ? null : <Typography
+                  style={{
+                    fontSize: "18px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "100%",
+                  }}
+                >
+                  อัพโหลดรูปบัตรประชาชน
+                </Typography>}
                 </Box>
+                <Grid
+              item
+              xs={12}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "end",
+                height:'40px',
+              }}
+            >
+              <label htmlFor="contained-button-file" sx={{height:'40px',}}>
+                <Input
+                  accept="image/*"
+                  id="contained-button-file"
+                  multiple
+                  type="file"
+                  onChange={handleChangeFile}
+                  
+                />
+                <Button variant="contained" component="span">
+                  กดเพื่อเพิ่มรูปภาพห้องพักของคุณ
+                </Button>
+              </label>
+            </Grid>
                 {/*  */}
               </Grid>
             </Grid>

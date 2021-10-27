@@ -37,6 +37,19 @@ import ButtonUnstyled, {
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { useHistory, useLocation } from "react-router";
+import { makeStyles } from "@material-ui/styles";
+// import CarouselBox from "./CarouselBox";
+import FastfoodIcon from "@mui/icons-material/Fastfood";
+import WifiIcon from "@mui/icons-material/Wifi";
+import PoolIcon from "@mui/icons-material/Pool";
+import LocalBarIcon from "@mui/icons-material/LocalBar";
+import SpaIcon from "@mui/icons-material/Spa";
+import AlarmOnIcon from "@mui/icons-material/AlarmOn";
+import RoomServiceIcon from "@mui/icons-material/RoomService";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+
+import { residents } from "../mocks/residents";
+import Image from "material-ui-image";
 
 //customize button blue
 const CustomButtonRoot = styled("span")(`
@@ -213,6 +226,72 @@ function AddcomDetail() {
               </Grid> */}
 
             {/* <Grid
+              </Grid>
+
+              <Grid
+                item
+                xs={3}
+                sx={{ display: "flex", alignItems: "center", mb: 2 }}
+              >
+                <FastfoodIcon />
+                <Typography sx={{ ml: 2 }}>อาหารเช้า</Typography>
+              </Grid>
+
+              <Grid
+                item
+                xs={3}
+                sx={{ display: "flex", alignItems: "center", mb: 2 }}
+              >
+                <WifiIcon />
+                <Typography sx={{ ml: 2 }}>Wifi</Typography>
+              </Grid>
+
+              <Grid
+                item
+                xs={3}
+                sx={{ display: "flex", alignItems: "center", mb: 2 }}
+              >
+                <PoolIcon />
+                <Typography sx={{ ml: 2 }}>สระว่ายน้ำ</Typography>
+              </Grid>
+
+              <Grid
+                item
+                xs={3}
+                sx={{ display: "flex", alignItems: "center", mb: 2 }}
+              >
+                <LocalBarIcon />
+                <Typography sx={{ ml: 2 }}>บาร์</Typography>
+              </Grid>
+
+              <Grid
+                item
+                xs={3}
+                sx={{ display: "flex", alignItems: "center", mb: 2 }}
+              >
+                <SpaIcon />
+                <Typography sx={{ ml: 2 }}>ห้องซาวน่า</Typography>
+              </Grid>
+
+              <Grid
+                item
+                xs={3}
+                sx={{ display: "flex", alignItems: "center", mb: 2 }}
+              >
+                <RoomServiceIcon />
+                <Typography sx={{ ml: 2 }}>Room service</Typography>
+              </Grid>
+
+              <Grid
+                item
+                xs={3}
+                sx={{ display: "flex", alignItems: "center", mb: 2 }}
+              >
+                <FitnessCenterIcon />
+                <Typography sx={{ ml: 2 }}>ห้องออกกำลังกาย</Typography>
+              </Grid>
+
+              <Grid
                 item
                 xs={3}
                 sx={{ display: "flex", alignItems: "center", mb: 2 }}
@@ -420,6 +499,7 @@ function AddcomDetail() {
             </Grid>
           </Grid>
         ))}
+
         <Grid item sx={{ display: "flex", justifyContent: "center" }}>
           <CustomButton
             sx={{
