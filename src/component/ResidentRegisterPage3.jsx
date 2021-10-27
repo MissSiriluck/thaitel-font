@@ -107,8 +107,8 @@ console.log(values)
                 id="outlined-password-input"
                 label="ชื่อที่พักที่ให้บริการ"
                 size="small"
-                value={values.name}
-                onChange={e => handleChange('name',e)}
+                value={values.residentName}
+                onChange={e => handleChange('residentName',e)}
                 sx={{ width: "100%", alignItems: "stretch" }}
               />
             </Grid>
@@ -350,7 +350,7 @@ console.log(values)
                   </Grid>
                 </Grid>
               </Grid>
-              
+
               <Grid item xs={12}>
                 <Grid>
                   <Grid item sx={{ display: "flex" }}>

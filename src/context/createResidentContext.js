@@ -7,8 +7,16 @@ const CreateResidentContext = createContext();
 function CreateResidentProvider ({ children }) {
 
     const [values, setValues] = useState({
+        email:"",
+        password:"",
+        confirmPassword:"",
+        firstName: "",
+        lastNAme: "",
+        phone:"",
+        idCard:"",
+        idCardImgUrl:"",
         typeof: "",
-        name: "",
+        residentName: "",
         rateStar:"",
         address: "",
         subDistrict:"",

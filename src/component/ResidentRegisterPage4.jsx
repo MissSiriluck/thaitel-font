@@ -379,8 +379,8 @@ function ResidentRegisterPage4() {
                     label="ราคาต่อคืน(บาท)"
                     size="small"
                     sx={{ width: "100%" }}
-                    value={values.roomAmount}
-                    onChange={e => handleChange('roomAmount', e)}
+                    value={values.pricePerNigth}
+                    onChange={e => handleChange('pricePerNigth', e)}
 
                   />
                 </Grid>

@@ -10,6 +10,7 @@ import ButtonUnstyled, {
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
 import axios from "../config/axios";
+import { setToken } from "../service/localStorage";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -46,6 +47,9 @@ function CustomButton(props) {
 }
 
 function LoginContent() {
+
+  // const { setUser } = useContext(AuthContext);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -56,8 +60,12 @@ function LoginContent() {
     const values = {
       email: data.get("email"),
       password: data.get("password"),
-      // role: "user",
     };
+    setToken(res.data.token);
+    // setUser(jwtDecode(res.data.token));
+    
+    // history.push("/");
+
     const res = await axios.post("/users/login", values);
   };
 
