@@ -7,9 +7,9 @@ import { Grid } from "@mui/material";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 // import Carousel, { Dots } from "@brainhubeu/react-carousel";
-import "@brainhubeu/react-carousel/lib/style.css";
+// import "@brainhubeu/react-carousel/lib/style.css";
 import { residents } from "../mocks/residents";
-import { Carousel } from "react-responsive-carousel";
+// import { Carousel } from "react-responsive-carousel";
 
 function CarouselBox() {
   const [curImg, setCurImg] = useState(0);

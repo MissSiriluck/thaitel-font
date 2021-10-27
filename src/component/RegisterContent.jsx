@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, useHistory } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { Container, Grid, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -52,6 +52,7 @@ function RegisterContent() {
   //       password: data.get('password'),
   //     });
   //   };
+  const history = useHistory();
 
   const handleSubmit = async (event) => {
     try {
@@ -67,7 +68,16 @@ function RegisterContent() {
       };
 
       const res = await axios.post("/users/register", values);
-      console.log(res);
+      
+      history.push({
+        pathname: "/login",
+        state: {
+          successMessage:
+            "Your account has been created. Please login to continue.",
+          from: " register page",
+        },
+      });
+
     } catch (err) {
       console.dir(err);
     }
