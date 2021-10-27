@@ -1,4 +1,5 @@
 import AddCom from "../pages/AddCom";
+import BookingConfirmationPage from "../pages/BookingConfirmationPage";
 import Homepage from "../pages/Homepage";
 import LoginPage from "../pages/LoginPage";
 import OwnerDetailPage from "../pages/OwnerDetailPage";
@@ -66,6 +67,10 @@ const route = {
     {
       path: "/history",
       component: UserHistoryPage,
+    },
+    {
+      path: "/BookingConfirmation",
+      component: BookingConfirmationPage,
     },
     {
       redirect: "/",
