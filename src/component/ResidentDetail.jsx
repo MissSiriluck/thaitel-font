@@ -69,7 +69,7 @@ function ResidentDetail() {
   });
   const classes = useStyles();
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setRoom(event.target.value);
   };
 
@@ -91,7 +91,7 @@ function ResidentDetail() {
         <Grid container>
           <Grid
             item
-            id=''
+            id=""
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
@@ -112,7 +112,7 @@ function ResidentDetail() {
           {/* Service block */}
           <Grid
             item
-            id=''
+            id=""
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
@@ -338,10 +338,10 @@ function ResidentDetail() {
         </Box>
 
         {/* room type block */}
-        {residents.map(resident => (
+        {residents.map((resident) => (
           <Grid
             item
-            id=''
+            id=""
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
@@ -386,7 +386,7 @@ function ResidentDetail() {
 
         <Grid item sx={{ display: "flex", justifyContent: "center" }}>
           <Button
-            variant='outlined'
+            variant="outlined"
             sx={{
               width: "240px",
               fontFamily: "'Noto Sans Thai', sans-serif",

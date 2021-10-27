@@ -37,26 +37,26 @@ function CarouselBox() {
         </Grid>
       ))}  */}
 
-      <div className='Carousel'>
+      <div className="Carousel">
         <div
-          className='CarouselInner'
+          className="CarouselInner"
           style={{ backgroundImage: `url(${images[curImg].img})` }}
         >
           <div
-            className='left'
+            className="left"
             onClick={() => {
-              curImg > 0 && setCurImg(currentImg => currentImg - 1);
+              curImg > 0 && setCurImg((currentImg) => currentImg - 1);
             }}
           >
             <ArrowBackIosIcon />
           </div>
 
-          <div className='center'></div>
+          <div className="center"></div>
           <div
-            className='right'
+            className="right"
             onClick={() => {
               curImg < images.length - 1 &&
-                setCurImg(currentImg => currentImg + 1);
+                setCurImg((currentImg) => currentImg + 1);
             }}
           >
             <ArrowForwardIosIcon />

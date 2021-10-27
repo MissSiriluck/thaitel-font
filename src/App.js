@@ -8,8 +8,10 @@ function App() {
   const { user } = useContext(AuthContext);
   const role = user ? user.role : "guest";
 
+  // console.log("role...................", role);
+  console.log("user...................", user);
   return (
-    <div className='App'>
+    <div className="App">
       <BrowserRouter>
         <Switch>
           {routes[role].map((item, idx) =>
