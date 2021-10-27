@@ -39,18 +39,21 @@ function CustomButton(props) {
 }
 
 function ResidentRegisterPage5() {
+
+  // const context = useContext(contextValue)
+
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" sx={{ mt: 18 }}>
       <Stack spacing={2} sx={{ display: "flex", flexDirection: "column" }}>
         <Grid item>
           <Typography sx={{ fontSize: "36px" }}>ห้องทั้งหมดของคุณ</Typography>
         </Grid>
-        <Grid item>
+        {/* <Grid item>
           <RoomCardResidentRegisterPage5 />
         </Grid>
         <Grid item>
           <RoomCardResidentRegisterPage5 />
-        </Grid>
+        </Grid> */}
       </Stack>
       <Grid item sx={{ display: "flex", justifyContent: "end" }}>
         <Grid container xs={12} justifyContent="end">

@@ -1,5 +1,5 @@
 import { Grid, Box } from "@mui/material";
-// import { BackgroundContainer } from "../assets/images/bg_container_residentregisterpage2.jpeg";
+//Material 
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import BusinessIcon from "@mui/icons-material/Business";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
@@ -14,9 +14,9 @@ const styles = {
   },
 };
 
-function ResidentRegiterPage2() {
+function ResidentRegisterPage2() {
   return (
-    <Grid container xs={12}>
+    <Grid container xs={12} sx={{ mt: 18 }}>
       <Grid
         item
         sx={{
@@ -42,4 +42,4 @@ function ResidentRegiterPage2() {
   );
 }
 
-export default ResidentRegiterPage2;
+export default ResidentRegisterPage2;

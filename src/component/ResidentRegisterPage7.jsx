@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Box, Grid, Typography } from "@mui/material";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
@@ -38,8 +38,8 @@ function CustomButton(props) {
 
 function ResidentRegisterPage7() {
   return (
-    // <Container>
     <Grid container>
+      <Box>
       <Grid>
         <Typography sx={{ fontSize: "36px", marginLeft: "20px" }}>
           ภาพถ่ายที่พัก
@@ -171,8 +171,8 @@ function ResidentRegisterPage7() {
           </Grid>
         </Grid>
       </Grid>
+    </Box>
     </Grid>
-    // </Container>
   );
 }
 

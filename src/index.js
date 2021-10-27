@@ -4,11 +4,14 @@ import App from "./App";
 import theme from "./component/theme";
 import { ThemeProvider } from "@material-ui/core/styles";
 import reportWebVitals from "./reportWebVitals";
+import { CreateResidentProvider } from "./context/createResidentContext";
 import { AuthContextProvider } from "./context/AuthContext";
 import { BookingContextProvider } from "./context/BookingContext";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
+    <CreateResidentProvider>
+
     {/* <React.StrictMode> */}
     <AuthContextProvider>
       <BookingContextProvider>
@@ -16,6 +19,9 @@ ReactDOM.render(
       </BookingContextProvider>
     </AuthContextProvider>
     {/* </React.StrictMode> */}
+
+    </CreateResidentProvider>
+
   </ThemeProvider>,
   document.getElementById("root")
 );

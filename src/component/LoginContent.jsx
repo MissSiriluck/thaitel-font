@@ -10,6 +10,7 @@ import ButtonUnstyled, {
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
 import axios from "../config/axios";
+import { setToken } from "../service/localStorage";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -56,8 +57,12 @@ function LoginContent() {
     const values = {
       email: data.get("email"),
       password: data.get("password"),
-      // role: "user",
     };
+    setToken(res.data.token);
+    // setUser(jwtDecode(res.data.token));
+
+    // history.push("/");
+
     const res = await axios.post("/users/login", values);
   };
 
@@ -169,106 +174,94 @@ function LoginContent() {
             onSubmit={handleSubmit}
             noValidate
           >
-            {/* <CustomButton
-              sx={{
-                background: "#c62828",
-                color: "#fff",
-                display: "flex",
-                justifyContent: "center",
-                width: "80%",
-                marginTop: "10px",
-              }}
-              type="submit"
-            >
-              Test
-            </CustomButton> */}
-
-            <Grid
-              container
-              spacing={2}
-              justifyContent='space-around'
-              alignContent='center'
-              sx={{
-                padding: 0,
-                marginTop: "0s",
-              }}
-              xs={7}
-              md={7}
-            >
-              {/*  */}
+            <Grid container justifyContent='center'>
               <Grid
                 container
                 spacing={2}
-                justifyContent='center'
-                alignItems='center'
+                justifyContent='space-around'
+                alignContent='center'
                 sx={{
                   padding: 0,
-                  borderBottom: "2px solid #C4C4C4",
-                  height: 15,
-                  margin: 0,
+                  marginTop: "0s",
                 }}
-                xs={5}
-                md={5}
-              />
-              <Typography sx={{ color: "#C4C4C4" }}>or</Typography>
-              <Grid
-                container
-                spacing={2}
-                justifyContent='center'
-                alignItems='center'
-                sx={{
-                  padding: 0,
-                  borderBottom: "2px solid #C4C4C4",
-                  height: 15,
-                  margin: 0,
-                }}
-                xs={5}
-                md={5}
-              />
-            </Grid>
-            {/*  */}
-
-            <Grid
-              container
-              spacing={2}
-              justifyContent='center'
-              alignItems='center'
-              sx={{
-                padding: 0,
-              }}
-              xs={12}
-              md={12}
-            >
-              <Grid
-                item
                 xs={7}
                 md={7}
+              >
+                {/*  */}
+                <Grid
+                  container
+                  spacing={2}
+                  justifyContent='center'
+                  alignItems='center'
+                  sx={{
+                    padding: 0,
+                    borderBottom: "2px solid #C4C4C4",
+                    height: 15,
+                    margin: 0,
+                  }}
+                  xs={5}
+                  md={5}
+                />
+                <Typography sx={{ color: "#C4C4C4" }}>or</Typography>
+                <Grid
+                  container
+                  spacing={2}
+                  justifyContent='center'
+                  alignItems='center'
+                  sx={{
+                    padding: 0,
+                    borderBottom: "2px solid #C4C4C4",
+                    height: 15,
+                    margin: 0,
+                  }}
+                  xs={5}
+                  md={5}
+                />
+              </Grid>
+              {/*  */}
+
+              <Grid
+                container
+                spacing={2}
+                justifyContent='center'
+                alignItems='center'
                 sx={{
                   padding: 0,
                 }}
+                xs={12}
+                md={12}
               >
-                <Typography
-                  style={{
-                    fontSize: 16,
-                    marginBottom: 8,
-                    justifyContent: "start",
-                  }}
-                >
-                  อีเมล์
-                </Typography>
-                <TextField
-                  fullWidth
-                  label='อีเมล์'
-                  placeholder='กรอกอีเมล์'
-                  id='email'
-                  name='email'
-                  multiline
-                  size='small'
+                <Grid
+                  item
+                  xs={7}
+                  md={7}
                   sx={{
                     padding: 0,
-                    marginBottom: "3px",
                   }}
-                />
+                >
+                  <Typography
+                    style={{
+                      fontSize: 16,
+                      marginBottom: 8,
+                      justifyContent: "start",
+                    }}
+                  >
+                    อีเมล์
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    label='อีเมล์'
+                    placeholder='กรอกอีเมล์'
+                    id='email'
+                    name='email'
+                    multiline
+                    size='small'
+                    sx={{
+                      padding: 0,
+                      marginBottom: "3px",
+                    }}
+                  />
+                </Grid>
               </Grid>
             </Grid>
             <Grid
