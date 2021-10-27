@@ -89,6 +89,30 @@ const route = {
       component: OwnerDetailPage,
     },
     {
+      path: "/residentregisterpage2",
+      component: OwnerDetailPage,
+    },
+    {
+      path: "/ownerdetail",
+      component: OwnerDetailPage,
+    },
+    {
+      path: "/ownerdetail",
+      component: OwnerDetailPage,
+    },
+    {
+      path: "/ownerdetail",
+      component: OwnerDetailPage,
+    },
+    {
+      path: "/ownerdetail",
+      component: OwnerDetailPage,
+    },
+    {
+      path: "/ownerdetail",
+      component: OwnerDetailPage,
+    },
+    {
       redirect: "/ownerhistory",
     },
   ],
