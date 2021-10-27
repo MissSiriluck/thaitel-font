@@ -98,7 +98,7 @@ function HotelCardList({ resident }) {
               <Grid item xs={3.5}>
                 <Rating
                   name="rate_star"
-                  defaultValue={resident.rate_star}
+                  defaultValue={resident.rateStar}
                   precision={0.5}
                   readOnly
                   sx={{
