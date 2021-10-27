@@ -4,6 +4,12 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import { useLocation } from "react-router";
+import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+// import { useEffect, useState } from "react";
+// import axios from "axios";
 
 const CustomButtonRoot = styled("span")(`
     background-color: none;
@@ -37,8 +43,74 @@ export function CustomButton(props) {
 }
 
 function BookingCfmDetail() {
+  const { user } = useContext(AuthContext);
+  const location = useLocation();
+  console.log("location...................................", location.state);
+
+  const hotelName = location.state.resident.resident.name;
+  // const price = location.state.rooms
+  // const fetchRoomSummary = location.state.resident;
+  // console.log(fetchRoomSummary);
+
+  // const [resident, setResident] = useState({});
+
+  // useEffect(() => {
+  //   const fetchResidentByid = async () => {
+  //     // const res = await axios.get(`/residents/${user.id}`);
+  //     const res = await axios.get(`/residents/${location.state.id}`);
+  //     setResident(res.data);
+  //     // console.log("res.data.......................", res.data);
+  //   };
+  //   fetchResidentByid();
+  // }, []);
+
+  // console.log("resident.............................", resident.resident);
+
+  let totalService = location.state.resident.resident.ServiceItems.reduce(
+    (a, c) => a + +c.pricePerTime,
+    0
+  );
+  // console.log("totalService..............................", totalService);
+
+  let totalPrice = location.state.rooms.reduce(
+    (a, c) => a + +c.pricePerNight * c.roomBookingAmount,
+    0
+  );
+  let total = totalPrice;
+
+  const getCheckIn = new Date(location.state.checkInDate);
+  const getCheckInDate = getCheckIn.getDate();
+  // console.log("night................................", getCheckInDate);
+
+  const getCheckOut = new Date(location.state.checkOutDate);
+  const getCheckOutDate = getCheckOut.getDate();
+  // console.log("night................................", getCheckOutDate);
+
+  const totalNight = getCheckOutDate - getCheckInDate;
+  // console.log("totalNight.........................", totalNight);
+
+  const allTotalPrice = total * totalNight + totalService;
+  // console.log("allTotalPrice.............................", allTotalPrice);
+
+  const handleClickToPayment = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("/payments/request-payment", {
+        userId: user.id,
+        checkInDate: location.state.checkInDate,
+        checkOutDate: location.state.checkOutDate,
+        totalPrice: total,
+        serviceFee: totalService,
+        rooms: location.state.rooms,
+      });
+      window.location.assign(res.data.ChillpayData.PaymentUrl);
+    } catch (err) {
+      console.dir(err);
+    }
+  };
+
   return (
-    <Container maxWidth='md'>
+    <Container maxWidth="md">
       <Grid item>
         <Typography sx={{ fontSize: "36px", textAlign: "center", mb: 2 }}>
           ข้อมูลการจอง
@@ -64,7 +136,8 @@ function BookingCfmDetail() {
                     ชื่อที่พัก
                   </Typography>
                   <Typography sx={{ fontSize: "20px", p: 1, flexGrow: 1 }}>
-                    Paradise tree hostel
+                    {hotelName}
+                    {/* Paradise tree hostel */}
                   </Typography>
                 </Box>
                 <Box sx={{ display: "flex", p: 1, flexGrow: 1, mr: 1 }}>
@@ -79,13 +152,40 @@ function BookingCfmDetail() {
                   >
                     ลักษณะห้องพัก
                   </Typography>
-                  <Typography sx={{ fontSize: "20px", p: 1, flexGrow: 1 }}>
-                    ห้องมาตรฐานเตียงเดี่ยว
-                  </Typography>
+                  <Box>
+                    {location?.state?.rooms?.map((resident) => (
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          width: "400px",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            display: "flex",
+                            width: "400px",
+                          }}
+                        >
+                          <Typography
+                            sx={{ fontSize: "20px", p: 1, flexGrow: 1 }}
+                          >
+                            {resident?.typeOf}
+                            <Typography
+                              sx={{ fontSize: "20px", p: 1, flexGrow: 1 }}
+                            >
+                              {resident?.roomBookingAmount} ห้อง
+                            </Typography>
+                            {/* ห้องมาตรฐานเตียงเดี่ยว */}
+                          </Typography>
+                        </Box>
+                      </Box>
+                    ))}
+                  </Box>
                 </Box>
               </Box>
               <Box sx={{ p: 1 }}>
-                <Typography sx={{ fontSize: "20px" }}>จำนวน 1 ห้อง</Typography>
+                {/* <Typography sx={{ fontSize: "20px" }}>จำนวน 1 ห้อง</Typography> */}
               </Box>
             </Box>
 
@@ -144,6 +244,8 @@ function BookingCfmDetail() {
                       Tue, Sep 21
                     </Typography>
                     <Typography sx={{ p: 1, flexGrow: 1 }}>
+                      {/* {fetchRoomSummary.resident.timeCheckInStart}-
+                      {fetchRoomSummary.resident.timeCheckInEnd} */}
                       9.00AM -14.00PM
                     </Typography>
                   </Box>
@@ -190,6 +292,8 @@ function BookingCfmDetail() {
                       Tue, Sep 21
                     </Typography>
                     <Typography sx={{ p: 1, flexGrow: 1 }}>
+                      {/* {fetchRoomSummary.resident.timeCheckOutStart}-
+                      {fetchRoomSummary.resident.timeCheckOutEnd} */}
                       9.00AM -14.00PM
                     </Typography>
                   </Box>
@@ -211,10 +315,12 @@ function BookingCfmDetail() {
                       flexGrow: 1,
                     }}
                   >
-                    1,500.00 บาท/คืน x 3 คืน
+                    {total} บาท/คืน x{totalNight}
+                    คืน
                   </Typography>
                   <Typography sx={{ fontSize: "20px", p: 1 }}>
-                    4,500.00 บาท
+                    {total * totalNight} บาท
+                    {/* 4,500.00 บาท */}
                   </Typography>
                 </Box>
                 <Box sx={{ display: "flex", p: 1, flexGrow: 1, mr: 1, mb: -2 }}>
@@ -230,7 +336,8 @@ function BookingCfmDetail() {
                     Service fee
                   </Typography>
                   <Typography sx={{ fontSize: "20px", p: 1 }}>
-                    0.00 บาท
+                    {totalService} บาท
+                    {/* 0.00 บาท */}
                   </Typography>
                 </Box>
                 <Box sx={{ display: "flex", p: 1, flexGrow: 1, mr: 1 }}>
@@ -246,7 +353,8 @@ function BookingCfmDetail() {
                     Total
                   </Typography>
                   <Typography sx={{ fontSize: "20px", p: 1 }}>
-                    4,500.00 บาท
+                    {allTotalPrice} บาท
+                    {/* 4,500.00 บาท */}
                   </Typography>
                 </Box>
               </Box>
@@ -254,11 +362,40 @@ function BookingCfmDetail() {
           </div>
         </Box>
 
-        <Container sx={{ textAlign: "center" }}>
-          <CustomButton sx={{ background: "#c62828", color: "#fff" }}>
+        {/* <Container sx={{ textAlign: "center" }}>
+          <CustomButton
+            sx={{
+              background: "#c62828",
+              color: "#fff",
+              height: "40px",
+              mt: 3,
+              mb: 15,
+              p: 2.5,
+            }}
+          >
             ยืนยันการจองและดำเนินการชำระเงิน
           </CustomButton>
-        </Container>
+        </Container> */}
+
+        <Grid item sx={{ display: "flex", justifyContent: "center" }}>
+          <CustomButton
+            sx={{
+              background: "#c62828",
+              color: "#fff",
+              fontFamily: "'Noto Sans Thai', sans-serif",
+              fontSize: "20px",
+              display: "flex",
+              justifyContent: "center",
+              mt: 3,
+              mb: 15,
+              p: 2.5,
+              width: "50%",
+            }}
+            onClick={handleClickToPayment}
+          >
+            จองห้องพัก
+          </CustomButton>
+        </Grid>
       </Grid>
     </Container>
   );

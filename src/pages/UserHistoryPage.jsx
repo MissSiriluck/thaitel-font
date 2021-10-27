@@ -1,11 +1,10 @@
-import React from "react";
 import { Container, Grid, Typography } from "@mui/material";
 import SpaceforHead from "../component/SpaceforHead";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
-import CardOwnerHistoryList from "../component/CardOwnerHistoryList";
+import CardHistoryList from "../component/CardHistoryList";
 
-function OwnerHistoryPage() {
+function UserHistoryPage() {
   return (
     <>
       <SpaceforHead />
@@ -15,15 +14,15 @@ function OwnerHistoryPage() {
         <Grid container>
           <Grid item xs={12}>
             <Typography sx={{ fontSize: "25px", mb: 1 }}>
-              {`สวัสดี คุณ{Owner's name}`}
+              {`สวัสดี คุณ{Username}`}
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography sx={{ fontSize: "16px" }}>
-              ดูรายละเอียดที่พักของฉัน
+              ดูรายละเอียดการจองที่พักของคุณ
             </Typography>
           </Grid>
-          <CardOwnerHistoryList />
+          <CardHistoryList />
         </Grid>
       </Container>
 
@@ -32,4 +31,4 @@ function OwnerHistoryPage() {
   );
 }
 
-export default OwnerHistoryPage;
+export default UserHistoryPage;

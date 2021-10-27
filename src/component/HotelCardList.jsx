@@ -4,6 +4,7 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
+import { useHistory } from "react-router";
 
 //customize button blue
 const CustomButtonRoot = styled("span")(`
@@ -55,7 +56,17 @@ function HotelCardList({ resident }) {
     [0, 0]
   );
 
-  console.log({ result });
+  const history = useHistory();
+
+  const handleClicklookRoom = (e) => {
+    e.preventDefault();
+    history.push({
+      pathname: "/addcom",
+      state: { id: resident.id },
+    });
+  };
+
+  // console.log({ result });
   return (
     <Grid container sx={{ mb: 12 }}>
       <Grid
@@ -104,7 +115,6 @@ function HotelCardList({ resident }) {
                   }}
                 >
                   {`${result[1]} - ${result[0]}`} บาท
-                  {/* {`2300 - 1500 บาท`} */}
                 </Typography>
                 <Typography
                   sx={{
@@ -123,6 +133,7 @@ function HotelCardList({ resident }) {
                     justifyContent: "center",
                     mt: 1.5,
                   }}
+                  onClick={handleClicklookRoom}
                 >
                   ดูห้องว่างที่เหลืออยู่
                 </CustomButton>

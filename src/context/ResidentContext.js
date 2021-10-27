@@ -11,7 +11,7 @@ function ResidentContextProvider({ children }) {
       try {
         const res = await axios.get("/residents");
         setResidents(res.data.resident);
-        console.log(res.data.resident);
+        // console.log(res.data.resident);
       } catch (err) {
         console.log(err);
       }
