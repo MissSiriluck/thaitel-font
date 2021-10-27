@@ -1,6 +1,6 @@
+import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { createTheme } from "@mui/material/styles";
-import "./App.css";
 import BookingConfirmationPage from "./pages/BookingConfirmationPage";
 import ConfirmInfoPage from "./pages/ConfirmInfoPage";
 import Homepage from "./pages/Homepage";
@@ -17,6 +17,9 @@ import ResidentRegisterPage6Page from "./pages/ResidentRegisterPage6Page";
 import ResidentRegisterPage7Page from "./pages/ResidentRegisterPage7Page";
 import ResidentRegisterPage8Page from "./pages/ResidentRegisterPage8Page";
 import AddCom from "./pages/AddCom";
+import UserHistoryPage from "./pages/UserHistoryPage";
+import OwnerHistoryPage from "./pages/OwnerHistoryPage";
+import OwnerDetailPage from "./pages/OwnerDetailPage";
 
 function App() {
   // const theme = createTheme({
@@ -36,6 +39,9 @@ function App() {
           <Route exact path='/ownerregister' component={OwnerRegisterPage} />
           <Route exact path='/mainmenu' component={ShowResultPage} />
           <Route exact path='/addcom' component={AddCom} />
+          <Route exact path='/history' component={UserHistoryPage} />
+          <Route exact path='/ownerhistory' component={OwnerHistoryPage} />
+          <Route exact path='/ownerdetail' component={OwnerDetailPage} />
           <Route
             exact
             path='/BookingConfirmation'
