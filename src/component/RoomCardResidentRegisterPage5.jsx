@@ -37,7 +37,7 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function RoomCardResidentRegisterPage5() {
+function RoomCardResidentRegisterPage5(props) {
   return (
     <Stack
       xs={12}
@@ -53,7 +53,8 @@ function RoomCardResidentRegisterPage5() {
     >
       <Grid item>
         <Typography sx={{ fontSize: "18px" }}>
-          ห้องมาตรฐานเตียงเดี่ยว
+          {/* ห้องมาตรฐานเตียงเดี่ยว */}
+          {props.roomName}
         </Typography>
       </Grid>
 
@@ -90,6 +91,7 @@ function RoomCardResidentRegisterPage5() {
             variant="filled"
             xs={12}
             md={6}
+            value={props.roomAmount}
           />
         </Grid>
       </Grid>

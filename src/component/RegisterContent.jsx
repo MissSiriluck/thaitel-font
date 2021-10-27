@@ -64,7 +64,6 @@ function RegisterContent() {
         email: data.get("email"),
         password: data.get("password"),
         telephone: data.get("phone"),
-        role: "user",
       };
 
       const res = await axios.post("/users/register", values);
