@@ -12,13 +12,13 @@ import { Box, styled } from "@mui/system";
 // import iconsmoking from "../assets/images/ICON-SMOKING.png";
 // import iconswim from "../assets/images/ICON-SWIM.png";
 // import iconwifi from "../assets/images/ICON-WIFI.png";
-import bed1 from "../assets/images/bed1.png";
-import bed2 from "../assets/images/bed2.png";
+// import bed1 from "../assets/images/bed1.png";
+// import bed2 from "../assets/images/bed2.png";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
-import { Grid, Rating, Typography } from "@mui/material";
-import CarouselBox from "./CarouselBox";
+import { Grid, Typography } from "@mui/material";
+// import CarouselBox from "./CarouselBox";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import WifiIcon from "@mui/icons-material/Wifi";
@@ -32,6 +32,8 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { residents } from "../mocks/residents";
+import res_1 from "../assets/images/residents/hotel-1.jpeg";
+import Image from "material-ui-image";
 
 //customize button blue
 const CustomButtonRoot = styled("span")(`
@@ -86,7 +88,8 @@ function AddcomDetail() {
   return (
     <Grid container>
       <Grid item>
-        <CarouselBox />
+        {/* <CarouselBox /> */}
+        <img src={res_1} style={{ width: "1116px", height: "450px", mb: 2 }} />
 
         {/* Name hotel and other detail */}
         <Grid container>
@@ -94,7 +97,13 @@ function AddcomDetail() {
             item
             id=''
             xs={12}
-            sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
+            sx={{
+              border: "1px solid #BFBFBF",
+              borderRadius: 2,
+              p: 4,
+              mb: 2,
+              mt: 2,
+            }}
           >
             <Typography sx={{ fontSize: "24px", pb: 2 }}>
               {`PARADISE TREE HOSTEL`}

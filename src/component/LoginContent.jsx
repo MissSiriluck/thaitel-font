@@ -46,7 +46,7 @@ function CustomButton(props) {
 }
 
 function LoginContent() {
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // console.log({
@@ -64,15 +64,15 @@ function LoginContent() {
   return (
     <div>
       <Container
-        maxWidth="md"
-        justifyContent="center"
-        alignItems="center"
-        direction="column"
+        maxWidth='md'
+        justifyContent='center'
+        alignItems='center'
+        direction='column'
         sx={{ padding: 0, mt: 23 }}
       >
         <Box
-          alignItems="center"
-          justifyContent="center"
+          alignItems='center'
+          justifyContent='center'
           sx={{
             height: "60vh",
             display: "flex",
@@ -81,20 +81,20 @@ function LoginContent() {
           }}
         >
           <Box
-            alignItems="center"
-            justifyContent="center"
+            alignItems='center'
+            justifyContent='center'
             sx={{ width: "80%", display: "flex" }}
             xs={8}
             sm={8}
           >
             <Grid
               container
-              justifyContent="start"
-              alignItems="center"
+              justifyContent='start'
+              alignItems='center'
               xs={9}
               sx={{ height: "40px" }}
             >
-              <Typography variant="h3" component="div" sx={{ fontWeight: 600 }}>
+              <Typography variant='h3' component='div' sx={{ fontWeight: 600 }}>
                 เข้าสู่ระบบ
               </Typography>
             </Grid>
@@ -103,8 +103,8 @@ function LoginContent() {
 
           <Grid
             container
-            justifyContent="center"
-            alignContent="center"
+            justifyContent='center'
+            alignContent='center'
             sx={{
               padding: 0,
             }}
@@ -112,7 +112,7 @@ function LoginContent() {
             md={7}
           >
             <Button
-              variant="contained"
+              variant='contained'
               sx={{
                 width: "100%",
                 display: "flex",
@@ -144,7 +144,7 @@ function LoginContent() {
                 }}
               >
                 <Typography
-                  variant="p"
+                  variant='p'
                   sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
                 >
                   Sign In With Google
@@ -156,8 +156,8 @@ function LoginContent() {
           <Box
             container
             spacing={2}
-            justifyContent="center"
-            alignItems="center"
+            justifyContent='center'
+            alignItems='center'
             sx={{
               padding: 0,
               margin: 0,
@@ -165,7 +165,7 @@ function LoginContent() {
             }}
             xs={12}
             md={12}
-            component="form"
+            component='form'
             onSubmit={handleSubmit}
             noValidate
           >
@@ -186,8 +186,8 @@ function LoginContent() {
             <Grid
               container
               spacing={2}
-              justifyContent="space-around"
-              alignContent="center"
+              justifyContent='space-around'
+              alignContent='center'
               sx={{
                 padding: 0,
                 marginTop: "0s",
@@ -199,8 +199,8 @@ function LoginContent() {
               <Grid
                 container
                 spacing={2}
-                justifyContent="center"
-                alignItems="center"
+                justifyContent='center'
+                alignItems='center'
                 sx={{
                   padding: 0,
                   borderBottom: "2px solid #C4C4C4",
@@ -214,8 +214,8 @@ function LoginContent() {
               <Grid
                 container
                 spacing={2}
-                justifyContent="center"
-                alignItems="center"
+                justifyContent='center'
+                alignItems='center'
                 sx={{
                   padding: 0,
                   borderBottom: "2px solid #C4C4C4",
@@ -231,8 +231,8 @@ function LoginContent() {
             <Grid
               container
               spacing={2}
-              justifyContent="center"
-              alignItems="center"
+              justifyContent='center'
+              alignItems='center'
               sx={{
                 padding: 0,
               }}
@@ -258,12 +258,12 @@ function LoginContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  label="อีเมล์"
-                  placeholder="กรอกอีเมล์"
-                  id="email"
-                  name="email"
+                  label='อีเมล์'
+                  placeholder='กรอกอีเมล์'
+                  id='email'
+                  name='email'
                   multiline
-                  size="small"
+                  size='small'
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
@@ -274,8 +274,8 @@ function LoginContent() {
             <Grid
               container
               spacing={2}
-              justifyContent="center"
-              alignItems="center"
+              justifyContent='center'
+              alignItems='center'
               sx={{
                 padding: 0,
                 marginBottom: "3px",
@@ -295,12 +295,12 @@ function LoginContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  label="รหัสผ่าน"
-                  placeholder="กรอกรหัสผ่าน"
-                  id="password"
-                  name="password"
+                  label='รหัสผ่าน'
+                  placeholder='กรอกรหัสผ่าน'
+                  id='password'
+                  name='password'
                   multiline
-                  size="small"
+                  size='small'
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
@@ -315,8 +315,8 @@ function LoginContent() {
             <Grid
               container
               spacing={2}
-              justifyContent="center"
-              alignItems="center"
+              justifyContent='center'
+              alignItems='center'
               sx={{
                 padding: 0,
               }}
@@ -338,7 +338,7 @@ function LoginContent() {
                     width: "80%",
                     marginTop: "10px",
                   }}
-                  type="submit"
+                  type='submit'
                 >
                   <Typography
                     style={{
@@ -369,9 +369,13 @@ function LoginContent() {
                 </Grid>
 
                 <Grid mr={1}>
-                  <Link to="/register">
+                  <Link to='/register' style={{ textDecoration: "none" }}>
                     <Typography
-                      style={{ color: "#16264D", fontWeight: 700, margin: 0 }}
+                      sx={{
+                        color: "#16264D",
+                        fontWeight: 700,
+                        margin: 0,
+                      }}
                     >
                       สมัครสมาชิก
                     </Typography>

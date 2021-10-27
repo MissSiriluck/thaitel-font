@@ -21,6 +21,7 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { residents } from "../mocks/residents";
+import res_1 from "../assets/images/residents/hotel-1.jpeg";
 
 //customize button blue
 const CustomButtonRoot = styled("span")(`
@@ -75,7 +76,16 @@ function ResidentDetail() {
   return (
     <Grid container>
       <Grid item>
-        <CarouselBox />
+        {/* <CarouselBox /> */}
+        <img
+          src={res_1}
+          style={{
+            width: "1152px",
+            height: "450px",
+            marginBottom: "10px",
+            borderRadius: "10px",
+          }}
+        />
 
         {/* Name hotel and other detail */}
         <Grid container>

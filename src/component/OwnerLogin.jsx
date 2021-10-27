@@ -8,8 +8,10 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
+import { useState } from "react";
+import axios from "../config/axios";
 
-const CustomButtonRoot = styled("span")(`
+const CustomButtonRoot = styled("button")(`
     background-color: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -41,9 +43,16 @@ function CustomButton(props) {
 }
 
 function OwnerLogin() {
-  const handleSubmit = e => {
-    e.preventDefault();
-    // axios.post('/login', {email, password})
+  const handleSubmit = async event => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+
+    const values = {
+      email: data.get("email"),
+      password: data.get("password"),
+    };
+
+    const res = await axios.post("/hotelOwners/login", values);
   };
 
   return (
@@ -100,6 +109,7 @@ function OwnerLogin() {
               variant='contained'
               sx={{
                 width: "100%",
+                height: "30%",
                 display: "flex",
                 justifyContent: "space-between",
               }}
@@ -126,6 +136,7 @@ function OwnerLogin() {
                   justifyContent: "center",
                   height: "32px",
                   alignItems: "center",
+                  height: "100%",
                 }}
               >
                 <Typography
@@ -229,6 +240,7 @@ function OwnerLogin() {
                   id='outlined-textarea fullWidth'
                   label='อีเมล์'
                   placeholder='กรอกอีเมล์'
+                  name='email'
                   multiline
                   size='small'
                   sx={{
@@ -265,6 +277,7 @@ function OwnerLogin() {
                   id='outlined-textarea fullWidth'
                   label='รหัสผ่าน'
                   placeholder='กรอกรหัสผ่าน'
+                  name='password'
                   multiline
                   size='small'
                   sx={{
@@ -304,6 +317,7 @@ function OwnerLogin() {
                     width: "80%",
                     marginTop: "10px",
                   }}
+                  type='submit'
                   // onClick={signIn}
                 >
                   <Typography
@@ -338,23 +352,6 @@ function OwnerLogin() {
                     style={{ color: "#16264D", fontWeight: 700, margin: 0 }}
                   >
                     สมัครสมาชิก
-                  </Typography>
-                </Grid>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                md={12}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: 0,
-                }}
-              >
-                <Grid mr={1} sx={{ padding: 0 }}>
-                  <Typography style={{ color: "#16264D", fontWeight: 700 }}>
-                    ลืมรหัสผ่าน
                   </Typography>
                 </Grid>
               </Grid>
