@@ -6,14 +6,17 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import reportWebVitals from "./reportWebVitals";
 import { AuthContextProvider } from "./context/AuthContext";
 import { BookingContextProvider } from "./context/BookingContext";
+import { ResidentContextProvider } from "./context/ResidentContext";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     {/* <React.StrictMode> */}
     <AuthContextProvider>
-      <BookingContextProvider>
-        <App />
-      </BookingContextProvider>
+      <ResidentContextProvider>
+        <BookingContextProvider>
+          <App />
+        </BookingContextProvider>
+      </ResidentContextProvider>
     </AuthContextProvider>
     {/* </React.StrictMode> */}
   </ThemeProvider>,
