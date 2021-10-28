@@ -8,6 +8,7 @@ import OwnerRegisterPage from "../pages/OwnerRegisterPage";
 import RegisterPage from "../pages/RegisterPage";
 import ShowResultPage from "../pages/ShowResultPage";
 import UserHistoryPage from "../pages/UserHistoryPage";
+import ResidentRegisterPage2Page from "../pages/ResidentRegisterPage2Page";
 
 const route = {
   guest: [
@@ -88,6 +89,30 @@ const route = {
     {
       path: "/ownerregister",
       component: OwnerRegisterPage,
+    },
+    {
+      path: "/ownerdetail",
+      component: OwnerDetailPage,
+    },
+    {
+      path: "/residentregisterpage2",
+      component: ResidentRegisterPage2Page,
+    },
+    {
+      path: "/ownerdetail",
+      component: OwnerDetailPage,
+    },
+    {
+      path: "/ownerdetail",
+      component: OwnerDetailPage,
+    },
+    {
+      path: "/ownerdetail",
+      component: OwnerDetailPage,
+    },
+    {
+      path: "/ownerdetail",
+      component: OwnerDetailPage,
     },
     {
       path: "/ownerdetail",

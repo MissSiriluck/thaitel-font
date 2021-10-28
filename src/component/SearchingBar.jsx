@@ -10,6 +10,7 @@ import ButtonUnstyled, {
 import { styled } from "@mui/system";
 import BtnGuestnRoom from "./BtnGuestnRoom";
 
+//customize blue button
 const CustomButtonRoot = styled("span")(`
     background-color: none;
     padding: 12px 35px;
