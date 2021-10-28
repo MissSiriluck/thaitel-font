@@ -8,8 +8,11 @@ import ButtonUnstyled, {
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
 import BtnLogOut from "./BtnLogOut";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
-//customize button blue
+//customize button red
 const CustomButtonRoot = styled("span")(`
     background-color: none;
     padding: 10px 20px;
@@ -42,6 +45,8 @@ function CustomButton(props) {
 }
 
 function Header() {
+  const { user, setUser } = useContext(AuthContext);
+
   return (
     <AppBar
       position='fixed'
@@ -56,38 +61,60 @@ function Header() {
       }}
     >
       <Toolbar>
-        <Typography
-          variant='h6'
-          component='div'
-          sx={{
+        <Link
+          to='/'
+          style={{
+            textDecoration: "none",
             flexGrow: 1,
-            fontFamily: "'Noto Sans Thai', sans-serif",
+            color: "#fff",
           }}
         >
-          THAITEL
-        </Typography>
-        <CustomButton sx={{ background: "#c62828", color: "#fff" }}>
-          ลงทะเบียนที่พักของท่าน
-        </CustomButton>
-        <Button
-          color='inherit'
-          sx={{
-            marginLeft: 2,
-            fontFamily: "'Noto Sans Thai', sans-serif",
-          }}
-        >
-          สมัครสมาชิก
-        </Button>
-        <Button
-          color='inherit'
-          sx={{
-            marginLeft: 2,
-            fontFamily: "'Noto Sans Thai', sans-serif",
-          }}
-        >
-          เข้าสู่ระบบ
-        </Button>
-        <BtnLogOut />
+          <Typography
+            variant='h6'
+            component='div'
+            sx={{
+              flexGrow: 1,
+              fontFamily: "'Noto Sans Thai', sans-serif",
+            }}
+          >
+            THAITEL
+          </Typography>
+        </Link>
+        <Link to='/ownerlogin' style={{ textDecoration: "none" }}>
+          <CustomButton sx={{ background: "#c62828", color: "#fff" }}>
+            ลงทะเบียนที่พักของท่าน
+          </CustomButton>
+        </Link>
+        {user ? (
+          <BtnLogOut />
+        ) : (
+          <>
+            <Link to='/register' style={{ textDecoration: "none" }}>
+              <Button
+                color='inherit'
+                sx={{
+                  marginLeft: 2,
+                  fontFamily: "'Noto Sans Thai', sans-serif",
+                  color: "#fff",
+                }}
+              >
+                สมัครสมาชิก
+              </Button>
+            </Link>
+            <Link to='/login' style={{ textDecoration: "none" }}>
+              <Button
+                color='inherit'
+                sx={{
+                  marginLeft: 2,
+                  fontFamily: "'Noto Sans Thai', sans-serif",
+                  color: "#fff",
+                }}
+              >
+                เข้าสู่ระบบ
+              </Button>
+            </Link>
+          </>
+        )}
       </Toolbar>
     </AppBar>
   );

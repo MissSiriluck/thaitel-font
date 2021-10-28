@@ -1,16 +1,22 @@
-import React from "react";
-import { Container, Grid, Typography, TextField } from "@mui/material";
+import React, { useContext, useState } from "react";
+import { BrowserRouter as Router, Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
+import { Container, Grid, Typography, TextField, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Stack from "@mui/material/Stack";
 import Checkbox from "@mui/material/Checkbox";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
-import { fontSize } from "@mui/system";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import { CreateResidentContext } from "../context/createResidentContext";
+import { fontSize, width } from "@mui/system";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 
-const CustomButtonRoot = styled("span")(`
+const CustomButtonRoot = styled("button")(`
       background-color: none;
       padding: 10px 20px;
       border-radius: 30px;
@@ -42,8 +48,182 @@ function CustomButton(props) {
 }
 
 function ResidentRegisterPage6() {
+
+  
+  const [parking, setParking] = useState({
+    serviceName: 'ที่จอดรถ',
+    isFree: true,
+    pricePerTime: 0
+  })
+
+  const [breakfast, setBreakfast] = useState({
+    serviceName: 'อาหารเช้า',
+    isFree: true,
+    pricePerTime: 0
+  })
+
+  const [wifi, setWifi] = useState({
+    serviceName: 'Wifi',
+    isFree: true,
+    pricePerTime: 0
+  })
+
+  const [pool, setPool] = useState({
+    serviceName: 'สระว่ายน้ำ',
+    isFree: true,
+    pricePerTime: 0
+  })
+
+  const [twentyfourHourReception, setTwentyfourHourReception] = useState(
+    {
+      serviceName: 'แผนกต้อนรับส่วนหน้า 24 ชั่วโมง',
+      isFree: true,
+      pricePerTime: 0
+    }
+  )
+  const [bar, setBar] = useState({
+      serviceName: 'บาร์',
+      isFree: true,
+      pricePerTime: 0  
+  })
+
+const [sauna, setSauna] = useState({
+  serviceName: 'ห้องซาวน่า',
+      isFree: true,
+      pricePerTime: 0 
+})
+
+const [roomService, setRoomService] = useState({
+  serviceName: 'roomService',
+      isFree: true,
+      pricePerTime: 0 
+})
+
+const [gym, setGym] = useState({
+  serviceName: 'gym',
+      isFree: true,
+      pricePerTime: 0
+})
+
+
+const handleChangepricePerTimeForParking = e => {
+  const newParking = {...parking}
+  newParking.pricePerTime=e.target.value
+  setParking(newParking)
+}
+
+const handleChangepricePerTimeForBreakfast = e => {
+  const newBreakfast = {...breakfast}
+  newBreakfast.pricePerTime=e.target.value
+  setBreakfast(newBreakfast)
+}
+
+const handleChangepricePerTimeForWifi = e => {
+  const newWifi = {...wifi}
+  newWifi.pricePerTime=e.target.value
+  setWifi(newWifi)
+}
+
+const handleChangepricePerTimeForPool = e => {
+  const newPool = {...pool}
+  newPool.pricePerTime=e.target.value
+  setPool(newPool)
+}
+
+const handleChangepricePerTimeForTwentyfourHourReception = e => {
+  const newTwentyfourHourReception = {...twentyfourHourReception}
+  newTwentyfourHourReception.pricePerTime=e.target.value
+  setTwentyfourHourReception(newTwentyfourHourReception)
+}
+
+const handleChangepricePerTimeForBar = e => {
+  const newBar = {...bar}
+  newBar.pricePerTime=e.target.value
+  setBar(newBar)
+}
+
+const handleChangepricePerTimeForSauna = e => {
+  const newSauna = {...sauna}
+  newSauna.pricePerTime=e.target.value
+  setSauna(newSauna)
+}
+
+const handleChangepricePerTimeForRoomService = e => {
+  const newRoomService = {...roomService}
+  newRoomService.pricePerTime=e.target.value
+  setRoomService(newRoomService)
+}
+
+const handleChangepricePerTimeForGym = e => {
+  const newGym = {...gym}
+  newGym.pricePerTime=e.target.value
+  setGym(newGym)
+}
+
+const location = useLocation();
+console.log(location)
+
+const history = useHistory();
+
+const {values, setValues} = useContext(CreateResidentContext)
+
+const handleSubmitPage6 = async e => {
+  
+  e.preventDefault();
+  
+  const serviceArray = [parking, breakfast, pool, twentyfourHourReception, bar, sauna, roomService, gym]
+
+  const clone = [...values.serviceCollection]
+
+  clone.push(serviceArray)
+
+  setValues({ ...values, serviceCollection: clone});
+  
+  try {
+    history.push({
+      pathname: "/residentregisterpage8",
+      state: {
+        email: location.state.email,
+        phone: location.state.phone,
+        password: location.state.password,
+        confirmPassword: location.state.confirmPassword,
+        firstName: location.state.firstName,
+        lastName: location.state.lastName,
+        idCard: location.state.idCard,
+        idCardImgUrl: location.state.file,
+        typeof: location.state.type,
+        residentName: location.state.residentName,
+        rateStar: location.state.rateStar,
+        address: location.state.address,
+        subDistrict: location.state.subDistrict,
+        district: location.state.district,
+        province: location.state.province,
+        postalCode: location.state.postalCode,
+        residentImgUrl: location.state.residentImgUrl,
+        timeCheckInToStart: location.state.timeCheckInToStart,
+        timeCheckInToEnd: location.state.timeCheckInToEnd,
+        timeCheckOutToStart: location.state.timeCheckOutToStart,
+        timeCheckOutToEnd: location.state.timeCheckOutToEnd,
+        cancelDate: location.state.cancelDate,
+        roomTypeOf: location.state.roomTypeOf,
+        roomAmount: location.state.roomAmount,
+        roomSize: location.state.roomSize,
+        maxGuest: location.state.maxGuest,
+        optionRoomDetail: location.state.optionRoomDetail,
+        roomImgUrl: location.state.roomImgUrl,
+        roomShowImg: location.state.roomShowImg,
+        roomCollection: location.state.roomCollection,
+        serviceCollection: clone 
+      },
+    });
+  } catch(err) {
+    console.dir(err);
+  }
+};
+
   return (
     <Container maxWidth='md' sx={{ mt: 18 }}>
+        <Box>
       <Grid container direction='column'>
         <Grid item>
           <Typography sx={{ fontSize: "36px", marginBottom: "5px" }}>
@@ -59,14 +239,136 @@ function ResidentRegisterPage6() {
             padding: "20px",
           }}
         >
+
+          <Stack
+            direction='row'
+            spacing={4}
+            xs={12}
+            sx={{ display:'flex', justifyContent: "start", alignItems: "center" }}
+          >
+            <FormControl component="fieldset" sx={{ display:'flex', flexDirection:'row' , width: '100%'}}>
+            <Grid xs={3}>
+            <FormLabel component="legend"><Typography sx={{ fontSize: "20px" }}>ที่จอดรถ</Typography></FormLabel>
+            </Grid>
+
+            <Grid
+              item
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "start",
+              }}
+            >
+              <Grid xs={12} sx={{ display:'flex', flexDirection:'row'}}>
+
+                <RadioGroup
+                  aria-label="gender"
+                  serviceName="controlled-radio-buttons-group"
+                  defaultValue={parking.isFree}
+                  sx={{ display: 'flex', flexDirection: 'row'}}
+                >
+                  <FormControlLabel value={true} control={<Radio />} onChange={e=>setParking(cur=>{
+                    return {...cur,isFree:true}
+                  })} label="บริการฟรี" />
+                  <FormControlLabel value={false} onChange={e=>setParking(cur=>{
+                    return {...cur,isFree:false}
+                  })} control={<Radio />} label="มีค่าบริการ" />
+                </RadioGroup>
+
+              </Grid>
+
+              { !parking.isFree ?  <Grid
+                item
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <TextField
+                  xs={3}
+                  id='outlined-password-input'
+                  label='(บาท)'
+                  size='small'
+                  sx={{ width: "100%", alignItems: "stretch" }}
+                  value={parking.pricePerTime}
+                  onChange={handleChangepricePerTimeForParking}
+                  />
+              </Grid> : null }
+              
+            </Grid>
+          </FormControl>
+          </Stack>
+
+          <Stack
+            direction='row'
+            spacing={4}
+            xs={12}
+            sx={{ display:'flex', justifyContent: "start", alignItems: "center" }}
+          >
+            <FormControl component="fieldset" sx={{ display:'flex', flexDirection:'row' , width: '100%'}}>
+            <Grid xs={3}>
+            <FormLabel component="legend"><Typography sx={{ fontSize: "20px" }}>อาหารเช้า</Typography></FormLabel>
+            </Grid>
+
+            <Grid
+              item
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "start",
+              }}
+            >
+              <Grid xs={12} sx={{ display:'flex', flexDirection:'row'}}>
+
+                <RadioGroup
+                  aria-label="gender"
+                  serviceName="controlled-radio-buttons-group"
+                  defaultValue={breakfast.isFree}
+                  sx={{ display: 'flex', flexDirection: 'row'}}
+                >
+                  <FormControlLabel value={true} control={<Radio />} onChange={e=> setBreakfast(cur=>{
+                    return {...cur,isFree:true}
+                  })} label="บริการฟรี" />
+                  <FormControlLabel value={false} onChange={e=> setBreakfast(cur=>{
+                    return {...cur,isFree:false}
+                  })} control={<Radio />} label="มีค่าบริการ" />
+                </RadioGroup>
+
+              </Grid>
+
+              { !breakfast.isFree ?  <Grid
+                item
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <TextField
+                  xs={3}
+                  id='outlined-password-input'
+                  label='(บาท)'
+                  size='small'
+                  sx={{ width: "100%", alignItems: "stretch" }}
+                  value={breakfast.pricePerTime}
+                  onChange={handleChangepricePerTimeForBreakfast}
+                  />
+              </Grid> : null }
+              
+            </Grid>
+          </FormControl>
+          </Stack>
+
           <Stack
             direction='row'
             spacing={4}
             xs={12}
             sx={{ justifyContent: "start", alignItems: "center" }}
           >
+            <FormControl component="fieldset" sx={{ display:'flex', flexDirection:'row' , width: '100%'}}>
             <Grid xs={3}>
-              <Typography sx={{ fontSize: "20px" }}>ที่จอดรถ</Typography>
+            <FormLabel component="legend"><Typography sx={{ fontSize: "20px" }}>Wifi</Typography></FormLabel>
             </Grid>
 
             <Grid
@@ -77,16 +379,26 @@ function ResidentRegisterPage6() {
                 justifyContent: "start",
               }}
             >
-              <Grid xs={12}>
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label='บริการฟรี'
-                  sx={{ marginRight: "50px" }}
-                />
-                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
+              <Grid xs={12}  sx={{ display:'flex', flexDirection:'row'}}>
+
+                <RadioGroup
+                  aria-label="gender"
+                  serviceName="controlled-radio-buttons-group"
+                  sx={{ display: 'flex', flexDirection: 'row'}}
+                  defaultValue={wifi.isFree}
+
+                >
+                  <FormControlLabel value={true} control={<Radio />} onChange={e=>setWifi(cur=>{
+                    return {...cur,isFree:true}
+                  })} label="บริการฟรี" />
+                  <FormControlLabel value={false} onChange={e=>setWifi(cur=>{
+                    return {...cur,isFree:false}
+                  })} control={<Radio />} label="มีค่าบริการ" />
+                </RadioGroup>
+
               </Grid>
 
-              <Grid
+              { !wifi.isFree ?  <Grid
                 item
                 sx={{
                   display: "flex",
@@ -100,104 +412,24 @@ function ResidentRegisterPage6() {
                   label='(บาท)'
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
-                />
-              </Grid>
-            </Grid>
-          </Stack>
-          <Stack
-            direction='row'
-            spacing={4}
-            sx={{ justifyContent: "start", alignItems: "center" }}
-          >
-            <Grid xs={3}>
-              <Typography sx={{ fontSize: "20px" }}>อาหารเช้า</Typography>
-            </Grid>
+                  value={wifi.pricePerTime}
+                  onChnage={handleChangepricePerTimeForWifi}
+                  />
+              </Grid> : null }
 
-            <Grid
-              item
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "start",
-              }}
-            >
-              <Grid xs={12}>
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label='บริการฟรี'
-                  sx={{ marginRight: "50px" }}
-                />
-                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
-              </Grid>
-              <Grid
-                item
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                }}
-              >
-                <TextField
-                  xs={3}
-                  id='outlined-password-input'
-                  label='(บาท)'
-                  size='small'
-                  sx={{ width: "100%", alignItems: "stretch" }}
-                />
-              </Grid>
             </Grid>
-          </Stack>
-          <Stack
-            direction='row'
-            spacing={4}
-            sx={{ justifyContent: "start", alignItems: "center" }}
-          >
-            <Grid xs={3}>
-              <Typography sx={{ fontSize: "20px" }}>Wifi</Typography>
-            </Grid>
-
-            <Grid
-              item
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "start",
-              }}
-            >
-              <Grid xs={12}>
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label='บริการฟรี'
-                  sx={{ marginRight: "50px" }}
-                />
-                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
-              </Grid>
-              <Grid
-                item
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                }}
-              >
-                <TextField
-                  xs={3}
-                  id='outlined-password-input'
-                  label='(บาท)'
-                  size='small'
-                  sx={{ width: "100%", alignItems: "stretch" }}
-                />
-              </Grid>
-            </Grid>
+          </FormControl>
           </Stack>
 
           <Stack
             direction='row'
             spacing={4}
+            xs={12}
             sx={{ justifyContent: "start", alignItems: "center" }}
           >
+            <FormControl component="fieldset" sx={{ display:'flex', flexDirection:'row' , width: '100%'}}>
             <Grid xs={3}>
-              <Typography sx={{ fontSize: "20px" }}>สระว่ายน้ำ</Typography>
+            <FormLabel component="legend"><Typography sx={{ fontSize: "20px" }}>สระว่ายน้ำ</Typography></FormLabel>
             </Grid>
 
             <Grid
@@ -208,15 +440,25 @@ function ResidentRegisterPage6() {
                 justifyContent: "start",
               }}
             >
-              <Grid xs={12}>
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label='บริการฟรี'
-                  sx={{ marginRight: "50px" }}
-                />
-                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
+              <Grid xs={12} sx={{ display:'flex', flexDirection:'row'}}>
+
+                <RadioGroup
+                  aria-label="gender"
+                  serviceName="controlled-radio-buttons-group"
+                  sx={{ display: 'flex', flexDirection: 'row'}}
+                  defaultValue={pool.isFree}
+                >
+                  <FormControlLabel value={true} control={<Radio />} onChange={e=>setPool(cur=>{
+                    return {...cur,isFree:true}
+                  })} label="บริการฟรี" />
+                  <FormControlLabel value={false} onChange={e=>setPool(cur=>{
+                    return {...cur,isFree:false}
+                  })} control={<Radio />} label="มีค่าบริการ" />
+                </RadioGroup>
+
               </Grid>
-              <Grid
+
+              { !pool.isFree ?  <Grid
                 item
                 sx={{
                   display: "flex",
@@ -230,18 +472,24 @@ function ResidentRegisterPage6() {
                   label='(บาท)'
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
-                />
-              </Grid>
+                  value={pool.pricePerTime} 
+                  onChange={handleChangepricePerTimeForPool}
+                  />
+              </Grid> : null }
+
             </Grid>
+          </FormControl>
           </Stack>
 
           <Stack
             direction='row'
             spacing={4}
+            xs={12}
             sx={{ justifyContent: "start", alignItems: "center" }}
           >
+            <FormControl component="fieldset" sx={{ display:'flex', flexDirection:'row' , width: '100%'}}>
             <Grid xs={3}>
-              <Typography sx={{ fontSize: "20px" }}>บาร์</Typography>
+            <FormLabel component="legend"><Typography sx={{ fontSize: "20px", paddingRight: '25px' }}>แผนกต้อนรับส่วนหน้า 24 ชั่วโมง</Typography></FormLabel>
             </Grid>
 
             <Grid
@@ -252,15 +500,25 @@ function ResidentRegisterPage6() {
                 justifyContent: "start",
               }}
             >
-              <Grid xs={12}>
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label='บริการฟรี'
-                  sx={{ marginRight: "50px" }}
-                />
-                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
+              <Grid xs={12} sx={{ display:'flex', flexDirection:'row'}}>
+
+                <RadioGroup
+                  aria-label="gender"
+                  serviceName="controlled-radio-buttons-group"
+                  sx={{ display: 'flex', flexDirection: 'row'}}
+                  defaultValue={twentyfourHourReception.isFree}
+                >
+                  <FormControlLabel value={true} control={<Radio />} onChange={e=>setTwentyfourHourReception(cur=>{
+                    return {...cur,isFree:true}
+                  })} label="บริการฟรี" />
+                  <FormControlLabel value={false} onChange={e=>setTwentyfourHourReception(cur=>{
+                    return {...cur,isFree:false}
+                  })} control={<Radio />} label="มีค่าบริการ" />
+                </RadioGroup>
+
               </Grid>
-              <Grid
+
+              { !twentyfourHourReception.isFree ?  <Grid
                 item
                 sx={{
                   display: "flex",
@@ -274,17 +532,23 @@ function ResidentRegisterPage6() {
                   label='(บาท)'
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
-                />
-              </Grid>
+                  value={twentyfourHourReception.pricePerTime}
+                  onChange={handleChangepricePerTimeForTwentyfourHourReception}
+                  />
+              </Grid> : null }
             </Grid>
+          </FormControl>
           </Stack>
+
           <Stack
             direction='row'
             spacing={4}
+            xs={12}
             sx={{ justifyContent: "start", alignItems: "center" }}
           >
+            <FormControl component="fieldset" sx={{ display:'flex', flexDirection:'row' , width: '100%'}}>
             <Grid xs={3}>
-              <Typography sx={{ fontSize: "20px" }}>ห้องซาวน่า</Typography>
+            <FormLabel component="legend"><Typography sx={{ fontSize: "20px" }}>บาร์</Typography></FormLabel>
             </Grid>
 
             <Grid
@@ -295,15 +559,25 @@ function ResidentRegisterPage6() {
                 justifyContent: "start",
               }}
             >
-              <Grid xs={12}>
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label='บริการฟรี'
-                  sx={{ marginRight: "50px" }}
-                />
-                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
+              <Grid xs={12} sx={{ display:'flex', flexDirection:'row'}}>
+
+                <RadioGroup
+                  aria-label="gender"
+                  serviceName="controlled-radio-buttons-group"
+                  sx={{ display: 'flex', flexDirection: 'row'}}
+                  defaultValue={bar.isFree}
+                >
+                  <FormControlLabel value={true} control={<Radio />} onChange={e=>setBar(cur=>{
+                    return {...cur,isFree:true}
+                  })} label="บริการฟรี" />
+                  <FormControlLabel value={false} onChange={e=>setBar(cur=>{
+                    return {...cur,isFree:false}
+                  })} control={<Radio />} label="มีค่าบริการ" />
+                </RadioGroup>
+
               </Grid>
-              <Grid
+
+              { !bar.isFree ?  <Grid
                 item
                 sx={{
                   display: "flex",
@@ -317,19 +591,23 @@ function ResidentRegisterPage6() {
                   label='(บาท)'
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
-                />
-              </Grid>
+                  value={bar.pricePerTime} 
+                  onChange={handleChangepricePerTimeForBar}
+                  />
+              </Grid> : null }
             </Grid>
+          </FormControl>
           </Stack>
+
           <Stack
             direction='row'
             spacing={4}
+            xs={12}
             sx={{ justifyContent: "start", alignItems: "center" }}
           >
+            <FormControl component="fieldset" sx={{ display:'flex', flexDirection:'row' , width: '100%'}}>
             <Grid xs={3}>
-              <Typography sx={{ fontSize: "20px", marginRight: "25px" }}>
-                แผนกต้อนรับส่วนหน้า 24 ชั่วโมง
-              </Typography>
+            <FormLabel component="legend"><Typography sx={{ fontSize: "20px" }}>ห้องซาวน่า</Typography></FormLabel>
             </Grid>
 
             <Grid
@@ -340,15 +618,25 @@ function ResidentRegisterPage6() {
                 justifyContent: "start",
               }}
             >
-              <Grid xs={12}>
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label='บริการฟรี'
-                  sx={{ marginRight: "50px" }}
-                />
-                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
+              <Grid xs={12} sx={{ display:'flex', flexDirection:'row'}}>
+
+                <RadioGroup
+                  aria-label="gender"
+                  serviceName="controlled-radio-buttons-group"
+                  sx={{ display: 'flex', flexDirection: 'row'}}
+                  defaultValue={sauna.isFree}
+                >
+                  <FormControlLabel value={true} control={<Radio />} onChange={e=>setSauna(cur=>{
+                    return {...cur,isFree:true}
+                  })} label="บริการฟรี" />
+                  <FormControlLabel value={false} onChange={e=>setSauna(cur=>{
+                    return {...cur,isFree:false}
+                  })} control={<Radio />} label="มีค่าบริการ" />
+                </RadioGroup>
+
               </Grid>
-              <Grid
+
+              { !sauna.isFree ?  <Grid
                 item
                 sx={{
                   display: "flex",
@@ -362,17 +650,25 @@ function ResidentRegisterPage6() {
                   label='(บาท)'
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
-                />
-              </Grid>
+                  value={sauna.pricePerTime}
+                  onChange={handleChangepricePerTimeForSauna}
+                  />
+              </Grid> : null }
+
             </Grid>
+          </FormControl>
           </Stack>
+
           <Stack
             direction='row'
             spacing={4}
+            xs={12}
             sx={{ justifyContent: "start", alignItems: "center" }}
-          >
+          >  
+
+            <FormControl component="fieldset" sx={{ display:'flex', flexDirection:'row' , width: '100%'}}>
             <Grid xs={3}>
-              <Typography sx={{ fontSize: "20px" }}>Room service</Typography>
+            <FormLabel component="legend" ><Typography sx={{ fontSize: "20px" }}>Room service</Typography></FormLabel>
             </Grid>
 
             <Grid
@@ -383,15 +679,25 @@ function ResidentRegisterPage6() {
                 justifyContent: "start",
               }}
             >
-              <Grid xs={12}>
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label='บริการฟรี'
-                  sx={{ marginRight: "50px" }}
-                />
-                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
+              <Grid xs={12} sx={{ display:'flex', flexDirection:'row'}}>
+
+                <RadioGroup
+                  aria-label="gender"
+                  serviceName="controlled-radio-buttons-group"
+                  sx={{ display: 'flex', flexDirection: 'row'}}
+                  defaultValue={roomService.isFree}
+                >
+                  <FormControlLabel value={true} control={<Radio />} onChange={e=> setRoomService(cur=>{
+                    return {...cur, isFree:true}
+                  })} label="บริการฟรี" />
+                  <FormControlLabel value={false} onChange={e=> setRoomService(cur=>{
+                    return {...cur, isFree:false}
+                  })} control={<Radio />} label="มีค่าบริการ" />
+                </RadioGroup>
+
               </Grid>
-              <Grid
+
+              { !roomService.isFree ?  <Grid
                 item
                 sx={{
                   display: "flex",
@@ -405,17 +711,24 @@ function ResidentRegisterPage6() {
                   label='(บาท)'
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
-                />
-              </Grid>
+                  onChange={handleChangepricePerTimeForRoomService}
+                  value={roomService.pricePerTime}
+                  />
+              </Grid> : null }
+
             </Grid>
+          </FormControl>
           </Stack>
+
           <Stack
             direction='row'
             spacing={4}
+            xs={12}
             sx={{ justifyContent: "start", alignItems: "center" }}
           >
+            <FormControl component="fieldset" sx={{ display:'flex', flexDirection:'row' , width: '100%'}}>
             <Grid xs={3}>
-              <Typography sx={{ fontSize: "20px" }}>ห้องออกกำลังกาย</Typography>
+            <FormLabel component="legend"><Typography sx={{ fontSize: "20px" }}>ห้องออกกำลังกาย</Typography></FormLabel>
             </Grid>
 
             <Grid
@@ -426,15 +739,25 @@ function ResidentRegisterPage6() {
                 justifyContent: "start",
               }}
             >
-              <Grid xs={12}>
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label='บริการฟรี'
-                  sx={{ marginRight: "50px" }}
-                />
-                <FormControlLabel control={<Checkbox />} label='มีค่าบริการ' />
+              <Grid xs={12} sx={{ display:'flex', flexDirection:'row'}}>
+
+                <RadioGroup
+                  aria-label="gender"
+                  serviceName="controlled-radio-buttons-group"
+                  sx={{ display: 'flex', flexDirection: 'row'}}
+                  defaultValue={gym.isFree}
+                >
+                  <FormControlLabel value={true} control={<Radio />} onChange={e=>setGym(cur=>{
+                    return {...cur,isFree:true}
+                  })} label="บริการฟรี" />
+                  <FormControlLabel value={false} onChange={e=>setGym(cur=>{
+                    return {...cur,isFree:false}
+                  })} control={<Radio />} label="มีค่าบริการ" />
+                </RadioGroup>
+
               </Grid>
-              <Grid
+
+              { !gym.isFree ?  <Grid
                 item
                 sx={{
                   display: "flex",
@@ -448,11 +771,14 @@ function ResidentRegisterPage6() {
                   label='(บาท)'
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
-                />
-              </Grid>
+                  onChange={handleChangepricePerTimeForGym}
+                  value={gym.isFree}
+                  />
+              </Grid> : null }
             </Grid>
+          </FormControl>
           </Stack>
-        </Stack>
+        </Stack> 
       </Grid>
 
       <Grid item sx={{ display: "flex", justifyContent: "end" }}>
@@ -477,8 +803,9 @@ function ResidentRegisterPage6() {
                 marginBottom: "50px",
                 marginTop: "20px",
 
-                height: "20px",
+                height: "40px",
               }}
+              onClick={handleSubmitPage6}
             >
               <Typography
                 style={{
@@ -492,6 +819,7 @@ function ResidentRegisterPage6() {
           </Grid>
         </Grid>
       </Grid>
+        </Box>
     </Container>
   );
 }

@@ -28,14 +28,16 @@ const CustomButtonRoot = styled("span")(`
     &.${buttonUnstyledClasses.focusVisible} {
         outline: #64CEEF solid 2px;
     }
+
+    @media (max-width: 1500px) {
+      padding-right: 10px;
+      padding-left: 10px;
+    }
 `);
 
 export function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
-
-//customize popover
-const PopoverStyle = {};
 
 function BtnGuestnRoom(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -84,6 +86,7 @@ function BtnGuestnRoom(props) {
         variant='contained'
         onClick={handleClick}
         sx={{ background: "#fff", color: "#000", width: "500px" }}
+        // className={classes.ButtonUnstyled}
       >
         {`จำนวนผู้เข้าพัก ${props.guest} คน, ${props.room}  ห้อง`}
       </CustomButton>
@@ -96,7 +99,7 @@ function BtnGuestnRoom(props) {
           vertical: "bottom",
           horizontal: "left",
         }}
-        style={PopoverStyle}
+        // style={PopoverStyle}
         sx={{ width: "100%", mt: "1px", flexGlow: 1 }}
       >
         <Grid container sx={{ width: "280px" }}>

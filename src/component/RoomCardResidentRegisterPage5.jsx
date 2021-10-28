@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Container, Grid, TextField, Typography, Box } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
+import EditCreateRoomResidentRegisterPage5 from "./EditCreateRoomResidentRegisterPage5";
+import { CreateResidentContext } from "../context/createResidentContext";
 
-const CustomButtonRoot = styled("span")(`
+const CustomButtonRoot = styled("button")(`
     background-color: none;
     padding: 10px 20px;
     border-radius: 10px;
@@ -37,8 +39,36 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function RoomCardResidentRegisterPage5() {
+function RoomCardResidentRegisterPage5(props) {
+
+  const {values, setValues} = useContext(CreateResidentContext)
+
+  const handleDeleteRoom = async id => {
+
+    props.deleteRoomCollections(props.index)
+    
+  }
+
+  console.log(props.roomCollection)
+
+  const [showEdit, setShowEdit] = useState(false)
+
+  const handleClickEditRoom = e => {
+    setShowEdit(!showEdit);
+
+  }
+
+
   return (
+
+    <>
+    { showEdit ? 
+    <EditCreateRoomResidentRegisterPage5
+    id={props.id}
+    roomCollection={props.roomCollection}
+    /> : null }
+    
+    
     <Stack
       xs={12}
       direction="row"
@@ -53,7 +83,9 @@ function RoomCardResidentRegisterPage5() {
     >
       <Grid item>
         <Typography sx={{ fontSize: "18px" }}>
-          ห้องมาตรฐานเตียงเดี่ยว
+          {/* ห้องมาตรฐานเตียงเดี่ยว */}
+          {/* {props.roomName} */}
+          {props.roomTypeOf}
         </Typography>
       </Grid>
 
@@ -74,23 +106,27 @@ function RoomCardResidentRegisterPage5() {
             justifyContent: "center",
           }}
           xs={12}
-          md={5}
         >
           <Typography>จำนวนห้องพัก :</Typography>
         </Grid>
         <Grid item xs={12} md={7}>
-          <TextField
-            id="outlined-password-input"
-            label="x ห้อง"
-            size="small"
-            sx={{ width: "80%", alignItems: "stretch" }}
-            InputProps={{
-              readOnly: true,
-            }}
-            variant="filled"
-            xs={12}
-            md={6}
-          />
+          
+          <Box sx={{border: "1px solid #c4c4c4", borderRadius: '5px', marginLeft:'20px', height: '40px', display: 'flex', justifyContent: 'center', alignItems: "center"}}>
+            <Typography
+                style={{
+                  fontSize: 14,
+                  marginBottom: "1px",
+                  justifyContent: "center",
+                  fontWeight: 500,
+                  padding: "0 10px",
+                  width: '50px'
+                }}
+                sx={{display: 'flex'}}
+              >
+          
+                {props.roomAmount}
+              </Typography>
+          </Box>
         </Grid>
       </Grid>
       <Grid
@@ -118,7 +154,7 @@ function RoomCardResidentRegisterPage5() {
               display: "flex",
               justifyContent: "center",
               width: "100%",
-              height: "16px",
+              height: "40px",
             }}
             // onClick={signIn}
           >
@@ -130,6 +166,7 @@ function RoomCardResidentRegisterPage5() {
                 fontWeight: 500,
                 padding: "0 10px",
               }}
+              onClick={handleClickEditRoom}
             >
               EDIT
             </Typography>
@@ -149,9 +186,9 @@ function RoomCardResidentRegisterPage5() {
               display: "flex",
               justifyContent: "center",
               width: "100%",
-              height: "16px",
+              height: "40px",
             }}
-            // onClick={signIn}
+            onClick={handleDeleteRoom}
           >
             <Typography
               style={{
@@ -167,6 +204,7 @@ function RoomCardResidentRegisterPage5() {
         </Grid>
       </Grid>
     </Stack>
+    </>
   );
 }
 

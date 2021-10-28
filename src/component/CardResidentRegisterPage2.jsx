@@ -1,16 +1,19 @@
+import React, { useContext, useState } from "react";
+//Material 
 import { Grid, Box } from "@mui/material";
 import { BackgroundContainer } from "../assets/images/bg_container_residentregisterpage2.jpeg";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import BusinessIcon from "@mui/icons-material/Business";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import Typography from "@mui/material/Typography";
-import React from "react";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { height, styled } from "@mui/system";
+import { CreateResidentContext } from "../context/createResidentContext";
+import { useHistory, useLocation } from "react-router";
 
-const CustomButtonRoot = styled("span")(`
+const CustomButtonRoot = styled("button")(`
     background-color: none;
     padding: 10px 20px;
     border-radius: 40px;
@@ -41,7 +44,33 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function CardResidentRegisterPage2() {
+function CardResidentRegisterPage2() {   
+  const location = useLocation();
+
+  console.log(location)
+  
+  const history= useHistory();
+
+  const {values, setValues} = useContext(CreateResidentContext)
+  const handleOnClickChooseType = (props, type) => {
+
+    setValues({ ...values, [props]: type })
+    
+    history.push({pathname: "/residentregisterpage3",
+        state:{
+          email: location.state.email,
+          phone: location.state.phone,
+          password: location.state.password,
+          confirmPassword: location.state.confirmPassword,
+          firstName: location.state.firstName,
+          lastName: location.state.lastName,
+          idCard: location.state.idCard,
+          idCardImgUrl: location.state.idCardImgUrl,
+          typeof: type
+      }
+})
+  }
+
   return (
     <>
       <Grid
@@ -115,9 +144,9 @@ function CardResidentRegisterPage2() {
               justifyContent: "center",
               width: "100%",
               marginTop: "-20px",
-              height: "20px",
+              height: "50px",
             }}
-            // onClick={signIn}
+            onClick={() => handleOnClickChooseType('typeof', 'hotel')}
           >
             <Typography
               style={{
@@ -202,9 +231,9 @@ function CardResidentRegisterPage2() {
               justifyContent: "center",
               width: "100%",
               marginTop: "-20px",
-              height: "20px",
+              height: "50px",
             }}
-            // onClick={signIn}
+            onClick={() => handleOnClickChooseType('typeof', 'apartment')}
           >
             <Typography
               style={{
@@ -289,9 +318,9 @@ function CardResidentRegisterPage2() {
               justifyContent: "center",
               width: "100%",
               marginTop: "-20px",
-              height: "20px",
+              height: "50px",
             }}
-            // onClick={signIn}
+            onClick={() => handleOnClickChooseType('typeof', 'villa')}
           >
             <Typography
               style={{

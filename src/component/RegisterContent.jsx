@@ -1,6 +1,6 @@
 import React from "react";
-import { BrowserRouter as Link } from "react-router-dom";
-// import Button from "@mui/material/Button";
+import { BrowserRouter as Router, Switch, Route, Link, useHistory } from "react-router-dom";
+import Button from "@mui/material/Button";
 import { Container, Grid, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -9,9 +9,6 @@ import ButtonUnstyled, {
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
 import axios from "../config/axios";
-import { useHistory } from "react-router";
-import { useState } from "react";
-import isEmail from "validator/lib/isEmail";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -45,106 +42,35 @@ function CustomButton(props) {
 }
 
 function RegisterContent() {
-  // export default function SignUp() {
-  //   const handleSubmit = (event) => {
-  //     event.preventDefault();
-  //     const data = new FormData(event.currentTarget);
-  //     // eslint-disable-next-line no-console
-  //     console.log({
-  //       email: data.get('email'),
-  //       password: data.get('password'),
-  //     });
-  //   };
+
   const history = useHistory();
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    telephone: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const [error, setError] = useState({});
 
-  function validate(e) {
-    /// email ห้ามซ้ำ
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const values = {
+        firstName: data.get("firstName"),
+        lastName: data.get("lastName"),
+        email: data.get("email"),
+        password: data.get("password"),
+        telephone: data.get("phone"),
+      };
 
-    if (e.target.value !== formData.password) {
-      setError({ confirmPassword: "INVALID PASSWORD" });
-    } else {
-      setError({});
+      const res = await axios.post("/users/register", values);
+      
+      history.push({
+        pathname: "/login",
+        state: {
+          successMessage:
+            "Your account has been created. Please login to continue.",
+          from: " register page",
+        },
+      });
+    } catch (err) {
+      console.dir(err);
     }
-  }
-  function validateName(e) {
-    if (e.target.value === "") {
-      if (e.target.name === "name") {
-        setError({ name: "INVALID FIRSTNAME" });
-      }
-      if (e.target.name === "lastname") {
-        setError({ lastname: "INVALID LASTNAME" });
-      }
-    } else {
-      setError({});
-    }
-  }
-  function validateEmail(e) {
-    if (!isEmail(e.target.value)) {
-      setError({ email: "INVALID EMAIL" });
-    } else {
-      setError({});
-    }
-  }
-  function Submit() {
-    // validate();
-    if (Object.keys(error).length === 0) {
-      axios
-        .post("http://localhost:7777/register", formData)
-        .then(() => {
-          history.push("/Login");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else setError({ confirmPassword: "INVALID PASSWORD" });
-    console.log(Object.keys(error).length);
-  }
-
-  // const handleSubmit = async (event) => {
-  //   try {
-  //     event.preventDefault();
-  //     const data = new FormData(event.currentTarget);
-  //     // eslint-disable-next-line no-console
-  //     const values = {
-  //       firstName: data.get("firstName"),
-  //       lastName: data.get("lastName"),
-  //       email: data.get("email"),
-  //       password: data.get("password"),
-  //       telephone: data.get("phone"),
-  //       role: "user",
-  //     };
-  //     console.log(values);
-  //     const res = await axios.post("/users/register", values);
-  //     console.log(res);
-  //   } catch (err) {
-  //     console.dir(err);
-  //   }
-  // };
-
-  // const [values, setValues] = React.useState({
-  //   firstName: "",
-  //   lastName: "",
-  //   email: "",
-  //   password: "",
-  //   confirmPassword: "",
-  //   phone: "",
-  //   google_user_id: "",
-  //   // role:"",
-  //   showPassword: false,
-  // });
-
-  // const handleChange = prop => event => {
-  //   setValues({ ...values, [prop]: event.target.value });
-  // };
+  };
 
   return (
     <div>
@@ -153,7 +79,7 @@ function RegisterContent() {
         justifyContent="center"
         alignItems="center"
         direction="column"
-        sx={{ padding: 0, mt: 23 }}
+        sx={{ padding: 0, mt: 18 }}
       >
         <Box
           alignItems="center"
@@ -186,15 +112,19 @@ function RegisterContent() {
             </Grid>
           </Box>
           {/*  */}
+
+          <Grid container sx={{width: '100%'}}>
+
           <Box
             component="form"
-            // onSubmit={Submit}
+            onSubmit={handleSubmit}
             container
             spacing={2}
             justifyContent="center"
             alignItems="center"
             sx={{
               padding: 0,
+              width:'100%'
             }}
             xs={12}
             md={12}
@@ -227,9 +157,6 @@ function RegisterContent() {
                 >
                   ชื่อจริง
                 </Typography>
-                {error.name && (
-                  <h1 style={{ color: "red", margin: 0 }}>{error.name}</h1>
-                )}
                 <TextField
                   fullWidth
                   label="ชื่อจริง"
@@ -239,12 +166,6 @@ function RegisterContent() {
                   multiline
                   // value={values.firstName}
                   // onChange={handleChange("firstName")}
-                  value={formData.firstName}
-                  onChange={(e) => {
-                    // validateName(e);
-                    validateName(e);
-                    setFormData({ ...formData, firstName: e.target.value });
-                  }}
                   size="small"
                   justifyContent="center"
                   alignItems="center"
@@ -287,12 +208,6 @@ function RegisterContent() {
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
-                  }}
-                  value={formData.lastName}
-                  onChange={(e) => {
-                    // validateName(e);
-                    validateName(e);
-                    setFormData({ ...formData, lastName: e.target.value });
                   }}
                 />
               </Grid>
@@ -339,12 +254,6 @@ function RegisterContent() {
                   sx={{
                     padding: 0,
                   }}
-                  value={formData.email}
-                  onChange={(e) => {
-                    // validateEmail(e);
-                    validateEmail(e);
-                    setFormData({ ...formData, email: e.target.value });
-                  }}
                 />
               </Grid>
               <Grid
@@ -369,7 +278,7 @@ function RegisterContent() {
                   id="outlined-textarea fullWidth"
                   label="เบอร์โทรศัพท์"
                   placeholder="กรอกเบอร์โทรศัพท์"
-                  // id="phone"
+                  id="phone"
                   name="phone"
                   multiline
                   // value={values.phone}
@@ -377,11 +286,6 @@ function RegisterContent() {
                   size="small"
                   sx={{
                     padding: 0,
-                  }}
-                  value={formData.telephone}
-                  onChange={(e) => {
-                    // validate(e);
-                    setFormData({ ...formData, telephone: e.target.value });
                   }}
                 />
               </Grid>
@@ -420,7 +324,7 @@ function RegisterContent() {
                   label="รหัสผ่าน"
                   placeholder="กรอกรหัสผ่าน"
                   multiline
-                  // id="password"
+                  id="password"
                   name="password"
                   // value={values.password}
                   // onChange={handleChange("password")}
@@ -428,14 +332,6 @@ function RegisterContent() {
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
-                  }}
-                  value={formData.password}
-                  onChange={(e) => {
-                    validate(e);
-                    setFormData({
-                      ...formData,
-                      password: e.target.value,
-                    });
                   }}
                 />
               </Grid>
@@ -467,19 +363,11 @@ function RegisterContent() {
                   id="outlined-textarea fullWidth"
                   label="ยืนยันรหัสผ่าน"
                   placeholder="ยืนยันรหัสผ่าน"
-                  // id="confirmPassword"
+                  id="confirmPassword"
                   name="confirmPassword"
                   multiline
                   // value={values.confirmPassword}
                   // onChange={handleChange("confirmPassword")}
-                  value={formData.confirmPassword}
-                  onChange={(e) => {
-                    validate(e);
-                    setFormData({
-                      ...formData,
-                      confirmPassword: e.target.value,
-                    });
-                  }}
                   size="small"
                   sx={{
                     padding: 0,
@@ -506,9 +394,10 @@ function RegisterContent() {
                     color: "#fff",
                     display: "flex",
                     justifyContent: "center",
-                    width: "92%",
+                    width: "100%",
                     marginTop: "10px",
                   }}
+                  type="submit"
                 >
                   <Typography
                     style={{
@@ -516,7 +405,6 @@ function RegisterContent() {
                       marginBottom: "1px",
                       justifyContent: "start",
                     }}
-                    onClick={Submit}
                   >
                     สมัครสมาชิก
                   </Typography>
@@ -551,7 +439,10 @@ function RegisterContent() {
             </Grid>
           </Box>
           {/*  */}
+          </Grid>
+
         </Box>
+        
       </Container>
     </div>
   );

@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useContext } from 'react'
+import { BrowserRouter as Router, Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
+//Material 
 import { styled } from "@mui/material/styles";
 import { Container, Grid, TextField, Typography, Box } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -8,13 +10,13 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
+import { CreateResidentContext } from "../context/createResidentContext";
 
 const CustomButtonRoot = styled("span")(`
     background-color: none;
@@ -44,33 +46,124 @@ const CustomButtonRoot = styled("span")(`
 `);
 
 function CustomButton(props) {
-  return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
-}
+    return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
+  }  
 
-function ResidentRegiterPage3() {
-  const [age, setAge] = React.useState("");
+function EditCreateRoomResidentRegisterPage5(props) {
 
-  const handleChange = event => {
-    setAge(event.target.value);
-  };
+    const {values, setValues} = useContext(CreateResidentContext)
+    const roomCollection = props.roomCollection
+    console.log(props)
 
-  const Input = styled("input")({
-    display: "none",
-  });
+    // const [roomCollection, setRoomCollection] = useState( props.roomCollection )
+    
+    const handleChangeFile = e => {
+        setFile(e.target.files[0])
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          //   console.log(reader.result);
+          setShowImg(reader.result);
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      }
 
-  return (
-    <Container maxWidth="md">
-      <Grid container direction="column" sx={8} spacing={2}>
-        <Grid item sx={{ display: "flex", flexDirection: "column" }}>
-          <Typography
-            style={{
-              fontSize: 40,
-            }}
-          >
-            รูปแบบ และ ราคา
-          </Typography>
-        </Grid>
-        <Grid item sx={{ display: "flex", flexDirection: "column" }}>
+      const [showImg, setShowImg] = useState("")
+
+      const [file, setFile] = useState(null)
+      // console.log(file)
+
+      const location = useLocation();
+      console.log(location)
+    
+      const history = useHistory();
+    
+    
+      const handleOnChangeCheckNoSmoking = ( props, event) => {
+        setValues({ ...values, [props]: event.target.value });
+        const clone = { ...values };
+        // clone.noSmoking = !clone.noSmoking;
+        setValues({ ...values, [props]: event.target.value , noSmoking : !clone.noSmoking});
+      };
+    
+      const handleOnChangeCheckPetAllow = ( props, event) => {
+        setValues({ ...values, [props]: event.target.value });
+        const clone = { ...values };
+        setValues({ ...values, [props]: event.target.value , petAllow : !clone.petAllow});
+      };
+    
+      const handleChange = ( props, event) => {
+        setValues({ ...values, [props]: event.target.value });
+      };
+    
+      const Input = styled("input")({
+        display: "none",
+      });
+
+      const handleSubmitPage5 = e => {
+        const eachRoom = {
+          roomTypeOf: values.roomTypeOf,
+          roomAmount: values.roomAmount,
+          roomSize: values.roomSize,
+          maxGuest: values.maxGuest,
+          noSmoking: values.noSmoking,
+          petAllow: values.petAllow,
+          optionRoomDetail: values.optionRoomDetail,
+          roomImgUrl: values.roomImgUrl,
+          roomShowImg: values.roomShowImg,
+        }
+    
+        const clone = [...values.roomCollection]
+    
+        clone.push(eachRoom)
+    
+        setValues({ ...values, roomCollection : clone});
+    
+        try {
+          history.push({
+            
+            state: {
+              email: location.state.email,
+              phone: location.state.phone,
+              password: location.state.password,
+              confirmPassword: location.state.confirmPassword,
+              firstName: location.state.firstName,
+              lastName: location.state.lastName,
+              idCard: location.state.idCard,
+              idCardImgUrl: location.state.idCardImgUrl,
+              typeof: location.state.typeof,
+              residentName: location.state.residentName,
+              rateStar: location.state.rateStar,
+              address: location.state.address,
+              subDistrict: location.state.subDistrict,
+              district: location.state.district,
+              postalCode: location.state.postalCode,
+                residentImgUrl: location.state.residentImgUrl ,
+              timeCheckInToStart: values.timeCheckInToStart,
+                timeCheckInToEnd: values.timeCheckInToEnd,
+                timeCheckOutToStart: values.timeCheckOutToStart,
+                timeCheckOutToEnd: values.timeCheckOutToEnd,
+                cancelDate: values.cancelDate,
+              roomTypeOf: values.roomTypeOf,
+              roomAmount: values.roomAmount,
+              roomSize: values.roomSize,
+              maxGuest: values.maxGuest,
+              optionRoomDetail: values.optionRoomDetail,
+              noSmoking: location.state.noSmoking,
+                petAllow: location.state.petAllow,
+              roomShowImg: location.state.roomShowImg,
+              roomCollection: clone,
+            },
+          });
+        } catch(err) {
+          console.dir(err);
+        }
+      }
+
+      console.log(roomCollection)
+
+    return (
+        <>
+        <Grid item sx={{ display: "flex", flexDirection: "column", border: "2px solid #c4c4c4", borderRadius:'10px', padding: '20px' }}>
           <Grid item sx={{ display: "flex", flexDirection: "column" }}>
             <Grid
               item
@@ -81,7 +174,7 @@ function ResidentRegiterPage3() {
                   fontSize: 27,
                 }}
               >
-                โปรดเลือก
+                แก้ไขข้อมูลห้องพักของคุณ
               </Typography>
               <Grid
                 item
@@ -109,7 +202,7 @@ function ResidentRegiterPage3() {
                 >
                   <Grid
                     item
-                    xs={11}
+                    xs={12}
                     sx={{
                       display: "flex",
                       flexDirection: "column",
@@ -128,19 +221,20 @@ function ResidentRegiterPage3() {
                       label="ประเภทห้องพัก"
                       size="small"
                       sx={{ width: "100%" }}
+                      value={roomCollection.roomTypeOf}
+                    //   onChange={e => handleChange('roomTypeOf', e)}
                     />
                   </Grid>
-                  <Grid
-                    item
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      marginLeft: "40px",
-                    }}
-                    xs={11}
-                  >
-                    <Grid item xs={5.5}>
+                </Grid>
+                <Stack
+                  item
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Grid item xs={3.5}>
                       <Typography
                         style={{
                           fontSize: 18,
@@ -154,11 +248,14 @@ function ResidentRegiterPage3() {
                         label="จำนวนของห้องพัก"
                         size="small"
                         sx={{ width: "100%", alignItems: "stretch" }}
+                        value={roomCollection.roomAmount}
+                        // onChange={e => handleChange('roomAmount', e)}
                       />
                     </Grid>
+
                     <Grid
                       item
-                      xs={5.5}
+                      xs={3.5}
                       sx={{
                         display: "flex",
                         flexDirection: "column",
@@ -178,72 +275,12 @@ function ResidentRegiterPage3() {
                         label="ประเภทห้องพัก"
                         size="small"
                         sx={{ width: "100%", alignItems: "stretch" }}
+                        value={roomCollection.roomSize}
+                        // onChange={e => handleChange('roomSize', e)}
                       />
                     </Grid>
-                  </Grid>
-                </Grid>
-                <Stack
-                  item
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Grid item xs={5.8}>
-                    <Typography
-                      style={{
-                        fontSize: 18,
-                        marginTop: "10px",
-                      }}
-                    >
-                      รายละเอียดห้องพัก
-                    </Typography>
-                    <FormControl sx={{ width: "100%" }}>
-                      <InputLabel
-                        id="demo-simple-select-helper-label"
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          paddingTop: "-15px",
-                        }}
-                      >
-                        รายละเอียดห้องพัก
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-helper-label"
-                        id="demo-simple-select-helper"
-                        value={age}
-                        label="Age"
-                        onChange={handleChange}
-                        size="small"
-                        sx={{
-                          display: "flex",
-                          width: "100%",
-                          //   backgroundColor: "yellow",
-                          justifyContent: "center",
-                          alignContent: "center",
-                        }}
-                      >
-                        <MenuItem value="" sx={{ justifyContent: "center" }}>
-                          <Typography
-                            style={{
-                              fontSize: 18,
-                              marginTop: "10px",
-                            }}
-                          >
-                            เลือกรายละเอียดห้องของท่าน
-                          </Typography>
-                        </MenuItem>
-                        <MenuItem value={10}>วิวสะว่ายน้ำ</MenuItem>
-                        <MenuItem value={20}>ริมทางเดิน</MenuItem>
-                        <MenuItem value={30}>ห้องเดี่ยว</MenuItem>
-                      </Select>
-                      {/* <FormHelperText>With label + helper text</FormHelperText> */}
-                    </FormControl>
-                  </Grid>
-                  <Grid item xs={5.8}>
+
+                  <Grid item xs={3.8}>
                     <Typography
                       style={{
                         fontSize: 18,
@@ -258,6 +295,8 @@ function ResidentRegiterPage3() {
                       size="small"
                       xs={5}
                       sx={{ width: "100%" }}
+                      value={roomCollection.maxGuest}
+                    //   onChange={e => handleChange('maxGuest', e)}
                     />
                   </Grid>
                 </Stack>
@@ -273,9 +312,11 @@ function ResidentRegiterPage3() {
                     </Typography>
                     <TextField
                       id="outlined-password-input"
-                      label="ประเภทห้องพัก"
+                      label="รายละเอียดห้องพักเพิ่มเติม"
                       size="small"
                       sx={{ width: "100%" }}
+                      value={roomCollection.optionRoomDetail}
+                    //   onChange={e => handleChange('optionRoomDetail', e)}
                     />
                   </Grid>
                 </Grid>
@@ -304,9 +345,12 @@ function ResidentRegiterPage3() {
                   alignItems: "center",
                   borderRadius: "5px",
                   justifyContent: "center",
+                  backgroundImage: `url(${showImg})`,
+                  backgroundSize: 'contain',
+                  backgroundRepeat: 'no-repeat'
                 }}
               >
-                <Typography
+                { showImg ? null : <Typography
                   style={{
                     fontSize: "18px",
                     display: "flex",
@@ -316,7 +360,8 @@ function ResidentRegiterPage3() {
                   }}
                 >
                   อัพโหลดรูปห้องพักจำนวน 1 รูป
-                </Typography>
+                </Typography>}
+                
               </Box>
             </Grid>
             <Grid
@@ -334,9 +379,10 @@ function ResidentRegiterPage3() {
                   id="contained-button-file"
                   multiple
                   type="file"
+                  onChange={handleChangeFile}
                 />
                 <Button variant="contained" component="span">
-                  กดเพื่อเพิ่มรูปภาพห้องพักของคุณ
+                  กดเพื่อเลือกรูปภาพห้องพักของคุณ
                 </Button>
               </label>
             </Grid>
@@ -359,10 +405,16 @@ function ResidentRegiterPage3() {
                   <FormControlLabel
                     control={<Checkbox />}
                     label="ห้ามสูบบุหรี่"
+                    value={roomCollection.noSmoking}
+                    onChange={e => handleOnChangeCheckNoSmoking('noSmoking', e)}
+
                   />
                   <FormControlLabel
                     control={<Checkbox />}
                     label="ห้ามนำสัตว์เลี้ยงเข้ามา"
+                    value={roomCollection.petAllow}
+                    onChange={e => handleOnChangeCheckPetAllow('petAllow', e)}
+                    // { roomCollection.petAllow ? checked : ""}
                   />
                 </Grid>
               </Grid>
@@ -392,14 +444,50 @@ function ResidentRegiterPage3() {
                     label="ราคาต่อคืน(บาท)"
                     size="small"
                     sx={{ width: "100%" }}
+                    value={values.pricePerNigth}
+                    onChange={e => handleChange('pricePerNigth', e)}
+
                   />
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
-        <Grid item sx={{ display: "flex", justifyContent: "end" }}>
+          <Grid item sx={{ display: "flex", justifyContent: "end" }}>
           <Grid container xs={12} justifyContent="end">
+            <Grid
+              item
+              xs={3}
+              md={3}
+              sx={{
+                display: "flex",
+                justifyContent: "end",
+                marginBottom: "25px",
+              }}
+            >
+              <CustomButton
+                sx={{
+                  background: "#fff",
+                  color: "#07133C",
+                border: "1px solid #07133C",
+                  display: "flex",
+                  justifyContent: "center",
+                  width: "90%",
+                  marginTop: "-30px",
+                    marginRight: "20px",
+                  height: "20px",
+                }}
+                // onClick={handleSubmitPage5}
+              >
+                <Typography
+                  style={{
+                    fontSize: 16,
+                    justifyContent: "start",
+                  }}
+                >
+                  ยกเลิกการแก้ไขข้อมูล
+                </Typography>
+              </CustomButton>
+            </Grid>
             <Grid
               item
               xs={3}
@@ -416,12 +504,12 @@ function ResidentRegiterPage3() {
                   color: "#fff",
                   display: "flex",
                   justifyContent: "center",
-                  width: "90%",
-                  marginBottom: "50px",
-                  marginTop: "-20px",
+                  width: "85%",
+                  marginTop: "-30px",
 
                   height: "20px",
                 }}
+                // onClick={handleSubmitPage5}
               >
                 <Typography
                   style={{
@@ -429,15 +517,16 @@ function ResidentRegiterPage3() {
                     justifyContent: "start",
                   }}
                 >
-                  ดำเนินการต่อ
+                  แก้ไขข้อมูลห้องพัก
                 </Typography>
               </CustomButton>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Container>
-  );
+        </Grid>
+        </>
+    )
 }
 
-export default ResidentRegiterPage3;
+export default EditCreateRoomResidentRegisterPage5
+     

@@ -1,22 +1,24 @@
+import React, {useContext} from "react";
 import { Grid, Box } from "@mui/material";
-// import { BackgroundContainer } from "../assets/images/bg_container_residentregisterpage2.jpeg";
+import { useLocation, useHistory } from "react-router-dom";
+//Material 
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import BusinessIcon from "@mui/icons-material/Business";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import Typography from "@mui/material/Typography";
-import React from "react";
 import { height, styled } from "@mui/system";
+
 import CardResidentRegisterPage2 from "./CardResidentRegisterPage2";
 
-const styles = {
-  paperContainer: {
-    // backgroundImage: `url(${BackgroundContainer})`,
-  },
-};
+import { CreateResidentContext } from "../context/createResidentContext";
 
-function ResidentRegiterPage2() {
+;
+
+function ResidentRegisterPage2() {
+
+ 
   return (
-    <Grid container xs={12}>
+    <Grid container xs={12} sx={{ mt: 18 }}>
       <Grid
         item
         sx={{
@@ -42,4 +44,4 @@ function ResidentRegiterPage2() {
   );
 }
 
-export default ResidentRegiterPage2;
+export default ResidentRegisterPage2;

@@ -1,25 +1,19 @@
 import Header from "../component/Header";
-import Search from "../component/Search";
-import HotelCard from "../component/HotelCard";
 import Footer from "../component/Footer";
 import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 import SpaceforHead from "../component/SpaceforHead";
+import ResidentDetail from "../component/ResidentDetail";
 
-function ShowResultPage() {
+function OwnerDetailPage() {
   return (
     <>
       <SpaceforHead />
       <Header />
 
-      <Container maxWidth="xl" sx={{ mt: 18 }}>
+      <Container maxWidth='lg' sx={{ mt: 18 }}>
         <Grid container>
-          <Grid item xs={3}>
-            <Search />
-          </Grid>
-          <Grid item xs={9}>
-            <HotelCard />
-          </Grid>
+          <ResidentDetail />
         </Grid>
       </Container>
 
@@ -27,4 +21,4 @@ function ShowResultPage() {
     </>
   );
 }
-export default ShowResultPage;
+export default OwnerDetailPage;
