@@ -47,10 +47,11 @@ function SearhchingBar() {
   const [checkIn, setCheckIn] = useState([null, null]);
   // const [checkOut, setCheckOut] = useState("");
   const [guest, setGuest] = useState(1);
+  const [room,setRoom]= useState(1);
 
   function handleGetData() {
     axios.get(
-      `http://localhost:7777/search/?resident=${resident}&&checkin=${checkIn}&&guest=${guest}`
+      `http://localhost:7777/search/?resident=${resident}&&checkin=${checkIn}&&roominput=${room}`
     );
   }
   return (
@@ -70,7 +71,7 @@ function SearhchingBar() {
         <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
           <SearchingBox value={resident} setResident={setResident} />
           <DatePicker checkIn={checkIn} setCheckIn={setCheckIn} />
-          <BtnGuestnRoom guest={guest} setGuest={setGuest}/>
+          <BtnGuestnRoom guest={guest} setGuest={setGuest} room={room} setRoom={setRoom}/>
           <CustomButton
             sx={{
               background: "#03a9f4",

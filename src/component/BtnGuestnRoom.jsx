@@ -39,7 +39,7 @@ const PopoverStyle = {};
 
 function BtnGuestnRoom(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [room, setRoom] = React.useState(1);
+  // const [room, setRoom] = React.useState(1);
   // const [guest, setGuest] = React.useState(1);
 
   //popover
@@ -58,19 +58,19 @@ function BtnGuestnRoom(props) {
   }
 
   function handleMinusGuest() {
-    if (guest > 1) {
+    if (props.guest > 1) {
       props.setGuest(current => current - 1);
     }
   }
 
   //add number of room
   function handleAddRoom() {
-    setRoom(current => current + 1);
+    props.setRoom(current => current + 1);
   }
 
   function handleMinusRoom() {
-    if (room > 1) {
-      setRoom(current => current - 1);
+    if (props.room > 1) {
+      props.setRoom(current => current - 1);
     }
   }
 
@@ -85,7 +85,7 @@ function BtnGuestnRoom(props) {
         onClick={handleClick}
         sx={{ background: "#fff", color: "#000", width: "500px" }}
       >
-        {`จำนวนผู้เข้าพัก ${guest} คน, ${room}  ห้อง`}
+        {`จำนวนผู้เข้าพัก ${props.guest} คน, ${props.room}  ห้อง`}
       </CustomButton>
       <Popover
         id={id}
@@ -122,7 +122,7 @@ function BtnGuestnRoom(props) {
                 <RemoveIcon onClick={handleMinusGuest} />
               </Fab>
               <span>
-                <Typography>{guest}</Typography>
+                <Typography>{props.guest}</Typography>
               </span>
               <Fab color='primary' aria-label='add' size='small'>
                 <AddIcon onClick={handleAddGuest} />
@@ -153,7 +153,7 @@ function BtnGuestnRoom(props) {
                 <RemoveIcon onClick={handleMinusRoom} />
               </Fab>
               <span>
-                <Typography>{room}</Typography>
+                <Typography>{props.room}</Typography>
               </span>
               <Fab color='primary' aria-label='add' size='small'>
                 <AddIcon onClick={handleAddRoom} />
