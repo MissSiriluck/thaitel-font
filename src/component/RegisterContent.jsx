@@ -42,23 +42,13 @@ function CustomButton(props) {
 }
 
 function RegisterContent() {
-  // export default function SignUp() {
-  //   const handleSubmit = (event) => {
-  //     event.preventDefault();
-  //     const data = new FormData(event.currentTarget);
-  //     // eslint-disable-next-line no-console
-  //     console.log({
-  //       email: data.get('email'),
-  //       password: data.get('password'),
-  //     });
-  //   };
+
   const history = useHistory();
 
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
-      // eslint-disable-next-line no-console
       const values = {
         firstName: data.get("firstName"),
         lastName: data.get("lastName"),
@@ -77,7 +67,6 @@ function RegisterContent() {
           from: " register page",
         },
       });
-
     } catch (err) {
       console.dir(err);
     }

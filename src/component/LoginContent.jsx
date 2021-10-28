@@ -65,6 +65,7 @@ function LoginContent() {
       const res = await axios.post("/users/login", values);
       setToken(res.data.token);
       setUser(jwtDecode(res.data.token));
+      
       history.push({
         pathname: "/",
         state: {

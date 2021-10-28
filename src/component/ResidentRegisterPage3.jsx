@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 //Material 
-import { Container, Grid, TextField, Typography, Box } from "@mui/material";
+import { Container, Grid, TextField, Typography, Box, } from "@mui/material";
+import { BrowserRouter as Router, Switch, Route, Link, useHistory, useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -19,7 +20,7 @@ import ButtonUnstyled, {
 import { padding } from "@mui/system";
 import { CreateResidentContext } from "../context/createResidentContext";
 
-const CustomButtonRoot = styled("span")(`
+const CustomButtonRoot = styled("button")(`
     background-color: none;
     padding: 10px 20px;
     border-radius: 30px;
@@ -52,17 +53,68 @@ function CustomButton(props) {
 
 function ResidentRegisterPage3() {
   
+  const history = useHistory();
+  const location = useLocation();
+  console.log(location)
+
   const Input = styled("input")({
     display: "none",
   });
 
-  const {values, setValues} = useContext(CreateResidentContext)
+  const [showImg, setShowImg] = useState("")
 
-console.log(values)
+  const [file, setFile] = useState(null)
+
+  const handleChangeFile = e => {
+    setFile(e.target.files[0])
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      //   console.log(reader.result);
+      setShowImg(reader.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  }
+
+  const {values, setValues} = useContext(CreateResidentContext)
 
   const handleChange = (props, event) => {
     setValues({ ...values, [props]: event.target.value });
   };
+
+  const handleSubmitPage3 = e => {
+
+    try {
+      history.push({
+        pathname: "/residentregisterpage4",
+        state: {
+          email: location.state.email,
+          phone: location.state.phone,
+          password: location.state.password,
+          confirmPassword: location.state.confirmPassword,
+          firstName: location.state.firstName,
+          lastName: location.state.lastName,
+          idCard: location.state.idCard,
+          idCardImgUrl: location.state.idCardImgUrl,
+          typeof: values.typeof,
+          residentName: values.residentName,
+          rateStar: values.rateStar,
+          address: values.address,
+          subDistrict: values.subDistrict,
+          district: values.district,
+          province: values.province,
+          postalCode: values.postalCode,
+          residentImgUrl: file ,
+          timeCheckInToStart: values.timeCheckInToStart,
+          timeCheckInToEnd: values.timeCheckInToEnd,
+          timeCheckOutToStart: values.timeCheckOutToStart,
+          timeCheckOutToEnd: values.timeCheckOutToEnd,
+          cancelDate: values.cancelDate
+        },
+      });
+    } catch(err) {
+      console.dir(err);
+    }
+  }
 
   return (
     <Container maxWidth="md"  sx={{ mt: 18 }}>
@@ -285,6 +337,116 @@ console.log(values)
         </Grid>
       </Grid>
 
+      <Grid>
+        <Typography
+          style={{
+            fontSize: "30px",
+            marginTop: "20px",
+            marginBottom: "5px",
+          }}
+        >
+          การเพิ่มรูปที่พักของคุณ
+        </Typography>
+      </Grid>
+      
+      <Grid
+        item
+        xs={12}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          border: "2px solid #c4c4c4",
+          borderRadius: "5px",
+
+          padding: "20px",
+          width: "100%",
+        }}
+      >
+        <Grid>
+          <Grid
+            item
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+            xs={12}
+          >
+            <Grid item xs={12}>
+              <Grid
+                Container
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+              
+                <Grid xs={12} sx={{display: 'flex', height: '240px'}}>
+
+                  <Grid item xs={12} sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                  
+                    <Box
+                      item
+                      xs={5.9}
+                      sx={{
+                        border: "2px dotted #cfcfcf",
+                        width: "100%",
+                        margin: "5px",
+                        alignItems: "center",
+                        borderRadius: "5px",
+                        height: "100%",
+                        justifyContent: "center",
+                        backgroundImage: `url(${showImg})`,
+                        backgroundSize: 'contain',
+                        backgroundRepeat: 'no-repeat'
+                      }}
+                    >
+                        { showImg ? null : <Typography
+                        style={{
+                          fontSize: "18px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          height: "100%",
+                        }}
+                      >
+                        อัพโหลดรูปภาพที่พักของคุณ
+                      </Typography>}
+                    </Box>
+                    <Grid
+                      item
+                      xs={12}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "end",
+                        height:'40px',
+                      }}
+                    >
+                      <label htmlFor="contained-button-file" sx={{height:'40px',}}>
+                        <Input
+                          accept="image/*"
+                          id="contained-button-file"
+                          multiple
+                          type="file"
+                          onChange={handleChangeFile}
+                          
+                        />
+                        <Button variant="contained" component="span">
+                          กดเพื่อเพิ่มรูปภาพที่พักของคุณ
+                        </Button>
+                      </label>
+                    </Grid>
+                  
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+
       <Grid Container sx={{ marginTop: "20px", marginBottom: "5px" }}>
         <Typography sx={{ fontSize: "30px" }}>นโยบายข้อห้าม</Typography>
       </Grid>
@@ -336,7 +498,7 @@ console.log(values)
                     <Grid xs={9}>
                       <TextField
                         id="outlined-password-input"
-                        label="วันที่เช็คอิน"
+                        label="เวลาที่เช็คอินตั้งแต่ (นาฬิกา)"
                         size="small"
                         sx={{
                           width: "100%",
@@ -367,7 +529,7 @@ console.log(values)
                     <Grid xs={9}>
                       <TextField
                         id="outlined-password-input"
-                        label="วันที่เช็คอิน"
+                        label="เวลาที่เช็คอินได้ถึง (นาฬิกา)"
                         size="small"
                         sx={{
                           width: "100%",
@@ -440,7 +602,7 @@ console.log(values)
                     <Grid xs={9}>
                       <TextField
                         id="outlined-password-input"
-                        label="วันที่เช็คอิน"
+                        label="เวลาที่เช็คเอาท์ตั้งแต่ (นาฬิกา)"
                         size="small"
                         sx={{
                           width: "100%",
@@ -470,7 +632,7 @@ console.log(values)
                     <Grid xs={9}>
                       <TextField
                         id="outlined-password-input"
-                        label="วันที่เช็คอิน"
+                        label="เวลาที่เช็คเอาท์ถึง (นาฬิกา)"
                         size="small"
                         sx={{
                           width: "100%",
@@ -588,9 +750,9 @@ console.log(values)
                 width: "90%",
                 marginBottom: "50px",
                 marginTop: "20px",
-
-                height: "20px",
+                height: "40px",
               }}
+              onClick={handleSubmitPage3}
             >
               <Typography
                 style={{
