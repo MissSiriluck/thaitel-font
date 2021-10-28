@@ -7,13 +7,28 @@ import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
+import { useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { removeToken } from "../service/localStorage";
 
 function BtnLogOut() {
   const [open, setOpen] = React.useState(false);
+  const { user, setUser } = useContext(AuthContext);
+
   const anchorRef = React.useRef(null);
+
+  const history = useHistory();
 
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
+  };
+
+  const handleClickLogout = e => {
+    e.preventDefault();
+    removeToken();
+    setUser(null);
+    history.push("/login");
   };
 
   const handleClose = event => {
@@ -74,7 +89,7 @@ function BtnLogOut() {
                 placement === "bottom-start" ? "left top" : "left bottom",
             }}
           >
-            <Paper>
+            <Paper sx={{ width: "130px", background: "#16264D", mt: "5px" }}>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList
                   autoFocusItem={open}
@@ -82,8 +97,17 @@ function BtnLogOut() {
                   aria-labelledby='composition-button'
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  <Link
+                    to='/history'
+                    style={{ textDecoration: "none", color: "#000" }}
+                  >
+                    <MenuItem onClick={handleClose} sx={{ color: "#fff" }}>
+                      History
+                    </MenuItem>
+                  </Link>
+                  <MenuItem onClick={handleClickLogout} sx={{ color: "#fff" }}>
+                    Logout
+                  </MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
