@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
 //Material 
 import { Grid, Box } from "@mui/material";
 import { BackgroundContainer } from "../assets/images/bg_container_residentregisterpage2.jpeg";
@@ -12,6 +11,7 @@ import ButtonUnstyled, {
 } from "@mui/core/ButtonUnstyled";
 import { height, styled } from "@mui/system";
 import { CreateResidentContext } from "../context/createResidentContext";
+import { useHistory, useLocation } from "react-router";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -44,17 +44,31 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function CardResidentRegisterPage2() {
+function CardResidentRegisterPage2() {   
+  const location = useLocation();
 
-  const {values, setValues} = useContext(CreateResidentContext)
-
+  console.log(location)
+  
   const history= useHistory();
 
+  const {values, setValues} = useContext(CreateResidentContext)
   const handleOnClickChooseType = (props, type) => {
 
     setValues({ ...values, [props]: type })
     
-    history.push({pathname: "/residentregisterpage4"})
+    history.push({pathname: "/residentregisterpage3",
+        state:{
+          email: location.state.email,
+          phone: location.state.phone,
+          password: location.state.password,
+          confirmPassword: location.state.confirmPassword,
+          firstName: location.state.firstName,
+          lastName: location.state.lastName,
+          idCard: location.state.idCard,
+          idCardImgUrl: location.state.idCardImgUrl,
+          typeof: type
+      }
+})
   }
 
   return (
@@ -306,7 +320,7 @@ function CardResidentRegisterPage2() {
               marginTop: "-20px",
               height: "50px",
             }}
-            onClick={() => handleOnClickChooseType('typeof', 'apartment')}
+            onClick={() => handleOnClickChooseType('typeof', 'villa')}
           >
             <Typography
               style={{

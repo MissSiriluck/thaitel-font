@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { BrowserRouter as Router, Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
 import { Container, Grid, Typography, TextField, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
@@ -15,7 +16,7 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 
-const CustomButtonRoot = styled("span")(`
+const CustomButtonRoot = styled("button")(`
       background-color: none;
       padding: 10px 20px;
       border-radius: 30px;
@@ -48,115 +49,177 @@ function CustomButton(props) {
 
 function ResidentRegisterPage6() {
 
-
+  
   const [parking, setParking] = useState({
-    name: 'ที่จอดรถ',
-    isfree: true,
-    pricePerNight: 0
+    serviceName: 'ที่จอดรถ',
+    isFree: true,
+    pricePerTime: 0
   })
 
   const [breakfast, setBreakfast] = useState({
-    name: 'อาหารเช้า',
-    isfree: true,
-    pricePerNight: 0
+    serviceName: 'อาหารเช้า',
+    isFree: true,
+    pricePerTime: 0
   })
 
   const [wifi, setWifi] = useState({
-    name: 'Wifi',
-    isfree: true,
-    pricePerNight: 0
+    serviceName: 'Wifi',
+    isFree: true,
+    pricePerTime: 0
   })
 
   const [pool, setPool] = useState({
-    name: 'สระว่ายน้ำ',
-    isfree: true,
-    pricePerNight: 0
+    serviceName: 'สระว่ายน้ำ',
+    isFree: true,
+    pricePerTime: 0
   })
 
   const [twentyfourHourReception, setTwentyfourHourReception] = useState(
     {
-      name: 'แผนกต้อนรับส่วนหน้า 24 ชั่วโมง',
-      isfree: true,
-      pricePerNight: 0
+      serviceName: 'แผนกต้อนรับส่วนหน้า 24 ชั่วโมง',
+      isFree: true,
+      pricePerTime: 0
     }
   )
   const [bar, setBar] = useState({
-      name: 'บาร์',
-      isfree: true,
-      pricePerNight: 0  
+      serviceName: 'บาร์',
+      isFree: true,
+      pricePerTime: 0  
   })
 
 const [sauna, setSauna] = useState({
-  name: 'ห้องซาวน่า',
-      isfree: true,
-      pricePerNight: 0 
+  serviceName: 'ห้องซาวน่า',
+      isFree: true,
+      pricePerTime: 0 
 })
 
 const [roomService, setRoomService] = useState({
-  name: 'roomService',
-      isfree: true,
-      pricePerNight: 0 
+  serviceName: 'roomService',
+      isFree: true,
+      pricePerTime: 0 
 })
 
 const [gym, setGym] = useState({
-  name: 'gym',
-      isfree: true,
-      pricePerNight: 0
+  serviceName: 'gym',
+      isFree: true,
+      pricePerTime: 0
 })
 
-const handleChangePricePerNightForParking = e => {
+
+const handleChangepricePerTimeForParking = e => {
   const newParking = {...parking}
-  newParking.pricePerNight=e.target.value
+  newParking.pricePerTime=e.target.value
   setParking(newParking)
 }
 
-const handleChangePricePerNightForBreakfast = e => {
+const handleChangepricePerTimeForBreakfast = e => {
   const newBreakfast = {...breakfast}
-  newBreakfast.pricePerNight=e.target.value
+  newBreakfast.pricePerTime=e.target.value
   setBreakfast(newBreakfast)
 }
 
-const handleChangePricePerNightForWifi = e => {
+const handleChangepricePerTimeForWifi = e => {
   const newWifi = {...wifi}
-  newWifi.pricePerNight=e.target.value
+  newWifi.pricePerTime=e.target.value
   setWifi(newWifi)
 }
 
-const handleChangePricePerNightForPool = e => {
+const handleChangepricePerTimeForPool = e => {
   const newPool = {...pool}
-  newPool.pricePerNight=e.target.value
+  newPool.pricePerTime=e.target.value
   setPool(newPool)
 }
 
-const handleChangePricePerNightForTwentyfourHourReception = e => {
+const handleChangepricePerTimeForTwentyfourHourReception = e => {
   const newTwentyfourHourReception = {...twentyfourHourReception}
-  newTwentyfourHourReception.pricePerNight=e.target.value
+  newTwentyfourHourReception.pricePerTime=e.target.value
   setTwentyfourHourReception(newTwentyfourHourReception)
 }
 
-const handleChangePricePerNightForBar = e => {
+const handleChangepricePerTimeForBar = e => {
   const newBar = {...bar}
-  newBar.pricePerNight=e.target.value
+  newBar.pricePerTime=e.target.value
   setBar(newBar)
 }
 
-const handleChangePricePerNightForSauna = e => {
+const handleChangepricePerTimeForSauna = e => {
   const newSauna = {...sauna}
-  newSauna.pricePerNight=e.target.value
+  newSauna.pricePerTime=e.target.value
   setSauna(newSauna)
 }
 
-const handleChangePricePerNightForRoomService = e => {
+const handleChangepricePerTimeForRoomService = e => {
   const newRoomService = {...roomService}
-  newRoomService.pricePerNight=e.target.value
+  newRoomService.pricePerTime=e.target.value
   setRoomService(newRoomService)
 }
 
-const handleChangePricePerNightForGym = e => {
+const handleChangepricePerTimeForGym = e => {
   const newGym = {...gym}
-  newGym.pricePerNight=e.target.value
+  newGym.pricePerTime=e.target.value
   setGym(newGym)
 }
+
+const location = useLocation();
+console.log(location)
+
+const history = useHistory();
+
+const {values, setValues} = useContext(CreateResidentContext)
+
+const handleSubmitPage6 = async e => {
+  
+  e.preventDefault();
+  
+  const serviceArray = [parking, breakfast, pool, twentyfourHourReception, bar, sauna, roomService, gym]
+
+  const clone = [...values.serviceCollection]
+
+  clone.push(serviceArray)
+
+  setValues({ ...values, serviceCollection: clone});
+  
+  try {
+    history.push({
+      pathname: "/residentregisterpage8",
+      state: {
+        email: location.state.email,
+        phone: location.state.phone,
+        password: location.state.password,
+        confirmPassword: location.state.confirmPassword,
+        firstName: location.state.firstName,
+        lastName: location.state.lastName,
+        idCard: location.state.idCard,
+        idCardImgUrl: location.state.file,
+        typeof: location.state.type,
+        residentName: location.state.residentName,
+        rateStar: location.state.rateStar,
+        address: location.state.address,
+        subDistrict: location.state.subDistrict,
+        district: location.state.district,
+        province: location.state.province,
+        postalCode: location.state.postalCode,
+        residentImgUrl: location.state.residentImgUrl,
+        timeCheckInToStart: location.state.timeCheckInToStart,
+        timeCheckInToEnd: location.state.timeCheckInToEnd,
+        timeCheckOutToStart: location.state.timeCheckOutToStart,
+        timeCheckOutToEnd: location.state.timeCheckOutToEnd,
+        cancelDate: location.state.cancelDate,
+        roomTypeOf: location.state.roomTypeOf,
+        roomAmount: location.state.roomAmount,
+        roomSize: location.state.roomSize,
+        maxGuest: location.state.maxGuest,
+        optionRoomDetail: location.state.optionRoomDetail,
+        roomImgUrl: location.state.roomImgUrl,
+        roomShowImg: location.state.roomShowImg,
+        roomCollection: location.state.roomCollection,
+        serviceCollection: clone 
+      },
+    });
+  } catch(err) {
+    console.dir(err);
+  }
+};
 
   return (
     <Container maxWidth='md' sx={{ mt: 18 }}>
@@ -200,21 +263,21 @@ const handleChangePricePerNightForGym = e => {
 
                 <RadioGroup
                   aria-label="gender"
-                  name="controlled-radio-buttons-group"
-                  defaultValue={parking.isfree}
+                  serviceName="controlled-radio-buttons-group"
+                  defaultValue={parking.isFree}
                   sx={{ display: 'flex', flexDirection: 'row'}}
                 >
                   <FormControlLabel value={true} control={<Radio />} onChange={e=>setParking(cur=>{
-                    return {...cur,isfree:true}
+                    return {...cur,isFree:true}
                   })} label="บริการฟรี" />
                   <FormControlLabel value={false} onChange={e=>setParking(cur=>{
-                    return {...cur,isfree:false}
+                    return {...cur,isFree:false}
                   })} control={<Radio />} label="มีค่าบริการ" />
                 </RadioGroup>
 
               </Grid>
 
-              { !parking.isfree ?  <Grid
+              { !parking.isFree ?  <Grid
                 item
                 sx={{
                   display: "flex",
@@ -228,8 +291,8 @@ const handleChangePricePerNightForGym = e => {
                   label='(บาท)'
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
-                  value={parking.pricePerNight}
-                  onChange={handleChangePricePerNightForParking}
+                  value={parking.pricePerTime}
+                  onChange={handleChangepricePerTimeForParking}
                   />
               </Grid> : null }
               
@@ -260,21 +323,21 @@ const handleChangePricePerNightForGym = e => {
 
                 <RadioGroup
                   aria-label="gender"
-                  name="controlled-radio-buttons-group"
-                  defaultValue={breakfast.isfree}
+                  serviceName="controlled-radio-buttons-group"
+                  defaultValue={breakfast.isFree}
                   sx={{ display: 'flex', flexDirection: 'row'}}
                 >
                   <FormControlLabel value={true} control={<Radio />} onChange={e=> setBreakfast(cur=>{
-                    return {...cur,isfree:true}
+                    return {...cur,isFree:true}
                   })} label="บริการฟรี" />
                   <FormControlLabel value={false} onChange={e=> setBreakfast(cur=>{
-                    return {...cur,isfree:false}
+                    return {...cur,isFree:false}
                   })} control={<Radio />} label="มีค่าบริการ" />
                 </RadioGroup>
 
               </Grid>
 
-              { !breakfast.isfree ?  <Grid
+              { !breakfast.isFree ?  <Grid
                 item
                 sx={{
                   display: "flex",
@@ -288,8 +351,8 @@ const handleChangePricePerNightForGym = e => {
                   label='(บาท)'
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
-                  value={breakfast.pricePerNight}
-                  onChange={handleChangePricePerNightForBreakfast}
+                  value={breakfast.pricePerTime}
+                  onChange={handleChangepricePerTimeForBreakfast}
                   />
               </Grid> : null }
               
@@ -320,22 +383,22 @@ const handleChangePricePerNightForGym = e => {
 
                 <RadioGroup
                   aria-label="gender"
-                  name="controlled-radio-buttons-group"
+                  serviceName="controlled-radio-buttons-group"
                   sx={{ display: 'flex', flexDirection: 'row'}}
-                  defaultValue={wifi.isfree}
+                  defaultValue={wifi.isFree}
 
                 >
                   <FormControlLabel value={true} control={<Radio />} onChange={e=>setWifi(cur=>{
-                    return {...cur,isfree:true}
+                    return {...cur,isFree:true}
                   })} label="บริการฟรี" />
                   <FormControlLabel value={false} onChange={e=>setWifi(cur=>{
-                    return {...cur,isfree:false}
+                    return {...cur,isFree:false}
                   })} control={<Radio />} label="มีค่าบริการ" />
                 </RadioGroup>
 
               </Grid>
 
-              { !wifi.isfree ?  <Grid
+              { !wifi.isFree ?  <Grid
                 item
                 sx={{
                   display: "flex",
@@ -349,8 +412,8 @@ const handleChangePricePerNightForGym = e => {
                   label='(บาท)'
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
-                  value={wifi.pricePerNight}
-                  onChnage={handleChangePricePerNightForWifi}
+                  value={wifi.pricePerTime}
+                  onChnage={handleChangepricePerTimeForWifi}
                   />
               </Grid> : null }
 
@@ -381,21 +444,21 @@ const handleChangePricePerNightForGym = e => {
 
                 <RadioGroup
                   aria-label="gender"
-                  name="controlled-radio-buttons-group"
+                  serviceName="controlled-radio-buttons-group"
                   sx={{ display: 'flex', flexDirection: 'row'}}
-                  defaultValue={pool.isfree}
+                  defaultValue={pool.isFree}
                 >
                   <FormControlLabel value={true} control={<Radio />} onChange={e=>setPool(cur=>{
-                    return {...cur,isfree:true}
+                    return {...cur,isFree:true}
                   })} label="บริการฟรี" />
                   <FormControlLabel value={false} onChange={e=>setPool(cur=>{
-                    return {...cur,isfree:false}
+                    return {...cur,isFree:false}
                   })} control={<Radio />} label="มีค่าบริการ" />
                 </RadioGroup>
 
               </Grid>
 
-              { !pool.isfree ?  <Grid
+              { !pool.isFree ?  <Grid
                 item
                 sx={{
                   display: "flex",
@@ -409,8 +472,8 @@ const handleChangePricePerNightForGym = e => {
                   label='(บาท)'
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
-                  value={pool.pricePerNight} 
-                  onChange={handleChangePricePerNightForPool}
+                  value={pool.pricePerTime} 
+                  onChange={handleChangepricePerTimeForPool}
                   />
               </Grid> : null }
 
@@ -441,21 +504,21 @@ const handleChangePricePerNightForGym = e => {
 
                 <RadioGroup
                   aria-label="gender"
-                  name="controlled-radio-buttons-group"
+                  serviceName="controlled-radio-buttons-group"
                   sx={{ display: 'flex', flexDirection: 'row'}}
-                  defaultValue={twentyfourHourReception.isfree}
+                  defaultValue={twentyfourHourReception.isFree}
                 >
                   <FormControlLabel value={true} control={<Radio />} onChange={e=>setTwentyfourHourReception(cur=>{
-                    return {...cur,isfree:true}
+                    return {...cur,isFree:true}
                   })} label="บริการฟรี" />
                   <FormControlLabel value={false} onChange={e=>setTwentyfourHourReception(cur=>{
-                    return {...cur,isfree:false}
+                    return {...cur,isFree:false}
                   })} control={<Radio />} label="มีค่าบริการ" />
                 </RadioGroup>
 
               </Grid>
 
-              { !twentyfourHourReception.isfree ?  <Grid
+              { !twentyfourHourReception.isFree ?  <Grid
                 item
                 sx={{
                   display: "flex",
@@ -469,8 +532,8 @@ const handleChangePricePerNightForGym = e => {
                   label='(บาท)'
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
-                  value={twentyfourHourReception.pricePerNight}
-                  onChange={handleChangePricePerNightForTwentyfourHourReception}
+                  value={twentyfourHourReception.pricePerTime}
+                  onChange={handleChangepricePerTimeForTwentyfourHourReception}
                   />
               </Grid> : null }
             </Grid>
@@ -500,21 +563,21 @@ const handleChangePricePerNightForGym = e => {
 
                 <RadioGroup
                   aria-label="gender"
-                  name="controlled-radio-buttons-group"
+                  serviceName="controlled-radio-buttons-group"
                   sx={{ display: 'flex', flexDirection: 'row'}}
-                  defaultValue={bar.isfree}
+                  defaultValue={bar.isFree}
                 >
                   <FormControlLabel value={true} control={<Radio />} onChange={e=>setBar(cur=>{
-                    return {...cur,isfree:true}
+                    return {...cur,isFree:true}
                   })} label="บริการฟรี" />
                   <FormControlLabel value={false} onChange={e=>setBar(cur=>{
-                    return {...cur,isfree:false}
+                    return {...cur,isFree:false}
                   })} control={<Radio />} label="มีค่าบริการ" />
                 </RadioGroup>
 
               </Grid>
 
-              { !bar.isfree ?  <Grid
+              { !bar.isFree ?  <Grid
                 item
                 sx={{
                   display: "flex",
@@ -528,8 +591,8 @@ const handleChangePricePerNightForGym = e => {
                   label='(บาท)'
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
-                  value={bar.pricePerNight} 
-                  onChange={handleChangePricePerNightForBar}
+                  value={bar.pricePerTime} 
+                  onChange={handleChangepricePerTimeForBar}
                   />
               </Grid> : null }
             </Grid>
@@ -559,21 +622,21 @@ const handleChangePricePerNightForGym = e => {
 
                 <RadioGroup
                   aria-label="gender"
-                  name="controlled-radio-buttons-group"
+                  serviceName="controlled-radio-buttons-group"
                   sx={{ display: 'flex', flexDirection: 'row'}}
-                  defaultValue={sauna.isfree}
+                  defaultValue={sauna.isFree}
                 >
                   <FormControlLabel value={true} control={<Radio />} onChange={e=>setSauna(cur=>{
-                    return {...cur,isfree:true}
+                    return {...cur,isFree:true}
                   })} label="บริการฟรี" />
                   <FormControlLabel value={false} onChange={e=>setSauna(cur=>{
-                    return {...cur,isfree:false}
+                    return {...cur,isFree:false}
                   })} control={<Radio />} label="มีค่าบริการ" />
                 </RadioGroup>
 
               </Grid>
 
-              { !sauna.isfree ?  <Grid
+              { !sauna.isFree ?  <Grid
                 item
                 sx={{
                   display: "flex",
@@ -587,8 +650,8 @@ const handleChangePricePerNightForGym = e => {
                   label='(บาท)'
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
-                  value={sauna.pricePerNight}
-                  onChange={handleChangePricePerNightForSauna}
+                  value={sauna.pricePerTime}
+                  onChange={handleChangepricePerTimeForSauna}
                   />
               </Grid> : null }
 
@@ -620,21 +683,21 @@ const handleChangePricePerNightForGym = e => {
 
                 <RadioGroup
                   aria-label="gender"
-                  name="controlled-radio-buttons-group"
+                  serviceName="controlled-radio-buttons-group"
                   sx={{ display: 'flex', flexDirection: 'row'}}
-                  defaultValue={roomService.isfree}
+                  defaultValue={roomService.isFree}
                 >
                   <FormControlLabel value={true} control={<Radio />} onChange={e=> setRoomService(cur=>{
-                    return {...cur, isfree:true}
+                    return {...cur, isFree:true}
                   })} label="บริการฟรี" />
                   <FormControlLabel value={false} onChange={e=> setRoomService(cur=>{
-                    return {...cur, isfree:false}
+                    return {...cur, isFree:false}
                   })} control={<Radio />} label="มีค่าบริการ" />
                 </RadioGroup>
 
               </Grid>
 
-              { !roomService.isfree ?  <Grid
+              { !roomService.isFree ?  <Grid
                 item
                 sx={{
                   display: "flex",
@@ -648,8 +711,8 @@ const handleChangePricePerNightForGym = e => {
                   label='(บาท)'
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
-                  onChange={handleChangePricePerNightForRoomService}
-                  value={roomService.pricePerNight}
+                  onChange={handleChangepricePerTimeForRoomService}
+                  value={roomService.pricePerTime}
                   />
               </Grid> : null }
 
@@ -680,21 +743,21 @@ const handleChangePricePerNightForGym = e => {
 
                 <RadioGroup
                   aria-label="gender"
-                  name="controlled-radio-buttons-group"
+                  serviceName="controlled-radio-buttons-group"
                   sx={{ display: 'flex', flexDirection: 'row'}}
-                  defaultValue={gym.isfree}
+                  defaultValue={gym.isFree}
                 >
                   <FormControlLabel value={true} control={<Radio />} onChange={e=>setGym(cur=>{
-                    return {...cur,isfree:true}
+                    return {...cur,isFree:true}
                   })} label="บริการฟรี" />
                   <FormControlLabel value={false} onChange={e=>setGym(cur=>{
-                    return {...cur,isfree:false}
+                    return {...cur,isFree:false}
                   })} control={<Radio />} label="มีค่าบริการ" />
                 </RadioGroup>
 
               </Grid>
 
-              { !gym.isfree ?  <Grid
+              { !gym.isFree ?  <Grid
                 item
                 sx={{
                   display: "flex",
@@ -708,7 +771,7 @@ const handleChangePricePerNightForGym = e => {
                   label='(บาท)'
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
-                  onChange={handleChangePricePerNightForGym}
+                  onChange={handleChangepricePerTimeForGym}
                   value={gym.isFree}
                   />
               </Grid> : null }
@@ -740,8 +803,9 @@ const handleChangePricePerNightForGym = e => {
                 marginBottom: "50px",
                 marginTop: "20px",
 
-                height: "20px",
+                height: "40px",
               }}
+              onClick={handleSubmitPage6}
             >
               <Typography
                 style={{

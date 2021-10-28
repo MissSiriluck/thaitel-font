@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useContext, useState } from "react";
+import { useLocation, useHistory } from "react-router-dom";
 import "../App.css";
 //Material Ui
 import Avatar from "@mui/material/Avatar";
@@ -58,6 +59,31 @@ function OwnerRegister() {
   const [showImg, setShowImg] = useState("")
 
   const [file, setFile] = useState(null)
+
+  const history = useHistory();
+
+  const handleSubmitOwnerRegister = e => {
+    // history.pushState({
+    //   pathname: "/re"
+    // })
+    try {
+      history.push({
+          pathname: "/residentregisterpage2",
+          state: {
+          email: values.email,
+          phone: values.phone,
+          password: values.password,
+          confirmPassword: values.confirmPassword,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          idCard: values.idCard,
+          idCardImgUrl: file,
+        },
+      });
+    } catch(err) {
+      console.dir(err);
+    }
+  }
 
   const handleChange = (props, event) => {
     setValues({ ...values, [props]: event.target.value });
@@ -189,7 +215,7 @@ function OwnerRegister() {
                   margin='normal'
                   required
                   fullWidth
-                  id=''
+                  type='password'
                   label='รหัสผ่าน'
                   placeholder='กรอกรหัสผ่าน'
                   autoFocus
@@ -276,12 +302,12 @@ function OwnerRegister() {
                     fullWidth
                     label='หมายเลขบัตรประชาชน'
                     placeholder='กรอกหมายเลขบัตรประชาชน'
-                    type='password'
                     autoComplete='current-password'
                     autoFocus
                     size='small'
                     sx={{ marginTop: "8px" }}
                     value={values.idCard}
+                    onChange={e => handleChange('idCard', e)}
                   />
                 </Grid>
               </Grid>
@@ -308,7 +334,7 @@ function OwnerRegister() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    height: "100%",
+                    height: "200px",
                   }}
                 >
                   อัพโหลดรูปบัตรประชาชน
@@ -320,7 +346,7 @@ function OwnerRegister() {
               sx={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "end",
+                alignItems: "center",
                 height:'40px',
               }}
             >
@@ -362,6 +388,7 @@ function OwnerRegister() {
                     marginTop: "10px",
                     marginBottom: "50px",
                   }}
+                  onClick={handleSubmitOwnerRegister}
                 >
                   <Typography
                     style={{

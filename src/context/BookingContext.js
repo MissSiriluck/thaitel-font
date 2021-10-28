@@ -23,7 +23,7 @@ function BookingContextProvider({ children }) {
         console.dir(err);
       }
     };
-    fetchBookingItem();
+    // fetchBookingItem();
   }, []);
 
   return (

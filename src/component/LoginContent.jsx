@@ -1,5 +1,6 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { BrowserRouter as Router, Switch, Route, Link, useHistory } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 import { FcGoogle } from "react-icons/fc";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -11,6 +12,7 @@ import ButtonUnstyled, {
 import { styled } from "@mui/system";
 import axios from "../config/axios";
 import { setToken } from "../service/localStorage";
+import { AuthContext } from "../context/AuthContext";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -47,23 +49,34 @@ function CustomButton(props) {
 }
 
 function LoginContent() {
-  const handleSubmit = async event => {
+
+  const history = useHistory();
+
+  const { setUser } = useContext(AuthContext)
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
-    const values = {
-      email: data.get("email"),
-      password: data.get("password"),
-    };
-    setToken(res.data.token);
-    // setUser(jwtDecode(res.data.token));
-
-    // history.push("/");
-
-    const res = await axios.post("/users/login", values);
+    try {
+      const data = new FormData(event.currentTarget);
+      const values = {
+        email: data.get("email"),
+        password: data.get("password"),
+      };
+      const res = await axios.post("/users/login", values);
+      setToken(res.data.token);
+      setUser(jwtDecode(res.data.token));
+      
+      history.push({
+        pathname: "/",
+        state: {
+          successMessage:
+            "Already Login.",
+          from: " login page ",
+        },
+      });
+    } catch(err) {
+      console.dir(err)
+    }
   };
 
   return (

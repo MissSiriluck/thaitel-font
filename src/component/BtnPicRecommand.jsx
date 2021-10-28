@@ -37,7 +37,7 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
   height: 200,
 
   [theme.breakpoints.down("1500")]: {
-    height: "150px",
+    height: "170px",
   },
 
   "&:hover, &.Mui-focusVisible": {

@@ -56,310 +56,365 @@ function OwnerLogin() {
   };
 
   return (
-    <div>
-      <Container
-        maxWidth='md'
-        justifyContent='center'
-        alignItems='center'
-        direction='column'
-        sx={{ padding: 0, mt: 20 }}
-      >
-        <Box
-          alignItems='center'
-          justifyContent='center'
-          sx={{
-            height: "60vh",
-            display: "flex",
-            flexDirection: "column",
-            padding: 0,
-          }}
+    <Container
+      maxWidth='sm'
+      justifyContent='center'
+      alignItems='center'
+      direction='column'
+      sx={{ padding: 0, mt: 20 }}
+    >
+      <Grid Container sx={{ flexGlow: 1 }}>
+        {/* --------------- head --------------- */}
+        <Typography
+          variant='h4'
+          component='div'
+          sx={{ fontWeight: 600, mb: 3 }}
         >
-          <Box
-            alignItems='center'
-            justifyContent='center'
-            sx={{ width: "80%", display: "flex" }}
-            xs={8}
-            sm={8}
+          เข้าสู่ระบบสำหรับผู้ปล่อยเช่า
+        </Typography>
+
+        {/* --------------- button submit by google --------------- */}
+        <Grid container justifyContent='center' alignContent='center'>
+          <Button
+            variant='contained'
+            sx={{
+              width: "100%",
+              height: "30%",
+              display: "flex",
+              justifyContent: "space-between",
+              p: 1.5,
+            }}
           >
             <Grid
-              container
-              justifyContent='start'
-              alignItems='center'
-              xs={9}
-              sx={{ height: "40px" }}
+              item
+              sx={{
+                backgroundColor: "white",
+                borderRadius: "50px",
+                height: "18px",
+                width: "18px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              <Typography variant='h4' component='div' sx={{ fontWeight: 600 }}>
-                เข้าสู่ระบบสำหรับผู้ปล่อยเช่า
+              <FcGoogle />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                height: "32px",
+                alignItems: "center",
+                height: "100%",
+              }}
+            >
+              <Typography
+                variant='p'
+                sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
+              >
+                Sign In With Google
               </Typography>
             </Grid>
-          </Box>
-          {/*  */}
+          </Button>
+        </Grid>
 
+        {/* --------------- line --------------- */}
+        <Grid
+          container
+          justifyContent='center'
+          alignItems='center'
+          sx={{
+            mt: 2,
+            flexGlow: 1,
+          }}
+          component='form'
+          onSubmit={handleSubmit}
+          noValidate
+        >
+          <Grid container>
+            <Grid
+              item
+              xs={5.2}
+              sx={{
+                padding: 0,
+                borderBottom: "1px solid #C4C4C4",
+                height: 15,
+                mb: 1.5,
+                mr: 1,
+              }}
+            />
+            <Grid item xs={1}>
+              <Typography sx={{ color: "#C4C4C4", textAlign: "center" }}>
+                or
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={5.2}
+              sx={{
+                padding: 0,
+                borderBottom: "1px solid #C4C4C4",
+                height: 15,
+                mb: 1.5,
+                ml: 1,
+              }}
+            />
+          </Grid>
+        </Grid>
+
+        <Grid
+          container
+          spacing={2}
+          justifyContent='center'
+          alignItems='center'
+          sx={{
+            padding: 0,
+          }}
+          xs={12}
+          md={12}
+        >
           <Grid
-            container
-            justifyContent='center'
-            alignContent='center'
-            sx={{
-              padding: 0,
-            }}
+            item
             xs={7}
             md={7}
-          >
-            <Button
-              variant='contained'
-              sx={{
-                width: "100%",
-                height: "30%",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <Grid
-                item
-                sx={{
-                  backgroundColor: "white",
-                  borderRadius: "50px",
-                  height: "18px",
-                  width: "18px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <FcGoogle />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  height: "32px",
-                  alignItems: "center",
-                  height: "100%",
-                }}
-              >
-                <Typography
-                  variant='p'
-                  sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
-                >
-                  Sign In With Google
-                </Typography>
-              </Grid>
-            </Button>
-          </Grid>
-
-          <Grid
-            container
-            spacing={2}
-            justifyContent='center'
-            alignItems='center'
             sx={{
               padding: 0,
-              margin: 0,
             }}
-            xs={12}
-            md={12}
-            component='form'
-            onSubmit={handleSubmit}
-            noValidate
           >
-            <Grid
-              container
-              spacing={2}
-              justifyContent='space-around'
-              alignContent='center'
-              sx={{
-                padding: 0,
-                marginTop: "0s",
+            <Typography
+              style={{
+                fontSize: 16,
+                marginBottom: 8,
+                justifyContent: "start",
               }}
-              xs={7}
-              md={7}
             >
-              <Grid
-                container
-                spacing={2}
-                justifyContent='center'
-                alignItems='center'
-                sx={{
-                  padding: 0,
-                  borderBottom: "2px solid #C4C4C4",
-                  height: 15,
-                  margin: 0,
-                }}
-                xs={5}
-                md={5}
-              />
-              <Typography sx={{ color: "#C4C4C4" }}>or</Typography>
-              <Grid
-                container
-                spacing={2}
-                justifyContent='center'
-                alignItems='center'
-                sx={{
-                  padding: 0,
-                  borderBottom: "2px solid #C4C4C4",
-                  height: 15,
-                  margin: 0,
-                }}
-                xs={5}
-                md={5}
-              />
-            </Grid>
-
-            <Grid
-              container
-              spacing={2}
-              justifyContent='center'
-              alignItems='center'
-              sx={{
-                padding: 0,
-              }}
-              xs={12}
-              md={12}
-            >
-              <Grid
-                item
-                xs={7}
-                md={7}
-                sx={{
-                  padding: 0,
-                }}
-              >
-                <Typography
-                  style={{
-                    fontSize: 16,
-                    marginBottom: 8,
-                    justifyContent: "start",
-                  }}
-                >
-                  อีเมล์
-                </Typography>
-                <TextField
-                  fullWidth
-                  label='อีเมล์'
-                  placeholder='กรอกอีเมล์'
-                  name='email'
-                  multiline
-                  size='small'
-                  sx={{
-                    padding: 0,
-                    marginBottom: "3px",
-                  }}
-                />
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              spacing={2}
-              justifyContent='center'
-              alignItems='center'
+              อีเมล์
+            </Typography>
+            <TextField
+              fullWidth
+              label='อีเมล์'
+              placeholder='กรอกอีเมล์'
+              name='email'
+              multiline
+              size='small'
               sx={{
                 padding: 0,
                 marginBottom: "3px",
               }}
-              xs={12}
-              md={12}
-            >
-              <Grid item xs={7} md={7} sx={{ padding: 0 }}>
-                <Typography
-                  style={{
-                    fontSize: 16,
-                    marginBottom: 8,
-                    justifyContent: "start",
-                  }}
-                >
-                  รหัสผ่าน
-                </Typography>
-                <TextField
-                  fullWidth
-                  id='outlined-textarea fullWidth'
-                  label='รหัสผ่าน'
-                  placeholder='กรอกรหัสผ่าน'
-                  name='password'
-                  multiline
-                  size='small'
-                  sx={{
-                    padding: 0,
-                    marginBottom: "3px",
-                  }}
-                />
-              </Grid>
-              {/* <FormControlLabel
-                control={<Checkbox defaultChecked />}
-                label="Label"
-              /> */}
-            </Grid>
-            <Grid
-              container
-              spacing={2}
-              justifyContent='center'
-              alignItems='center'
-              sx={{
-                padding: 0,
-              }}
-              xs={12}
-              md={12}
-            >
-              <Grid
-                item
-                xs={8}
-                md={8}
-                sx={{ display: "flex", justifyContent: "center" }}
-              >
-                <CustomButton
-                  sx={{
-                    background: "#c62828",
-                    color: "#fff",
-                    display: "flex",
-                    justifyContent: "center",
-                    width: "80%",
-                    marginTop: "10px",
-                  }}
-                  type='submit'
-                  // onClick={signIn}
-                >
-                  <Typography
-                    style={{
-                      fontSize: 16,
-                      marginBottom: "1px",
-                      justifyContent: "start",
-                    }}
-                  >
-                    เข้าสู่ระบบ
-                  </Typography>
-                </CustomButton>
-              </Grid>
-
-              <Grid
-                item
-                xs={12}
-                md={12}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Grid mr={1}>
-                  <Typography style={{ color: "grey", margin: 0 }}>
-                    คุณยังไม่เคยลงทะเบียน
-                  </Typography>
-                </Grid>
-                <Grid mr={1}>
-                  <Typography
-                    style={{ color: "#16264D", fontWeight: 700, margin: 0 }}
-                  >
-                    สมัครสมาชิก
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
+            />
           </Grid>
-          {/*  */}
-        </Box>
-      </Container>
-    </div>
+        </Grid>
+      </Grid>
+    </Container>
+
+    // <div>
+    //   <Container
+    //     maxWidth='md'
+    //     justifyContent='center'
+    //     alignItems='center'
+    //     direction='column'
+    //     sx={{ padding: 0, mt: 20 }}
+    //   >
+    //     <Box
+    //       alignItems='center'
+    //       justifyContent='center'
+    //       sx={{
+    //         height: "60vh",
+    //         display: "flex",
+    //         flexDirection: "column",
+    //         padding: 0,
+    //       }}
+    //     >
+    //       <Box
+    //         alignItems='center'
+    //         justifyContent='center'
+    //         sx={{ width: "80%", display: "flex" }}
+    //         xs={8}
+    //         sm={8}
+    //       >
+    //         <Grid
+    //           container
+    //           justifyContent='start'
+    //           alignItems='center'
+    //           xs={9}
+    //           sx={{ height: "40px" }}
+    //         >
+    //           <Typography variant='h4' component='div' sx={{ fontWeight: 600 }}>
+    //             เข้าสู่ระบบสำหรับผู้ปล่อยเช่า
+    //           </Typography>
+    //         </Grid>
+    //       </Box>
+    //       {/*  */}
+
+    //       <Grid
+    //         container
+    //         justifyContent='center'
+    //         alignContent='center'
+    //         sx={{
+    //           padding: 0,
+    //         }}
+    //         xs={7}
+    //         md={7}
+    //       >
+    //         <Button
+    //           variant='contained'
+    //           sx={{
+    //             width: "100%",
+    //             height: "30%",
+    //             display: "flex",
+    //             justifyContent: "space-between",
+    //           }}
+    //         >
+    //           <Grid
+    //             item
+    //             sx={{
+    //               backgroundColor: "white",
+    //               borderRadius: "50px",
+    //               height: "18px",
+    //               width: "18px",
+    //               display: "flex",
+    //               justifyContent: "center",
+    //               alignItems: "center",
+    //             }}
+    //           >
+    //             <FcGoogle />
+    //           </Grid>
+    //           <Grid
+    //             item
+    //             xs={12}
+    //             sx={{
+    //               display: "flex",
+    //               justifyContent: "center",
+    //               height: "32px",
+    //               alignItems: "center",
+    //               height: "100%",
+    //             }}
+    //           >
+    //             <Typography
+    //               variant='p'
+    //               sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
+    //             >
+    //               Sign In With Google
+    //             </Typography>
+    //           </Grid>
+    //         </Button>
+    //       </Grid>
+
+    //
+    //         <Grid
+    //           container
+    //           spacing={2}
+    //           justifyContent='center'
+    //           alignItems='center'
+    //           sx={{
+    //             padding: 0,
+    //             marginBottom: "3px",
+    //           }}
+    //           xs={12}
+    //           md={12}
+    //         >
+    //           <Grid item xs={7} md={7} sx={{ padding: 0 }}>
+    //             <Typography
+    //               style={{
+    //                 fontSize: 16,
+    //                 marginBottom: 8,
+    //                 justifyContent: "start",
+    //               }}
+    //             >
+    //               รหัสผ่าน
+    //             </Typography>
+    //             <TextField
+    //               fullWidth
+    //               id='outlined-textarea fullWidth'
+    //               label='รหัสผ่าน'
+    //               placeholder='กรอกรหัสผ่าน'
+    //               name='password'
+    //  type='password'
+    //               multiline
+    //               size='small'
+    //               sx={{
+    //                 padding: 0,
+    //                 marginBottom: "3px",
+    //               }}
+    //             />
+    //           </Grid>
+    //           {/* <FormControlLabel
+    //             control={<Checkbox defaultChecked />}
+    //             label="Label"
+    //           /> */}
+    //         </Grid>
+    //         <Grid
+    //           container
+    //           spacing={2}
+    //           justifyContent='center'
+    //           alignItems='center'
+    //           sx={{
+    //             padding: 0,
+    //           }}
+    //           xs={12}
+    //           md={12}
+    //         >
+    //           <Grid
+    //             item
+    //             xs={8}
+    //             md={8}
+    //             sx={{ display: "flex", justifyContent: "center" }}
+    //           >
+    //             <CustomButton
+    //               sx={{
+    //                 background: "#c62828",
+    //                 color: "#fff",
+    //                 display: "flex",
+    //                 justifyContent: "center",
+    //                 width: "80%",
+    //                 marginTop: "10px",
+    //               }}
+    //               type='submit'
+    //               // onClick={signIn}
+    //             >
+    //               <Typography
+    //                 style={{
+    //                   fontSize: 16,
+    //                   marginBottom: "1px",
+    //                   justifyContent: "start",
+    //                 }}
+    //               >
+    //                 เข้าสู่ระบบ
+    //               </Typography>
+    //             </CustomButton>
+    //           </Grid>
+
+    //           <Grid
+    //             item
+    //             xs={12}
+    //             md={12}
+    //             sx={{
+    //               display: "flex",
+    //               alignItems: "center",
+    //               justifyContent: "center",
+    //             }}
+    //           >
+    //             <Grid mr={1}>
+    //               <Typography style={{ color: "grey", margin: 0 }}>
+    //                 คุณยังไม่เคยลงทะเบียน
+    //               </Typography>
+    //             </Grid>
+    //             <Grid mr={1}>
+    //               <Typography
+    //                 style={{ color: "#16264D", fontWeight: 700, margin: 0 }}
+    //               >
+    //                 สมัครสมาชิก
+    //               </Typography>
+    //             </Grid>
+    //           </Grid>
+    //         </Grid>
+    //       </Grid>
+    //       {/*  */}
+    //     </Box>
+    //   </Container>
+    // </div>
   );
 }
 
