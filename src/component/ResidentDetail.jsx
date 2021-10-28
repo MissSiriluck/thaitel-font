@@ -21,6 +21,7 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { residents } from "../mocks/residents";
+import res_1 from "../assets/images/residents/hotel-1.jpeg";
 
 //customize button blue
 const CustomButtonRoot = styled("span")(`
@@ -68,20 +69,29 @@ function ResidentDetail() {
   });
   const classes = useStyles();
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setRoom(event.target.value);
   };
 
   return (
     <Grid container>
       <Grid item>
-        <CarouselBox />
+        {/* <CarouselBox /> */}
+        <img
+          src={res_1}
+          style={{
+            width: "1152px",
+            height: "450px",
+            marginBottom: "10px",
+            borderRadius: "10px",
+          }}
+        />
 
         {/* Name hotel and other detail */}
         <Grid container>
           <Grid
             item
-            id=''
+            id=""
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
@@ -102,7 +112,7 @@ function ResidentDetail() {
           {/* Service block */}
           <Grid
             item
-            id=''
+            id=""
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
@@ -328,10 +338,10 @@ function ResidentDetail() {
         </Box>
 
         {/* room type block */}
-        {residents.map(resident => (
+        {residents.map((resident) => (
           <Grid
             item
-            id=''
+            id=""
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
@@ -376,7 +386,7 @@ function ResidentDetail() {
 
         <Grid item sx={{ display: "flex", justifyContent: "center" }}>
           <Button
-            variant='outlined'
+            variant="outlined"
             sx={{
               width: "240px",
               fontFamily: "'Noto Sans Thai', sans-serif",

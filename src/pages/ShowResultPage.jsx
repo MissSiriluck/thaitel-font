@@ -12,7 +12,7 @@ function ShowResultPage() {
       <SpaceforHead />
       <Header />
 
-      <Container maxWidth='xl' sx={{ mt: 18 }}>
+      <Container maxWidth="xl" sx={{ mt: 18 }}>
         <Grid container>
           <Grid item xs={3}>
             <Search />
