@@ -164,47 +164,61 @@ function OwnerLogin() {
           </Grid>
         </Grid>
 
+        {/* --------------- input email and password --------------- */}
         <Grid
-          container
-          spacing={2}
-          justifyContent='center'
-          alignItems='center'
+          item
+          xs={12}
           sx={{
             padding: 0,
           }}
-          xs={12}
-          md={12}
         >
-          <Grid
-            item
-            xs={7}
-            md={7}
-            sx={{
-              padding: 0,
+          <Typography
+            style={{
+              fontSize: 16,
+              marginBottom: 8,
+              justifyContent: "start",
             }}
           >
-            <Typography
-              style={{
-                fontSize: 16,
-                marginBottom: 8,
-                justifyContent: "start",
-              }}
-            >
-              อีเมล์
-            </Typography>
-            <TextField
-              fullWidth
-              label='อีเมล์'
-              placeholder='กรอกอีเมล์'
-              name='email'
-              multiline
-              size='small'
-              sx={{
-                padding: 0,
-                marginBottom: "3px",
-              }}
-            />
-          </Grid>
+            อีเมล์
+          </Typography>
+          <TextField
+            fullWidth
+            label='อีเมล์'
+            placeholder='กรอกอีเมล์'
+            name='email'
+            multiline
+            size='small'
+            sx={{
+              padding: 0,
+              marginBottom: "3px",
+            }}
+          />
+        </Grid>
+
+        <Grid item xs={12} sx={{ padding: 0 }}>
+          <Typography
+            style={{
+              fontSize: 16,
+              marginBottom: 8,
+              justifyContent: "start",
+            }}
+          >
+            รหัสผ่าน
+          </Typography>
+          <TextField
+            fullWidth
+            id='outlined-textarea fullWidth'
+            label='รหัสผ่าน'
+            placeholder='กรอกรหัสผ่าน'
+            name='password'
+            type='password'
+            multiline
+            size='small'
+            sx={{
+              padding: 0,
+              marginBottom: "3px",
+            }}
+          />
         </Grid>
       </Grid>
     </Container>
@@ -303,43 +317,7 @@ function OwnerLogin() {
     //       </Grid>
 
     //
-    //         <Grid
-    //           container
-    //           spacing={2}
-    //           justifyContent='center'
-    //           alignItems='center'
-    //           sx={{
-    //             padding: 0,
-    //             marginBottom: "3px",
-    //           }}
-    //           xs={12}
-    //           md={12}
-    //         >
-    //           <Grid item xs={7} md={7} sx={{ padding: 0 }}>
-    //             <Typography
-    //               style={{
-    //                 fontSize: 16,
-    //                 marginBottom: 8,
-    //                 justifyContent: "start",
-    //               }}
-    //             >
-    //               รหัสผ่าน
-    //             </Typography>
-    //             <TextField
-    //               fullWidth
-    //               id='outlined-textarea fullWidth'
-    //               label='รหัสผ่าน'
-    //               placeholder='กรอกรหัสผ่าน'
-    //               name='password'
-    //  type='password'
-    //               multiline
-    //               size='small'
-    //               sx={{
-    //                 padding: 0,
-    //                 marginBottom: "3px",
-    //               }}
-    //             />
-    //           </Grid>
+    //
     //           {/* <FormControlLabel
     //             control={<Checkbox defaultChecked />}
     //             label="Label"
