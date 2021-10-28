@@ -4,17 +4,6 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Box, styled } from "@mui/system";
 import res_1 from "../assets/images/residents/hotel-1.jpeg";
-// import iconbar from "../assets/images/ICON-BAR.png";
-// import iconbed from "../assets/images/ICON-BED.png";
-// import iconbreakfast from "../assets/images/ICON-BREAKFAST.png";
-// import iconcarpark from "../assets/images/ICON-CARPARK.png";
-// import iconexercise from "../assets/images/ICON-EXERCISE.png";
-// import iconpillow from "../assets/images/ICON-PILLOW.png";
-// import iconsmoking from "../assets/images/ICON-SMOKING.png";
-// import iconswim from "../assets/images/ICON-SWIM.png";
-// import iconwifi from "../assets/images/ICON-WIFI.png";
-// import bed1 from "../assets/images/bed1.png";
-// import bed2 from "../assets/images/bed2.png";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import { useEffect, useState } from "react";
 // import { makeStyles } from "@material-ui/styles";
@@ -117,7 +106,7 @@ function AddcomDetail() {
   // const classes = useStyles();
   const history = useHistory();
 
-  const handleClickRoomSumary = (e) => {
+  const handleClickRoomSumary = e => {
     e.preventDefault();
     history.push({
       pathname: "/BookingConfirmation",
@@ -151,7 +140,7 @@ function AddcomDetail() {
     });
   };
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     setRoom(event.target.value);
   };
 
@@ -159,7 +148,7 @@ function AddcomDetail() {
     <Grid container>
       <Grid item>
         {/* <CarouselBox /> */}
-        {resident?.resident?.ResidentImgs?.map((resident) => (
+        {resident?.resident?.ResidentImgs?.map(resident => (
           <img
             src={resident.imgUrl}
             style={{ width: "1116px", height: "450px", mb: 2 }}
@@ -170,7 +159,7 @@ function AddcomDetail() {
         <Grid container>
           <Grid
             item
-            id=""
+            id=''
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
@@ -193,7 +182,7 @@ function AddcomDetail() {
           {/* Service block */}
           <Grid
             item
-            id=""
+            id=''
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
@@ -201,7 +190,7 @@ function AddcomDetail() {
               บริการภายในโรงแรม
             </Typography>
 
-            {resident?.resident?.ServiceItems?.map((resident) => (
+            {resident?.resident?.ServiceItems?.map(resident => (
               <Grid container sx={{ flexWrap: "wrap" }}>
                 <Grid
                   item
@@ -438,10 +427,10 @@ function AddcomDetail() {
           </Box>
         </Box>
         {/* {resident.rooms.map(item) => ()} */}
-        {resident?.rooms?.map((resident) => (
+        {resident?.rooms?.map(resident => (
           <Grid
             item
-            id=""
+            id=''
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
@@ -469,14 +458,14 @@ function AddcomDetail() {
                   <Grid item xs={5}>
                     <Grid item xs={4} sx={{ mb: 2 }}>
                       <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">
+                        <InputLabel id='demo-simple-select-label'>
                           จำนวนห้อง
                         </InputLabel>
                         <Select
-                          labelId="demo-simple-select-label"
-                          id="demo-simple-select"
+                          labelId='demo-simple-select-label'
+                          id='demo-simple-select'
                           value={room}
-                          label="จำนวนห้อง"
+                          label='จำนวนห้อง'
                           onChange={handleChange}
                         >
                           <MenuItem value={1}>1</MenuItem>

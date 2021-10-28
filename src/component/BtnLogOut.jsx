@@ -70,7 +70,7 @@ function BtnLogOut() {
         aria-haspopup='true'
         onClick={handleToggle}
       >
-        Name Account
+        {`Name Account`}
       </Button>
       <Popper
         open={open}

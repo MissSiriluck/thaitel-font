@@ -35,10 +35,11 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: "relative",
   margin: 10,
   height: 200,
-  [theme.breakpoints.down("sm")]: {
-    width: "100% !important", // Overrides inline-style
-    height: 100,
+
+  [theme.breakpoints.down("1500")]: {
+    height: "150px",
   },
+
   "&:hover, &.Mui-focusVisible": {
     zIndex: 1,
     "& .MuiImageBackdrop-root": {
@@ -140,6 +141,7 @@ function BtnPicRecommand() {
               style={{
                 width: image.width,
               }}
+              className='img_btn_homepage'
             >
               <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
               <ImageBackdrop className='MuiImageBackdrop-root' />
