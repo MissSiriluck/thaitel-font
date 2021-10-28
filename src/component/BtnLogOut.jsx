@@ -89,7 +89,7 @@ function BtnLogOut() {
                 placement === "bottom-start" ? "left top" : "left bottom",
             }}
           >
-            <Paper sx={{ width: "130px", background: "#16264D", mt: "5px" }}>
+            <Paper sx={{ width: "140px", background: "#16264D", mt: "5px" }}>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList
                   autoFocusItem={open}
