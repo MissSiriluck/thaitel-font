@@ -4,17 +4,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Box, styled } from "@mui/system";
 // import res_1 from "../assets/images/residents/hotel-1.jpeg";
-// import iconbar from "../assets/images/ICON-BAR.png";
-// import iconbed from "../assets/images/ICON-BED.png";
-// import iconbreakfast from "../assets/images/ICON-BREAKFAST.png";
-// import iconcarpark from "../assets/images/ICON-CARPARK.png";
-// import iconexercise from "../assets/images/ICON-EXERCISE.png";
-// import iconpillow from "../assets/images/ICON-PILLOW.png";
-// import iconsmoking from "../assets/images/ICON-SMOKING.png";
-// import iconswim from "../assets/images/ICON-SWIM.png";
-// import iconwifi from "../assets/images/ICON-WIFI.png";
-// import bed1 from "../assets/images/bed1.png";
-// import bed2 from "../assets/images/bed2.png";
+
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import { useEffect, useState } from "react";
 // import { makeStyles } from "@material-ui/styles";

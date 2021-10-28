@@ -1,4 +1,6 @@
 import React, { useContext, useState } from "react";
+import { BrowserRouter as Router, Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
+
 import { Container, Grid, Box, Typography, TextField, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -52,6 +54,11 @@ function CustomButton(props) {
 
 function ResidentRegisterPage8() {
 
+  const location = useLocation();
+  console.log(location)
+
+  const history = useHistory();
+
   const {values, setValues} = useContext(CreateResidentContext)
   
   const [showingImgBank, setshowingImgBank] = useState("")
@@ -76,6 +83,92 @@ function ResidentRegisterPage8() {
   const Input = styled("input")({
     display: "none",
   });
+
+  const submitButtonCreateResident = async e => {
+    try {
+      history.push({
+        pathname: "/residentregisterpage8",
+        state: {
+          email: location.state.email,
+          phone: location.state.phone,
+          password: location.state.password,
+          confirmPassword: location.state.confirmPassword,
+          firstName: location.state.firstName,
+          lastName: location.state.lastName,
+          idCard: location.state.idCard,
+          idCardImgUrl: location.state.file,
+          typeof: location.state.type,
+          residentName: location.state.residentName,
+          rateStar: location.state.rateStar,
+          address: location.state.address,
+          subDistrict: location.state.subDistrict,
+          district: location.state.district,
+          postalCode: location.state.postalCode,
+          roomTypeOf: location.state.roomTypeOf,
+          roomAmount: location.state.roomAmount,
+          roomSize: location.state.roomSize,
+          maxGuest: location.state.maxGuest,
+          optionRoomDetail: location.state.optionRoomDetail,
+          roomImgUrl: location.state.roomImgUrl,
+          roomShowImg: location.state.roomShowImg,
+          roomCollection: location.state.roomCollection,
+          serviceCollection: location.state.serviceCollection,
+          accName: values.accName,
+          accNumber: values.accNumber,
+          bankacc: 'Test',
+          bankImgUrl: fileBank
+        },
+      });
+
+      const res1 = await axios.post("/residents/createResident", {
+        firstName: location.state.firstName,
+        lastName: location.state.lastName,
+        email: location.state.email,
+        telephone: location.state.phone,
+        password: location.state.password,
+        idCard: location.state.idCard,
+        idCardImgUrl: location.state.file,
+    });
+
+      const res2 = await axios.post("/residents/createResident", {
+        typeof: location.state.type,
+        name: location.state.residentName,
+        rateStar: location.state.rateStar,
+        address: location.state.address,
+        subDistrict: location.state.subDistrict,
+        district: location.state.district,
+        province: location.state.province,
+        postalCode: location.state.postalCode,
+        residentImgUrl: location.state.residentImgUrl,
+        timeCheckInToStart: location.state.timeCheckInToStart,
+        timeCheckInToEnd: location.state.timeCheckInToEnd,
+        timeCheckOutToStart: location.state.timeCheckOutToStart,
+        timeCheckOutToEnd: location.state.timeCheckOutToEnd,
+        cancelDate: location.state.cancelDate,
+        roomTypeOf: location.state.roomTypeOf,
+        roomAmount: location.state.roomAmount,
+        roomSize: location.state.roomSize,
+        maxGuest: location.state.maxGuest,
+        optionRoomDetail: location.state.optionRoomDetail,
+        roomImgUrl: location.state.roomImgUrl,
+        roomShowImg: location.state.roomShowImg,
+        roomCollection: location.state.roomCollection,
+        serviceCollection: location.state.serviceCollection,
+        accName: values.accName,
+        accNumber: values.accNumber,
+        bankacc: 'Test',
+        bankImgUrl: fileBank
+    
+    });
+
+    console.dir("Creating campaign is success.");
+    alert("Campaign be created successfully");
+
+
+    } catch(err) {
+      console.dir(err);
+    }
+  }
 
   return (
     <Container maxWidth="md" sx={{ mt: 18 }}>
@@ -334,6 +427,7 @@ function ResidentRegisterPage8() {
                 marginBottom: "1px",
                 justifyContent: "start",
               }}
+              onClick={submitButtonCreateResident}
             >
               ลงทะเบียน และ เปิดรับการจองทันที
             </Typography>
