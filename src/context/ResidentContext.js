@@ -6,18 +6,18 @@ const ResidentContext = createContext();
 function ResidentContextProvider({ children }) {
   const [residents, setResidents] = useState([]);
 
-  useEffect(() => {
-    const fetchResident = async () => {
-      try {
-        const res = await axios.get("/residents");
-        setResidents(res.data.resident);
-        // console.log(res.data.resident);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchResident();
-  }, []);
+  // useEffect(() => {
+  //   const fetchResident = async () => {
+  //     try {
+  //       const res = await axios.get("/residents");
+  //       setResidents(res.data.resident);
+  //       // console.log(res.data.resident);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchResident();
+  // }, []);
 
   return (
     <>

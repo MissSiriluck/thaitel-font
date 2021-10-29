@@ -20,9 +20,12 @@ import ButtonUnstyled, {
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
 import { CreateResidentContext } from "../context/createResidentContext";
-import axios from "axios";
+import jwtDecode from "jwt-decode";
+import axios from "../config/axios";
+import { setToken } from "../service/localStorage";
+import { AuthContext } from "../context/AuthContext";
 
-const CustomButtonRoot = styled("span")(`
+const CustomButtonRoot = styled("button")(`
     background-color: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -56,6 +59,8 @@ function CustomButton(props) {
 function OwnerRegister() {
   const { values, setValues } = useContext(CreateResidentContext);
 
+  const { setUser } = useContext(AuthContext);
+
   const [showImg, setShowImg] = useState("");
 
   const [file, setFile] = useState(null);
@@ -63,32 +68,26 @@ function OwnerRegister() {
   const history = useHistory();
 
   const handleSubmitOwnerRegister = async e => {
-
+    e.preventDefault()
+    console.log("test")
     try {
-      // history.push({
-      //     pathname: "/residentregisterpage2",
-      //     state: {
-      //     email: values.email,
-      //     phone: values.phone,
-      //     password: values.password,
-      //     confirmPassword: values.confirmPassword,
-      //     firstName: values.firstName,
-      //     lastName: values.lastName,
-      //     idCard: values.idCard,
-      //     idCardImgUrl: file,
-      //   },
-      // });
+
       const res = await axios.post("/hotelOwners/register", {
-        firstName: values.state.firstName,
-        lastName: values.state.lastName,
-        email: values.state.email,
-        telephone: values.state.phone,
-        password: values.state.password,
-        idCard: values.state.idCard,
-        idCardImgUrl: values.state.file,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        telephone: values.phone,
+        password: values.password,
+        idCard: values.idCard,
+        idCardImgUrl: values.file,
       })
 
-      history.push("/")
+      // console.log(`token`, res.data.token)
+      
+      // setToken(res.data.token);
+      // setUser(jwtDecode(res.data.token));
+
+      history.push("/ownerlogin")
     } catch(err) {
       console.dir(err);
     }
@@ -140,7 +139,7 @@ function OwnerRegister() {
               justifyContent: "center",
               width: "100%",
             }}
-            // onSubmit={}
+            onSubmit={handleSubmitOwnerRegister}
           >
             <Grid
               container

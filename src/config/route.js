@@ -153,6 +153,10 @@ const route = {
       component: OwnerDetailPage,
     },
     {
+      path: "/ownerhistory",
+      component: OwnerHistoryPage,
+    },
+    {
       redirect: "/ownerhistory",
     },
   ],

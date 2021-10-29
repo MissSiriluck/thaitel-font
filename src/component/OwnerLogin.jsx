@@ -52,6 +52,7 @@ function OwnerLogin() {
 
   const handleSubmit = async event => {
     event.preventDefault();
+    console.log('Test')
     try {
       const data = new FormData(event.currentTarget);
       const values = {
@@ -63,7 +64,7 @@ function OwnerLogin() {
       setUser(jwtDecode(res.data.token));
 
       history.push({
-        pathname: "/",
+        pathname: "/ownerhistory",
         state: {
           successMessage: "Already Login.",
           from: " login page ",
@@ -73,6 +74,8 @@ function OwnerLogin() {
       console.dir(err);
     }
   };
+
+
 
   return (
     <Container
@@ -140,7 +143,7 @@ function OwnerLogin() {
         </Grid>
 
         {/* --------------- line --------------- */}
-        <Grid
+        <Box
           container
           justifyContent='center'
           alignItems='center'
@@ -181,25 +184,7 @@ function OwnerLogin() {
               }}
             />
           </Grid>
-        </Grid>
 
-        {/* --------------- input email and password --------------- */}
-        <Box
-          container
-          spacing={2}
-          justifyContent='center'
-          alignItems='center'
-          sx={{
-            padding: 0,
-            margin: 0,
-            width: "100%",
-          }}
-          xs={12}
-          md={12}
-          component='form'
-          onSubmit={handleSubmit}
-          noValidate
-        >
           <Grid
             item
             xs={12}
@@ -253,9 +238,8 @@ function OwnerLogin() {
               }}
             />
           </Grid>
-        </Box>
 
-        {/* --------------- button submit login--------------- */}
+           {/* --------------- button submit login--------------- */}
         <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
           <CustomButton
             sx={{
@@ -279,6 +263,28 @@ function OwnerLogin() {
             </Typography>
           </CustomButton>
         </Grid>
+        </Box>
+
+        {/* --------------- input email and password --------------- */}
+        <Box
+          container
+          spacing={2}
+          justifyContent='center'
+          alignItems='center'
+          sx={{
+            padding: 0,
+            margin: 0,
+            width: "100%",
+          }}
+          xs={12}
+          md={12}
+          component='form'
+          onSubmit={handleSubmit}
+          noValidate
+        >
+         
+</Box>
+       
 
         <Grid
           item
