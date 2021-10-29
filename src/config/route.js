@@ -3,6 +3,7 @@ import BookingConfirmationPage from "../pages/BookingConfirmationPage";
 import Homepage from "../pages/Homepage";
 import LoginPage from "../pages/LoginPage";
 import OwnerDetailPage from "../pages/OwnerDetailPage";
+import OwnerHistoryPage from "../pages/OwnerHistoryPage";
 import OwnerLoginPage from "../pages/OwnerLoginPage";
 import OwnerRegisterPage from "../pages/OwnerRegisterPage";
 import RegisterPage from "../pages/RegisterPage";
@@ -39,6 +40,14 @@ const route = {
     {
       path: "/ownerregister",
       component: OwnerRegisterPage,
+    },
+    {
+      path: "/ownerhistory",
+      component: OwnerHistoryPage,
+    },
+    {
+      path: "/ownerdetail",
+      component: OwnerDetailPage,
     },
     {
       redirect: "/",
