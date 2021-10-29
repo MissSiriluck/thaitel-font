@@ -53,12 +53,11 @@ function CustomButton(props) {
 }
 
 function OwnerRegister() {
+  const { values, setValues } = useContext(CreateResidentContext);
 
-  const {values, setValues} = useContext(CreateResidentContext)
-  
-  const [showImg, setShowImg] = useState("")
+  const [showImg, setShowImg] = useState("");
 
-  const [file, setFile] = useState(null)
+  const [file, setFile] = useState(null);
 
   const history = useHistory();
 
@@ -68,8 +67,8 @@ function OwnerRegister() {
     // })
     try {
       history.push({
-          pathname: "/residentregisterpage2",
-          state: {
+        pathname: "/residentregisterpage2",
+        state: {
           email: values.email,
           phone: values.phone,
           password: values.password,
@@ -80,10 +79,10 @@ function OwnerRegister() {
           idCardImgUrl: file,
         },
       });
-    } catch(err) {
+    } catch (err) {
       console.dir(err);
     }
-  }
+  };
 
   const handleChange = (props, event) => {
     setValues({ ...values, [props]: event.target.value });
@@ -94,19 +93,19 @@ function OwnerRegister() {
   });
 
   const handleChangeFile = e => {
-    setFile(e.target.files[0])
+    setFile(e.target.files[0]);
     const reader = new FileReader();
     reader.onloadend = () => {
       //   console.log(reader.result);
       setShowImg(reader.result);
     };
     reader.readAsDataURL(e.target.files[0]);
-  }
+  };
 
   return (
     <Container
       maxWidth='lg'
-      sx={{ justifyContent: "center", display: "flex", mt: 14 }}
+      sx={{ justifyContent: "center", display: "flex", mt: 15 }}
     >
       <Grid
         container
@@ -164,7 +163,7 @@ function OwnerRegister() {
                   size='small'
                   sx={{ marginTop: "8px" }}
                   value={values.email}
-                  onChange={e => handleChange('email', e)}
+                  onChange={e => handleChange("email", e)}
                 />
               </Grid>
               <Grid item xs={5.8}>
@@ -180,7 +179,7 @@ function OwnerRegister() {
                   size='small'
                   sx={{ marginTop: "8px" }}
                   value={values.phone}
-                  onChange={e => handleChange('phone', e)}
+                  onChange={e => handleChange("phone", e)}
                 />
               </Grid>
 
@@ -202,7 +201,7 @@ function OwnerRegister() {
                   size='small'
                   sx={{ marginTop: "8px" }}
                   value={values.password}
-                  onChange={e => handleChange('password', e)}
+                  onChange={e => handleChange("password", e)}
                 />
               </Grid>
 
@@ -222,7 +221,7 @@ function OwnerRegister() {
                   size='small'
                   sx={{ marginTop: "8px" }}
                   value={values.confirmPassword}
-                  onChange={e => handleChange('confirmPassword', e)}
+                  onChange={e => handleChange("confirmPassword", e)}
                 />
               </Grid>
             </Grid>
@@ -261,7 +260,7 @@ function OwnerRegister() {
                     size='small'
                     sx={{ marginTop: "8px" }}
                     value={values.firstName}
-                    onChange={e => handleChange('firstName', e)}
+                    onChange={e => handleChange("firstName", e)}
                   />
                 </Grid>
                 <Grid
@@ -282,7 +281,7 @@ function OwnerRegister() {
                     size='small'
                     sx={{ marginTop: "8px" }}
                     value={values.lastName}
-                    onChange={e => handleChange('lastName', e)}
+                    onChange={e => handleChange("lastName", e)}
                   />
                 </Grid>
 
@@ -307,11 +306,15 @@ function OwnerRegister() {
                     size='small'
                     sx={{ marginTop: "8px" }}
                     value={values.idCard}
-                    onChange={e => handleChange('idCard', e)}
+                    onChange={e => handleChange("idCard", e)}
                   />
                 </Grid>
               </Grid>
-              <Grid item xs={5.9} sx={{ display: "flex", flexDirection:"column" }}>
+              <Grid
+                item
+                xs={5.9}
+                sx={{ display: "flex", flexDirection: "column" }}
+              >
                 <Box
                   item
                   xs={12}
@@ -324,46 +327,50 @@ function OwnerRegister() {
                     height: "100%",
                     justifyContent: "center",
                     backgroundImage: `url(${showImg})`,
-                    backgroundSize: 'contain',
-                    backgroundRepeat: 'no-repeat'
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
                   }}
                 >
-                  { showImg ? null : <Typography
-                  style={{
-                    fontSize: "18px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: "200px",
-                  }}
-                >
-                  อัพโหลดรูปบัตรประชาชน
-                </Typography>}
+                  {showImg ? null : (
+                    <Typography
+                      style={{
+                        fontSize: "18px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height: "200px",
+                      }}
+                    >
+                      อัพโหลดรูปบัตรประชาชน
+                    </Typography>
+                  )}
                 </Box>
                 <Grid
-              item
-              xs={12}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height:'40px',
-              }}
-            >
-              <label htmlFor="contained-button-file" sx={{height:'40px',}}>
-                <Input
-                  accept="image/*"
-                  id="contained-button-file"
-                  multiple
-                  type="file"
-                  onChange={handleChangeFile}
-                  
-                />
-                <Button variant="contained" component="span">
-                  กดเพื่อเพิ่มรูปภาพห้องพักของคุณ
-                </Button>
-              </label>
-            </Grid>
+                  item
+                  xs={12}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "40px",
+                  }}
+                >
+                  <label
+                    htmlFor='contained-button-file'
+                    sx={{ height: "40px" }}
+                  >
+                    <Input
+                      accept='image/*'
+                      id='contained-button-file'
+                      multiple
+                      type='file'
+                      onChange={handleChangeFile}
+                    />
+                    <Button variant='contained' component='span'>
+                      กดเพื่อเพิ่มรูปภาพห้องพักของคุณ
+                    </Button>
+                  </label>
+                </Grid>
                 {/*  */}
               </Grid>
             </Grid>
