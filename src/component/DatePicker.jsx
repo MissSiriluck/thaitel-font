@@ -9,7 +9,7 @@ import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system";
 
 //customize input date picker
-const RedditTextField = styled(props => (
+const RedditTextField = styled((props) => (
   <TextField InputProps={{ disableUnderline: true }} {...props} />
 ))(({ theme }) => ({
   "& .MuiFilledInput-root": {
@@ -57,8 +57,9 @@ const DateRangePickerDay = styled(MuiDateRangePickerDay)(
   })
 );
 
-function DatePicker() {
-  const [value, setValue] = React.useState([null, null]);
+function DatePicker(props) {
+  // const [value, setValue] = React.useState([null, null]);
+  // const [value, setValue] = React.useState([null, null]);
 
   const renderWeekPickerDay = (date, dateRangePickerDayProps) => {
     return <DateRangePickerDay {...dateRangePickerDayProps} />;
@@ -75,19 +76,21 @@ function DatePicker() {
         }}
       >
         <DateRangePicker
-          startText='Check-in Date'
-          endText='Check-out Date'
-          value={value}
+          startText="Check-in Date"
+          endText="Check-out Date"
+          // value={value}
+          value={props.checkIn}
           renderDay={renderWeekPickerDay}
-          onChange={newValue => {
-            setValue(newValue);
-          }}
+          // onChange={newValue => {
+          //   setValue(newValue);
+          // }}
+          onChange={(newvalue) => props.setCheckIn(newvalue)}
           renderInput={(startProps, endProps) => (
             <React.Fragment>
               <RedditTextField
-                id='filled-basic'
-                label='Filled'
-                variant='filled'
+                id="filled-basic"
+                label="Filled"
+                variant="filled"
                 sx={{
                   backgroundColor: "#fff",
                   borderRadius: "4px",
@@ -110,9 +113,9 @@ function DatePicker() {
                 {...startProps}
               />
               <RedditTextField
-                id='filled-basic'
-                label='Filled'
-                variant='filled'
+                id="filled-basic"
+                label="Filled"
+                variant="filled"
                 sx={{
                   backgroundColor: "#fff",
                   borderRadius: "4px",

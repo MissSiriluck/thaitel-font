@@ -92,7 +92,7 @@ function BookingCfmDetail() {
   const allTotalPrice = total * totalNight + totalService;
   // console.log("allTotalPrice.............................", allTotalPrice);
 
-  const handleClickToPayment = async (e) => {
+  const handleClickToPayment = async e => {
     e.preventDefault();
     try {
       const res = await axios.post("/payments/request-payment", {
@@ -110,7 +110,7 @@ function BookingCfmDetail() {
   };
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth='md' sx={{ mt: 15 }}>
       <Grid item>
         <Typography sx={{ fontSize: "36px", textAlign: "center", mb: 2 }}>
           ข้อมูลการจอง
@@ -153,7 +153,7 @@ function BookingCfmDetail() {
                     ลักษณะห้องพัก
                   </Typography>
                   <Box>
-                    {location?.state?.rooms?.map((resident) => (
+                    {location?.state?.rooms?.map(resident => (
                       <Box
                         sx={{
                           display: "flex",
