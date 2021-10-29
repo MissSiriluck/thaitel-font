@@ -6,6 +6,13 @@ import Footer from "../component/Footer";
 import CardOwnerHistoryList from "../component/CardOwnerHistoryList";
 
 function OwnerHistoryPage() {
+
+  // useEffect(() => {
+  //   const fetchResidentOwner = async () => {
+
+  //   }
+  // }, [])
+
   return (
     <>
       <SpaceforHead />
@@ -23,6 +30,7 @@ function OwnerHistoryPage() {
               ดูรายละเอียดที่พักของฉัน
             </Typography>
           </Grid>
+          { }
           <CardOwnerHistoryList />
         </Grid>
       </Container>

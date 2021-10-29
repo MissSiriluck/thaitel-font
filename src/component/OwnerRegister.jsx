@@ -20,8 +20,9 @@ import ButtonUnstyled, {
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
 import { CreateResidentContext } from "../context/createResidentContext";
+import axios from "axios";
 
-const CustomButtonRoot = styled("span")(`
+const CustomButtonRoot = styled("button")(`
     background-color: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -62,24 +63,35 @@ function OwnerRegister() {
 
   const history = useHistory();
 
-  const handleSubmitOwnerRegister = e => {
-    // history.pushState({
-    //   pathname: "/re"
-    // })
+  const handleSubmitOwnerRegister = async e => {
+
+    console.log('test')
+
     try {
-      history.push({
-          pathname: "/residentregisterpage2",
-          state: {
-          email: values.email,
-          phone: values.phone,
-          password: values.password,
-          confirmPassword: values.confirmPassword,
-          firstName: values.firstName,
-          lastName: values.lastName,
-          idCard: values.idCard,
-          idCardImgUrl: file,
-        },
-      });
+      // history.push({
+      //     pathname: "/residentregisterpage2",
+      //     state: {
+      //     email: values.email,
+      //     phone: values.phone,
+      //     password: values.password,
+      //     confirmPassword: values.confirmPassword,
+      //     firstName: values.firstName,
+      //     lastName: values.lastName,
+      //     idCard: values.idCard,
+      //     idCardImgUrl: file,
+      //   },
+      // });
+      const res = await axios.post("/hotelOwners/register", {
+        firstName: values.state.firstName,
+        lastName: values.state.lastName,
+        email: values.state.email,
+        telephone: values.state.phone,
+        password: values.state.password,
+        idCard: values.state.idCard,
+        idCardImgUrl: values.state.file,
+      })
+
+      history.push("/ownerlogin")
     } catch(err) {
       console.dir(err);
     }
@@ -131,6 +143,7 @@ function OwnerRegister() {
               justifyContent: "center",
               width: "100%",
             }}
+            onSubmit={handleSubmitOwnerRegister}
           >
             <Grid
               container
@@ -357,10 +370,9 @@ function OwnerRegister() {
                   multiple
                   type="file"
                   onChange={handleChangeFile}
-                  
                 />
                 <Button variant="contained" component="span">
-                  กดเพื่อเพิ่มรูปภาพห้องพักของคุณ
+                  กดเพื่อเพิ่มรูปภาพรูปบัตรประชาชน
                 </Button>
               </label>
             </Grid>
@@ -378,7 +390,7 @@ function OwnerRegister() {
                   marginBottom: "25px",
                 }}
               >
-                <CustomButton
+                {/* <CustomButton
                   sx={{
                     background: "#c62828",
                     color: "#fff",
@@ -398,6 +410,28 @@ function OwnerRegister() {
                     }}
                   >
                     ดำเนินการต่อ
+                  </Typography>
+                </CustomButton> */}
+                <CustomButton
+                  sx={{
+                    background: "#c62828",
+                    color: "#fff",
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "92%",
+                    marginTop: "10px",
+                    marginBottom: "50px",
+                  }}
+                  type="submit"
+                >
+                  <Typography
+                    style={{
+                      fontSize: 16,
+                      marginBottom: "1px",
+                      justifyContent: "start",
+                    }}
+                  >
+                    ลงทะเบียนผู้ปล่อยเช่า
                   </Typography>
                 </CustomButton>
               </Grid>

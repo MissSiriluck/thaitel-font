@@ -1,4 +1,6 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
+//Material UI
 import Button from "@mui/material/Button";
 import { Container, Grid, TextField } from "@mui/material";
 import { FcGoogle } from "react-icons/fc";
@@ -43,6 +45,9 @@ function CustomButton(props) {
 }
 
 function OwnerLogin() {
+
+  const history = useHistory();
+
   const handleSubmit = async event => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -53,6 +58,9 @@ function OwnerLogin() {
     };
 
     const res = await axios.post("/hotelOwners/login", values);
+
+    history.push("/ownerhistory")
+
   };
 
   return (
