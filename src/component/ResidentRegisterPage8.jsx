@@ -120,17 +120,7 @@ function ResidentRegisterPage8() {
         },
       });
 
-    //   const res1 = await axios.post("/hotelOwners/register", {
-    //     firstName: location.state.firstName,
-    //     lastName: location.state.lastName,
-    //     email: location.state.email,
-    //     telephone: location.state.phone,
-    //     password: location.state.password,
-    //     idCard: location.state.idCard,
-    //     idCardImgUrl: location.state.file,
-    // });
-
-      const res2 = await axios.post("/residents/createResident", {
+      const res = await axios.post("/residents/createResident", {
         typeof: location.state.type,
         name: location.state.residentName,
         rateStar: location.state.rateStar,
