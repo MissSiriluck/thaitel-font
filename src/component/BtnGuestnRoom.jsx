@@ -39,10 +39,10 @@ export function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function BtnGuestnRoom() {
+function BtnGuestnRoom(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [room, setRoom] = React.useState(1);
-  const [guest, setGuest] = React.useState(1);
+  // const [room, setRoom] = React.useState(1);
+  // const [guest, setGuest] = React.useState(1);
 
   //popover
   const handleClick = event => {
@@ -55,23 +55,24 @@ function BtnGuestnRoom() {
 
   //add number of guest
   function handleAddGuest() {
-    setGuest(current => current + 1);
+    // setGuest(current => current + 1);
+    props.setGuest(current => current + 1)
   }
 
   function handleMinusGuest() {
-    if (guest > 1) {
-      setGuest(current => current - 1);
+    if (props.guest > 1) {
+      props.setGuest(current => current - 1);
     }
   }
 
   //add number of room
   function handleAddRoom() {
-    setRoom(current => current + 1);
+    props.setRoom(current => current + 1);
   }
 
   function handleMinusRoom() {
-    if (room > 1) {
-      setRoom(current => current - 1);
+    if (props.room > 1) {
+      props.setRoom(current => current - 1);
     }
   }
 
@@ -87,7 +88,7 @@ function BtnGuestnRoom() {
         sx={{ background: "#fff", color: "#000", width: "500px" }}
         // className={classes.ButtonUnstyled}
       >
-        {`จำนวนผู้เข้าพัก ${guest} คน, ${room}  ห้อง`}
+        {`จำนวนผู้เข้าพัก ${props.guest} คน, ${props.room}  ห้อง`}
       </CustomButton>
       <Popover
         id={id}
@@ -124,7 +125,7 @@ function BtnGuestnRoom() {
                 <RemoveIcon onClick={handleMinusGuest} />
               </Fab>
               <span>
-                <Typography>{guest}</Typography>
+                <Typography>{props.guest}</Typography>
               </span>
               <Fab color='primary' aria-label='add' size='small'>
                 <AddIcon onClick={handleAddGuest} />
@@ -155,7 +156,7 @@ function BtnGuestnRoom() {
                 <RemoveIcon onClick={handleMinusRoom} />
               </Fab>
               <span>
-                <Typography>{room}</Typography>
+                <Typography>{props.room}</Typography>
               </span>
               <Fab color='primary' aria-label='add' size='small'>
                 <AddIcon onClick={handleAddRoom} />

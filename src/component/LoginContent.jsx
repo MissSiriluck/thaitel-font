@@ -78,6 +78,7 @@ function LoginContent() {
       console.dir(err)
     }
   };
+  
 
   return (
     <div>
