@@ -20,7 +20,7 @@ function HotelCard() {
     fetchResident();
   }, []);
 
-  console.log("residents....................", residents.length);
+  // console.log("residents....................", residents.length);
 
   return (
     <Grid container>

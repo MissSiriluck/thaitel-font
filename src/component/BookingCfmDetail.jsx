@@ -85,19 +85,25 @@ function BookingCfmDetail() {
 
   const getCheckIn = new Date(location.state.checkInDate);
   const getCheckInDate = getCheckIn.getDate();
-  // const getCheckInMonth = getCheckIn.getMonth();
-
-  // console.log("night................................", getCheckInMonth);
+  const fullDateCheckIn = getCheckIn.toLocaleString("en-US", {
+    weekday: "short",
+    // year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  // console.log("fullDateCheckIn...", fullDateCheckIn);
 
   const getCheckOut = new Date(location.state.checkOutDate);
+  const fullDateCheckOut = getCheckOut.toLocaleString("en-US", {
+    weekday: "short",
+    // year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  // console.log("fullDateCheckOut...", fullDateCheckOut);
   const getCheckOutDate = getCheckOut.getDate();
-  // console.log("night................................", getCheckOutDate);
-
   const totalNight = getCheckOutDate - getCheckInDate;
-  // console.log("totalNight.........................", totalNight);
-
   const allTotalPrice = total * totalNight + totalService;
-  // console.log("allTotalPrice.............................", allTotalPrice);
 
   const handleClickToPayment = async (e) => {
     e.preventDefault();
@@ -248,7 +254,7 @@ function BookingCfmDetail() {
                         width: "7rem",
                       }}
                     >
-                      Tue, Sep 21
+                      {fullDateCheckIn}
                     </Typography>
                     <Typography sx={{ p: 1, flexGrow: 1 }}>
                       {timeCheckInStart} AM - {timeCheckInEnd} AM
@@ -294,7 +300,7 @@ function BookingCfmDetail() {
                         width: "7rem",
                       }}
                     >
-                      Tue, Sep 21
+                      {fullDateCheckOut}
                     </Typography>
                     <Typography sx={{ p: 1, flexGrow: 1 }}>
                       {timeCheckOutStart} PM - {timeCheckOutEnd} PM
