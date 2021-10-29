@@ -87,14 +87,6 @@ function ResidentRegisterPage3() {
       history.push({
         pathname: "/residentregisterpage4",
         state: {
-          email: location.state.email,
-          phone: location.state.phone,
-          password: location.state.password,
-          confirmPassword: location.state.confirmPassword,
-          firstName: location.state.firstName,
-          lastName: location.state.lastName,
-          idCard: location.state.idCard,
-          idCardImgUrl: location.state.idCardImgUrl,
           typeof: values.typeof,
           residentName: values.residentName,
           rateStar: values.rateStar,
