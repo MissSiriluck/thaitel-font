@@ -24,8 +24,27 @@
   /* Height of the footer*/
   height: 40px;
   margin: 0;
+  z-index: 1;
 }
 
 .container_resident_residregister {
   background-image: url(../src/assets/images/bg_container_residentregisterpage2.jpeg);
+}
+
+@media (max-width: 1550px) {
+  .container_head_search {
+    height: 15rem;
+  }
+}
+
+@media (max-width: 1460px) {
+  .container_head_search {
+    height: 18rem;
+  }
+}
+
+@media (max-width: 1400px) {
+  .container_head_search {
+    height: 15rem;
+  }
 }

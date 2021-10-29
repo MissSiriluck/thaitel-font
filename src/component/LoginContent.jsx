@@ -313,10 +313,7 @@ function LoginContent() {
                   }}
                 />
               </Grid>
-              {/* <FormControlLabel
-                control={<Checkbox defaultChecked />}
-                label="Label"
-              /> */}
+
             </Grid>
             <Grid
               container

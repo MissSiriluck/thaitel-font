@@ -1,5 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link, useHistory } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory,
+} from "react-router-dom";
 import Button from "@mui/material/Button";
 import { Container, Grid, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -42,10 +48,9 @@ function CustomButton(props) {
 }
 
 function RegisterContent() {
-
   const history = useHistory();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
     try {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
@@ -58,7 +63,7 @@ function RegisterContent() {
       };
 
       const res = await axios.post("/users/register", values);
-      
+
       history.push({
         pathname: "/login",
         state: {
@@ -75,15 +80,15 @@ function RegisterContent() {
   return (
     <div>
       <Container
-        maxWidth="md"
-        justifyContent="center"
-        alignItems="center"
-        direction="column"
+        maxWidth='md'
+        justifyContent='center'
+        alignItems='center'
+        direction='column'
         sx={{ padding: 0, mt: 18 }}
       >
         <Box
-          alignItems="center"
-          justifyContent="center"
+          alignItems='center'
+          justifyContent='center'
           sx={{
             height: "60vh",
             display: "flex",
@@ -92,357 +97,347 @@ function RegisterContent() {
           }}
         >
           <Box
-            alignItems="center"
-            justifyContent="center"
+            alignItems='center'
+            justifyContent='center'
             sx={{ width: "80%", display: "flex" }}
             xs={8}
             sm={8}
           >
-            <Grid container justifyContent="start" alignItems="center" xs={10}>
-              <Typography
-                style={{
-                  fontSize: 40,
-                  marginBottom: 18,
-                  justifyContent: "start",
-                  fontWeight: 600,
-                }}
-              >
+            <Grid container justifyContent='start' alignItems='center' xs={10}>
+              <Typography variant='h4' component='div' sx={{ fontWeight: 600 }}>
                 สมัครสมาชิก
               </Typography>
             </Grid>
           </Box>
           {/*  */}
 
-          <Grid container sx={{width: '100%'}}>
-
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            container
-            spacing={2}
-            justifyContent="center"
-            alignItems="center"
-            sx={{
-              padding: 0,
-              width:'100%'
-            }}
-            xs={12}
-            md={12}
-          >
-            <Grid
+          <Grid container sx={{ width: "100%" }}>
+            <Box
+              component='form'
+              onSubmit={handleSubmit}
               container
               spacing={2}
-              justifyContent="center"
-              alignItems="center"
+              justifyContent='center'
+              alignItems='center'
               sx={{
                 padding: 0,
+                width: "100%",
               }}
               xs={12}
               md={12}
             >
               <Grid
-                item
-                xs={4}
-                md={4}
+                container
+                spacing={2}
+                justifyContent='center'
+                alignItems='center'
                 sx={{
                   padding: 0,
                 }}
+                xs={12}
+                md={12}
               >
-                <Typography
-                  style={{
-                    fontSize: 16,
-                    marginBottom: "3px",
-                    justifyContent: "start",
-                  }}
-                >
-                  ชื่อจริง
-                </Typography>
-                <TextField
-                  fullWidth
-                  label="ชื่อจริง"
-                  placeholder="กรอกชื่อจริง"
-                  id="firstName"
-                  name="firstName"
-                  multiline
-                  // value={values.firstName}
-                  // onChange={handleChange("firstName")}
-                  size="small"
-                  justifyContent="center"
-                  alignItems="center"
-                  sx={{
-                    padding: 0,
-                    marginBottom: "3px",
-                  }}
-                />
-              </Grid>
-              <Grid
-                item
-                xs={4}
-                md={4}
-                sx={{
-                  padding: 0,
-                  marginBottom: "3px",
-                }}
-              >
-                <Typography
-                  style={{
-                    fontSize: 16,
-                    marginBottom: "3px",
-                    justifyContent: "start",
-                  }}
-                >
-                  นามสกุล
-                </Typography>
-                <TextField
-                  fullWidth
-                  label="นามสกุล"
-                  placeholder="กรอกนามสกุล"
-                  id="lastName"
-                  name="lastName"
-                  multiline
-                  // value={values.lastName}
-                  // onChange={handleChange("lastName")}
-                  size="small"
-                  justifyContent="center"
-                  alignItems="center"
-                  sx={{
-                    padding: 0,
-                    marginBottom: "3px",
-                  }}
-                />
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              spacing={2}
-              justifyContent="center"
-              alignItems="center"
-              sx={{
-                padding: 0,
-                marginBottom: "3px",
-              }}
-              xs={12}
-              md={12}
-            >
-              <Grid
-                item
-                xs={4}
-                md={4}
-                sx={{
-                  padding: 0,
-                }}
-              >
-                <Typography
-                  style={{
-                    fontSize: 16,
-                    marginBottom: "3px",
-                    justifyContent: "start",
-                  }}
-                >
-                  อีเมล์
-                </Typography>
-                <TextField
-                  fullWidth
-                  label="อีเมล์"
-                  placeholder="กรอกอีเมล์"
-                  id="email"
-                  name="email"
-                  multiline
-                  // value={values.email}
-                  // onChange={handleChange("email")}
-                  size="small"
+                <Grid
+                  item
+                  xs={4}
+                  md={4}
                   sx={{
                     padding: 0,
                   }}
-                />
-              </Grid>
-              <Grid
-                item
-                xs={4}
-                md={4}
-                sx={{
-                  padding: 0,
-                }}
-              >
-                <Typography
-                  style={{
-                    fontSize: 16,
-                    marginBottom: "3px",
-                    justifyContent: "start",
-                  }}
-                >
-                  เบอร์โทรศัพท์
-                </Typography>
-                <TextField
-                  fullWidth
-                  id="outlined-textarea fullWidth"
-                  label="เบอร์โทรศัพท์"
-                  placeholder="กรอกเบอร์โทรศัพท์"
-                  id="phone"
-                  name="phone"
-                  multiline
-                  // value={values.phone}
-                  // onChange={handleChange("phone")}
-                  size="small"
-                  sx={{
-                    padding: 0,
-                  }}
-                />
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              spacing={2}
-              justifyContent="center"
-              alignItems="center"
-              sx={{
-                padding: 0,
-              }}
-              xs={12}
-              md={12}
-            >
-              <Grid
-                item
-                xs={8}
-                md={8}
-                sx={{
-                  padding: 0,
-                }}
-              >
-                <Typography
-                  style={{
-                    fontSize: 16,
-                    marginBottom: "3px",
-                    justifyContent: "start",
-                  }}
-                >
-                  รหัสผ่าน
-                </Typography>
-                <TextField
-                  fullWidth
-                  id="outlined-textarea fullWidth"
-                  label="รหัสผ่าน"
-                  placeholder="กรอกรหัสผ่าน"
-                  multiline
-                  id="password"
-                  name="password"
-                  // value={values.password}
-                  // onChange={handleChange("password")}
-                  size="small"
-                  sx={{
-                    padding: 0,
-                    marginBottom: "3px",
-                  }}
-                />
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              spacing={2}
-              justifyContent="center"
-              alignItems="center"
-              sx={{
-                padding: 0,
-                marginBottom: "3px",
-              }}
-              xs={12}
-              md={12}
-            >
-              <Grid item xs={8} md={8} sx={{ padding: 0 }}>
-                <Typography
-                  style={{
-                    fontSize: 16,
-                    marginBottom: "3px",
-                    justifyContent: "start",
-                  }}
-                >
-                  ยืนยันรหัสผ่าน
-                </Typography>
-                <TextField
-                  fullWidth
-                  id="outlined-textarea fullWidth"
-                  label="ยืนยันรหัสผ่าน"
-                  placeholder="ยืนยันรหัสผ่าน"
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  multiline
-                  // value={values.confirmPassword}
-                  // onChange={handleChange("confirmPassword")}
-                  size="small"
-                  sx={{
-                    padding: 0,
-                    marginBottom: "3px",
-                  }}
-                />
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              spacing={2}
-              justifyContent="center"
-              alignItems="center"
-              sx={{
-                padding: 0,
-              }}
-              xs={12}
-              md={12}
-            >
-              <Grid item xs={8} md={8}>
-                <CustomButton
-                  sx={{
-                    background: "#c62828",
-                    color: "#fff",
-                    display: "flex",
-                    justifyContent: "center",
-                    width: "100%",
-                    marginTop: "10px",
-                  }}
-                  type="submit"
                 >
                   <Typography
                     style={{
                       fontSize: 16,
-                      marginBottom: "1px",
+                      marginBottom: "3px",
                       justifyContent: "start",
                     }}
                   >
-                    สมัครสมาชิก
+                    ชื่อจริง
                   </Typography>
-                </CustomButton>
+                  <TextField
+                    fullWidth
+                    label='ชื่อจริง'
+                    placeholder='กรอกชื่อจริง'
+                    id='firstName'
+                    name='firstName'
+                    // value={values.firstName}
+                    // onChange={handleChange("firstName")}
+                    size='small'
+                    justifyContent='center'
+                    alignItems='center'
+                    sx={{
+                      padding: 0,
+                      marginBottom: "3px",
+                    }}
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={4}
+                  md={4}
+                  sx={{
+                    padding: 0,
+                    marginBottom: "3px",
+                  }}
+                >
+                  <Typography
+                    style={{
+                      fontSize: 16,
+                      marginBottom: "3px",
+                      justifyContent: "start",
+                    }}
+                  >
+                    นามสกุล
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    label='นามสกุล'
+                    placeholder='กรอกนามสกุล'
+                    id='lastName'
+                    name='lastName'
+                    // value={values.lastName}
+                    // onChange={handleChange("lastName")}
+                    size='small'
+                    justifyContent='center'
+                    alignItems='center'
+                    sx={{
+                      padding: 0,
+                      marginBottom: "3px",
+                    }}
+                  />
+                </Grid>
               </Grid>
-
               <Grid
-                item
+                container
+                spacing={2}
+                justifyContent='center'
+                alignItems='center'
+                sx={{
+                  padding: 0,
+                  marginBottom: "3px",
+                }}
                 xs={12}
                 md={12}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
               >
-                <Grid mr={1}>
-                  <Typography style={{ color: "grey", margin: "0" }}>
-                    เคยสมัครสมาชิกแล้ว ?
+                <Grid
+                  item
+                  xs={4}
+                  md={4}
+                  sx={{
+                    padding: 0,
+                  }}
+                >
+                  <Typography
+                    style={{
+                      fontSize: 16,
+                      marginBottom: "3px",
+                      justifyContent: "start",
+                    }}
+                  >
+                    อีเมล์
                   </Typography>
+                  <TextField
+                    fullWidth
+                    label='อีเมล์'
+                    placeholder='กรอกอีเมล์'
+                    id='email'
+                    name='email'
+                    // value={values.email}
+                    // onChange={handleChange("email")}
+                    size='small'
+                    sx={{
+                      padding: 0,
+                    }}
+                  />
                 </Grid>
-                <Grid mr={1}>
-                  <Link to="/login">
-                    <Typography
-                      style={{ color: "#16264D", fontWeight: 700, margin: "0" }}
-                    >
-                      เข้าสู่ระบบ
-                    </Typography>
-                  </Link>
+                <Grid
+                  item
+                  xs={4}
+                  md={4}
+                  sx={{
+                    padding: 0,
+                  }}
+                >
+                  <Typography
+                    style={{
+                      fontSize: 16,
+                      marginBottom: "3px",
+                      justifyContent: "start",
+                    }}
+                  >
+                    เบอร์โทรศัพท์
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    id='outlined-textarea fullWidth'
+                    label='เบอร์โทรศัพท์'
+                    placeholder='กรอกเบอร์โทรศัพท์'
+                    id='phone'
+                    name='phone'
+                    // value={values.phone}
+                    // onChange={handleChange("phone")}
+                    size='small'
+                    sx={{
+                      padding: 0,
+                    }}
+                  />
                 </Grid>
               </Grid>
-            </Grid>
-          </Box>
-          {/*  */}
-          </Grid>
+              <Grid
+                container
+                spacing={2}
+                justifyContent='center'
+                alignItems='center'
+                sx={{
+                  padding: 0,
+                }}
+                xs={12}
+                md={12}
+              >
+                <Grid
+                  item
+                  xs={8}
+                  md={8}
+                  sx={{
+                    padding: 0,
+                  }}
+                >
+                  <Typography
+                    style={{
+                      fontSize: 16,
+                      marginBottom: "3px",
+                      justifyContent: "start",
+                    }}
+                  >
+                    รหัสผ่าน
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    id='outlined-textarea fullWidth'
+                    label='รหัสผ่าน'
+                    placeholder='กรอกรหัสผ่าน'
+                    id='password'
+                    name='password'
+                    type='password'
+                    // value={values.password}
+                    // onChange={handleChange("password")}
+                    size='small'
+                    sx={{
+                      padding: 0,
+                      marginBottom: "3px",
+                    }}
+                  />
+                </Grid>
+              </Grid>
+              <Grid
+                container
+                spacing={2}
+                justifyContent='center'
+                alignItems='center'
+                sx={{
+                  padding: 0,
+                  marginBottom: "3px",
+                }}
+                xs={12}
+                md={12}
+              >
+                <Grid item xs={8} md={8} sx={{ padding: 0 }}>
+                  <Typography
+                    style={{
+                      fontSize: 16,
+                      marginBottom: "3px",
+                      justifyContent: "start",
+                    }}
+                  >
+                    ยืนยันรหัสผ่าน
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    id='outlined-textarea fullWidth'
+                    label='ยืนยันรหัสผ่าน'
+                    placeholder='ยืนยันรหัสผ่าน'
+                    id='confirmPassword'
+                    name='confirmPassword'
+                    type='password'
+                    // value={values.confirmPassword}
+                    // onChange={handleChange("confirmPassword")}
+                    size='small'
+                    sx={{
+                      padding: 0,
+                      marginBottom: "3px",
+                    }}
+                  />
+                </Grid>
+              </Grid>
+              <Grid
+                container
+                spacing={2}
+                justifyContent='center'
+                alignItems='center'
+                sx={{
+                  padding: 0,
+                }}
+                xs={12}
+                md={12}
+              >
+                <Grid item xs={8} md={8}>
+                  <CustomButton
+                    sx={{
+                      background: "#c62828",
+                      color: "#fff",
+                      display: "flex",
+                      justifyContent: "center",
+                      width: "100%",
+                      marginTop: "10px",
+                    }}
+                    type='submit'
+                  >
+                    <Typography
+                      style={{
+                        fontSize: 16,
+                        marginBottom: "1px",
+                        justifyContent: "start",
+                      }}
+                    >
+                      สมัครสมาชิก
+                    </Typography>
+                  </CustomButton>
+                </Grid>
 
+                <Grid
+                  item
+                  xs={12}
+                  md={12}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Grid mr={1}>
+                    <Typography style={{ color: "grey", margin: "0" }}>
+                      เคยสมัครสมาชิกแล้ว ?
+                    </Typography>
+                  </Grid>
+                  <Grid mr={1}>
+                    <Link to='/login' style={{ textDecoration: "none" }}>
+                      <Typography
+                        style={{
+                          color: "#16264D",
+                          fontWeight: 700,
+                          margin: "0",
+                        }}
+                      >
+                        เข้าสู่ระบบ
+                      </Typography>
+                    </Link>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Box>
+            {/*  */}
+          </Grid>
         </Box>
-        
       </Container>
     </div>
   );
