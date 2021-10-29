@@ -41,16 +41,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function SearchingBox() {
+function SearchingBox(props) {
   return (
     <Search sx={{ mr: 3 }}>
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>
       <StyledInputBase
-        placeholder='จะไปไหน'
+        placeholder="จะไปไหน"
         inputProps={{ "aria-label": "search" }}
         sx={{ color: "#000000" }}
+        value={props.value}
+        onChange={(e) => props.setResident(e.target.value)}
       />
     </Search>
   );

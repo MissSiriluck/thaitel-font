@@ -109,8 +109,8 @@ function AddcomDetail() {
     fetchResidentByid();
   }, []);
 
-  // console.log("rooms.............................", rooms);
-  // console.log("resident.............................", resident);
+  console.log("rooms.............................", rooms);
+  console.log("resident.............................", resident);
 
   const history = useHistory();
 

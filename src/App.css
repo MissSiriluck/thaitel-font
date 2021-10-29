@@ -31,9 +31,9 @@
   background-image: url(../src/assets/images/bg_container_residentregisterpage2.jpeg);
 }
 
-@media (max-width: 1870px) {
+@media (max-width: 1550px) {
   .container_head_search {
-    height: 20rem;
+    height: 15rem;
   }
 }
 
