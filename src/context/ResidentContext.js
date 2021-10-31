@@ -15,5 +15,3 @@ function ResidentContextProvider({ children }) {
   );
 }
 export { ResidentContextProvider, ResidentContext };
-
-// ใช้ like...... or ......
