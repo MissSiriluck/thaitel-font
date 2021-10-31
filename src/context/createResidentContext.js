@@ -31,7 +31,12 @@ function CreateResidentProvider ({ children }) {
         timeCheckOutToEnd:"",
         cancelDate: "",
         description: "",
-        roomCollection: [],
+        roomCollection: [
+            // roomTypeOf: "",
+            // roomAmount: "",
+            // roomSize: "",
+            // optionRoomDetail: "",
+        ],
         roomTypeOf: "",
         roomAmount:"",
         roomSize: "",

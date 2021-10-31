@@ -40,10 +40,10 @@ function CustomButton(props) {
 function CardHistoryList() {
   return (
     <Grid item xs={12} sx={{ mt: 3, mb: 15 }}>
-      {residents.map(resident => (
+      {residents.map((resident) => (
         <Grid
           item
-          id=''
+          id=""
           xs={12}
           sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 2, mb: 2 }}
         >

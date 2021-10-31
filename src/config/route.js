@@ -3,6 +3,7 @@ import BookingConfirmationPage from "../pages/BookingConfirmationPage";
 import Homepage from "../pages/Homepage";
 import LoginPage from "../pages/LoginPage";
 import OwnerDetailPage from "../pages/OwnerDetailPage";
+import OwnerHistoryPage from "../pages/OwnerHistoryPage";
 import OwnerLoginPage from "../pages/OwnerLoginPage";
 import OwnerRegisterPage from "../pages/OwnerRegisterPage";
 import RegisterPage from "../pages/RegisterPage";
@@ -14,6 +15,10 @@ import ResidentRegisterPage4Page from "../pages/ResidentRegisterPage4Page";
 import ResidentRegisterPage5Page from "../pages/ResidentRegisterPage5Page";
 import ResidentRegisterPage6Page from "../pages/ResidentRegisterPage6Page";
 import ResidentRegisterPage8Page from "../pages/ResidentRegisterPage8Page";
+
+// Edit create resident
+import CreateResident2 from "../pages/CreateResident"
+
 
 const route = {
   guest: [
@@ -44,6 +49,18 @@ const route = {
     {
       path: "/ownerregister",
       component: OwnerRegisterPage,
+    },
+    {
+      path: "/ownerhistory",
+      component: OwnerHistoryPage,
+    },
+    {
+      path: "/ownerdetail",
+      component: OwnerDetailPage,
+    },
+    { 
+      path: "/createresident",
+      component: CreateResident2,
     },
     {
       redirect: "/",
@@ -142,6 +159,10 @@ const route = {
     {
       path: "/ownerdetail",
       component: OwnerDetailPage,
+    },
+    {
+      path: "/ownerhistory",
+      component: OwnerHistoryPage,
     },
     {
       redirect: "/ownerhistory",

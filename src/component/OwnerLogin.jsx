@@ -1,12 +1,14 @@
 import React, { useContext, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useLocation,
+  useHistory,
+} from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-
-import axios from "../config/axios";
-import jwtDecode from "jwt-decode";
-import { setToken } from "../service/localStorage";
-import { AuthContext } from "../context/AuthContext";
-
+//Material UI
 import Button from "@mui/material/Button";
 import { Container, Grid, TextField } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -19,6 +21,10 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
+import axios from "../config/axios";
+import { setToken } from "../service/localStorage";
+import { AuthContext } from "../context/AuthContext";
+import jwtDecode from "jwt-decode";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -97,6 +103,7 @@ function OwnerLogin() {
 
   const handleSubmit = async event => {
     event.preventDefault();
+    console.log("Test");
     try {
       const data = new FormData(event.currentTarget);
       const values = {
@@ -108,7 +115,7 @@ function OwnerLogin() {
       setUser(jwtDecode(res.data.token));
 
       history.push({
-        pathname: "/",
+        pathname: "/ownerhistory",
         state: {
           successMessage: "Already Login.",
           from: " login page ",
@@ -185,7 +192,7 @@ function OwnerLogin() {
         </Grid>
 
         {/* --------------- line --------------- */}
-        <Grid
+        <Box
           container
           justifyContent='center'
           alignItems='center'
@@ -226,25 +233,7 @@ function OwnerLogin() {
               }}
             />
           </Grid>
-        </Grid>
 
-        {/* --------------- input email and password --------------- */}
-        <Box
-          container
-          spacing={2}
-          justifyContent='center'
-          alignItems='center'
-          sx={{
-            padding: 0,
-            margin: 0,
-            width: "100%",
-          }}
-          xs={12}
-          md={12}
-          component='form'
-          onSubmit={handleSubmit}
-          noValidate
-        >
           <Grid
             item
             xs={12}
@@ -319,32 +308,51 @@ function OwnerLogin() {
               }}
             />
           </Grid>
+
+          {/* --------------- button submit login--------------- */}
+          <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+            <CustomButton
+              sx={{
+                background: "#c62828",
+                color: "#fff",
+                display: "flex",
+                justifyContent: "center",
+                width: "100%",
+                mt: 3,
+              }}
+              type='submit'
+            >
+              <Typography
+                style={{
+                  fontSize: 16,
+                  marginBottom: "1px",
+                  justifyContent: "start",
+                }}
+              >
+                เข้าสู่ระบบ
+              </Typography>
+            </CustomButton>
+          </Grid>
         </Box>
 
-        {/* --------------- button submit login--------------- */}
-        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-          <CustomButton
-            sx={{
-              background: "#c62828",
-              color: "#fff",
-              display: "flex",
-              justifyContent: "center",
-              width: "100%",
-              mt: 3,
-            }}
-            type='submit'
-          >
-            <Typography
-              style={{
-                fontSize: 16,
-                marginBottom: "1px",
-                justifyContent: "start",
-              }}
-            >
-              เข้าสู่ระบบ
-            </Typography>
-          </CustomButton>
-        </Grid>
+        {/* --------------- input email and password --------------- */}
+        {/* <Box
+          container
+          spacing={2}
+          justifyContent='center'
+          alignItems='center'
+          sx={{
+            padding: 0,
+            margin: 0,
+            width: "100%",
+          }}
+          xs={12}
+          md={12}
+          component='form'
+          onSubmit={handleSubmit}
+          noValidate
+        >         
+        </Box> */}
 
         <Grid
           item

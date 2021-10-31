@@ -48,6 +48,11 @@ function BookingCfmDetail() {
   console.log("location...................................", location.state);
 
   const hotelName = location.state.resident.resident.name;
+  const timeCheckInStart = location.state.resident.resident.timeCheckInStart;
+  const timeCheckInEnd = location.state.resident.resident.timeCheckInEnd;
+  const timeCheckOutStart = location.state.resident.resident.timeCheckOutStart;
+  const timeCheckOutEnd = location.state.resident.resident.timeCheckOutEnd;
+
   // const price = location.state.rooms
   // const fetchRoomSummary = location.state.resident;
   // console.log(fetchRoomSummary);
@@ -80,19 +85,27 @@ function BookingCfmDetail() {
 
   const getCheckIn = new Date(location.state.checkInDate);
   const getCheckInDate = getCheckIn.getDate();
-  // console.log("night................................", getCheckInDate);
+  const fullDateCheckIn = getCheckIn.toLocaleString("en-US", {
+    weekday: "short",
+    // year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  // console.log("fullDateCheckIn...", fullDateCheckIn);
 
   const getCheckOut = new Date(location.state.checkOutDate);
+  const fullDateCheckOut = getCheckOut.toLocaleString("en-US", {
+    weekday: "short",
+    // year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  // console.log("fullDateCheckOut...", fullDateCheckOut);
   const getCheckOutDate = getCheckOut.getDate();
-  // console.log("night................................", getCheckOutDate);
-
   const totalNight = getCheckOutDate - getCheckInDate;
-  // console.log("totalNight.........................", totalNight);
-
   const allTotalPrice = total * totalNight + totalService;
-  // console.log("allTotalPrice.............................", allTotalPrice);
 
-  const handleClickToPayment = async e => {
+  const handleClickToPayment = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post("/payments/request-payment", {
@@ -110,7 +123,7 @@ function BookingCfmDetail() {
   };
 
   return (
-    <Container maxWidth='md' sx={{ mt: 15 }}>
+    <Container maxWidth="md" sx={{ mt: 15 }}>
       <Grid item>
         <Typography sx={{ fontSize: "36px", textAlign: "center", mb: 2 }}>
           ข้อมูลการจอง
@@ -153,7 +166,7 @@ function BookingCfmDetail() {
                     ลักษณะห้องพัก
                   </Typography>
                   <Box>
-                    {location?.state?.rooms?.map(resident => (
+                    {location?.state?.rooms?.map((resident) => (
                       <Box
                         sx={{
                           display: "flex",
@@ -241,12 +254,10 @@ function BookingCfmDetail() {
                         width: "7rem",
                       }}
                     >
-                      Tue, Sep 21
+                      {fullDateCheckIn}
                     </Typography>
                     <Typography sx={{ p: 1, flexGrow: 1 }}>
-                      {/* {fetchRoomSummary.resident.timeCheckInStart}-
-                      {fetchRoomSummary.resident.timeCheckInEnd} */}
-                      9.00AM -14.00PM
+                      {timeCheckInStart} AM - {timeCheckInEnd} AM
                     </Typography>
                   </Box>
                 </Box>
@@ -289,12 +300,10 @@ function BookingCfmDetail() {
                         width: "7rem",
                       }}
                     >
-                      Tue, Sep 21
+                      {fullDateCheckOut}
                     </Typography>
                     <Typography sx={{ p: 1, flexGrow: 1 }}>
-                      {/* {fetchRoomSummary.resident.timeCheckOutStart}-
-                      {fetchRoomSummary.resident.timeCheckOutEnd} */}
-                      9.00AM -14.00PM
+                      {timeCheckOutStart} PM - {timeCheckOutEnd} PM
                     </Typography>
                   </Box>
                 </Box>
