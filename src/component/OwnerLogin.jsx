@@ -1,18 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+
+import axios from "../config/axios";
+import jwtDecode from "jwt-decode";
+import { setToken } from "../service/localStorage";
+import { AuthContext } from "../context/AuthContext";
+
 import Button from "@mui/material/Button";
 import { Container, Grid, TextField } from "@mui/material";
-import { FcGoogle } from "react-icons/fc";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
-import axios from "../config/axios";
-import { Link, useHistory } from "react-router-dom";
-import { setToken } from "../service/localStorage";
-import { AuthContext } from "../context/AuthContext";
-import jwtDecode from "jwt-decode";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -45,10 +51,49 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
+// const initialValues = {
+//   email: "",
+//   password: "",
+//   showPassword: false,
+// };
+
 function OwnerLogin() {
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+    showPassword: false,
+  });
+
+  const [error, setError] = useState({});
+
   const history = useHistory();
 
   const { setUser } = useContext(AuthContext);
+
+  const validate = () => {
+    let temp = {};
+    temp.email = /$|.+@+..+/.test(values.email)
+      ? ""
+      : "กรุณาระบุอีเมลที่ถูกต้อง";
+    setError({ ...temp });
+
+    return Object.values(temp).every(x => x == "");
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
+
+  const handleChange = prop => event => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -222,6 +267,10 @@ function OwnerLogin() {
               placeholder='กรอกอีเมล์'
               name='email'
               size='small'
+              value={values.email}
+              onChange={handleChange("email")}
+              error={error.email}
+              {...(error & { error: true, helperText: error })}
               sx={{
                 padding: 0,
                 marginBottom: "3px",
@@ -239,17 +288,34 @@ function OwnerLogin() {
             >
               รหัสผ่าน
             </Typography>
+
             <TextField
               fullWidth
-              id='outlined-textarea fullWidth'
+              id='outlined-adornment-password'
               label='รหัสผ่าน'
               placeholder='กรอกรหัสผ่าน'
               name='password'
-              type='password'
+              value={values.password}
+              type={values.showPassword ? "text" : "password"}
+              onChange={handleChange("password")}
               size='small'
               sx={{
                 padding: 0,
                 marginBottom: "3px",
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='toggle password visibility'
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge='end'
+                    >
+                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
               }}
             />
           </Grid>
