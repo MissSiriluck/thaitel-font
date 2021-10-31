@@ -16,6 +16,10 @@ import ResidentRegisterPage5Page from "../pages/ResidentRegisterPage5Page";
 import ResidentRegisterPage6Page from "../pages/ResidentRegisterPage6Page";
 import ResidentRegisterPage8Page from "../pages/ResidentRegisterPage8Page";
 
+// Edit create resident
+import CreateResident2 from "../pages/CreateResident"
+
+
 const route = {
   guest: [
     {
@@ -53,6 +57,10 @@ const route = {
     {
       path: "/ownerdetail",
       component: OwnerDetailPage,
+    },
+    { 
+      path: "/createresident",
+      component: CreateResident2,
     },
     {
       redirect: "/",
