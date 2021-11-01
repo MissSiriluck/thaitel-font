@@ -1,5 +1,6 @@
 import { Grid, Rating, Typography } from "@mui/material";
-// import { residents } from "../mocks/residents";
+import { residents } from "../mocks/residents";
+// import { useHistory } from "react-router";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
@@ -38,110 +39,90 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function HotelCardList({ resident }) {
-  const result = resident.Rooms?.reduce(
-    (acc, cur, index) => {
-      if (index === 0) {
-        return [cur.pricePerNight, cur.pricePerNight];
-      }
-      let result = acc;
-      if (acc[0] < cur.pricePerNight) {
-        result[0] = cur.pricePerNight;
-      }
-      if (acc[1] > cur.pricePerNight) {
-        result[1] = cur.pricePerNight;
-      }
-      return result;
-    },
-    [0, 0]
-  );
+function HotelCardList({ data }) {
+  console.log(data);
+  // console.log(props.data[0])
+  // console.log(props.data[0].rateStar)
+  // console.log(props.data[0].name)
+  // console.log(props.data[0].province)
+  // console.log(props.data[0].imgURL)
+  // console.log(props.data[0].Rooms[0].pricePernight)
 
-  const history = useHistory();
-
-  const handleClicklookRoom = (e) => {
-    e.preventDefault();
-    history.push({
-      pathname: "/addcom",
-      state: { id: resident.id },
-    });
-  };
-
-  // console.log({ result });
   return (
     <Grid container sx={{ mb: 12 }}>
-      <Grid
-        item
-        id=""
-        xs={12}
-        sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 2, mb: 1 }}
-      >
-        <Grid container>
-          <Grid item xs={2.2}>
-            <img
-              // src={`${resident.url}`}
-              src={resident.ResidentImgs[0]?.imgUrl}
-              style={{
-                width: "170px",
-                height: "170px",
-                borderRadius: 8,
-              }}
-            />
-          </Grid>
-          <Grid item xs={9.8} sx={{ flexGlow: 1 }} sx={{ mt: 2 }}>
-            <Grid container>
-              <Grid item xs={8}>
-                <Typography sx={{ fontSize: "20px", mb: 1 }}>
-                  {`${resident.name}`}
-                </Typography>
-                <Typography>{`${resident.province}`}</Typography>
-              </Grid>
-              <Grid item xs={3.5}>
-                <Rating
-                  name="rate_star"
-                  defaultValue={resident.rateStar}
-                  precision={0.5}
-                  readOnly
-                  sx={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    mb: 2,
-                  }}
-                />
-                <Typography
-                  sx={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    fontSize: "22px",
-                  }}
-                >
-                  {`${result[1]} - ${result[0]}`} บาท
-                </Typography>
-                <Typography
-                  sx={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                  }}
-                >
-                  รวมธรรมเนียมและค่าภาษีแล้ว
-                </Typography>
-                <CustomButton
-                  sx={{
-                    background: "#03a9f4",
-                    color: "#fff",
-                    fontFamily: "'Noto Sans Thai', sans-serif",
-                    display: "flex",
-                    justifyContent: "center",
-                    mt: 1.5,
-                  }}
-                  onClick={handleClicklookRoom}
-                >
-                  ดูห้องว่างที่เหลืออยู่
-                </CustomButton>
+      {data.map((resident) => (
+        <Grid
+          item
+          id=""
+          xs={12}
+          sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 2, mb: 1 }}
+        >
+          <Grid container>
+            <Grid item xs={2.2}>
+              <img
+                src={`${resident.imgURL}`}
+                style={{
+                  width: "170px",
+                  height: "170px",
+                  borderRadius: 8,
+                }}
+              />
+            </Grid>
+            <Grid item xs={9.8} sx={{ flexGlow: 1 }} sx={{ mt: 2 }}>
+              <Grid container>
+                <Grid item xs={8}>
+                  <Typography sx={{ fontSize: "20px", mb: 1 }}>
+                    {`${resident.name}`}
+                  </Typography>
+                  <Typography>{`${resident.province}`}</Typography>
+                </Grid>
+                <Grid item xs={3.5}>
+                  <Rating
+                    name="rate_star"
+                    defaultValue={resident.rateStar}
+                    precision={0.5}
+                    readOnly
+                    sx={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      mb: 2,
+                    }}
+                  />
+                  <Typography
+                    sx={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      fontSize: "22px",
+                    }}
+                  >
+                    {`${resident.Rooms[0].pricePerNight} - ${resident.Rooms[1].pricePerNight}`}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                    }}
+                  >
+                    รวมธรรมเนียมและค่าภาษีแล้ว
+                  </Typography>
+                  <CustomButton
+                    sx={{
+                      background: "#03a9f4",
+                      color: "#fff",
+                      fontFamily: "'Noto Sans Thai', sans-serif",
+                      display: "flex",
+                      justifyContent: "center",
+                      mt: 1.5,
+                    }}
+                  >
+                    ดูห้องว่างที่เหลืออยู่
+                  </CustomButton>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      ))}
     </Grid>
   );
 }
