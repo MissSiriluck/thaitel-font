@@ -1,9 +1,11 @@
 import { Grid, Rating, Typography } from "@mui/material";
 import { residents } from "../mocks/residents";
+// import { useHistory } from "react-router";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
+
 
 //customize button blue
 const CustomButtonRoot = styled("span")(`
@@ -37,20 +39,29 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function HotelCardList() {
+function HotelCardList({data}) {
+  console.log(data)
+  // console.log(props.data[0])
+  // console.log(props.data[0].rateStar)
+  // console.log(props.data[0].name)
+  // console.log(props.data[0].province)
+  // console.log(props.data[0].imgURL)
+  // console.log(props.data[0].Rooms[0].pricePernight)
+  
+  
   return (
     <Grid container sx={{ mb: 12 }}>
-      {residents.map(resident => (
+      {data.map((resident) => (
         <Grid
           item
-          id=''
+          id=""
           xs={12}
           sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 2, mb: 1 }}
         >
           <Grid container>
             <Grid item xs={2.2}>
               <img
-                src={`${resident.url}`}
+                src={`${resident.imgURL}`}
                 style={{
                   width: "170px",
                   height: "170px",
@@ -68,8 +79,8 @@ function HotelCardList() {
                 </Grid>
                 <Grid item xs={3.5}>
                   <Rating
-                    name='rate_star'
-                    defaultValue={resident.rate_star}
+                    name="rate_star"
+                    defaultValue={resident.rateStar}
                     precision={0.5}
                     readOnly
                     sx={{
@@ -85,7 +96,7 @@ function HotelCardList() {
                       fontSize: "22px",
                     }}
                   >
-                    {`2300 - 1500 บาท`}
+                    {`${resident.Rooms[0].pricePerNight} - ${resident.Rooms[1].pricePerNight}`}
                   </Typography>
                   <Typography
                     sx={{

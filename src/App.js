@@ -34,7 +34,7 @@ function App() {
           <Route exact path='/register' component={RegisterPage} />
           <Route exact path='/ownerlogin' component={OwnerLoginPage} />
           <Route exact path='/ownerregister' component={OwnerRegisterPage} />
-          <Route exact path='/mainmenu' component={ShowResultPage} />
+          <Route exact path='/mainmenu/:resident/:checkin/:roominput' component={ShowResultPage} />
           <Route exact path='/addcom' component={AddCom} />
           <Route
             exact

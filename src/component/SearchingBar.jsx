@@ -4,6 +4,7 @@ import SearchingBox from "./SearchingBox";
 import DatePicker from "./DatePicker";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import { useHistory } from "react-router";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
@@ -47,11 +48,12 @@ function SearhchingBar() {
   const [checkIn, setCheckIn] = useState([null, null]);
   // const [checkOut, setCheckOut] = useState("");
   const [guest, setGuest] = useState(1);
-  const [room,setRoom]= useState(1);
-
-  function handleGetData() {
-    axios.get(
-      `http://localhost:7777/search/?resident=${resident}&&checkin=${checkIn}&&roominput=${room}`
+  const [room, setRoom] = useState(1);
+  const history = useHistory();
+  function HandleSumbit() {
+    // const history = useHistory();
+    history.push(
+      `/mainmenu/${resident}/${checkIn}/${room}`
     );
   }
   return (
@@ -71,7 +73,12 @@ function SearhchingBar() {
         <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
           <SearchingBox value={resident} setResident={setResident} />
           <DatePicker checkIn={checkIn} setCheckIn={setCheckIn} />
-          <BtnGuestnRoom guest={guest} setGuest={setGuest} room={room} setRoom={setRoom}/>
+          <BtnGuestnRoom
+            guest={guest}
+            setGuest={setGuest}
+            room={room}
+            setRoom={setRoom}
+          />
           <CustomButton
             sx={{
               background: "#03a9f4",
@@ -79,7 +86,7 @@ function SearhchingBar() {
               fontFamily: "'Noto Sans Thai', sans-serif",
               ml: 3,
             }}
-            onClick={handleGetData}
+            onClick={HandleSumbit}
           >
             Search
           </CustomButton>

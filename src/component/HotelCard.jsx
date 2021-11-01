@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import HotelCardList from "./HotelCardList";
 
-function HotelCard() {
+function HotelCard(props) {
   return (
     <Grid container>
       <Grid item>
@@ -9,7 +9,7 @@ function HotelCard() {
           sx={{ mb: 2 }}
         >{`ที่พักทั้งหมด ：พบที่พัก 200 แห่ง`}</Typography>
       </Grid>
-      <HotelCardList />
+      <HotelCardList data={props.data} />
     </Grid>
   );
 }
