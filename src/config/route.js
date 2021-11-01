@@ -63,6 +63,10 @@ const route = {
       component: CreateResident2,
     },
     {
+      path: "/addcom",
+      component: AddCom,
+    },
+    {
       redirect: "/",
     },
   ],

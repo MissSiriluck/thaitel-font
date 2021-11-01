@@ -5,6 +5,7 @@ const CreateResidentContext2 = createContext();
 const CreateResidentProvider2 = ({ children }) => {
 
   const [createResidentError, setCreateResidentError] = useState({ 
+    residentTypeOf: '',
     residentName: '',
     rateStar: '',
     address: '',
@@ -20,9 +21,16 @@ const CreateResidentProvider2 = ({ children }) => {
     timeCheckOutToStart: '',
     timeCheckOutToEnd: '',
     cancelDate: '',
+    bankAccept: false,
+    bankName: '',
+    accNumber: '',
+    accName: '',
+    bankImgUrl: '',
+    bankImageFile: null,
    });
 
   const [createResident, setCreateResident] = useState({
+    residentTypeOf: '',
     residentName: '',
     rateStar: '',
     address: '',
@@ -42,47 +50,48 @@ const CreateResidentProvider2 = ({ children }) => {
     serviceCollection: [
       {
         serviceName: 'ที่จอดรถ',
+        isHaving: false,
         isFree: true,
         pricePerTime: '',
       },
       {
         serviceName: 'อาหารเช้า',
-        isFree: true,
+        isFree: true,isHaving: false,
         pricePerTime: '',
       },
       {
         serviceName: 'Wifi',
-        isFree: true,
+        isFree: true,isHaving: false,
         pricePerTime: '',
       },
       {
-        serviceName: 'สระว่ายน้ำ',
+        serviceName: 'สระว่ายน้ำ',isHaving: false,
         isFree: true,
         pricePerTime: '',
       },
       {
         serviceName: 'แผนกต้อนรับส่วนหน้า 24 ชั่วโมง',
-        isFree: true,
+        isFree: true,isHaving: false,
         pricePerTime: '',
       },
       {
         serviceName: 'บาร์',
-        isFree: true,
+        isFree: true,isHaving: false,
         pricePerTime: '',
       },
       {
         serviceName: 'ห้องซาวน่า',
-        isFree: true,
+        isFree: true,isHaving: false,
         pricePerTime: '',
       },
       {
         serviceName: 'roomService',
-        isFree: true,
+        isFree: true,isHaving: false,
         pricePerTime: '',
       },
       {
         serviceName: 'gym',
-        isFree: true,
+        isFree: true,isHaving: false,
         pricePerTime: '',
       },
     ],

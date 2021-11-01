@@ -36,7 +36,57 @@ function CustomButton(props) {
 }
 
 function EditRoomForm({ room, editRoomCollection, index, setIsEdit }) {
-  const [editRoomForm, setEditRoomForm] = useState(room); //{optionRoomDetail: '',maxGuest: '',roomSize: '',roomTypeOf: '',roomAmount: '',noSmoking: false,petAllow: false,pricePerNigth: '',roomImageFile: null,roomShowImg: '',}
+  const [editRoomForm, setEditRoomForm, ] = useState(room); //{optionRoomDetail: '',maxGuest: '',roomSize: '',roomTypeOf: '',roomAmount: '',noSmoking: false,petAllow: false,pricePerNigth: '',roomImageFile: null,roomShowImg: '',}
+
+  const [editRoomFormError, setEditRoomFormError] = useState({
+    optionRoomDetail: '',
+    maxGuest: '',
+    roomSize: '',
+    roomTypeOf: '',
+    roomAmount: '',
+    pricePerNigth: '',
+    roomShowImg: '',
+  })
+
+  const handleClickSaveRoom = () => {
+
+    let allPass = true // สมมุติว่าทุกตัวผ่าน 
+
+    if (!editRoomForm.optionRoomDetail) {
+      allPass = false // สมมุติว่าถ้ามีตัวใดตัวนึงเข้า if ที่ check err, allPass จะมีค่าเป็น false 
+      setEditRoomFormError((curr) => ({ ...curr, optionRoomDetail: 'กรุณากรอกรายละเอียดที่พักเพิ่มเติม'}))
+    }
+    if (!editRoomForm.maxGuest) {
+      allPass = false
+      setEditRoomFormError((curr) => ({ ...curr, maxGuest: 'กรุณากรอกรายละเอียดที่พักเพิ่มเติม'}))
+    }
+    if (!editRoomForm.roomSize) {
+      allPass = false
+      setEditRoomFormError((curr) => ({ ...curr, roomSize: 'กรุณากรอกรายละเอียดขนาดที่พัก'}))
+    }
+    if (!editRoomForm.roomTypeOf) {
+      allPass = false
+      setEditRoomFormError((curr) => ({ ...curr, roomTypeOf: 'กรุณากรอกรายละเอียดชนิดของห้อง'}))
+    }
+    if (!editRoomForm.roomAmount) {
+      allPass = false
+      setEditRoomFormError((curr) => ({ ...curr, roomAmount: 'กรุณากรอกปริมาณของห้องพัก'}))
+    }
+    if (!editRoomForm.pricePerNigth) {
+      allPass = false
+      setEditRoomFormError((curr) => ({ ...curr, pricePerNigth: 'กรุณากรอกรายละเอียดราคาของห้อง'}))
+    }
+    if (!editRoomForm.roomShowImg) {
+      allPass = false
+      setEditRoomFormError((curr) => ({ ...curr, roomShowImg: 'กรุณาเพิ่มรูปของห้องพัก'}))
+    }
+
+    if (allPass) { //ถ้าไม่มี err ถึงทำ function นี้
+      editRoomCollection(index, editRoomForm);
+      setIsEdit(false);
+    }
+
+  };
 
   const handleChange = (type, e) => {
     setEditRoomForm((cur) => ({ ...cur, [type]: e.target.value }));
@@ -55,10 +105,10 @@ function EditRoomForm({ room, editRoomCollection, index, setIsEdit }) {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  const handleClickSaveRoom = () => {
-    editRoomCollection(index, editRoomForm);
-    setIsEdit(false);
-  };
+  // const handleClickSaveRoom = () => {
+  //   editRoomCollection(index, editRoomForm);
+  //   setIsEdit(false);
+  // };
 
   const Input = styled('input')({
     display: 'none',
@@ -124,6 +174,8 @@ function EditRoomForm({ room, editRoomCollection, index, setIsEdit }) {
                       sx={{ width: '100%' }}
                       value={editRoomForm.roomTypeOf}
                       onChange={(e) => handleChange('roomTypeOf', e)}
+                      // helperText= {roomFormError.roomTypeOf ? roomFormError.roomTypeOf : ""}
+                      // error={roomFormError.roomTypeOf}
                     />
                   </Grid>
                 </Grid>

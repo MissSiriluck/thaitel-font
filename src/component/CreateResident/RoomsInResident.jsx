@@ -5,6 +5,7 @@ import React, { useContext, useState } from 'react';
 import { CreateResidentContext2 } from '../../context/CreateResidentContext2';
 import AddRoomsForm from './AddRoomsForm';
 import RoomList from './RoomList';
+import ModalAddRoomsForm from './ModalAddRoomsForm';
 
 const CustomButtonRoot = styled('button')(`
     background-color: none;
@@ -39,14 +40,16 @@ function CustomButton(props) {
 }
 
 function RoomsInResident() {
-  const [isAdding, setIsAdding] = useState(false);
   const { createResident, setCreateResident } = useContext(CreateResidentContext2);
+  const [openModal, setOpenModal] = React.useState(false);
+  const handleOpen = () => setOpenModal(true);
+  const handleClose = () => setOpenModal(false);
 
   const addRoomCollection = (room) => {
     const clone = [...createResident.roomCollection];
     clone.push(room);
     setCreateResident((cur) => ({ ...cur, roomCollection: clone }));
-    setIsAdding(false);
+    setOpenModal(false);
   };
 
   const deleteRoomCollection = (index) => {
@@ -61,9 +64,7 @@ function RoomsInResident() {
     setCreateResident((cur) => ({ ...cur, roomCollection: clone }));
   };
 
-  const handleClickAdd = () => {
-    setIsAdding(true);
-  };
+ 
 
   return (
     <Container maxWidth='md'>
@@ -82,9 +83,10 @@ function RoomsInResident() {
         ))}
       </Stack>
 
-      {isAdding ? (
-        <AddRoomsForm addRoomCollection={addRoomCollection} />
-      ) : (
+      
+        <ModalAddRoomsForm addRoomCollection={addRoomCollection} openModal={openModal} handleOpen={handleOpen} handleClose={handleClose}/>
+         {/* <AddRoomsForm addRoomCollection={addRoomCollection} /> */}
+    
         <Grid item sx={{ display: 'flex', justifyContent: 'end' }}>
           <Grid container xs={12} justifyContent='end'>
             <Grid
@@ -107,7 +109,7 @@ function RoomsInResident() {
                   marginTop: '20px',
                   height: '40px',
                 }}
-                onClick={handleClickAdd}
+                onClick={handleOpen}
               >
                 <Typography
                   style={{
@@ -121,7 +123,7 @@ function RoomsInResident() {
             </Grid>
           </Grid>
         </Grid>
-      )}
+      
     </Container>
   );
 }
