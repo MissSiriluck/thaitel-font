@@ -1,5 +1,11 @@
 import React, { useContext } from "react";
-import { BrowserRouter as Router, Switch, Route, Link, useHistory } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory,
+} from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { FcGoogle } from "react-icons/fc";
 import Typography from "@mui/material/Typography";
@@ -49,12 +55,11 @@ function CustomButton(props) {
 }
 
 function LoginContent() {
-
   const history = useHistory();
 
-  const { setUser } = useContext(AuthContext)
+  const { setUser } = useContext(AuthContext);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
     event.preventDefault();
     try {
       const data = new FormData(event.currentTarget);
@@ -65,17 +70,16 @@ function LoginContent() {
       const res = await axios.post("/users/login", values);
       setToken(res.data.token);
       setUser(jwtDecode(res.data.token));
-      
+
       history.push({
         pathname: "/",
         state: {
-          successMessage:
-            "Already Login.",
+          successMessage: "Already Login.",
           from: " login page ",
         },
       });
-    } catch(err) {
-      console.dir(err)
+    } catch (err) {
+      console.dir(err);
     }
   };
 
@@ -313,7 +317,6 @@ function LoginContent() {
                   }}
                 />
               </Grid>
-
             </Grid>
             <Grid
               container

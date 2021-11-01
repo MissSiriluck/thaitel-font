@@ -1,3 +1,8 @@
+import axios from "../config/axios";
+import jwtDecode from "jwt-decode";
+import { setToken } from "../service/localStorage";
+import { AuthContext } from "../context/AuthContext";
+
 import React, { useContext, useState } from "react";
 import {
   BrowserRouter as Router,
@@ -21,6 +26,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
+
 import axios from "../config/axios";
 import { setToken } from "../service/localStorage";
 import { AuthContext } from "../context/AuthContext";
@@ -328,6 +334,7 @@ function OwnerLogin() {
                   marginBottom: "1px",
                   justifyContent: "start",
                 }}
+                type='submit'
               >
                 เข้าสู่ระบบ
               </Typography>
