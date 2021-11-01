@@ -15,6 +15,7 @@ import ResidentRegisterPage4Page from "../pages/ResidentRegisterPage4Page";
 import ResidentRegisterPage5Page from "../pages/ResidentRegisterPage5Page";
 import ResidentRegisterPage6Page from "../pages/ResidentRegisterPage6Page";
 import ResidentRegisterPage8Page from "../pages/ResidentRegisterPage8Page";
+import CardOwnerHistoryList from "../component/CardOwnerHistoryList";
 
 const route = {
   guest: [
@@ -46,10 +47,10 @@ const route = {
       path: "/ownerregister",
       component: OwnerRegisterPage,
     },
-    {
-      path: "/ownerhistory",
-      component: OwnerHistoryPage,
-    },
+    // {
+    //   path: "/ownerhistory",
+    //   component: OwnerHistoryPage,
+    // },
     {
       path: "/ownerdetail",
       component: OwnerDetailPage,
@@ -152,13 +153,19 @@ const route = {
       path: "/ownerdetail",
       component: OwnerDetailPage,
     },
+
     {
       path: "/ownerhistory",
       component: OwnerHistoryPage,
     },
-    {
-      redirect: "/ownerhistory",
-    },
+    // {
+    //   redirect: "/ownerhistory",
+    // },
+
+    // {
+    //   redirect: "/ownerhistory",
+    //   component: OwnerHistoryPage,
+    // },
   ],
 };
 
