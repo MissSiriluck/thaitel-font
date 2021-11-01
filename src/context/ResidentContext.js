@@ -5,6 +5,7 @@ const ResidentContext = createContext();
 
 function ResidentContextProvider({ children }) {
   const [residents, setResidents] = useState([]);
+  // console.log(residents);
 
   return (
     <>

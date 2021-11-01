@@ -27,7 +27,7 @@ function UserHistoryPage() {
     fetchBookingItem();
   }, []);
 
-  // console.log("booking.............", booking);
+  console.log("booking.............", booking);
 
   return (
     <>
