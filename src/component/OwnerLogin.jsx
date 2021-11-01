@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+import { BrowserRouter as Router, Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
+//Material UI
 import Button from "@mui/material/Button";
 import { Container, Grid, TextField } from "@mui/material";
 import { FcGoogle } from "react-icons/fc";
@@ -9,7 +11,6 @@ import ButtonUnstyled, {
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
 import axios from "../config/axios";
-import { Link, useHistory } from "react-router-dom";
 import { setToken } from "../service/localStorage";
 import { AuthContext } from "../context/AuthContext";
 import jwtDecode from "jwt-decode";
@@ -266,7 +267,7 @@ function OwnerLogin() {
         </Box>
 
         {/* --------------- input email and password --------------- */}
-        <Box
+        {/* <Box
           container
           spacing={2}
           justifyContent='center'
@@ -281,9 +282,8 @@ function OwnerLogin() {
           component='form'
           onSubmit={handleSubmit}
           noValidate
-        >
-         
-</Box>
+        >         
+        </Box> */}
        
 
         <Grid

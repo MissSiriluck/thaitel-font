@@ -51,18 +51,11 @@ function RoomCardResidentRegisterPage5(props) {
 
   console.log(props.roomCollection)
 
-  const [showEdit, setShowEdit] = useState(false)
-
-  const handleClickEditRoom = e => {
-    setShowEdit(!showEdit);
-
-  }
-
 
   return (
 
     <>
-    { showEdit ? 
+    { props.showEdit ? 
     <EditCreateRoomResidentRegisterPage5
     id={props.id}
     roomCollection={props.roomCollection}
@@ -156,7 +149,7 @@ function RoomCardResidentRegisterPage5(props) {
               width: "100%",
               height: "40px",
             }}
-            // onClick={signIn}
+            onClick={props.handleClickEditRoom}
           >
             <Typography
               style={{
@@ -166,7 +159,6 @@ function RoomCardResidentRegisterPage5(props) {
                 fontWeight: 500,
                 padding: "0 10px",
               }}
-              onClick={handleClickEditRoom}
             >
               EDIT
             </Typography>

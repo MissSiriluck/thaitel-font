@@ -52,20 +52,13 @@ function CardResidentRegisterPage2() {
   const history= useHistory();
 
   const {values, setValues} = useContext(CreateResidentContext)
+  
   const handleOnClickChooseType = (props, type) => {
 
     setValues({ ...values, [props]: type })
     
     history.push({pathname: "/residentregisterpage3",
         state:{
-          email: location.state.email,
-          phone: location.state.phone,
-          password: location.state.password,
-          confirmPassword: location.state.confirmPassword,
-          firstName: location.state.firstName,
-          lastName: location.state.lastName,
-          idCard: location.state.idCard,
-          idCardImgUrl: location.state.idCardImgUrl,
           typeof: type
       }
 })

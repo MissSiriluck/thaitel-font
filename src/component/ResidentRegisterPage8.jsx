@@ -63,7 +63,7 @@ function ResidentRegisterPage8() {
   
   const [showingImgBank, setshowingImgBank] = useState("")
   const [fileBank, setFileBank] = useState(null)
-  const [bankacc, setBankacc] = React.useState("");
+  const [bankacc, setBankacc] = useState("");
 
   const handleChangeFile = e => {
 
@@ -299,9 +299,9 @@ function ResidentRegisterPage8() {
                 <Select
                   labelId="demo-simple-select-helper-label"
                   id="demo-simple-select-helper"
-                  // value={bankacc}
+                  value={values.bankacc}
                   label="Age"
-                  // onChange={handleChange}
+                  onChange={e => handleChange('bankacc', e)}
                   size="small"
                   sx={{
                     display: "flex",

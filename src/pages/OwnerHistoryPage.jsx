@@ -52,9 +52,11 @@ function OwnerHistoryPage() {
               รายละเอียดที่พักของฉัน
             </Typography>
           </Grid>
-          {residents.map((item) => (
+          {residents?.map((item) => (
             <CardOwnerHistoryList resident={item} />
           ))}
+          {/* {} */}
+          <CardOwnerHistoryList />
         </Grid>
       </Container>
 

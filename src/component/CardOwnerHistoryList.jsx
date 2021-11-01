@@ -72,7 +72,7 @@ function CardOwnerHistoryList({ resident }) {
             {/* {resident?.ResidentImgs?.map((item) => ( */}
             <img
               // src={`${resident.url}`}
-              src={resident.imgUrl}
+              src={resident?.imgUrl}
               style={{
                 width: "200px",
                 height: "200px",
@@ -87,7 +87,7 @@ function CardOwnerHistoryList({ resident }) {
                 <Typography sx={{ mb: 1 }}>ชื่อที่พัก</Typography>
               </Grid>
               <Grid item xs={4}>
-                <Typography sx={{ mb: 1 }}>{resident.name}</Typography>
+                <Typography sx={{ mb: 1 }}>{resident?.name}</Typography>
               </Grid>
               {/* <Grid item xs={6}>
                 <Typography sx={{ mb: 1 }}>
@@ -121,7 +121,7 @@ function CardOwnerHistoryList({ resident }) {
                 <Typography sx={{ mb: 1 }}>จังหวัด</Typography>
               </Grid>
               <Grid item xs={10}>
-                <Typography sx={{ mb: 1 }}>{resident.province}</Typography>
+                <Typography sx={{ mb: 1 }}>{resident?.province}</Typography>
               </Grid>
             </Grid>
 
@@ -130,7 +130,7 @@ function CardOwnerHistoryList({ resident }) {
                 <Typography sx={{ mb: 1 }}>รายละเอียดอื่นๆ </Typography>
               </Grid>
               <Grid item xs={4} sx={{ marginLeft: "10px" }}>
-                <Typography sx={{ mb: 1 }}> {resident.description}</Typography>
+                <Typography sx={{ mb: 1 }}> {resident?.description}</Typography>
               </Grid>
             </Grid>
           </Grid>

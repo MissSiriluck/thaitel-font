@@ -68,8 +68,8 @@ function OwnerRegister() {
   const history = useHistory();
 
   const handleSubmitOwnerRegister = async e => {
-    e.preventDefault()
     console.log("test")
+    e.preventDefault()
     try {
 
       const res = await axios.post("/hotelOwners/register", {

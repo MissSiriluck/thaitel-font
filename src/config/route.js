@@ -17,6 +17,9 @@ import ResidentRegisterPage6Page from "../pages/ResidentRegisterPage6Page";
 import ResidentRegisterPage8Page from "../pages/ResidentRegisterPage8Page";
 import CardOwnerHistoryList from "../component/CardOwnerHistoryList";
 
+// Edit create resident
+import CreateResident2 from "../pages/CreateResident";
+
 const route = {
   guest: [
     {
@@ -54,6 +57,14 @@ const route = {
     {
       path: "/ownerdetail",
       component: OwnerDetailPage,
+    },
+    // {
+    //   path: "/createresident",
+    //   component: CreateResident2,
+    // },
+    {
+      path: "/addcom",
+      component: AddCom,
     },
     {
       redirect: "/",
@@ -116,6 +127,10 @@ const route = {
     {
       path: "/residentregisterpage3",
       component: ResidentRegisterPage3Page,
+    },
+    {
+      path: "/createresident",
+      component: CreateResident2,
     },
     {
       path: "/residentregisterpage4",
