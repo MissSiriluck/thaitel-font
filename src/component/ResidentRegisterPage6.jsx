@@ -53,56 +53,56 @@ function ResidentRegisterPage6() {
   const [parking, setParking] = useState({
     serviceName: 'ที่จอดรถ',
     isFree: true,
-    pricePerTime: 0
+    pricePerTime: ""
   })
 
   const [breakfast, setBreakfast] = useState({
     serviceName: 'อาหารเช้า',
     isFree: true,
-    pricePerTime: 0
+    pricePerTime: ""
   })
 
   const [wifi, setWifi] = useState({
     serviceName: 'Wifi',
     isFree: true,
-    pricePerTime: 0
+    pricePerTime: ""
   })
 
   const [pool, setPool] = useState({
     serviceName: 'สระว่ายน้ำ',
     isFree: true,
-    pricePerTime: 0
+    pricePerTime: ""
   })
 
   const [twentyfourHourReception, setTwentyfourHourReception] = useState(
     {
       serviceName: 'แผนกต้อนรับส่วนหน้า 24 ชั่วโมง',
       isFree: true,
-      pricePerTime: 0
+      pricePerTime: ""
     }
   )
   const [bar, setBar] = useState({
       serviceName: 'บาร์',
       isFree: true,
-      pricePerTime: 0  
+      pricePerTime: ""
   })
 
 const [sauna, setSauna] = useState({
   serviceName: 'ห้องซาวน่า',
       isFree: true,
-      pricePerTime: 0 
+      pricePerTime: "" 
 })
 
 const [roomService, setRoomService] = useState({
   serviceName: 'roomService',
       isFree: true,
-      pricePerTime: 0 
+      pricePerTime: ""
 })
 
 const [gym, setGym] = useState({
   serviceName: 'gym',
       isFree: true,
-      pricePerTime: 0
+      pricePerTime: ""
 })
 
 
@@ -120,7 +120,7 @@ const handleChangepricePerTimeForBreakfast = e => {
 
 const handleChangepricePerTimeForWifi = e => {
   const newWifi = {...wifi}
-  newWifi.pricePerTime=e.target.value
+  newWifi.pricePerTime = e.target.value
   setWifi(newWifi)
 }
 
@@ -183,14 +183,6 @@ const handleSubmitPage6 = async e => {
     history.push({
       pathname: "/residentregisterpage8",
       state: {
-        email: location.state.email,
-        phone: location.state.phone,
-        password: location.state.password,
-        confirmPassword: location.state.confirmPassword,
-        firstName: location.state.firstName,
-        lastName: location.state.lastName,
-        idCard: location.state.idCard,
-        idCardImgUrl: location.state.file,
         typeof: location.state.type,
         residentName: location.state.residentName,
         rateStar: location.state.rateStar,
@@ -413,7 +405,7 @@ const handleSubmitPage6 = async e => {
                   size='small'
                   sx={{ width: "100%", alignItems: "stretch" }}
                   value={wifi.pricePerTime}
-                  onChnage={handleChangepricePerTimeForWifi}
+                  onChange={handleChangepricePerTimeForWifi}
                   />
               </Grid> : null }
 

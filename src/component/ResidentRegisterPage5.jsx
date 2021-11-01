@@ -49,7 +49,7 @@ function ResidentRegisterPage5(props) {
   
   
   const location = useLocation();
-  console.log(location)
+  // console.log(location)
   const [roomCollections, setRoomCollections] = useState(location.state.roomCollection)
 
   const history = useHistory();
@@ -60,14 +60,6 @@ function ResidentRegisterPage5(props) {
       history.push({
         pathname: "/residentregisterpage6",
         state: {
-          email: location.state.email,
-          phone: location.state.phone,
-          password: location.state.password,
-          confirmPassword: location.state.confirmPassword,
-          firstName: location.state.firstName,
-          lastName: location.state.lastName,
-          idCard: location.state.idCard,
-          idCardImgUrl: location.state.file,
           typeof: location.state.type,
           residentName: location.state.residentName,
           rateStar: location.state.rateStar,
@@ -88,7 +80,7 @@ function ResidentRegisterPage5(props) {
           optionRoomDetail: location.state.optionRoomDetail,
           roomImgUrl: location.state.roomImgUrl,
           roomShowImg: location.state.roomShowImg,
-          roomCollection:roomCollections
+          roomCollection: roomCollections
         },
       });
     } catch(err) {
@@ -102,33 +94,7 @@ function ResidentRegisterPage5(props) {
       history.push({
         pathname: "/residentregisterpage4",
         state: {
-          email: location.state.email,
-          phone: location.state.phone,
-          password: location.state.password,
-          confirmPassword: location.state.confirmPassword,
-          firstName: location.state.firstName,
-          lastName: location.state.lastName,
-          idCard: location.state.idCard,
-          idCardImgUrl: location.state.file,
-          typeof: location.state.type,
-          residentName: location.state.residentName,
-          rateStar: location.state.rateStar,
-          address: location.state.address,
-          subDistrict: location.state.subDistrict,
-          district: location.state.district,
-          province: location.state.province,
-          postalCode: location.state.postalCode,
-          roomCollection: roomCollections,
-          roomTypeOf: location.state.roomTypeOf,
-          roomAmount: location.state.roomAmount,
-          roomSize: location.state.roomSize,
-          maxGuest: location.state.maxGuest,
-          optionRoomDetail: location.state.optionRoomDetail,
-          noSmoking: location.state.noSmoking,
-          petAllow: location.state.petAllow,
-          roomImgUrl: location.state.roomImgUrl,
-          roomShowImg: location.state.roomShowImg,
-          roomCollection: location.state.roomCollection,
+
         },
       });
     } catch(err) {
@@ -136,7 +102,13 @@ function ResidentRegisterPage5(props) {
     }
   }
 
-  const deleteRoomCollections = (index)=>{
+  const [showEdit, setShowEdit] = useState(false)
+
+  const handleClickEditRoom = e => {
+    setShowEdit(!showEdit);
+  }
+
+  const deleteRoomCollections = (index) =>{
     const newRoomCollections = [...roomCollections]
     newRoomCollections.splice(index,1)
     setRoomCollections(newRoomCollections)
@@ -154,9 +126,8 @@ function ResidentRegisterPage5(props) {
             key={index}
             index={index}
             roomCollection={item}
-            roomTypeOf={item.roomTypeOf}
-            roomAmount={item.roomAmount} 
             deleteRoomCollections={deleteRoomCollections}
+            handleClickEditRoom={handleClickEditRoom}
           />
         ))}
 

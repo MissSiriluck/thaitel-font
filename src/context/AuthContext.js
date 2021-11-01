@@ -5,6 +5,7 @@ const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const [user, setUser] = useState(initialUser);
+  
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       {children}

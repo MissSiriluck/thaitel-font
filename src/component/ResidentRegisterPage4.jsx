@@ -58,7 +58,6 @@ function ResidentRegisterPage4() {
   const [showImg, setShowImg] = useState("")
 
   const [file, setFile] = useState(null)
-  // console.log(file)
 
   const location = useLocation();
   console.log(location)
@@ -89,14 +88,6 @@ function ResidentRegisterPage4() {
       history.push({
         pathname: "/residentregisterpage5",
         state: {
-          email: location.state.email,
-          phone: location.state.phone,
-          password: location.state.password,
-          confirmPassword: location.state.confirmPassword,
-          firstName: location.state.firstName,
-          lastName: location.state.lastName,
-          idCard: location.state.idCard,
-          idCardImgUrl: location.state.idCardImgUrl,
           typeof: location.state.typeof,
           residentName: location.state.residentName,
           rateStar: location.state.rateStar,
@@ -135,7 +126,6 @@ function ResidentRegisterPage4() {
     setFile(e.target.files[0])
     const reader = new FileReader();
     reader.onloadend = () => {
-      //   console.log(reader.result);
       setShowImg(reader.result);
     };
     reader.readAsDataURL(e.target.files[0]);
@@ -144,7 +134,6 @@ function ResidentRegisterPage4() {
   const handleOnChangeCheckNoSmoking = ( props, event) => {
     setValues({ ...values, [props]: event.target.value });
     const clone = { ...values };
-    // clone.noSmoking = !clone.noSmoking;
     setValues({ ...values, [props]: event.target.value , noSmoking : !clone.noSmoking});
   };
 
@@ -458,7 +447,6 @@ function ResidentRegisterPage4() {
                     sx={{ width: "100%" }}
                     value={values.pricePerNigth}
                     onChange={e => handleChange('pricePerNigth', e)}
-
                   />
                 </Grid>
               </Grid>

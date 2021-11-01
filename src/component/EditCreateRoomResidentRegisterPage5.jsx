@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
 //Material 
 import { styled } from "@mui/material/styles";
@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -46,124 +47,129 @@ const CustomButtonRoot = styled("span")(`
 `);
 
 function CustomButton(props) {
-    return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
-  }  
+  return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
+}
 
-function EditCreateRoomResidentRegisterPage5(props) {
 
-    const {values, setValues} = useContext(CreateResidentContext)
-    const roomCollection = props.roomCollection
-    console.log(props)
+function EditCreateRoomResidentRegisterPage5({ index, roomCollection, deleteRoomCollections, handleClickEditRoom }) {
 
-    // const [roomCollection, setRoomCollection] = useState( props.roomCollection )
-    
-    const handleChangeFile = e => {
-        setFile(e.target.files[0])
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          //   console.log(reader.result);
-          setShowImg(reader.result);
-        };
-        reader.readAsDataURL(e.target.files[0]);
-      }
+  const {values, setValues} = useContext(CreateResidentContext)
 
-      const [showImg, setShowImg] = useState("")
+  const [showImg, setShowImg] = useState("")
 
-      const [file, setFile] = useState(null)
-      // console.log(file)
+  const [file, setFile] = useState(null)
 
-      const location = useLocation();
-      console.log(location)
-    
-      const history = useHistory();
-    
-    
-      const handleOnChangeCheckNoSmoking = ( props, event) => {
-        setValues({ ...values, [props]: event.target.value });
-        const clone = { ...values };
-        // clone.noSmoking = !clone.noSmoking;
-        setValues({ ...values, [props]: event.target.value , noSmoking : !clone.noSmoking});
-      };
-    
-      const handleOnChangeCheckPetAllow = ( props, event) => {
-        setValues({ ...values, [props]: event.target.value });
-        const clone = { ...values };
-        setValues({ ...values, [props]: event.target.value , petAllow : !clone.petAllow});
-      };
-    
-      const handleChange = ( props, event) => {
-        setValues({ ...values, [props]: event.target.value });
-      };
-    
-      const Input = styled("input")({
-        display: "none",
+  const location = useLocation();
+  console.log(location)
+
+  const history = useHistory();
+
+  const [roomCollections, setRoomCollections] = useState(roomCollection)
+  
+  console.log(roomCollections)
+
+  const handleSubmitPage4 = e => {
+    const eachRoom = {
+      roomTypeOf: values.roomTypeOf,
+      roomAmount: values.roomAmount,
+      roomSize: values.roomSize,
+      maxGuest: values.maxGuest,
+      noSmoking: values.noSmoking,
+      petAllow: values.petAllow,
+      optionRoomDetail: values.optionRoomDetail,
+      roomImgUrl: file,
+      roomShowImg: showImg,
+    }
+
+
+    const clone = [...values.roomCollection]
+
+    clone.push(eachRoom)
+
+    setValues({ ...values, roomCollection : clone});
+
+    try {
+      history.push({
+        pathname: "/residentregisterpage5",
+        state: {
+          // typeof: location.state.typeof,
+          // residentName: location.state.residentName,
+          // rateStar: location.state.rateStar,
+          // address: location.state.address,
+          // subDistrict: location.state.subDistrict,
+          // district: location.state.district,
+          // province: location.state.province,
+          // postalCode: location.state.postalCode,
+          // residentImgUrl: location.state.residentImgUrl,
+          // timeCheckInToStart: location.state.timeCheckInToStart,
+          // timeCheckInToEnd: location.state.timeCheckInToEnd,
+          // timeCheckOutToStart: location.state.timeCheckOutToStart,
+          // timeCheckOutToEnd: location.state.timeCheckOutToEnd,
+          // cancelDate: location.state.cancelDate,
+          // roomTypeOf: values.roomTypeOf,
+          // roomAmount: values.roomAmount,
+          // roomSize: values.roomSize,
+          // maxGuest: values.maxGuest,
+          // optionRoomDetail: values.optionRoomDetail,
+          // noSmoking: values.noSmoking,
+          // petAllow: values.petAllow,
+          // roomImgUrl: file,
+          // roomShowImg: showImg,
+          // roomCollection: clone,
+        },
       });
 
-      const handleSubmitPage5 = e => {
-        const eachRoom = {
-          roomTypeOf: values.roomTypeOf,
-          roomAmount: values.roomAmount,
-          roomSize: values.roomSize,
-          maxGuest: values.maxGuest,
-          noSmoking: values.noSmoking,
-          petAllow: values.petAllow,
-          optionRoomDetail: values.optionRoomDetail,
-          roomImgUrl: values.roomImgUrl,
-          roomShowImg: values.roomShowImg,
-        }
-    
-        const clone = [...values.roomCollection]
-    
-        clone.push(eachRoom)
-    
-        setValues({ ...values, roomCollection : clone});
-    
-        try {
-          history.push({
-            
-            state: {
-              email: location.state.email,
-              phone: location.state.phone,
-              password: location.state.password,
-              confirmPassword: location.state.confirmPassword,
-              firstName: location.state.firstName,
-              lastName: location.state.lastName,
-              idCard: location.state.idCard,
-              idCardImgUrl: location.state.idCardImgUrl,
-              typeof: location.state.typeof,
-              residentName: location.state.residentName,
-              rateStar: location.state.rateStar,
-              address: location.state.address,
-              subDistrict: location.state.subDistrict,
-              district: location.state.district,
-              postalCode: location.state.postalCode,
-                residentImgUrl: location.state.residentImgUrl ,
-              timeCheckInToStart: values.timeCheckInToStart,
-                timeCheckInToEnd: values.timeCheckInToEnd,
-                timeCheckOutToStart: values.timeCheckOutToStart,
-                timeCheckOutToEnd: values.timeCheckOutToEnd,
-                cancelDate: values.cancelDate,
-              roomTypeOf: values.roomTypeOf,
-              roomAmount: values.roomAmount,
-              roomSize: values.roomSize,
-              maxGuest: values.maxGuest,
-              optionRoomDetail: values.optionRoomDetail,
-              noSmoking: location.state.noSmoking,
-                petAllow: location.state.petAllow,
-              roomShowImg: location.state.roomShowImg,
-              roomCollection: clone,
-            },
-          });
-        } catch(err) {
-          console.dir(err);
-        }
-      }
+      // Reset ค่าใหม่
 
-      console.log(roomCollection)
+    } catch(err) {
+      console.dir(err);
+    }
+  }
 
-    return (
-        <>
-        <Grid item sx={{ display: "flex", flexDirection: "column", border: "2px solid #c4c4c4", borderRadius:'10px', padding: '20px' }}>
+  const handleChangeFile = e => {
+    setFile(e.target.files[0])
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setShowImg(reader.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  }
+
+  const handleOnChangeCheckNoSmoking = ( props, event) => {
+    setValues({ ...values, [props]: event.target.value });
+    const clone = { ...values };
+    setValues({ ...values, [props]: event.target.value , noSmoking : !clone.noSmoking});
+  };
+
+  const handleOnChangeCheckPetAllow = ( props, event) => {
+    setValues({ ...values, [props]: event.target.value });
+    const clone = { ...values };
+    setValues({ ...values, [props]: event.target.value , petAllow : !clone.petAllow});
+  };
+
+  const handleChange = ( props, event) => {
+    setValues({ ...values, [props]: event.target.value });
+  };
+
+  const Input = styled("input")({
+    display: "none",
+  });
+
+  
+
+  return (
+    <Container maxWidth="md" sx={{ padding: 0, mt: 18 }}>
+      <Grid container direction="column" sx={8} spacing={2}>
+        <Grid item sx={{ display: "flex", flexDirection: "column" }}>
+          <Typography
+            style={{
+              fontSize: 40,
+            }}
+          >
+            รูปแบบ และ ราคา
+          </Typography>
+        </Grid>
+        <Grid item sx={{ display: "flex", flexDirection: "column" }}>
           <Grid item sx={{ display: "flex", flexDirection: "column" }}>
             <Grid
               item
@@ -174,7 +180,7 @@ function EditCreateRoomResidentRegisterPage5(props) {
                   fontSize: 27,
                 }}
               >
-                แก้ไขข้อมูลห้องพักของคุณ
+                โปรดเลือก
               </Typography>
               <Grid
                 item
@@ -221,8 +227,8 @@ function EditCreateRoomResidentRegisterPage5(props) {
                       label="ประเภทห้องพัก"
                       size="small"
                       sx={{ width: "100%" }}
-                      value={roomCollection.roomTypeOf}
-                    //   onChange={e => handleChange('roomTypeOf', e)}
+                      value={values.roomTypeOf}
+                      onChange={e => handleChange('roomTypeOf', e)}
                     />
                   </Grid>
                 </Grid>
@@ -248,8 +254,8 @@ function EditCreateRoomResidentRegisterPage5(props) {
                         label="จำนวนของห้องพัก"
                         size="small"
                         sx={{ width: "100%", alignItems: "stretch" }}
-                        value={roomCollection.roomAmount}
-                        // onChange={e => handleChange('roomAmount', e)}
+                        value={values.roomAmount}
+                        onChange={e => handleChange('roomAmount', e)}
                       />
                     </Grid>
 
@@ -272,11 +278,11 @@ function EditCreateRoomResidentRegisterPage5(props) {
                       </Typography>
                       <TextField
                         id="outlined-password-input"
-                        label="ประเภทห้องพัก"
+                        label="ขนาดห้องพัก"
                         size="small"
                         sx={{ width: "100%", alignItems: "stretch" }}
-                        value={roomCollection.roomSize}
-                        // onChange={e => handleChange('roomSize', e)}
+                        value={values.roomSize}
+                        onChange={e => handleChange('roomSize', e)}
                       />
                     </Grid>
 
@@ -295,8 +301,8 @@ function EditCreateRoomResidentRegisterPage5(props) {
                       size="small"
                       xs={5}
                       sx={{ width: "100%" }}
-                      value={roomCollection.maxGuest}
-                    //   onChange={e => handleChange('maxGuest', e)}
+                      value={values.maxGuest}
+                      onChange={e => handleChange('maxGuest', e)}
                     />
                   </Grid>
                 </Stack>
@@ -315,8 +321,8 @@ function EditCreateRoomResidentRegisterPage5(props) {
                       label="รายละเอียดห้องพักเพิ่มเติม"
                       size="small"
                       sx={{ width: "100%" }}
-                      value={roomCollection.optionRoomDetail}
-                    //   onChange={e => handleChange('optionRoomDetail', e)}
+                      value={values.optionRoomDetail}
+                      onChange={e => handleChange('optionRoomDetail', e)}
                     />
                   </Grid>
                 </Grid>
@@ -382,7 +388,7 @@ function EditCreateRoomResidentRegisterPage5(props) {
                   onChange={handleChangeFile}
                 />
                 <Button variant="contained" component="span">
-                  กดเพื่อเลือกรูปภาพห้องพักของคุณ
+                  กดเพื่อเพิ่มรูปภาพห้องพักของคุณ
                 </Button>
               </label>
             </Grid>
@@ -405,16 +411,15 @@ function EditCreateRoomResidentRegisterPage5(props) {
                   <FormControlLabel
                     control={<Checkbox />}
                     label="ห้ามสูบบุหรี่"
-                    value={roomCollection.noSmoking}
+                    value={values.noSmoking}
                     onChange={e => handleOnChangeCheckNoSmoking('noSmoking', e)}
-
                   />
                   <FormControlLabel
                     control={<Checkbox />}
                     label="ห้ามนำสัตว์เลี้ยงเข้ามา"
-                    value={roomCollection.petAllow}
+                    value={values.petAllow}
                     onChange={e => handleOnChangeCheckPetAllow('petAllow', e)}
-                    // { roomCollection.petAllow ? checked : ""}
+
                   />
                 </Grid>
               </Grid>
@@ -446,48 +451,14 @@ function EditCreateRoomResidentRegisterPage5(props) {
                     sx={{ width: "100%" }}
                     value={values.pricePerNigth}
                     onChange={e => handleChange('pricePerNigth', e)}
-
                   />
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
-          <Grid item sx={{ display: "flex", justifyContent: "end" }}>
+        </Grid>
+        <Grid item sx={{ display: "flex", justifyContent: "end" }}>
           <Grid container xs={12} justifyContent="end">
-            <Grid
-              item
-              xs={3}
-              md={3}
-              sx={{
-                display: "flex",
-                justifyContent: "end",
-                marginBottom: "25px",
-              }}
-            >
-              <CustomButton
-                sx={{
-                  background: "#fff",
-                  color: "#07133C",
-                border: "1px solid #07133C",
-                  display: "flex",
-                  justifyContent: "center",
-                  width: "90%",
-                  marginTop: "-30px",
-                    marginRight: "20px",
-                  height: "20px",
-                }}
-                // onClick={handleSubmitPage5}
-              >
-                <Typography
-                  style={{
-                    fontSize: 16,
-                    justifyContent: "start",
-                  }}
-                >
-                  ยกเลิกการแก้ไขข้อมูล
-                </Typography>
-              </CustomButton>
-            </Grid>
             <Grid
               item
               xs={3}
@@ -504,12 +475,13 @@ function EditCreateRoomResidentRegisterPage5(props) {
                   color: "#fff",
                   display: "flex",
                   justifyContent: "center",
-                  width: "85%",
+                  width: "90%",
+                  marginBottom: "50px",
                   marginTop: "-30px",
 
                   height: "20px",
                 }}
-                // onClick={handleSubmitPage5}
+                onClick={handleSubmitPage4}
               >
                 <Typography
                   style={{
@@ -517,16 +489,15 @@ function EditCreateRoomResidentRegisterPage5(props) {
                     justifyContent: "start",
                   }}
                 >
-                  แก้ไขข้อมูลห้องพัก
+                  ดำเนินการต่อ
                 </Typography>
               </CustomButton>
             </Grid>
           </Grid>
         </Grid>
-        </Grid>
-        </>
-    )
+      </Grid>
+    </Container>
+  );
 }
 
-export default EditCreateRoomResidentRegisterPage5
-     
+export default EditCreateRoomResidentRegisterPage5;

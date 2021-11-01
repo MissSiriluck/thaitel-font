@@ -78,7 +78,6 @@ function LoginContent() {
       console.dir(err)
     }
   };
-  
 
   return (
     <div>
@@ -314,10 +313,7 @@ function LoginContent() {
                   }}
                 />
               </Grid>
-              {/* <FormControlLabel
-                control={<Checkbox defaultChecked />}
-                label="Label"
-              /> */}
+
             </Grid>
             <Grid
               container

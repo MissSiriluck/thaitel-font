@@ -85,14 +85,14 @@ function AddcomDetail() {
   const [resident, setResident] = useState({});
   // const [roomBookingAmount, setRoomBookingAmount] = useState(0);
 
-  const filterRoom = rooms.filter(item => item.roomBookingAmount > 0);
+  const filterRoom = rooms.filter((item) => item.roomBookingAmount > 0);
   console.log("filterRoom...........", filterRoom);
 
   useEffect(() => {
     const fetchResidentByid = async () => {
       // const res = await axios.get(`/residents/${user.id}`);
       const res = await axios.get(`/residents/${location.state.id}`);
-      const roomsFetch = res.data?.rooms?.map(item => {
+      const roomsFetch = res.data?.rooms?.map((item) => {
         return {
           roomId: item.id,
           typeOf: item.typeOf,
@@ -109,15 +109,15 @@ function AddcomDetail() {
     fetchResidentByid();
   }, []);
 
-  // console.log("rooms.............................", rooms);
-  // console.log("resident.............................", resident);
+  console.log("rooms.............................", rooms);
+  console.log("resident.............................", resident);
 
   const history = useHistory();
 
-  const roomEachInfo = rooms.map(item => item.typeOf);
+  const roomEachInfo = rooms.map((item) => item.typeOf);
   console.log(roomEachInfo);
 
-  const handleClickRoomSumary = e => {
+  const handleClickRoomSumary = (e) => {
     e.preventDefault();
     history.push({
       pathname: "/BookingConfirmation",
@@ -146,7 +146,7 @@ function AddcomDetail() {
 
   const updateRoomAmount = (roomId, roomBookingAmount) => {
     const newRoom = [...rooms];
-    const idx = newRoom.findIndex(item => item.roomId === roomId);
+    const idx = newRoom.findIndex((item) => item.roomId === roomId);
     if (idx !== -1) {
       newRoom[idx].roomBookingAmount = roomBookingAmount;
       setRooms(newRoom);
@@ -158,7 +158,7 @@ function AddcomDetail() {
     <Grid container>
       <Grid item>
         {/* <CarouselBox /> */}
-        {resident?.resident?.ResidentImgs?.map(resident => (
+        {resident?.resident?.ResidentImgs?.map((resident) => (
           <img
             src={resident.imgUrl}
             style={{ width: "1116px", height: "450px", mb: 2 }}
@@ -169,7 +169,7 @@ function AddcomDetail() {
         <Grid container>
           <Grid
             item
-            id=''
+            id=""
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
@@ -185,7 +185,7 @@ function AddcomDetail() {
           {/* Service block */}
           <Grid
             item
-            id=''
+            id=""
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
@@ -193,7 +193,7 @@ function AddcomDetail() {
               บริการภายในโรงแรม
             </Typography>
 
-            {resident?.resident?.ServiceItems?.map(resident => (
+            {resident?.resident?.ServiceItems?.map((resident) => (
               <Grid container sx={{ flexWrap: "wrap" }}>
                 <Grid
                   item
@@ -343,7 +343,7 @@ function AddcomDetail() {
         </Box>
         {/* {resident.rooms.map(item) => ()} */}
         {/* {resident?.rooms?.map((resident) => ( */}
-        {rooms?.map(room => (
+        {rooms?.map((room) => (
           <EachRoomCard room={room} updateRoomAmount={updateRoomAmount} />
         ))}
 
