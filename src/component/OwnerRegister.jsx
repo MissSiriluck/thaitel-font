@@ -20,8 +20,12 @@ import ButtonUnstyled, {
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
 import { CreateResidentContext } from "../context/createResidentContext";
+import jwtDecode from "jwt-decode";
+import axios from "../config/axios";
+import { setToken } from "../service/localStorage";
+import { AuthContext } from "../context/AuthContext";
 
-const CustomButtonRoot = styled("span")(`
+const CustomButtonRoot = styled("button")(`
     background-color: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -55,31 +59,36 @@ function CustomButton(props) {
 function OwnerRegister() {
   const { values, setValues } = useContext(CreateResidentContext);
 
+  const { setUser } = useContext(AuthContext);
+
   const [showImg, setShowImg] = useState("");
 
   const [file, setFile] = useState(null);
 
   const history = useHistory();
 
-  const handleSubmitOwnerRegister = e => {
-    // history.pushState({
-    //   pathname: "/re"
-    // })
+  const handleSubmitOwnerRegister = async e => {
+    console.log("test")
+    e.preventDefault()
     try {
-      history.push({
-        pathname: "/residentregisterpage2",
-        state: {
-          email: values.email,
-          phone: values.phone,
-          password: values.password,
-          confirmPassword: values.confirmPassword,
-          firstName: values.firstName,
-          lastName: values.lastName,
-          idCard: values.idCard,
-          idCardImgUrl: file,
-        },
-      });
-    } catch (err) {
+
+      const res = await axios.post("/hotelOwners/register", {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        telephone: values.phone,
+        password: values.password,
+        idCard: values.idCard,
+        idCardImgUrl: values.file,
+      })
+
+      // console.log(`token`, res.data.token)
+      
+      // setToken(res.data.token);
+      // setUser(jwtDecode(res.data.token));
+
+      history.push("/ownerlogin")
+    } catch(err) {
       console.dir(err);
     }
   };
@@ -130,6 +139,7 @@ function OwnerRegister() {
               justifyContent: "center",
               width: "100%",
             }}
+            onSubmit={handleSubmitOwnerRegister}
           >
             <Grid
               container
@@ -345,7 +355,7 @@ function OwnerRegister() {
                     </Typography>
                   )}
                 </Box>
-                <Grid
+                {/* <Grid
                   item
                   xs={12}
                   sx={{
@@ -355,6 +365,32 @@ function OwnerRegister() {
                     height: "40px",
                   }}
                 >
+                  อัพโหลดรูปบัตรประชาชน
+                </Typography> */}
+                {/* </Box> */}
+                <Grid
+              item
+              xs={12}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height:'40px',
+              }}
+            >
+              {/* <label htmlFor="contained-button-file" sx={{height:'40px',}}>
+                <Input
+                  accept="image/*"
+                  id="contained-button-file"
+                  multiple
+                  type="file"
+                  onChange={handleChangeFile}
+                />
+                <Button variant="contained" component="span">
+                  กดเพื่อเพิ่มรูปภาพรูปบัตรประชาชน
+                </Button>
+              </label> */}
+ 
                   <label
                     htmlFor='contained-button-file'
                     sx={{ height: "40px" }}
@@ -385,7 +421,7 @@ function OwnerRegister() {
                   marginBottom: "25px",
                 }}
               >
-                <CustomButton
+                {/* <CustomButton
                   sx={{
                     background: "#c62828",
                     color: "#fff",
@@ -405,6 +441,28 @@ function OwnerRegister() {
                     }}
                   >
                     ดำเนินการต่อ
+                  </Typography>
+                </CustomButton> */}
+                <CustomButton
+                  sx={{
+                    background: "#c62828",
+                    color: "#fff",
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "92%",
+                    marginTop: "10px",
+                    marginBottom: "50px",
+                  }}
+                  type="submit"
+                >
+                  <Typography
+                    style={{
+                      fontSize: 16,
+                      marginBottom: "1px",
+                      justifyContent: "start",
+                    }}
+                  >
+                    ลงทะเบียนผู้ปล่อยเช่า
                   </Typography>
                 </CustomButton>
               </Grid>

@@ -63,7 +63,7 @@ function ResidentRegisterPage8() {
   
   const [showingImgBank, setshowingImgBank] = useState("")
   const [fileBank, setFileBank] = useState(null)
-  const [bankacc, setBankacc] = React.useState("");
+  const [bankacc, setBankacc] = useState("");
 
   const handleChangeFile = e => {
 
@@ -120,17 +120,7 @@ function ResidentRegisterPage8() {
         },
       });
 
-      const res1 = await axios.post("/residents/createResident", {
-        firstName: location.state.firstName,
-        lastName: location.state.lastName,
-        email: location.state.email,
-        telephone: location.state.phone,
-        password: location.state.password,
-        idCard: location.state.idCard,
-        idCardImgUrl: location.state.file,
-    });
-
-      const res2 = await axios.post("/residents/createResident", {
+      const res = await axios.post("/residents/createResident", {
         typeof: location.state.type,
         name: location.state.residentName,
         rateStar: location.state.rateStar,
@@ -309,9 +299,9 @@ function ResidentRegisterPage8() {
                 <Select
                   labelId="demo-simple-select-helper-label"
                   id="demo-simple-select-helper"
-                  // value={bankacc}
+                  value={values.bankacc}
                   label="Age"
-                  // onChange={handleChange}
+                  onChange={e => handleChange('bankacc', e)}
                   size="small"
                   sx={{
                     display: "flex",
@@ -333,10 +323,11 @@ function ResidentRegisterPage8() {
                     </Typography>
                   </MenuItem>
 
-                  <MenuItem value={10}>ธนาคารไทยพาณิชย์</MenuItem>
-                  <MenuItem value={20}>ธนาคารออมสิน</MenuItem>
-                  <MenuItem value={30}>ธนาคารกรุงไทย</MenuItem>
-                  <MenuItem value={30}>ธนาคารกรุงศรี</MenuItem>
+                  <MenuItem value={"Bank of Ayudhya"}>Bank of Ayudhya</MenuItem>
+                  <MenuItem value={"Kasikorn bank"}>Kasikorn bank</MenuItem>
+                  <MenuItem value={"Krungthai bank"}>Krungthai bank</MenuItem>
+                  <MenuItem value={"Siam Commercial Bank"}>Siam Commercial Bank</MenuItem>
+                  <MenuItem value={"Aomsin bank"}>Aomsin bank</MenuItem>
                   
                 </Select>
                 {/* <FormHelperText>With label + helper text</FormHelperText> */}
@@ -370,7 +361,7 @@ function ResidentRegisterPage8() {
                     height: "100%",
                   }}
                 >
-                  อัพโหลดรูปห้องพักจำนวน 1 รูป
+                  อัพโหลดรูปหน้าบัญชีธนาคารของท่าน 1 รูป
               </Typography> }
           </Box>
           {/*  */}
