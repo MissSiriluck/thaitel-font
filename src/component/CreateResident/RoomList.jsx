@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
 import EditRoomForm from './EditRoom';
+import ModalEditRoomsForm from './ModalEditRoomsForm';
 
 const CustomButtonRoot = styled('button')(`
     background-color: none;
@@ -39,16 +40,22 @@ function CustomButton(props) {
 function RoomList({ index, room, deleteRoomCollection, editRoomCollection }) {
   const [isEdit, setIsEdit] = useState(false);
 
+  const [openModal, setOpenModal] = React.useState(false);
+  const handleOpen = () => setOpenModal(true);
+  const handleClose = () => setOpenModal(false);
+
   const handleClickDeleteRoom = () => {
     deleteRoomCollection(index);
   };
 
   const handleClickEdit = () => {
     setIsEdit(true);
+    handleOpen()
   };
 
   if (isEdit) {
-    return <EditRoomForm index={index} room={room} editRoomCollection={editRoomCollection} setIsEdit={setIsEdit} />;
+    // return <EditRoomForm index={index} room={room} editRoomCollection={editRoomCollection} setIsEdit={setIsEdit} />;
+    return <ModalEditRoomsForm index={index} room={room} editRoomCollection={editRoomCollection} setIsEdit={setIsEdit}  openModal={openModal} handleOpen={handleOpen} handleClose={handleClose}/>;
   }
 
   return (
@@ -66,8 +73,6 @@ function RoomList({ index, room, deleteRoomCollection, editRoomCollection }) {
     >
       <Grid item>
         <Typography sx={{ fontSize: '18px' }}>
-          {/* ห้องมาตรฐานเตียงเดี่ยว */}
-          {/* {props.roomName} */}
           {room.roomTypeOf}
         </Typography>
       </Grid>

@@ -1,18 +1,12 @@
 import * as React from "react";
 import { useContext, useState } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "../App.css";
 //Material Ui
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import ButtonUnstyled, {
@@ -58,20 +52,17 @@ function CustomButton(props) {
 
 function OwnerRegister() {
   const { values, setValues } = useContext(CreateResidentContext);
-
   const { setUser } = useContext(AuthContext);
 
   const [showImg, setShowImg] = useState("");
-
   const [file, setFile] = useState(null);
 
   const history = useHistory();
 
   const handleSubmitOwnerRegister = async e => {
-    console.log("test")
-    e.preventDefault()
+    console.log("test");
+    e.preventDefault();
     try {
-
       const res = await axios.post("/hotelOwners/register", {
         firstName: values.firstName,
         lastName: values.lastName,
@@ -80,15 +71,15 @@ function OwnerRegister() {
         password: values.password,
         idCard: values.idCard,
         idCardImgUrl: values.file,
-      })
+      });
 
       // console.log(`token`, res.data.token)
-      
+
       // setToken(res.data.token);
       // setUser(jwtDecode(res.data.token));
 
-      history.push("/ownerlogin")
-    } catch(err) {
+      history.push("/ownerlogin");
+    } catch (err) {
       console.dir(err);
     }
   };
@@ -369,16 +360,16 @@ function OwnerRegister() {
                 </Typography> */}
                 {/* </Box> */}
                 <Grid
-              item
-              xs={12}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height:'40px',
-              }}
-            >
-              {/* <label htmlFor="contained-button-file" sx={{height:'40px',}}>
+                  item
+                  xs={12}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "40px",
+                  }}
+                >
+                  {/* <label htmlFor="contained-button-file" sx={{height:'40px',}}>
                 <Input
                   accept="image/*"
                   id="contained-button-file"
@@ -390,7 +381,7 @@ function OwnerRegister() {
                   กดเพื่อเพิ่มรูปภาพรูปบัตรประชาชน
                 </Button>
               </label> */}
- 
+
                   <label
                     htmlFor='contained-button-file'
                     sx={{ height: "40px" }}
@@ -453,7 +444,7 @@ function OwnerRegister() {
                     marginTop: "10px",
                     marginBottom: "50px",
                   }}
-                  type="submit"
+                  type='submit'
                 >
                   <Typography
                     style={{

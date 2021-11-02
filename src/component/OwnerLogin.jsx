@@ -1,32 +1,30 @@
 import React, { useContext, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useLocation,
-  useHistory,
-} from "react-router-dom";
+import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import axios from "../config/axios";
+import { setToken } from "../service/localStorage";
+import { AuthContext } from "../context/AuthContext";
+import jwtDecode from "jwt-decode";
+
 //Material UI
 import Button from "@mui/material/Button";
-import { Container, Grid, TextField } from "@mui/material";
+import {
+  Container,
+  Grid,
+  IconButton,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
-import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import IconButton from "@mui/material/IconButton";
-import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
 
-import axios from "../config/axios";
-import { setToken } from "../service/localStorage";
-import { AuthContext } from "../context/AuthContext";
-import jwtDecode from "jwt-decode";
-
+//customize button style
 const CustomButtonRoot = styled("button")(`
     background-color: none;
     padding: 10px 20px;
@@ -59,27 +57,19 @@ function CustomButton(props) {
 }
 
 function OwnerLogin() {
+  const history = useHistory();
+  const { setUser } = useContext(AuthContext);
+
   const [values, setValues] = useState({
     email: "",
     password: "",
     showPassword: false,
   });
 
-  const [error, setError] = useState({});
-
-  const history = useHistory();
-
-  const { setUser } = useContext(AuthContext);
-
-  const validate = () => {
-    let temp = {};
-    temp.email = /$|.+@+..+/.test(values.email)
-      ? ""
-      : "กรุณาระบุอีเมลที่ถูกต้อง";
-    setError({ ...temp });
-
-    return Object.values(temp).every(x => x == "");
-  };
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleClickShowPassword = () => {
     setValues({
@@ -92,19 +82,51 @@ function OwnerLogin() {
     event.preventDefault();
   };
 
-  const handleChange = prop => event => {
-    setValues({ ...values, [prop]: event.target.value });
+  const handleChange = (props, event) => {
+    setValues({ ...values, [props]: event.target.value });
   };
 
-  const handleSubmit = async event => {
-    event.preventDefault();
-    console.log("Test");
+  const handleSubmit = async e => {
+    e.preventDefault();
+    // console.log("Test");
     try {
-      const data = new FormData(event.currentTarget);
+      const data = new FormData(e.currentTarget);
       const values = {
         email: data.get("email"),
         password: data.get("password"),
       };
+
+      if (!values.email) {
+        setErrors(curr => ({
+          ...curr,
+          email: "กรุณากรอกอีเมลของท่าน",
+        }));
+      } else if (
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+      ) {
+        setErrors(curr => ({
+          ...curr,
+          email: "กรุณากรอกอีเมลให้ถูกต้อง",
+        }));
+      } else {
+        setErrors(curr => ({
+          ...curr,
+          email: "กรุณากรอกข้อมูลให้ถูกต้อง",
+        }));
+      }
+
+      if (!values.password) {
+        setErrors(curr => ({
+          ...curr,
+          password: "กรุณากรอกรหัสผ่านของท่าน",
+        }));
+      } else {
+        setErrors(curr => ({
+          ...curr,
+          password: "กรุณากรอกข้อมูลให้ถูกต้อง",
+        }));
+      }
+
       const res = await axios.post("/hotelOwners/login", values);
       setToken(res.data.token);
       setUser(jwtDecode(res.data.token));
@@ -127,7 +149,7 @@ function OwnerLogin() {
       justifyContent='center'
       alignItems='center'
       direction='column'
-      sx={{ padding: 0, mt: 20 }}
+      sx={{ padding: 0, mt: 18 }}
     >
       <Grid Container sx={{ flexGlow: 1 }}>
         {/* --------------- head --------------- */}
@@ -203,6 +225,7 @@ function OwnerLogin() {
             <Grid
               item
               xs={5.2}
+              i
               sx={{
                 padding: 0,
                 borderBottom: "1px solid #C4C4C4",
@@ -252,9 +275,9 @@ function OwnerLogin() {
               name='email'
               size='small'
               value={values.email}
-              onChange={handleChange("email")}
-              error={error.email}
-              {...(error & { error: true, helperText: error })}
+              onChange={e => handleChange("email", e)}
+              helperText={errors.email ? errors.email : ""}
+              error={errors.email}
               sx={{
                 padding: 0,
                 marginBottom: "3px",
@@ -281,7 +304,9 @@ function OwnerLogin() {
               name='password'
               value={values.password}
               type={values.showPassword ? "text" : "password"}
-              onChange={handleChange("password")}
+              onChange={e => handleChange("password", e)}
+              helperText={errors.password ? errors.password : ""}
+              error={errors.password}
               size='small'
               sx={{
                 padding: 0,
@@ -307,6 +332,7 @@ function OwnerLogin() {
           {/* --------------- button submit login--------------- */}
           <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
             <CustomButton
+              type='submit'
               sx={{
                 background: "#c62828",
                 color: "#fff",
@@ -315,7 +341,6 @@ function OwnerLogin() {
                 width: "100%",
                 mt: 3,
               }}
-              type='submit'
             >
               <Typography
                 style={{
@@ -323,7 +348,6 @@ function OwnerLogin() {
                   marginBottom: "1px",
                   justifyContent: "start",
                 }}
-                type='submit'
               >
                 เข้าสู่ระบบ
               </Typography>
