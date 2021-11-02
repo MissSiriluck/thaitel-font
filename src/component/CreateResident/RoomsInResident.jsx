@@ -1,13 +1,15 @@
-import { Container, Grid, Stack, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
-import React, { useContext, useState } from 'react';
-import { CreateResidentContext2 } from '../../context/CreateResidentContext2';
-import AddRoomsForm from './AddRoomsForm';
-import RoomList from './RoomList';
-import ModalAddRoomsForm from './ModalAddRoomsForm';
+import { Container, Grid, Stack, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import ButtonUnstyled, {
+  buttonUnstyledClasses,
+} from "@mui/core/ButtonUnstyled";
+import React, { useContext, useState } from "react";
+import { CreateResidentContext2 } from "../../context/CreateResidentContext2";
+import AddRoomsForm from "./AddRoomsForm";
+import RoomList from "./RoomList";
+import ModalAddRoomsForm from "./ModalAddRoomsForm";
 
-const CustomButtonRoot = styled('button')(`
+const CustomButtonRoot = styled("button")(`
     background-color: none;
     padding: 10px 20px;
     border-radius: 30px;
@@ -40,7 +42,9 @@ function CustomButton(props) {
 }
 
 function RoomsInResident() {
-  const { createResident, setCreateResident } = useContext(CreateResidentContext2);
+  const { createResident, setCreateResident } = useContext(
+    CreateResidentContext2
+  );
   const [openModal, setOpenModal] = React.useState(false);
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
@@ -53,6 +57,7 @@ function RoomsInResident() {
   };
 
   const deleteRoomCollection = (index) => {
+    // axios here
     const clone = [...createResident.roomCollection];
     clone.splice(index, 1);
     setCreateResident((cur) => ({ ...cur, roomCollection: clone }));
@@ -65,10 +70,10 @@ function RoomsInResident() {
   };
 
   return (
-    <Container maxWidth='md'>
-      <Stack spacing={2} sx={{ display: 'flex', flexDirection: 'column' }}>
+    <Container maxWidth="md">
+      <Stack spacing={2} sx={{ display: "flex", flexDirection: "column" }}>
         <Grid item>
-          <Typography sx={{ fontSize: '36px' }}>ห้องทั้งหมดของคุณ</Typography>
+          <Typography sx={{ fontSize: "36px" }}>ห้องทั้งหมดของคุณ</Typography>
         </Grid>
         {createResident.roomCollection.map((room, index) => (
           <RoomList
@@ -81,47 +86,50 @@ function RoomsInResident() {
         ))}
       </Stack>
 
-      
-        <ModalAddRoomsForm addRoomCollection={addRoomCollection} openModal={openModal} handleOpen={handleOpen} handleClose={handleClose}/>
-         {/* <AddRoomsForm addRoomCollection={addRoomCollection} /> */}
-    
-        <Grid item sx={{ display: 'flex', justifyContent: 'end' }}>
-          <Grid container xs={12} justifyContent='end'>
-            <Grid
-              item
-              xs={2.5}
+      <ModalAddRoomsForm
+        addRoomCollection={addRoomCollection}
+        openModal={openModal}
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+      />
+      {/* <AddRoomsForm addRoomCollection={addRoomCollection} /> */}
+
+      <Grid item sx={{ display: "flex", justifyContent: "end" }}>
+        <Grid container xs={12} justifyContent="end">
+          <Grid
+            item
+            xs={2.5}
+            sx={{
+              display: "flex",
+              justifyContent: "end",
+              marginBottom: "25px",
+            }}
+          >
+            <CustomButton
               sx={{
-                display: 'flex',
-                justifyContent: 'end',
-                marginBottom: '25px',
+                background: "#64CEEF",
+                color: "#fff",
+                display: "flex",
+                justifyContent: "center",
+                width: "100%",
+                marginBottom: "50px",
+                marginTop: "20px",
+                height: "40px",
               }}
+              onClick={handleOpen}
             >
-              <CustomButton
-                sx={{
-                  background: '#64CEEF',
-                  color: '#fff',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  width: '100%',
-                  marginBottom: '50px',
-                  marginTop: '20px',
-                  height: '40px',
+              <Typography
+                style={{
+                  fontSize: 16,
+                  justifyContent: "start",
                 }}
-                onClick={handleOpen}
               >
-                <Typography
-                  style={{
-                    fontSize: 16,
-                    justifyContent: 'start',
-                  }}
-                >
-                  เพิ่มประเภทห้องพัก
-                </Typography>
-              </CustomButton>
-            </Grid>
+                เพิ่มประเภทห้องพัก
+              </Typography>
+            </CustomButton>
           </Grid>
         </Grid>
-      
+      </Grid>
     </Container>
   );
 }

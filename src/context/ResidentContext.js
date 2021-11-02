@@ -5,6 +5,7 @@ const ResidentContext = createContext();
 
 function ResidentContextProvider({ children }) {
   const [residents, setResidents] = useState([]);
+  // console.log(residents);
 
   return (
     <>
@@ -15,5 +16,3 @@ function ResidentContextProvider({ children }) {
   );
 }
 export { ResidentContextProvider, ResidentContext };
-
-// ใช้ like...... or ......
