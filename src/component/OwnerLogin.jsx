@@ -1,8 +1,3 @@
-import axios from "../config/axios";
-import jwtDecode from "jwt-decode";
-import { setToken } from "../service/localStorage";
-import { AuthContext } from "../context/AuthContext";
-
 import React, { useContext, useState } from "react";
 import {
   BrowserRouter as Router,
