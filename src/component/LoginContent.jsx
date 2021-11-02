@@ -1,5 +1,11 @@
 import React, { useContext } from "react";
-import { BrowserRouter as Router, Switch, Route, Link, useHistory } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory,
+} from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { FcGoogle } from "react-icons/fc";
 import Typography from "@mui/material/Typography";
@@ -13,6 +19,7 @@ import { styled } from "@mui/system";
 import axios from "../config/axios";
 import { setToken } from "../service/localStorage";
 import { AuthContext } from "../context/AuthContext";
+import { GoogleLogin } from "react-google-login";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -49,10 +56,26 @@ function CustomButton(props) {
 }
 
 function LoginContent() {
-
   const history = useHistory();
 
-  const { setUser } = useContext(AuthContext)
+  const responseGoogle = async (response) => {
+    console.log(response);
+    console.log(response.profileObj)
+    console.log(response.profileObj.email)
+    console.log(response.profileObj.giveName)
+    console.log(response.profileObj.familyName)
+    console.log(response.profileObj.googleId)
+    const res = await axios.post('/googleLogin',{})
+    history.push({
+      pathname: "/",
+      state: {
+        successMessage: "Already Login.",
+        from: " login page ",
+      },
+    });
+  };
+
+  const { setUser } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -62,35 +85,34 @@ function LoginContent() {
         email: data.get("email"),
         password: data.get("password"),
       };
-      const res = await axios.post("/users/login", values);
+      const res = await axios.post("http://localhost:7777/", values);
       setToken(res.data.token);
       setUser(jwtDecode(res.data.token));
-      
+
       history.push({
         pathname: "/",
         state: {
-          successMessage:
-            "Already Login.",
+          successMessage: "Already Login.",
           from: " login page ",
         },
       });
-    } catch(err) {
-      console.dir(err)
+    } catch (err) {
+      console.dir(err);
     }
   };
 
   return (
     <div>
       <Container
-        maxWidth='md'
-        justifyContent='center'
-        alignItems='center'
-        direction='column'
+        maxWidth="md"
+        justifyContent="center"
+        alignItems="center"
+        direction="column"
         sx={{ padding: 0, mt: 23 }}
       >
         <Box
-          alignItems='center'
-          justifyContent='center'
+          alignItems="center"
+          justifyContent="center"
           sx={{
             height: "60vh",
             display: "flex",
@@ -99,20 +121,20 @@ function LoginContent() {
           }}
         >
           <Box
-            alignItems='center'
-            justifyContent='center'
+            alignItems="center"
+            justifyContent="center"
             sx={{ width: "80%", display: "flex" }}
             xs={8}
             sm={8}
           >
             <Grid
               container
-              justifyContent='start'
-              alignItems='center'
+              justifyContent="start"
+              alignItems="center"
               xs={9}
               sx={{ height: "40px" }}
             >
-              <Typography variant='h3' component='div' sx={{ fontWeight: 600 }}>
+              <Typography variant="h3" component="div" sx={{ fontWeight: 600 }}>
                 เข้าสู่ระบบ
               </Typography>
             </Grid>
@@ -121,61 +143,72 @@ function LoginContent() {
 
           <Grid
             container
-            justifyContent='center'
-            alignContent='center'
+            justifyContent="center"
+            alignContent="center"
             sx={{
               padding: 0,
             }}
             xs={7}
             md={7}
           >
-            <Button
-              variant='contained'
-              sx={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <Grid
-                item
-                sx={{
-                  backgroundColor: "white",
-                  borderRadius: "50px",
-                  height: "18px",
-                  width: "18px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <FcGoogle />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  height: "32px",
-                  alignItems: "center",
-                }}
-              >
-                <Typography
-                  variant='p'
-                  sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
+            <GoogleLogin
+              clientId="653158791610-ii8s99m412cd01m9lmb9113fjjbocssd.apps.googleusercontent.com"
+              render={(renderProps) => (
+                <Button
+                  variant="contained"
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
                 >
-                  Sign In With Google
-                </Typography>
-              </Grid>
-            </Button>
+                  <Grid
+                    item
+                    sx={{
+                      backgroundColor: "white",
+                      borderRadius: "50px",
+                      height: "18px",
+                      width: "18px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <FcGoogle />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      height: "32px",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography
+                      variant="p"
+                      sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
+                    >
+                      Sign In With Google
+                    </Typography>
+                  </Grid>
+                </Button>
+              )}
+              buttonText="Login"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy={"single_host_origin"}
+            />
           </Grid>
 
           <Box
             container
             spacing={2}
-            justifyContent='center'
-            alignItems='center'
+            justifyContent="center"
+            alignItems="center"
             sx={{
               padding: 0,
               margin: 0,
@@ -183,16 +216,16 @@ function LoginContent() {
             }}
             xs={12}
             md={12}
-            component='form'
+            component="form"
             onSubmit={handleSubmit}
             noValidate
           >
-            <Grid container justifyContent='center'>
+            <Grid container justifyContent="center">
               <Grid
                 container
                 spacing={2}
-                justifyContent='space-around'
-                alignContent='center'
+                justifyContent="space-around"
+                alignContent="center"
                 sx={{
                   padding: 0,
                   marginTop: "0s",
@@ -204,8 +237,8 @@ function LoginContent() {
                 <Grid
                   container
                   spacing={2}
-                  justifyContent='center'
-                  alignItems='center'
+                  justifyContent="center"
+                  alignItems="center"
                   sx={{
                     padding: 0,
                     borderBottom: "2px solid #C4C4C4",
@@ -219,8 +252,8 @@ function LoginContent() {
                 <Grid
                   container
                   spacing={2}
-                  justifyContent='center'
-                  alignItems='center'
+                  justifyContent="center"
+                  alignItems="center"
                   sx={{
                     padding: 0,
                     borderBottom: "2px solid #C4C4C4",
@@ -236,8 +269,8 @@ function LoginContent() {
               <Grid
                 container
                 spacing={2}
-                justifyContent='center'
-                alignItems='center'
+                justifyContent="center"
+                alignItems="center"
                 sx={{
                   padding: 0,
                 }}
@@ -263,12 +296,12 @@ function LoginContent() {
                   </Typography>
                   <TextField
                     fullWidth
-                    label='อีเมล์'
-                    placeholder='กรอกอีเมล์'
-                    id='email'
-                    name='email'
+                    label="อีเมล์"
+                    placeholder="กรอกอีเมล์"
+                    id="email"
+                    name="email"
                     multiline
-                    size='small'
+                    size="small"
                     sx={{
                       padding: 0,
                       marginBottom: "3px",
@@ -280,8 +313,8 @@ function LoginContent() {
             <Grid
               container
               spacing={2}
-              justifyContent='center'
-              alignItems='center'
+              justifyContent="center"
+              alignItems="center"
               sx={{
                 padding: 0,
                 marginBottom: "3px",
@@ -301,25 +334,24 @@ function LoginContent() {
                 </Typography>
                 <TextField
                   fullWidth
-                  label='รหัสผ่าน'
-                  placeholder='กรอกรหัสผ่าน'
-                  id='password'
-                  name='password'
+                  label="รหัสผ่าน"
+                  placeholder="กรอกรหัสผ่าน"
+                  id="password"
+                  name="password"
                   multiline
-                  size='small'
+                  size="small"
                   sx={{
                     padding: 0,
                     marginBottom: "3px",
                   }}
                 />
               </Grid>
-
             </Grid>
             <Grid
               container
               spacing={2}
-              justifyContent='center'
-              alignItems='center'
+              justifyContent="center"
+              alignItems="center"
               sx={{
                 padding: 0,
               }}
@@ -341,7 +373,7 @@ function LoginContent() {
                     width: "80%",
                     marginTop: "10px",
                   }}
-                  type='submit'
+                  type="submit"
                 >
                   <Typography
                     style={{
@@ -372,7 +404,7 @@ function LoginContent() {
                 </Grid>
 
                 <Grid mr={1}>
-                  <Link to='/register' style={{ textDecoration: "none" }}>
+                  <Link to="/register" style={{ textDecoration: "none" }}>
                     <Typography
                       sx={{
                         color: "#16264D",

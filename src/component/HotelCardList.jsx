@@ -41,6 +41,7 @@ function CustomButton(props) {
 
 function HotelCardList({ data }) {
   console.log(data);
+  // console.log(data[0].ResidentImgs[0].imgUrl)
   // console.log(props.data[0])
   // console.log(props.data[0].rateStar)
   // console.log(props.data[0].name)
@@ -60,12 +61,13 @@ function HotelCardList({ data }) {
           <Grid container>
             <Grid item xs={2.2}>
               <img
-                src={`${resident.imgURL}`}
+                src={`${resident.ResidentImgs[0]?.imgUrl}`}
                 style={{
                   width: "170px",
                   height: "170px",
                   borderRadius: 8,
                 }}
+                alt="resident-img"
               />
             </Grid>
             <Grid item xs={9.8} sx={{ flexGlow: 1 }} sx={{ mt: 2 }}>

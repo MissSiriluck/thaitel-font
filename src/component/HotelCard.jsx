@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
-import axios from "axios";
-import { useContext, useEffect } from "react";
-import { ResidentContext } from "../context/ResidentContext";
+// import axios from "axios";
+// import { useContext, useEffect } from "react";
+// import { ResidentContext } from "../context/ResidentContext";
 import HotelCardList from "./HotelCardList";
 
 function HotelCard(props) {

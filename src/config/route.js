@@ -35,7 +35,7 @@ const route = {
       component: RegisterPage,
     },
     {
-      path: "/mainmenu",
+      path: `/mainmenu/:resident/:checkIn/:room`,
       component: ShowResultPage,
     },
     {
@@ -80,7 +80,7 @@ const route = {
       component: RegisterPage,
     },
     {
-      path: "/mainmenu",
+      path: `/mainmenu/:resident/:checkIn/:room`,
       component: ShowResultPage,
     },
     {

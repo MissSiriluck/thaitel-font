@@ -11,18 +11,18 @@ import { useState } from "react";
 import axios from "axios";
 function ShowResultPage() {
   const [res,setRes]=useState([])
-  let { resident, checkin, roominput } = useParams();
+  let { resident, checkIn, room } = useParams();
   console.log(resident);
-  console.log(checkin);
-  console.log(roominput);
+  // console.log(checkin);
+  // console.log(roominput);
   useEffect(() => {
     axios
-      .get(`http://localhost:7777/search?resident=${resident}&&checkin=${checkin}&&roominput=${roominput}`)
+      .get(`http://localhost:7777/search?resident=${resident}&&checkin=${checkIn}&&roominput=${room}`)
       .then((res) => {
         console.log(res);
         setRes(res.data.avail)
       });
-  }, [ resident, checkin, roominput]);
+  }, [ resident, checkIn, room]);
   return (
     <>
       <SpaceforHead />
