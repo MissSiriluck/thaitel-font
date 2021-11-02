@@ -1,18 +1,14 @@
-<<<<<<< HEAD
-import React, { useContext, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-
-import axios from "../config/axios";
-import jwtDecode from "jwt-decode";
-import { setToken } from "../service/localStorage";
-import { AuthContext } from "../context/AuthContext";
-
-=======
 import React, { useContext } from "react";
-import { BrowserRouter as Router, Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useLocation,
+  useHistory,
+} from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
 //Material UI
->>>>>>> 78a5b6195ec456955feef6a65401f4453c796bf5
 import Button from "@mui/material/Button";
 import { Container, Grid, TextField } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -21,17 +17,10 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
-<<<<<<< HEAD
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import IconButton from "@mui/material/IconButton";
-import InputAdornment from "@mui/material/InputAdornment";
-=======
 import axios from "../config/axios";
 import { setToken } from "../service/localStorage";
 import { AuthContext } from "../context/AuthContext";
 import jwtDecode from "jwt-decode";
->>>>>>> 78a5b6195ec456955feef6a65401f4453c796bf5
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -110,7 +99,7 @@ function OwnerLogin() {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    console.log('Test')
+    console.log("Test");
     try {
       const data = new FormData(event.currentTarget);
       const values = {
@@ -132,8 +121,6 @@ function OwnerLogin() {
       console.dir(err);
     }
   };
-
-
 
   return (
     <Container
@@ -217,6 +204,7 @@ function OwnerLogin() {
             <Grid
               item
               xs={5.2}
+              i
               sx={{
                 padding: 0,
                 borderBottom: "1px solid #C4C4C4",
@@ -318,30 +306,30 @@ function OwnerLogin() {
             />
           </Grid>
 
-           {/* --------------- button submit login--------------- */}
-        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-          <CustomButton
-            sx={{
-              background: "#c62828",
-              color: "#fff",
-              display: "flex",
-              justifyContent: "center",
-              width: "100%",
-              mt: 3,
-            }}
-            type='submit'
-          >
-            <Typography
-              style={{
-                fontSize: 16,
-                marginBottom: "1px",
-                justifyContent: "start",
+          {/* --------------- button submit login--------------- */}
+          <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+            <CustomButton
+              sx={{
+                background: "#c62828",
+                color: "#fff",
+                display: "flex",
+                justifyContent: "center",
+                width: "100%",
+                mt: 3,
               }}
+              type='submit'
             >
-              เข้าสู่ระบบ
-            </Typography>
-          </CustomButton>
-        </Grid>
+              <Typography
+                style={{
+                  fontSize: 16,
+                  marginBottom: "1px",
+                  justifyContent: "start",
+                }}
+              >
+                เข้าสู่ระบบ
+              </Typography>
+            </CustomButton>
+          </Grid>
         </Box>
 
         {/* --------------- input email and password --------------- */}
@@ -362,7 +350,6 @@ function OwnerLogin() {
           noValidate
         >         
         </Box> */}
-       
 
         <Grid
           item
