@@ -58,12 +58,6 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-// const initialValues = {
-//   email: "",
-//   password: "",
-//   showPassword: false,
-// };
-
 function OwnerLogin() {
   const [values, setValues] = useState({
     email: "",

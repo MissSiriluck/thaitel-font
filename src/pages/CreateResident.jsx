@@ -73,7 +73,7 @@ function CreateResident() {
       if (!createResident.residentImageUrl) {
         setCreateResidentError(curr => ({
           ...curr,
-          residentImageUrl: "กรุณาเลือกรูปภาพของที่พักของท่าน!!",5*
+          residentImageUrl: "กรุณาเลือกรูปภาพของที่พักของท่าน!!",
         }));
       }
       if (!createResident.timeCheckInToStart) {
