@@ -58,9 +58,9 @@ function CardResidentRegisterPage2() {
     setValues({ ...values, [props]: type })
     
     history.push({pathname: "/residentregisterpage3",
-        state:{
-          typeof: type
-      }
+      state:{
+        typeof: type
+    }
 })
   }
 

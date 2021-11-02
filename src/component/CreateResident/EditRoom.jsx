@@ -105,11 +105,6 @@ function EditRoomForm({ room, editRoomCollection, index, setIsEdit }) {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  // const handleClickSaveRoom = () => {
-  //   editRoomCollection(index, editRoomForm);
-  //   setIsEdit(false);
-  // };
-
   const Input = styled('input')({
     display: 'none',
   });
@@ -174,8 +169,8 @@ function EditRoomForm({ room, editRoomCollection, index, setIsEdit }) {
                       sx={{ width: '100%' }}
                       value={editRoomForm.roomTypeOf}
                       onChange={(e) => handleChange('roomTypeOf', e)}
-                      // helperText= {roomFormError.roomTypeOf ? roomFormError.roomTypeOf : ""}
-                      // error={roomFormError.roomTypeOf}
+                      helperText= {editRoomFormError.roomTypeOf ? editRoomFormError.roomTypeOf : ""}
+                      error={editRoomFormError.roomTypeOf}
                     />
                   </Grid>
                 </Grid>
@@ -203,6 +198,8 @@ function EditRoomForm({ room, editRoomCollection, index, setIsEdit }) {
                       sx={{ width: '100%', alignItems: 'stretch' }}
                       value={editRoomForm.roomAmount}
                       onChange={(e) => handleChange('roomAmount', e)}
+                      helperText= {editRoomFormError.roomAmount ? editRoomFormError.roomAmount : ""}
+                      error={editRoomFormError.roomAmount}
                     />
                   </Grid>
 
@@ -230,6 +227,8 @@ function EditRoomForm({ room, editRoomCollection, index, setIsEdit }) {
                       sx={{ width: '100%', alignItems: 'stretch' }}
                       value={editRoomForm.roomSize}
                       onChange={(e) => handleChange('roomSize', e)}
+                      helperText= {editRoomFormError.roomSize ? editRoomFormError.roomSize : ""}
+                      error={editRoomFormError.roomSize}
                     />
                   </Grid>
 
@@ -250,6 +249,8 @@ function EditRoomForm({ room, editRoomCollection, index, setIsEdit }) {
                       sx={{ width: '100%' }}
                       value={editRoomForm.maxGuest}
                       onChange={(e) => handleChange('maxGuest', e)}
+                      helperText= {editRoomFormError.maxGues ? editRoomFormError.maxGues : ""}
+                      error={editRoomFormError.maxGues}
                     />
                   </Grid>
                 </Stack>
@@ -270,6 +271,8 @@ function EditRoomForm({ room, editRoomCollection, index, setIsEdit }) {
                       sx={{ width: '100%' }}
                       value={editRoomForm.optionRoomDetail}
                       onChange={(e) => handleChange('optionRoomDetail', e)}
+                      helperText= {editRoomFormError.optionRoomDetail ? editRoomFormError.optionRoomDetail : ""}
+                      error={editRoomFormError.optionRoomDetail}
                     />
                   </Grid>
                 </Grid>

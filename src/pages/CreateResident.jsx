@@ -9,6 +9,8 @@ import Footer from '../component/Footer';
 import Header from '../component/Header';
 import { CreateResidentContext2 } from '../context/CreateResidentContext2';
 
+import axios from '../config/axios';
+
 function CreateResident() {
 
   const { createResident, setCreateResident, createResidentError, setCreateResidentError} = useContext(CreateResidentContext2)
@@ -27,6 +29,9 @@ function CreateResident() {
       if (!createResident.rateStar) {
         setCreateResidentError((curr) => ({ ...curr, rateStar: 'กรุณากรอกจำนวนดาวของท่าน' }))
       }
+      if (!isNaN(createResident.rateStar)) {
+        setCreateResidentError((curr) => ({ ...curr, rateStar: 'กรุณากรอกจำนวนดาวของท่านเป็นข้อมูลประเภทตัวเลข' }))
+      }
       if (!createResident.address) {
         setCreateResidentError((curr) => ({ ...curr, address: 'กรุณากรอกที่อยู่ของที่พักของท่าน' }))
       }
@@ -42,9 +47,12 @@ function CreateResident() {
       if (!createResident.postalCode) {
         setCreateResidentError((curr) => ({ ...curr, postalCode: 'กรุณากรอกไปรษณีย์ของที่พักของท่าน' }))
       }
-      if (!createResident.optionRoomDetail) {
-        setCreateResidentError((curr) => ({ ...curr, optionRoomDetail: 'กรุณากรอกรายละเอียดเพิ่มเติมของที่พักของท่าน' }))
+      if (createResident.postalCode.length !== 5) {
+        setCreateResidentError((curr) => ({ ...curr, postalCode: 'กรุณากรอกไปรษณีย์ของที่พักของท่านให้ถูกต้อง' }))
       }
+      // if (!createResident.optionRoomDetail) {
+      //   setCreateResidentError((curr) => ({ ...curr, optionRoomDetail: 'กรุณากรอกรายละเอียดเพิ่มเติมของที่พักของท่าน' }))
+      // }
       if (!createResident.residentImageUrl) {
         setCreateResidentError((curr) => ({ ...curr, residentImageUrl: 'กรุณาเลือกรูปภาพของที่พักของท่าน' }))
       }
@@ -63,9 +71,6 @@ function CreateResident() {
       if (!createResident.cancelDate) {
         setCreateResidentError((curr) => ({ ...curr, cancelDate: 'กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน' }))
       }
-      if (!createResident.cancelDate) {
-        setCreateResidentError((curr) => ({ ...curr, cancelDate: 'กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน' }))
-      }
       if (createResident.bankAccept == false) {
         setCreateResidentError((curr) => ({ ...curr, bankAccept: 'กรุณากดยินยอมข้อตกลง' }))
       }
@@ -75,14 +80,15 @@ function CreateResident() {
       if (!createResident.accNumber) {
         setCreateResidentError((curr) => ({ ...curr, accNumber: 'กรุณากรอกเลขบัญชีธนาคารของท่าน' }))
       }
+      if (createResident.accNumber.length !== 10 ) {
+        setCreateResidentError((curr) => ({ ...curr, accNumber: 'กรุณากรอกเลขบัญชีธนาคารของท่านให้ถูกต้อง' }))
+      }
       if (!createResident.bankName) {
         setCreateResidentError((curr) => ({ ...curr, bankName: 'กรุณากรอกธนาคารของบัญชีของท่าน' }))
       }
       if (!createResident.bankImgUrl) {
         setCreateResidentError((curr) => ({ ...curr, bankImgUrl: 'กรุณาเพิ่มรูปภาพหน้าบัญชีของท่าน' }))
       }      
-
-      // const res = await 
 
     } catch (err) {
       console.dir(err);

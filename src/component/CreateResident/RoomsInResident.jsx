@@ -64,8 +64,6 @@ function RoomsInResident() {
     setCreateResident((cur) => ({ ...cur, roomCollection: clone }));
   };
 
- 
-
   return (
     <Container maxWidth='md'>
       <Stack spacing={2} sx={{ display: 'flex', flexDirection: 'column' }}>

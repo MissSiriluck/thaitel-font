@@ -78,13 +78,11 @@ function ModalAddRoomsForm({openModal,addRoomCollection,handleClose}) {
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
         open={openModal}
-        onClose={handleClose}
-        BackdropComponent={Backdrop}
+        onClose={handleClose} 
+        BackdropComponent={Backdrop} 
         sx={{overflow:'auto'}}
       >
         <Box sx={{ background: 'white', overflow:'auto', paddingTop: "50px"}}>
-          {/* <h2 id="unstyled-modal-title">Text in a modal</h2>
-          <p id="unstyled-modal-description">Aliquid amet deserunt earum!</p> */}
           <AddRoomsForm addRoomCollection={addRoomCollection}/>
         </Box>
       </StyledModal>
