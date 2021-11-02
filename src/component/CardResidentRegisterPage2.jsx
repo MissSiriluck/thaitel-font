@@ -52,6 +52,7 @@ function CardResidentRegisterPage2() {
   const history= useHistory();
 
   const {values, setValues} = useContext(CreateResidentContext)
+  
   const handleOnClickChooseType = (props, type) => {
 
     setValues({ ...values, [props]: type })
