@@ -34,6 +34,12 @@ function CreateResident() {
           rateStar: "กรุณากรอกจำนวนดาวของท่าน!!",
         }));
       }
+      if (!isNaN(createResident.rateStar)) {
+        setCreateResidentError(curr => ({
+          ...curr,
+          rateStar: "กรุณากรอกจำนวนดาวของท่านเป็นข้อมูลประเภทตัวเลข",
+        }));
+      }
       if (!createResident.address) {
         setCreateResidentError(curr => ({
           ...curr,
@@ -64,12 +70,15 @@ function CreateResident() {
           postalCode: "กรุณากรอกไปรษณีย์ของที่พักของท่าน!!",
         }));
       }
-      if (!createResident.optionRoomDetail) {
+      if (createResident.postalCode.length !== 5) {
         setCreateResidentError(curr => ({
           ...curr,
-          optionRoomDetail: "กรุณากรอกรายละเอียดเพิ่มเติมของที่พักของท่าน!!",
+          postalCode: "กรุณากรอกไปรษณีย์ของที่พักของท่านให้ถูกต้อง",
         }));
       }
+      // if (!createResident.optionRoomDetail) {
+      //   setCreateResidentError((curr) => ({ ...curr, optionRoomDetail: 'กรุณากรอกรายละเอียดเพิ่มเติมของที่พักของท่าน' }))
+      // }
       if (!createResident.residentImageUrl) {
         setCreateResidentError(curr => ({
           ...curr,
@@ -112,7 +121,55 @@ function CreateResident() {
           cancelDate: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน!!",
         }));
       }
-      // ขาด Bank
+      if (!createResident.accName) {
+        setCreateResidentError(curr => ({
+          ...curr,
+          accName: "กรุณากรอกชื่อธนาคารของบัญชีของท่าน",
+        }));
+      }
+      if (!createResident.accNumber) {
+        setCreateResidentError(curr => ({
+          ...curr,
+          accNumber: "กรุณากรอกเลขบัญชีธนาคารของท่าน",
+        }));
+      }
+      if (createResident.accNumber.length !== 10) {
+        setCreateResidentError(curr => ({
+          ...curr,
+          accNumber: "กรุณากรอกเลขบัญชีธนาคารของท่านให้ถูกต้อง",
+        }));
+      }
+      if (!createResident.bankName) {
+        setCreateResidentError(curr => ({
+          ...curr,
+          bankName: "กรุณากรอกธนาคารของบัญชีของท่าน",
+        }));
+      }
+      if (!createResident.bankImgUrl) {
+        setCreateResidentError(curr => ({
+          ...curr,
+          bankImgUrl: "กรุณาเพิ่มรูปภาพหน้าบัญชีของท่าน",
+        }));
+      }
+
+      const res = await axios.post("/residents/createResident", {
+        typeOf: createResident.residentTypeOf,
+        name: createResident.residentName,
+        rateStar: createResident.rateStar,
+        address: createResident.address,
+        subDistrict: createResident.subDistrict,
+        district: createResident.district,
+        province: createResident.province,
+        postalCode: createResident.postalCode,
+        timeCheckInStart: createResident.timeCheckInToStart,
+        timeCheckInEnd: createResident.timeCheckInToEnd,
+        timeCheckOutStart: createResident.timeCheckOutToStart,
+        timeCheckOutEnd: createResident.timeCheckOutToEnd,
+        canCancle: createResident.cancelDate,
+        // hotelOwnerId: createResident,
+        services: createResident.serviceCollection,
+      });
+      history.push("/ownerlogin");
     } catch (err) {
       console.dir(err);
     }
