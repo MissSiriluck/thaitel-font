@@ -131,11 +131,13 @@ function OwnerLogin() {
       });
     } catch (err) {
       console.dir(err);
-      setErrors(curr => ({
-        ...curr,
-        email: "กรุณากรอกข้อมูลให้ถูกต้อง",
-        password: "กรุณากรอกข้อมูลให้ถูกต้อง",
-      }));
+      if (err.respone.status === 400) {
+        setErrors(curr => ({
+          ...curr,
+          email: "กรุณากรอกข้อมูลให้ถูกต้อง",
+          password: "กรุณากรอกข้อมูลให้ถูกต้อง",
+        }));
+      }
     }
   };
 
