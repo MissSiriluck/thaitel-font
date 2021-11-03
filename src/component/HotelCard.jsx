@@ -4,21 +4,22 @@ import { useContext, useEffect } from "react";
 import { ResidentContext } from "../context/ResidentContext";
 import HotelCardList from "./HotelCardList";
 
-function HotelCard() {
+function HotelCard({ data }) {
   const { residents, setResidents } = useContext(ResidentContext);
 
   useEffect(() => {
-    const fetchResident = async () => {
-      try {
-        const res = await axios.get("/residents");
-        setResidents(res.data.resident);
-        // console.log(res.data.resident);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchResident();
-  }, []);
+    // const fetchResident = async () => {
+    //   try {
+    //     const res = await axios.get("/residents");
+    //     setResidents(res.data.resident);
+    //     // console.log(res.data.resident);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // };
+    // fetchResident();
+    setResidents(data);
+  }, [setResidents, data]);
 
   // console.log("residents....................", residents.length);
 
