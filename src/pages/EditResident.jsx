@@ -1,5 +1,6 @@
 import axios from "../config/axios";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory, useLocation,useParams } from "react-router-dom";
 import CreateResidentHeader from "../component/CreateResident/CreateResidentHeader";
 import ResidentDetailForm from "../component/CreateResident/ResidentDetailForm";
 import RoomsInResident from "../component/CreateResident/RoomsInResident";
@@ -9,11 +10,9 @@ import TransactionDetail from "../component/CreateResident/TransactionDetail";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
 import { CreateResidentContext2 } from "../context/CreateResidentContext2";
-import { useHistory } from "react-router";
-import SpaceforHead from "../component/SpaceforHead";
 
-function CreateResident() {
-  const history = useHistory();
+
+function EditResident() {
   
   const {
     createResident,
@@ -22,7 +21,86 @@ function CreateResident() {
     setCreateResidentError,
   } = useContext(CreateResidentContext2);
 
-  const handleSubmit = async e => {
+  const history = useHistory();
+  const params = useParams()
+
+  const location = useLocation();
+  console.log(`location`, location)
+
+  // const [rooms, setRooms] = useState(location.state.rooms );
+  // const [resident, setResident] = useState(location.state.resident);
+
+  useEffect(() => {
+    const fetchResidentByid = async () => {
+      // const res = await axios.get(`/residents/${user.id}`);
+      const res = await axios.get(`/residents/residentId/${params.residentId}`);
+      console.log(`res.data`, res.data)
+      
+      // setRooms(res.data.rooms);
+      // setResident(res.data.resident);
+      setCreateResident({
+        residentTypeOf: res.data.resident.typeOf,
+        residentName: res.data.resident.name,
+        rateStar: res.data.resident.typeOf,
+        address: res.data.resident.rateStar,
+        subDistrict: res.data.resident.subDistrict,
+        district: res.data.resident.district,
+        description: res.data.resident.description,
+        province: res.data.resident.province,
+        postalCode: res.data.resident.postalCode,
+        optionRoomDetail: res.data.resident.optionRoomDetail,
+        residentImageFile: null,
+        residentImageUrl:res.data.resident.ResidentImgs[0].imgUrl,
+        timeCheckInToStart: res.data.resident.timeCheckInStart,
+        timeCheckInToEnd: res.data.resident.timeCheckInEnd,
+        timeCheckOutToStart: res.data.resident.timeCheckOutStart,
+        timeCheckOutToEnd: res.data.resident.timeCheckOutEnd,
+        cancelDate: res.data.resident.canCancle,
+        roomCollection: res.data.rooms.map(item=>({...item,roomTypeOf:item.typeOf})),
+        serviceCollection: res.data.resident.ServiceItems,
+        bankAccept:true,
+        bankName: res.data.resident.BankAccount.bankName,
+        accNumber: res.data.resident.BankAccount.AccountNumber,
+        accName: res.data.resident.BankAccount.AccountName,
+        bankImgUrl: res.data.resident.BankAccount.imageIdURL,
+        bankImageFile:null
+      })
+    };
+    fetchResidentByid();
+  }, [params])
+
+  // useEffect(() => {
+  //   if(location.state){
+  //     setCreateResident({
+  //       residentTypeOf: resident.typeOf,
+  //       residentName: resident.name,
+  //       rateStar: resident.typeOf,
+  //       address: resident.rateStar,
+  //       subDistrict: resident.subDistrict,
+  //       district: resident.district,
+  //       province: resident.province,
+  //       postalCode: resident.postalCode,
+  //       optionRoomDetail: resident.optionRoomDetail,
+  //       residentImageFile: null,
+  //       residentImageUrl:resident.ResidentImgs[0].imgUrl,
+  //       timeCheckInToStart: resident.timeCheckInStart,
+  //       timeCheckInToEnd: resident.timeCheckInEnd,
+  //       timeCheckOutToStart: resident.timeCheckOutStart,
+  //       timeCheckOutToEnd: resident.timeCheckOutEnd,
+  //       cancelDate: resident.canCancle,
+  //       roomCollection: rooms.map(item=>({...item,roomTypeOf:item.typeOf})),
+  //       serviceCollection: resident.ServiceItems,
+  //       bankAccept:true,
+  //       bankName: resident.BankAccount.bankName,
+  //       accNumber: resident.BankAccount.AccountNumber,
+  //       accName: resident.BankAccount.AccountName,
+  //       bankImgUrl: resident.BankAccount.imageIdURL,
+  //       bankImageFile:null
+  //     })
+  //   }
+  // }, [])
+
+  const handleSubmit = async (e) => {
     try {
       let allPase = true;
 
@@ -172,15 +250,16 @@ function CreateResident() {
         }));
       }
 
-      if(allPase){
+      if(allPase) {
 
-      const resResident = await axios.post("/residents/createResident", {
+      const resResident = await axios.put(`/residents/editResident/${location.state.resident.id}`, {
         typeOf: createResident.residentTypeOf,
         name: createResident.residentName,
         rateStar: createResident.rateStar,
         address: createResident.address,
         subDistrict: createResident.subDistrict,
         district: createResident.district,
+        description: createResident.description,
         province: createResident.province,
         postalCode: createResident.postalCode,
         timeCheckInStart: createResident.timeCheckInToStart,
@@ -188,8 +267,8 @@ function CreateResident() {
         timeCheckOutStart: createResident.timeCheckOutToStart,
         timeCheckOutEnd: createResident.timeCheckOutToEnd,
         canCancle: createResident.cancelDate,
+        // hotelOwnerId: createResident,
         services: createResident.serviceCollection,
-        description: createResident.description
       });
 
       const formImageResident = new FormData()
@@ -197,33 +276,33 @@ function CreateResident() {
       formImageResident.append('residentId',resResident.data.resident.id)
       const resImageResident = await axios.post('/residentImgs',formImageResident)
 
-      createResident.roomCollection.forEach(async(item)=>{
-        const formRoom = new FormData()
-        formRoom.append('cloudInput',item.roomImageFile)
-        formRoom.append('typeOf',item.roomTypeOf)
-        formRoom.append('roomAmount',item.roomAmount)
-        formRoom.append('size',item.roomSize)
-        formRoom.append('optionalRoomDetail', item.optionRoomDetail)
-        formRoom.append('noSmoking', item.noSmoking)
-        formRoom.append('petAllowed', item.petAllow)
-        formRoom.append('pricePerNight', item.pricePerNigth)
-        formRoom.append('maxGuest', item.maxGuest)
-        formRoom.append('residentId', resResident.data.resident.id)
-        // console.log({
-        //   typeOf:item.roomTypeOf,
-        //   // roomDetail: item.optionalRoomDetail,
-        //   roomAmount: item.roomAmount,
-        //   size: item.roomSize,
-        //   optionalRoomDetail: item.optionRoomDetail,
-        //   noSmoking: item.noSmoking,
-        //   petAllowed: item.petAllow,
-        //   pricePerNight: item.pricePerNigth,
+      // createResident.roomCollection.forEach(async(item)=>{
+      //   const formRoom = new FormData()
+      //   formRoom.append('cloudInput',item.roomImageFile)
+      //   formRoom.append('typeOf',item.roomTypeOf)
+      //   formRoom.append('roomAmount',item.roomAmount)
+      //   formRoom.append('size',item.roomSize)
+      //   formRoom.append('optionalRoomDetail', item.optionRoomDetail)
+      //   formRoom.append('noSmoking', item.noSmoking)
+      //   formRoom.append('petAllowed', item.petAllow)
+      //   formRoom.append('pricePerNight', item.pricePerNigth)
+      //   formRoom.append('maxGuest', item.maxGuest)
+      //   formRoom.append('residentId', resResident.data.resident.id)
+      //   // console.log({
+      //   //   typeOf:item.roomTypeOf,
+      //   //   // roomDetail: item.optionalRoomDetail,
+      //   //   roomAmount: item.roomAmount,
+      //   //   size: item.roomSize,
+      //   //   optionalRoomDetail: item.optionRoomDetail,
+      //   //   noSmoking: item.noSmoking,
+      //   //   petAllowed: item.petAllow,
+      //   //   pricePerNight: item.pricePerNigth,
           
-        //   maxGuest: item.maxGuest,
-        //   residentId:resResident.data.resident.id,
-        // })
-        const resRoom = await axios.post('/rooms/:id', formRoom)
-      })
+      //   //   maxGuest: item.maxGuest,
+      //   //   residentId:resResident.data.resident.id,
+      //   // })
+      //   const resRoom = await axios.put(`/rooms/${item.id}`, formRoom)
+      // })
 
       const formBank = new FormData()
       formBank.append('bankName', createResident.bankName)
@@ -232,20 +311,20 @@ function CreateResident() {
       formBank.append('cloudInput', createResident.bankImageFile)
       formBank.append('residentId', resResident.data.resident.id)
 
-      const resBank = await axios.post('/backAccounts', formBank)
-      
-      // history.push("/ownerlogin");
+      const resBank = await axios.put(`/backAccounts/${location.state.resident.BankAccount.id}`, formBank)
     }
+
+      history.push("/ownerhistory");
     } catch (err) {
       console.dir(err);
-    } 
+    }
   };
 
   return (
     <>
-      <SpaceforHead />
       <Header />
       {/* ยังขาดการเลือก Type ของ Resident */}
+
       <CreateResidentHeader />
       <ResidentDetailForm />
       <ServicesInresident />
@@ -258,4 +337,4 @@ function CreateResident() {
   );
 }
 
-export default CreateResident;
+export default EditResident;

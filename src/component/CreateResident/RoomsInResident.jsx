@@ -44,10 +44,11 @@ function CustomButton(props) {
 function RoomsInResident() {
   const { createResident, setCreateResident } = useContext(
     CreateResidentContext2
-  );
+  ); 
   const [openModal, setOpenModal] = React.useState(false);
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
+ 
 
   const addRoomCollection = (room) => {
     const clone = [...createResident.roomCollection];

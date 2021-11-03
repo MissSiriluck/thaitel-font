@@ -19,6 +19,7 @@ import CardOwnerHistoryList from "../component/CardOwnerHistoryList";
 
 // Edit create resident
 import CreateResident2 from "../pages/CreateResident";
+import EditResident from "../pages/EditResident";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
 import ResetForNewPassword from "../pages/ResetForNewPassword";
 
@@ -37,7 +38,11 @@ const route = {
       component: RegisterPage,
     },
     {
-      path: "/mainmenu/:resident/:checkIn/:room",
+      path: `/mainmenu/:resident/:checkIn/:room`,
+      component: ShowResultPage,
+    },
+    {
+      path: `/bottommenu/:province`,
       component: ShowResultPage,
     },
     {
@@ -95,7 +100,7 @@ const route = {
       component: RegisterPage,
     },
     {
-      path: "/mainmenu/:resident/:checkIn/:room",
+      path: `/mainmenu/:resident/:checkIn/:room`,
       component: ShowResultPage,
     },
     {
@@ -123,71 +128,30 @@ const route = {
       path: "/",
       component: Homepage,
     },
-    {
-      path: "/ownerlogin",
-      component: OwnerLoginPage,
-    },
+    // {
+    //   path: "/ownerlogin",
+    //   component: OwnerLoginPage,
+    // },
     {
       path: "/ownerregister",
       component: OwnerRegisterPage,
     },
-    // {
-    //   path: "/ownerdetail",
-    //   component: OwnerDetailPage,
-    // },
     {
-      path: "/residentregisterpage2",
-      component: ResidentRegisterPage2Page,
+      path: "/createresident",
+      component: CreateResident2,
     },
-    {
-      path: "/residentregisterpage3",
-      component: ResidentRegisterPage3Page,
-    },
-    // {
-    //   path: "/createresident",
-    //   component: CreateResident2,
-    // },
-    {
-      path: "/residentregisterpage4",
-      component: ResidentRegisterPage4Page,
-    },
-    {
-      path: "/residentregisterpage5",
-      component: ResidentRegisterPage5Page,
-    },
-    {
-      path: "/residentregisterpage6",
-      component: ResidentRegisterPage6Page,
-    },
-    {
-      path: "/residentregisterpage8",
-      component: ResidentRegisterPage8Page,
-    },
-    {
-      path: "/ownerdetail",
-      component: OwnerDetailPage,
-    },
-    {
-      path: "/ownerdetail",
-      component: OwnerDetailPage,
-    },
-    {
-      path: "/ownerdetail",
-      component: OwnerDetailPage,
-    },
-    {
-      path: "/ownerdetail",
-      component: OwnerDetailPage,
-    },
-    {
-      path: "/ownerdetail",
-      component: OwnerDetailPage,
-    },
-
     {
       path: "/ownerhistory",
       component: OwnerHistoryPage,
     },
+    {
+      path: "/ownerdetail/:residentId",
+      component: OwnerDetailPage
+    },
+    {
+      path: "/owner_edit_resident/:residentId",
+      component: EditResident
+    }
     // {
     //   redirect: "/ownerhistory",
     // },

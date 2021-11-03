@@ -70,7 +70,7 @@ const style = {
 };
 
 
-function ModalEditRoomsForm({openModal, handleClose, room, editRoomCollection, index, setIsEdit }) {
+function ModalEditRoomsForm({openModal, handleClose, room, editRoomCollection, index }) {
   
     return (
       <div>
@@ -83,7 +83,7 @@ function ModalEditRoomsForm({openModal, handleClose, room, editRoomCollection, i
           sx={{overflow:'auto'}}
         >
           <Box sx={{ background: 'white', overflow:'auto', paddingTop: "50px"}}>
-            <EditRoomForm room={room} editRoomCollection={editRoomCollection} index={index} setIsEdit/>
+            <EditRoomForm room={room} handleClose={handleClose} editRoomCollection={editRoomCollection} index={index} />
           </Box>
         </StyledModal>
       </div>

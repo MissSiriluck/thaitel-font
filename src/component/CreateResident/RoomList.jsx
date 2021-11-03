@@ -38,25 +38,21 @@ function CustomButton(props) {
 }
 
 function RoomList({ index, room, deleteRoomCollection, editRoomCollection }) {
-  const [isEdit, setIsEdit] = useState(false);
 
-  const [openModal, setOpenModal] = React.useState(false);
-  const handleOpen = () => setOpenModal(true);
-  const handleClose = () => setOpenModal(false);
+
+  const [openModal1, setOpenModal1] = React.useState(false);
+  const handleOpen1 = () => setOpenModal1(true);
+  const handleClose1 = () => setOpenModal1(false);
 
   const handleClickDeleteRoom = () => {
     deleteRoomCollection(index);
   };
 
   const handleClickEdit = () => {
-    setIsEdit(true);
-    handleOpen()
+    handleOpen1()
   };
 
-  if (isEdit) {
-    // return <EditRoomForm index={index} room={room} editRoomCollection={editRoomCollection} setIsEdit={setIsEdit} />;
-    return <ModalEditRoomsForm index={index} room={room} editRoomCollection={editRoomCollection} setIsEdit={setIsEdit}  openModal={openModal} handleOpen={handleOpen} handleClose={handleClose}/>;
-  }
+  
 
   return (
     <Stack
@@ -71,6 +67,7 @@ function RoomList({ index, room, deleteRoomCollection, editRoomCollection }) {
         height: '14vh',
       }}
     >
+      <ModalEditRoomsForm index={index}  room={room} editRoomCollection={editRoomCollection}  openModal={openModal1} handleOpen={handleOpen1} handleClose={handleClose1}/>
       <Grid item>
         <Typography sx={{ fontSize: '18px' }}>
           {room.roomTypeOf}

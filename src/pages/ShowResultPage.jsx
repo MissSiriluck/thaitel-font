@@ -5,27 +5,37 @@ import Footer from "../component/Footer";
 import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 import SpaceforHead from "../component/SpaceforHead";
-import { useEffect, useState } from "react";
-import axios from "../config/axios";
 import { useParams } from "react-router-dom";
-
+import React, { useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
 function ShowResultPage() {
   const [res, setRes] = useState([]);
-  let { resident, checkIn, room } = useParams();
-  console.log(resident);
+  let { resident, checkIn, room, province } = useParams();
+  // console.log(resident);
+  console.log(province);
   // console.log(checkin);
   // console.log(roominput);
   useEffect(() => {
-    axios
-      .get(
-        `http://localhost:7777/search?resident=${resident}&&checkin=${checkIn}&&roominput=${room}`
-      )
-      .then((res) => {
-        console.log(res);
-        setRes(res.data.avail);
-      });
-  }, [resident, checkIn, room]);
+    if (province) {
+      axios
+        .get(`http://localhost:7777/search/province?province=${province}`)
+        .then((res) => {
+          console.log(res);
+          setRes(res.data.residents);
+        });
+    } else {
+      axios
+        .get(
+          `http://localhost:7777/search?resident=${resident}&&checkin=${checkIn}&&roominput=${room}`
+        )
 
+        .then((res) => {
+          console.log(res);
+          setRes(res.data.avail);
+        });
+    }
+  }, [resident, checkIn, room, province]);
   return (
     <>
       <SpaceforHead />

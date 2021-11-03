@@ -218,8 +218,8 @@ function AddRoomsForm({ addRoomCollection }) {
                       sx={{ width: '100%', alignItems: 'stretch' }}
                       value={roomForm.roomAmount}
                       onChange={(e) => handleChange('roomAmount', e)}
-                      helperText= {roomFormError.optionRoomDetail ? roomFormError.optionRoomDetail : ""}
-                      error={roomFormError.optionRoomDetail}
+                      helperText= {roomFormError.roomAmount ? roomFormError.roomAmount : ""}
+                      error={roomFormError.roomAmount}
                     />
                   </Grid>
 
@@ -263,10 +263,10 @@ function AddRoomsForm({ addRoomCollection }) {
                     </Typography>
                     <TextField
                       id='outlined-password-input'
-                      label='ประเภทห้องพัก'
+                      label='จำนวนแขกสูงสุด'
                       size='small'
                       xs={5}
-                      sx={{ width: '100%', height: '10px' }}
+                      sx={{ width: '100%' }}
                       value={roomForm.maxGuest}
                       onChange={(e) => handleChange('maxGuest', e)}
                       helperText= {roomFormError.maxGuest ? roomFormError.maxGuest : ""}
@@ -290,7 +290,7 @@ function AddRoomsForm({ addRoomCollection }) {
                       size='small'
                       sx={{ width: '100%' }}
                       value={roomForm.optionRoomDetail}
-                      onChange={(e) => handleChange('optionRoomDetail', e)}
+                      onChange={(e) => handleChange('กำ', e)}
                       helperText= {roomFormError.optionRoomDetail ? roomFormError.optionRoomDetail : ""}
                       error={roomFormError.optionRoomDetail}
                     />

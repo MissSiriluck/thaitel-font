@@ -4,8 +4,10 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { Box, styled } from "@mui/system";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { CreateResidentContext2 } from "../context/CreateResidentContext2";
+import { useContext, useEffect, useState } from "react";
+import axios from "../config/axios";
+import { useHistory } from "react-router";
 // import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
 //customize button red
@@ -40,8 +42,21 @@ function CustomButton(props) {
 }
 
 function CardOwnerHistoryList({ resident }) {
+
+  const { createResident, setCreateResident } = useContext(
+    CreateResidentContext2
+  ); 
+
   // const [count, setCount] = useState(0);
-  console.log("residents..................", resident);
+  console.log("residents.......", resident);
+
+
+
+  // const handleDeleteResident = (index) => {
+  //   const clone = {...resident};
+  //   clone.splice(index, 1);
+  
+  // }
 
   // useEffect(() => {
   //   const fetchResident = async () => {
@@ -56,10 +71,16 @@ function CardOwnerHistoryList({ resident }) {
   //   fetchResident();
   // }, []);
 
+  const history = useHistory();
+
+  const handleClickEditResidents = () => {
+    history.push(`/ownerdetail/${resident.id}`)
+  }
+
   // console.log(count);
 
   return (
-    <Grid item xs={12} sx={{ mt: 3, mb: 15 }}>
+    <Grid item xs={12} sx={{ mt: 3 }}>
       {/* {resident.map((resident) => ( */}
       <Grid
         item
@@ -78,10 +99,11 @@ function CardOwnerHistoryList({ resident }) {
                 height: "200px",
                 borderRadius: 8,
               }}
+              alt='resident-img'
             />
             {/* ))} */}
           </Grid>
-          <Grid item xs={8} sx={{ flexGlow: 1 }} sx={{ mt: 2 }}>
+          <Grid item xs={8} sx={{ flexGlow: 1,mt: 2 }}>
             <Grid container>
               <Grid item xs={2}>
                 <Typography sx={{ mb: 1 }}>ชื่อที่พัก</Typography>
@@ -148,8 +170,9 @@ function CardOwnerHistoryList({ resident }) {
                   mr: 1,
                   borderRadius: "10px",
                   fontFamily: "'Noto Sans Thai', sans-serif",
-                  width: "100px",
+                  width: "120px",
                 }}
+                onClick={handleClickEditResidents}
               >
                 DETAIL
               </Button>
@@ -161,7 +184,7 @@ function CardOwnerHistoryList({ resident }) {
                   fontSize: "18px",
                   display: "flex",
                   justifyContent: "center",
-                  width: "70px",
+                  width: "100px",
                   p: 2,
                 }}
               >
