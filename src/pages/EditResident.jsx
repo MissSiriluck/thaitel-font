@@ -13,6 +13,7 @@ import { CreateResidentContext2 } from "../context/CreateResidentContext2";
 
 
 function EditResident() {
+  const [resident, setResident] = useState({})
   
   const {
     createResident,
@@ -27,22 +28,19 @@ function EditResident() {
   const location = useLocation();
   console.log(`location`, location)
 
-  // const [rooms, setRooms] = useState(location.state.rooms );
-  // const [resident, setResident] = useState(location.state.resident);
 
   useEffect(() => {
     const fetchResidentByid = async () => {
       // const res = await axios.get(`/residents/${user.id}`);
       const res = await axios.get(`/residents/residentId/${params.residentId}`);
       console.log(`res.data`, res.data)
+      setResident(res.data.resident)
       
-      // setRooms(res.data.rooms);
-      // setResident(res.data.resident);
       setCreateResident({
         residentTypeOf: res.data.resident.typeOf,
         residentName: res.data.resident.name,
-        rateStar: res.data.resident.typeOf,
-        address: res.data.resident.rateStar,
+        rateStar: res.data.resident.rateStar,
+        address: res.data.resident.address,
         subDistrict: res.data.resident.subDistrict,
         district: res.data.resident.district,
         description: res.data.resident.description,
@@ -56,7 +54,14 @@ function EditResident() {
         timeCheckOutToStart: res.data.resident.timeCheckOutStart,
         timeCheckOutToEnd: res.data.resident.timeCheckOutEnd,
         cancelDate: res.data.resident.canCancle,
-        roomCollection: res.data.rooms.map(item=>({...item,roomTypeOf:item.typeOf})),
+        roomCollection: res.data.rooms.map(item=>({...item,
+          roomTypeOf:item.typeOf,
+          optionRoomDetail: item.optionalRoomDetail,
+        maxGuest: item.maxGuest,
+        roomSize: item.size,
+        roomAmount: item.roomAmount,
+        pricePerNigth: item.pricePerNight,
+        roomShowImg: item.imgURL,})),
         serviceCollection: res.data.resident.ServiceItems,
         bankAccept:true,
         bankName: res.data.resident.BankAccount.bankName,
@@ -125,7 +130,7 @@ function EditResident() {
           rateStar: "กรุณากรอกจำนวนดาวของท่าน",
         }));
       }
-      if (!isNaN(createResident.rateStar)) {
+      if (isNaN(createResident.rateStar)) {
         allPase= false;
         setCreateResidentError((curr) => ({ ...curr, rateStar: 'กรุณากรอกจำนวนดาวของท่านเป็นข้อมูลประเภทตัวเลข' }))
       }
@@ -255,7 +260,7 @@ function EditResident() {
       const resResident = await axios.put(`/residents/editResident/${location.state.resident.id}`, {
         typeOf: createResident.residentTypeOf,
         name: createResident.residentName,
-        rateStar: createResident.rateStar,
+        rateStar: +createResident.rateStar,
         address: createResident.address,
         subDistrict: createResident.subDistrict,
         district: createResident.district,
@@ -273,48 +278,37 @@ function EditResident() {
 
       const formImageResident = new FormData()
       formImageResident.append('cloudInput',createResident.residentImageFile)
-      formImageResident.append('residentId',resResident.data.resident.id)
-      const resImageResident = await axios.post('/residentImgs',formImageResident)
+      formImageResident.append('residentId',resident.id)
+      const resImageResident = await axios.put('/residentImgs',formImageResident)
 
-      // createResident.roomCollection.forEach(async(item)=>{
-      //   const formRoom = new FormData()
-      //   formRoom.append('cloudInput',item.roomImageFile)
-      //   formRoom.append('typeOf',item.roomTypeOf)
-      //   formRoom.append('roomAmount',item.roomAmount)
-      //   formRoom.append('size',item.roomSize)
-      //   formRoom.append('optionalRoomDetail', item.optionRoomDetail)
-      //   formRoom.append('noSmoking', item.noSmoking)
-      //   formRoom.append('petAllowed', item.petAllow)
-      //   formRoom.append('pricePerNight', item.pricePerNigth)
-      //   formRoom.append('maxGuest', item.maxGuest)
-      //   formRoom.append('residentId', resResident.data.resident.id)
-      //   // console.log({
-      //   //   typeOf:item.roomTypeOf,
-      //   //   // roomDetail: item.optionalRoomDetail,
-      //   //   roomAmount: item.roomAmount,
-      //   //   size: item.roomSize,
-      //   //   optionalRoomDetail: item.optionRoomDetail,
-      //   //   noSmoking: item.noSmoking,
-      //   //   petAllowed: item.petAllow,
-      //   //   pricePerNight: item.pricePerNigth,
-          
-      //   //   maxGuest: item.maxGuest,
-      //   //   residentId:resResident.data.resident.id,
-      //   // })
-      //   const resRoom = await axios.put(`/rooms/${item.id}`, formRoom)
-      // })
+      createResident.roomCollection.forEach(async(item)=>{
+        const formRoom = new FormData()
+        formRoom.append('cloudInput',item.roomImageFile)
+        formRoom.append('typeOf',item.roomTypeOf)
+        formRoom.append('roomAmount',item.roomAmount)
+        formRoom.append('size',item.roomSize)
+        formRoom.append('optionalRoomDetail', item.optionRoomDetail)
+        formRoom.append('noSmoking', item.noSmoking)
+        formRoom.append('petAllowed', item.petAllowed)
+        formRoom.append('pricePerNight', item.pricePerNigth)
+        formRoom.append('maxGuest', item.maxGuest)
+        formRoom.append('imgURL', item.imgURL)
+        formRoom.append('residentId', resident.id)
+        
+        const resRoom = await axios.put(`/rooms/${item.id}`, formRoom)
+      })
 
       const formBank = new FormData()
       formBank.append('bankName', createResident.bankName)
       formBank.append('AccountNumber', createResident.accNumber)
       formBank.append('AccountName', createResident.accName)
       formBank.append('cloudInput', createResident.bankImageFile)
-      formBank.append('residentId', resResident.data.resident.id)
+      formBank.append('residentId', resident.id)
 
       const resBank = await axios.put(`/backAccounts/${location.state.resident.BankAccount.id}`, formBank)
     }
 
-      history.push("/ownerhistory");
+      // history.push("/ownerhistory");
     } catch (err) {
       console.dir(err);
     }

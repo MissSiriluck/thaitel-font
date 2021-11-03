@@ -37,7 +37,7 @@ function ChoiceChooseTypeForm({ typeResident, iconResident }) {
         >
           <Typography
             sx={{
-              fontSize: "30px",
+              fontSize: "24px",
               display: "flex",
               justifyContent: "center",
               marginTop: "15px",

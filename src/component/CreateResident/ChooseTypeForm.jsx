@@ -63,14 +63,14 @@ function ChooseTypeForm({ createResident, setCreateResident, createResidentError
     </Typography>
   </FormLabel>
   <RadioGroup row aria-label="resident" name="row-radio-buttons-group" >
-    <FormControlLabel value="Hotel" control={<Radio />} 
-    checked={createResident.residentTypeOf === 'Hotel'.toUpperCase()}
+    <FormControlLabel value="HOTEL" control={<Radio />} 
+    checked={createResident.residentTypeOf === 'HOTEL'.toUpperCase()}
     onChange={handleChangeChooseType}
     label={ 
       <ChoiceChooseTypeForm typeResident={"Hotel"} iconResident={
         <BusinessIcon
               sx={{
-                fontSize: "80px",
+                fontSize: "75px",
                 display: "flex",
                 justifyContent: "center",
                 marginBottom: "10px",
@@ -80,14 +80,14 @@ function ChooseTypeForm({ createResident, setCreateResident, createResidentError
       }/>
     } 
     />
-    <FormControlLabel value="Apartment" control={<Radio />} 
+    <FormControlLabel value="APARTMENT" control={<Radio />} 
     onChange={handleChangeChooseType}
-    checked={createResident.residentTypeOf === 'Apartment'.toUpperCase()}
+    checked={createResident.residentTypeOf === 'APARTMENT'.toUpperCase()}
     label={ 
       <ChoiceChooseTypeForm typeResident={"Apartment"} iconResident={
         <ApartmentIcon
               sx={{
-                fontSize: "80px",
+                fontSize: "75px",
                 display: "flex",
                 justifyContent: "center",
                 marginBottom: "10px",
@@ -99,9 +99,9 @@ function ChooseTypeForm({ createResident, setCreateResident, createResidentError
       />
     }
       />
-    <FormControlLabel value="Villa" control={<Radio />} 
+    <FormControlLabel value="VILLA" control={<Radio />} 
     onChange={handleChangeChooseType}
-    checked={createResident.residentTypeOf === 'Villa'.toUpperCase()}
+    checked={createResident.residentTypeOf === 'VILLA'.toUpperCase()}
 
     label={
       <ChoiceChooseTypeForm typeResident={"Villa"} 
@@ -109,7 +109,7 @@ function ChooseTypeForm({ createResident, setCreateResident, createResidentError
       iconResident={
         <HolidayVillageIcon
               sx={{
-                fontSize: "80px",
+                fontSize: "75px",
                 display: "flex",
                 justifyContent: "center",
                 marginBottom: "10px",

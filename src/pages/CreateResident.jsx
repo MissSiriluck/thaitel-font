@@ -47,7 +47,7 @@ function CreateResident() {
           rateStar: "กรุณากรอกจำนวนดาวของท่าน",
         }));
       }
-      if (!isNaN(createResident.rateStar)) {
+      if (isNaN(createResident.rateStar)) {
         allPase= false;
         setCreateResidentError((curr) => ({ ...curr, rateStar: 'กรุณากรอกจำนวนดาวของท่านเป็นข้อมูลประเภทตัวเลข' }))
       }
@@ -222,7 +222,7 @@ function CreateResident() {
         //   maxGuest: item.maxGuest,
         //   residentId:resResident.data.resident.id,
         // })
-        const resRoom = await axios.post('/rooms/:id', formRoom)
+        const resRoom = await axios.post('/rooms/createRoom', formRoom)
       })
 
       const formBank = new FormData()
