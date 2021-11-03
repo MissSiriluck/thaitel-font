@@ -11,6 +11,7 @@ import { styled } from "@mui/system";
 import BtnGuestnRoom from "./BtnGuestnRoom";
 import { useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 const CustomButtonRoot = styled("span")(`
     background-color: none;
     padding: 12px 35px;
@@ -47,13 +48,15 @@ function SearhchingBar() {
   const [checkIn, setCheckIn] = useState([null, null]);
   // const [checkOut, setCheckOut] = useState("");
   const [guest, setGuest] = useState(1);
-  const [room,setRoom]= useState(1);
+  const [room, setRoom] = useState(1);
 
-  function handleGetData() {
-    axios.get(
-      `http://localhost:7777/search/?resident=${resident}&&checkin=${checkIn}&&roominput=${room}`
-    );
+  const history = useHistory();
+  function HandleSumbit() {
+    // const history = useHistory();
+
+    history.push(`/mainmenu/${resident}/${checkIn}/${room}`);
   }
+
   return (
     <Box
       sx={{
@@ -71,7 +74,12 @@ function SearhchingBar() {
         <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
           <SearchingBox value={resident} setResident={setResident} />
           <DatePicker checkIn={checkIn} setCheckIn={setCheckIn} />
-          <BtnGuestnRoom guest={guest} setGuest={setGuest} room={room} setRoom={setRoom}/>
+          <BtnGuestnRoom
+            guest={guest}
+            setGuest={setGuest}
+            room={room}
+            setRoom={setRoom}
+          />
           <CustomButton
             sx={{
               background: "#03a9f4",
@@ -79,7 +87,7 @@ function SearhchingBar() {
               fontFamily: "'Noto Sans Thai', sans-serif",
               ml: 3,
             }}
-            onClick={handleGetData}
+            onClick={HandleSumbit}
           >
             Search
           </CustomButton>

@@ -54,7 +54,7 @@ function CustomButton(props) {
   );
 }
 
-function LoginContent() {
+function ResetPasswordContent() {
   const history = useHistory();
 
   const { setUser } = useContext(AuthContext);
@@ -65,19 +65,20 @@ function LoginContent() {
       const data = new FormData(event.currentTarget);
       const values = {
         email: data.get("email"),
-        password: data.get("password"),
+        // password: data.get("password"),
       };
-      const res = await axios.post("/users/login", values);
-      setToken(res.data.token);
-      setUser(jwtDecode(res.data.token));
+      const res = await axios.post("/users/reset-password", values);
+      //   setToken(res.data.token);
+      //   console.log("res.data.token...................", res.data.token);
+      //   setUser(jwtDecode(res.data.token));
 
-      history.push({
-        pathname: "/",
-        state: {
-          successMessage: "Already Login.",
-          from: " login page ",
-        },
-      });
+      //   history.push({
+      //     pathname: "/",
+      //     state: {
+      //       successMessage: "Already Login.",
+      //       from: " login page ",
+      //     },
+      //   });
     } catch (err) {
       console.dir(err);
     }
@@ -116,64 +117,13 @@ function LoginContent() {
               xs={9}
               sx={{ height: "40px" }}
             >
-              <Typography variant="h3" component="div" sx={{ fontWeight: 600 }}>
-                เข้าสู่ระบบ
+              <Typography variant="h4" component="div" sx={{ fontWeight: 600 }}>
+                {/* เปลี่ยนรหัสผ่าน */}
+                กรอกอีเมลเพื่อเปลี่ยนรหัสผ่าน
               </Typography>
             </Grid>
           </Box>
           {/*  */}
-
-          <Grid
-            container
-            justifyContent="center"
-            alignContent="center"
-            sx={{
-              padding: 0,
-            }}
-            xs={7}
-            md={7}
-          >
-            <Button
-              variant="contained"
-              sx={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <Grid
-                item
-                sx={{
-                  backgroundColor: "white",
-                  borderRadius: "50px",
-                  height: "18px",
-                  width: "18px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <FcGoogle />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  height: "32px",
-                  alignItems: "center",
-                }}
-              >
-                <Typography
-                  variant="p"
-                  sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
-                >
-                  Sign In With Google
-                </Typography>
-              </Grid>
-            </Button>
-          </Grid>
 
           <Box
             container
@@ -205,7 +155,7 @@ function LoginContent() {
                 md={7}
               >
                 {/*  */}
-                <Grid
+                {/* <Grid
                   container
                   spacing={2}
                   justifyContent="center"
@@ -218,19 +168,21 @@ function LoginContent() {
                   }}
                   xs={5}
                   md={5}
-                />
-                <Typography sx={{ color: "#C4C4C4" }}>or</Typography>
+                /> */}
+                {/* <Typography sx={{ color: "#C4C4C4" }}>or</Typography> */}
                 <Grid
                   container
                   spacing={2}
                   justifyContent="center"
                   alignItems="center"
-                  sx={{
-                    padding: 0,
-                    borderBottom: "2px solid #C4C4C4",
-                    height: 15,
-                    margin: 0,
-                  }}
+                  sx={
+                    {
+                      // padding: 0,
+                      // borderBottom: "2px solid #C4C4C4",
+                      // height: 15,
+                      // margin: 0,
+                    }
+                  }
                   xs={5}
                   md={5}
                 />
@@ -292,32 +244,7 @@ function LoginContent() {
               }}
               xs={12}
               md={12}
-            >
-              <Grid item xs={7} md={7} sx={{ padding: 0 }}>
-                <Typography
-                  style={{
-                    fontSize: 16,
-                    marginBottom: 8,
-                    justifyContent: "start",
-                  }}
-                >
-                  รหัสผ่าน
-                </Typography>
-                <TextField
-                  fullWidth
-                  label="รหัสผ่าน"
-                  placeholder="กรอกรหัสผ่าน"
-                  id="password"
-                  name="password"
-                  multiline
-                  size="small"
-                  sx={{
-                    padding: 0,
-                    marginBottom: "3px",
-                  }}
-                />
-              </Grid>
-            </Grid>
+            ></Grid>
             <Grid
               container
               spacing={2}
@@ -353,12 +280,12 @@ function LoginContent() {
                       justifyContent: "start",
                     }}
                   >
-                    เข้าสู่ระบบ
+                    เปลี่ยนรหัสผ่าน
                   </Typography>
                 </CustomButton>
               </Grid>
 
-              <Grid
+              {/* <Grid
                 item
                 xs={12}
                 md={12}
@@ -387,37 +314,7 @@ function LoginContent() {
                     </Typography>
                   </Link>
                 </Grid>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                md={12}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Grid mr={1}>
-                  <Typography style={{ color: "grey", margin: 0 }}>
-                    ลืมพาสเวิร์ด
-                  </Typography>
-                </Grid>
-
-                <Grid mr={1}>
-                  <Link to="/reset" style={{ textDecoration: "none" }}>
-                    <Typography
-                      sx={{
-                        color: "#16264D",
-                        fontWeight: 700,
-                        margin: 0,
-                      }}
-                    >
-                      กดที่นี่
-                    </Typography>
-                  </Link>
-                </Grid>
-              </Grid>
+              </Grid> */}
             </Grid>
           </Box>
           {/*  */}
@@ -427,4 +324,4 @@ function LoginContent() {
   );
 }
 
-export default LoginContent;
+export default ResetPasswordContent;
