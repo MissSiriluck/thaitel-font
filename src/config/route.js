@@ -20,6 +20,8 @@ import CardOwnerHistoryList from "../component/CardOwnerHistoryList";
 // Edit create resident
 import CreateResident2 from "../pages/CreateResident";
 import EditResident from "../pages/EditResident";
+import ResetPasswordPage from "../pages/ResetPasswordPage";
+import ResetForNewPassword from "../pages/ResetForNewPassword";
 
 const route = {
   guest: [
@@ -36,7 +38,11 @@ const route = {
       component: RegisterPage,
     },
     {
-      path: "/mainmenu",
+      path: `/mainmenu/:resident/:checkIn/:room`,
+      component: ShowResultPage,
+    },
+    {
+      path: `/bottommenu/:province`,
       component: ShowResultPage,
     },
     {
@@ -50,6 +56,23 @@ const route = {
     {
       path: "/ownerregister",
       component: OwnerRegisterPage,
+    },
+    // {
+    //   path: "/ownerhistory",
+    //   component: OwnerHistoryPage,
+    // },
+    {
+      path: "/ownerdetail",
+      component: OwnerDetailPage,
+    },
+    {
+      path: "/reset",
+      component: ResetPasswordPage,
+    },
+    {
+      path: "/reset/:token",
+      // path: "/ResetForNewPassword",
+      component: ResetForNewPassword,
     },
     // {
     //   path: "/createresident",
@@ -77,7 +100,7 @@ const route = {
       component: RegisterPage,
     },
     {
-      path: "/mainmenu",
+      path: `/mainmenu/:resident/:checkIn/:room`,
       component: ShowResultPage,
     },
     {
@@ -91,6 +114,10 @@ const route = {
     {
       path: "/BookingConfirmation",
       component: BookingConfirmationPage,
+    },
+    {
+      path: "/Reset",
+      component: ResetPasswordPage,
     },
     {
       redirect: "/",

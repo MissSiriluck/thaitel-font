@@ -372,5 +372,3 @@ function AddcomDetail() {
 }
 
 export default AddcomDetail;
-
-//...............................................

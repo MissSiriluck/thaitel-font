@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import React from "react";
 import { styled } from "@mui/material/styles";
 import ButtonBase from "@mui/material/ButtonBase";
-
+import { useHistory } from "react-router";
 const images = [
   {
     url: `${chiangmai_pic}`,
@@ -99,6 +99,11 @@ const ImageMarked = styled("span")(({ theme }) => ({
 }));
 
 function BtnPicRecommand() {
+  const history = useHistory();
+  function HandleSumbit(e) {
+    console.log(e)
+    history.push(`/bottommenu/${e}`);
+  }
   return (
     <Box
       sx={{
@@ -134,32 +139,33 @@ function BtnPicRecommand() {
             width: "100%",
           }}
         >
-          {images.map(image => (
+          {images.map((image) => (
             <ImageButton
               focusRipple
               key={image.title}
               style={{
                 width: image.width,
               }}
-              className='img_btn_homepage'
+              className="img_btn_homepage"
+              onClick={()=>HandleSumbit(image.title)}
             >
               <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
-              <ImageBackdrop className='MuiImageBackdrop-root' />
+              <ImageBackdrop className="MuiImageBackdrop-root" />
               <Image>
                 <Typography
-                  component='span'
-                  variant='subtitle1'
-                  color='inherit'
+                  component="span"
+                  variant="subtitle1"
+                  color="inherit"
                   sx={{
                     position: "relative",
                     p: 4,
                     pt: 2,
-                    pb: theme => `calc(${theme.spacing(1)} + 6px)`,
+                    pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
                     fontFamily: "'Noto Sans Thai', sans-serif",
                   }}
                 >
                   {image.title}
-                  <ImageMarked className='MuiImageMarked-root' />
+                  <ImageMarked className="MuiImageMarked-root" />
                 </Typography>
               </Image>
             </ImageButton>

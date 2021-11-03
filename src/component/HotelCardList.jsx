@@ -85,9 +85,10 @@ function HotelCardList({ resident }) {
                 height: "170px",
                 borderRadius: 8,
               }}
+              alt="resident-img"
             />
           </Grid>
-          <Grid item xs={9.8} sx={{ flexGlow: 1 }} sx={{ mt: 2 }}>
+          <Grid item xs={9.8} sx={{ flexGlow: 1, mt: 2 }}>
             <Grid container>
               <Grid item xs={8}>
                 <Typography sx={{ fontSize: "20px", mb: 1 }}>

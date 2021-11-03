@@ -10,7 +10,7 @@ import Footer from "../component/Footer";
 import Header from "../component/Header";
 import { CreateResidentContext2 } from "../context/CreateResidentContext2";
 import { useHistory } from "react-router";
-
+import SpaceforHead from "../component/SpaceforHead";
 
 function CreateResident() {
   const history = useHistory();
@@ -22,7 +22,7 @@ function CreateResident() {
     setCreateResidentError,
   } = useContext(CreateResidentContext2);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     try {
       let allPase = true;
 
@@ -243,9 +243,9 @@ function CreateResident() {
 
   return (
     <>
+      <SpaceforHead />
       <Header />
       {/* ยังขาดการเลือก Type ของ Resident */}
-
       <CreateResidentHeader />
       <ResidentDetailForm />
       <ServicesInresident />

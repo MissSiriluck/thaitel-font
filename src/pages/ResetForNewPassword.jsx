@@ -1,16 +1,15 @@
 import Footer from "../component/Footer";
 import Header from "../component/Header";
-import LoginContent from "../component/LoginContent";
+import NewPasswordContent from "./NewPasswordContent";
 
-function LoginPage() {
+function ResetForNewPassword() {
   return (
     <>
       <Header />
-      <LoginContent /> 
+      <NewPasswordContent />
       <Footer />
     </>
   );
 }
 
-export default LoginPage;
- 
+export default ResetForNewPassword;
