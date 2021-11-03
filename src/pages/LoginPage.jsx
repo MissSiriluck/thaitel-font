@@ -6,10 +6,11 @@ function LoginPage() {
   return (
     <>
       <Header />
-      <LoginContent />
+      <LoginContent /> 
       <Footer />
     </>
   );
 }
 
 export default LoginPage;
+ 

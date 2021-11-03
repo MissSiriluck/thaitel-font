@@ -20,6 +20,7 @@ import axios from "../config/axios";
 import { setToken } from "../service/localStorage";
 import { AuthContext } from "../context/AuthContext";
 import { GoogleLogin } from "react-google-login";
+import { user  } from "../service/localStorage";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -57,24 +58,39 @@ function CustomButton(props) {
 
 function LoginContent() {
   const history = useHistory();
-
+   console.log(user)
   const responseGoogle = async (response) => {
-    console.log(response);
-    console.log(response.profileObj)
-    console.log(response.profileObj.email)
-    console.log(response.profileObj.giveName)
-    console.log(response.profileObj.familyName)
-    console.log(response.profileObj.googleId)
-    const res = await axios.post('/googleLogin',{})
-    history.push({
-      pathname: "/",
-      state: {
-        successMessage: "Already Login.",
-        from: " login page ",
-      },
-    });
+    try {
+      console.log(response);
+      console.log(response.profileObj);
+      // const response.profileObj
+      // console.log(response.profileObj.email)
+      console.log(response.profileObj.givenName);
+      // console.log(response.profileObj.familyName)
+      // console.log(response.profileObj.googleId)
+      const res = await axios.post("/googleLogin", {
+        email: response.profileObj.email,
+        firstName: response.profileObj.givenName,
+        lastName: response.profileObj.familyName,
+        googleId: response.profileObj.googleId,
+      });
+      console.log(res);
+      setToken(res.data.token);
+      
+      setUser(jwtDecode(res.data.token));
+      console.log(user)
+      history.push({
+        pathname: "/",
+        state: {
+          successMessage: "Already Login.",
+          from: " login page ",
+        },
+      });
+    } catch (err) {
+      console.dir(err);
+    }
   };
-
+   
   const { setUser } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {

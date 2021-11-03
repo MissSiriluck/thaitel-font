@@ -39,6 +39,10 @@ const route = {
       component: ShowResultPage,
     },
     {
+      path: `/bottommenu/:province`,
+      component: ShowResultPage,
+    },
+    {
       path: "/addcom",
       component: AddCom,
     },

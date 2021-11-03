@@ -10,19 +10,32 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 function ShowResultPage() {
-  const [res,setRes]=useState([])
-  let { resident, checkIn, room } = useParams();
-  console.log(resident);
+  const [res, setRes] = useState([]);
+  let { resident, checkIn, room, province } = useParams();
+  // console.log(resident);
+  console.log(province);
   // console.log(checkin);
   // console.log(roominput);
   useEffect(() => {
-    axios
-      .get(`http://localhost:7777/search?resident=${resident}&&checkin=${checkIn}&&roominput=${room}`)
-      .then((res) => {
-        console.log(res);
-        setRes(res.data.avail)
-      });
-  }, [ resident, checkIn, room]);
+    if (province) {
+      axios
+        .get(`http://localhost:7777/search/province?province=${province}`)
+        .then((res) => {
+          console.log(res);
+          setRes(res.data.residents);
+        });
+    } else {
+      axios
+        .get(
+          `http://localhost:7777/search?resident=${resident}&&checkin=${checkIn}&&roominput=${room}`
+        )
+
+        .then((res) => {
+          console.log(res);
+          setRes(res.data.avail);
+        });
+    }
+  }, [resident, checkIn, room, province]);
   return (
     <>
       <SpaceforHead />
@@ -34,7 +47,7 @@ function ShowResultPage() {
             <Search />
           </Grid>
           <Grid item xs={9}>
-            <HotelCard data={res}/>
+            <HotelCard data={res} />
           </Grid>
         </Grid>
       </Container>
