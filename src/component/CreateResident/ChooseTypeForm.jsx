@@ -64,6 +64,7 @@ function ChooseTypeForm({ createResident, setCreateResident, createResidentError
   </FormLabel>
   <RadioGroup row aria-label="resident" name="row-radio-buttons-group" >
     <FormControlLabel value="Hotel" control={<Radio />} 
+    checked={createResident.residentTypeOf === 'Hotel'.toUpperCase()}
     onChange={handleChangeChooseType}
     label={ 
       <ChoiceChooseTypeForm typeResident={"Hotel"} iconResident={
@@ -81,6 +82,7 @@ function ChooseTypeForm({ createResident, setCreateResident, createResidentError
     />
     <FormControlLabel value="Apartment" control={<Radio />} 
     onChange={handleChangeChooseType}
+    checked={createResident.residentTypeOf === 'Apartment'.toUpperCase()}
     label={ 
       <ChoiceChooseTypeForm typeResident={"Apartment"} iconResident={
         <ApartmentIcon
@@ -99,6 +101,8 @@ function ChooseTypeForm({ createResident, setCreateResident, createResidentError
       />
     <FormControlLabel value="Villa" control={<Radio />} 
     onChange={handleChangeChooseType}
+    checked={createResident.residentTypeOf === 'Villa'.toUpperCase()}
+
     label={
       <ChoiceChooseTypeForm typeResident={"Villa"} 
       sx={{}}

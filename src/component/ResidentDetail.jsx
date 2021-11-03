@@ -2,9 +2,10 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import axios from "../config/axios";
 import { Box, styled } from "@mui/system";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Button, Grid, Rating, Typography } from "@mui/material";
 import CarouselBox from "./CarouselBox";
@@ -20,8 +21,9 @@ import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
-import { residents } from "../mocks/residents";
+// import { residents } from "../mocks/residents";
 import res_1 from "../assets/images/residents/hotel-1.jpeg";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 
 //customize button blue
 const CustomButtonRoot = styled("span")(`
@@ -56,7 +58,34 @@ function CustomButton(props) {
 }
 
 function ResidentDetail() {
-  const [room, setRoom] = useState("");
+  
+  const [rooms, setRooms] = useState([]);
+  const [resident, setResident] = useState({});
+  const [residentImage, setResidentImage] = useState('')
+  
+  const history = useHistory();
+  const location = useLocation();
+  const params = useParams()
+
+  useEffect(() => {
+    const fetchResidentByid = async () => {
+      // const res = await axios.get(`/residents/${user.id}`);
+      const res = await axios.get(`/residents/residentId/${params.residentId}`);
+      console.log(`res.data`, res.data)
+      
+      setRooms(res.data.rooms);
+      setResident(res.data.resident);
+      setResidentImage(res.data.resident.ResidentImgs[0].imgUrl)
+    };
+    fetchResidentByid();
+  }, [])
+
+  console.log(`resident`, resident)
+  console.log(`resident.ServiceItems`, resident.ServiceItems)
+  console.log(`rooms`, rooms)
+
+  const filterService = resident?.ServiceItems?.filter((item) => item.isHaving === true)
+  console.log(`filterService`, filterService)
 
   const useStyles = makeStyles({
     root: {
@@ -69,22 +98,36 @@ function ResidentDetail() {
   });
   const classes = useStyles();
 
-  const handleChange = (event) => {
-    setRoom(event.target.value);
-  };
+  const handleOnClickEditResident = e => {
+
+    e.preventDefault();
+    
+    history.push({ 
+        pathname: `/owner_edit_resident/${resident.id}`,
+        state: {
+          resident: resident, 
+          rooms: rooms,
+        }
+    })
+  }
+
+  const handleDeleteRoom = () => {
+    
+  }
 
   return (
     <Grid container>
       <Grid item>
         {/* <CarouselBox /> */}
         <img
-          src={res_1}
+          src={residentImage}
           style={{
             width: "1152px",
             height: "450px",
             marginBottom: "10px",
             borderRadius: "10px",
           }}
+          alt=''
         />
 
         {/* Name hotel and other detail */}
@@ -96,16 +139,10 @@ function ResidentDetail() {
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
             <Typography sx={{ fontSize: "24px", pb: 2 }}>
-              {`PARADISE TREE HOSTEL`}
+              {resident?.name}
             </Typography>
             <Typography sx={{ lineHeight: "1.8" }}>
-              {`The Newnormal House ตั้งอยู่ในจังหวัดเชียงใหม่
-            อยู่ห่างจากตลาดช้างเผือก 200 ม. มีห้องอาหาร บาร์และวิวเมือง
-            โรงแรมระดับ 3 ดาวนี้มีโต๊ะบริการทัวร์และบริการตั๋ว
-            ที่พักนี้มีห้องครัวส่วนกลาง
-            บริการรับจอดรถและบริการแลกเปลี่ยนสกุลเงินสำหรับผู้เข้าพัก
-            ห้องพักทุกห้องที่โฮสเทลนี้มีห้องน้ำที่ใช้ร่วมกันพร้อมฝักบัว
-            เครื่องเป่าผมและมีเครื่องใช้ในห้องน้ำฟรี`}
+              {resident?.description}
             </Typography>
           </Grid>
 
@@ -121,88 +158,25 @@ function ResidentDetail() {
             </Typography>
 
             <Grid container sx={{ flexWrap: "wrap" }}>
-              <Grid
-                item
-                xs={3}
-                sx={{ display: "flex", alignItems: "center", mb: 2 }}
-              >
-                <DirectionsCarIcon />
-                <Typography sx={{ ml: 2 }}>ที่จอดรถ</Typography>
-              </Grid>
 
-              <Grid
+              {filterService?.map((service) => (
+                <Grid
                 item
                 xs={3}
                 sx={{ display: "flex", alignItems: "center", mb: 2 }}
               >
-                <FastfoodIcon />
-                <Typography sx={{ ml: 2 }}>อาหารเช้า</Typography>
+                {service?.serviceName === 'parking'? <DirectionsCarIcon /> : 
+                service?.serviceName === 'breakFast'? <FastfoodIcon /> : 
+                service?.serviceName === 'wifi'? <WifiIcon /> :                
+                service?.serviceName === 'swimingPool'? <FastfoodIcon /> :                
+                service?.serviceName === 'bar'? <LocalBarIcon /> :                
+                service?.serviceName === 'sauna'? <SpaIcon /> :                
+                service?.serviceName === 'reception'? <RoomServiceIcon /> :                
+                service?.serviceName === 'roomService'? <RoomServiceIcon /> :                
+                service?.serviceName === 'fitnessRoom'? <FitnessCenterIcon /> : null}                
+                <Typography sx={{ ml: 2 }}>{service?.serviceName}</Typography>
               </Grid>
-
-              <Grid
-                item
-                xs={3}
-                sx={{ display: "flex", alignItems: "center", mb: 2 }}
-              >
-                <WifiIcon />
-                <Typography sx={{ ml: 2 }}>Wifi</Typography>
-              </Grid>
-
-              <Grid
-                item
-                xs={3}
-                sx={{ display: "flex", alignItems: "center", mb: 2 }}
-              >
-                <PoolIcon />
-                <Typography sx={{ ml: 2 }}>สระว่ายน้ำ</Typography>
-              </Grid>
-
-              <Grid
-                item
-                xs={3}
-                sx={{ display: "flex", alignItems: "center", mb: 2 }}
-              >
-                <LocalBarIcon />
-                <Typography sx={{ ml: 2 }}>บาร์</Typography>
-              </Grid>
-
-              <Grid
-                item
-                xs={3}
-                sx={{ display: "flex", alignItems: "center", mb: 2 }}
-              >
-                <SpaIcon />
-                <Typography sx={{ ml: 2 }}>ห้องซาวน่า</Typography>
-              </Grid>
-
-              <Grid
-                item
-                xs={3}
-                sx={{ display: "flex", alignItems: "center", mb: 2 }}
-              >
-                <RoomServiceIcon />
-                <Typography sx={{ ml: 2 }}>Room service</Typography>
-              </Grid>
-
-              <Grid
-                item
-                xs={3}
-                sx={{ display: "flex", alignItems: "center", mb: 2 }}
-              >
-                <FitnessCenterIcon />
-                <Typography sx={{ ml: 2 }}>ห้องออกกำลังกาย</Typography>
-              </Grid>
-
-              <Grid
-                item
-                xs={3}
-                sx={{ display: "flex", alignItems: "center", mb: 2 }}
-              >
-                <AlarmOnIcon />
-                <Typography sx={{ ml: 2 }}>
-                  แผนกต้อนรับส่วนหน้า 24 ชั่วโมง
-                </Typography>
-              </Grid>
+               ))} 
             </Grid>
           </Grid>
         </Grid>
@@ -274,7 +248,7 @@ function ResidentDetail() {
                   Tue, Sep 21
                 </Typography>
                 <Typography sx={{ p: 1, flexGrow: 1 }}>
-                  9.00AM -14.00PM
+                  {resident?.timeCheckInStart} - {resident?.timeCheckInEnd} 
                 </Typography>
               </Box>
             </Box>
@@ -330,7 +304,7 @@ function ResidentDetail() {
                   Tue, Sep 21
                 </Typography>
                 <Typography sx={{ p: 1, flexGrow: 1 }}>
-                  9.00AM -14.00PM
+                  {resident.timeCheckOutStart} - {resident.timeCheckOutEnd}
                 </Typography>
               </Box>
             </Box>
@@ -338,7 +312,7 @@ function ResidentDetail() {
         </Box>
 
         {/* room type block */}
-        {residents.map((resident) => (
+        {rooms.map((room) => (
           <Grid
             item
             id=""
@@ -348,7 +322,7 @@ function ResidentDetail() {
             <Grid container>
               <Grid item xs={2.2}>
                 <img
-                  src={`${resident.url}`}
+                  src={room.imgURL}
                   style={{
                     width: "170px",
                     height: "170px",
@@ -360,23 +334,23 @@ function ResidentDetail() {
                 <Grid container>
                   <Grid item xs={5}>
                     <Typography sx={{ fontSize: "20px", mb: 1 }}>
-                      {`ห้องมาตราฐานเตียงเดี่ยว`}
+                      {room.typeOf}
                     </Typography>
                     <Typography sx={{ mb: 1 }}>
-                      {`${resident.province}`}
+                      {resident.province}
                     </Typography>
                     <Typography sx={{ mb: 1 }}>
-                      {`จำนวนแขกที่เข้าพักได้ {} คน / ห้อง`}
+                      จำนวนแขกที่เข้าพักได้ {room.maxGuest} คน / ห้อง
                     </Typography>
                   </Grid>
                   <Grid item xs={5}>
                     <Typography sx={{ mb: 1 }}>
-                      {`จำนวนห้องพักที่เหลือ {} ห้อง`}
+                      จำนวนห้องพักที่เหลือ {room?.roomAmount- room?.countBookedRoom} ห้อง
                     </Typography>
                     <Typography sx={{ mb: 1 }}>
-                      Room size : 3.5 ฟุต x 6.5 ฟุต
+                      Room size : {room?.size} ตร.ม.
                     </Typography>
-                    <Typography sx={{ mb: 1 }}>Price : 1500 BATH</Typography>
+                    <Typography sx={{ mb: 1 }}>Price : {room?.pricePerNight} BATH</Typography>
                   </Grid>
                 </Grid>
               </Grid>
@@ -396,6 +370,7 @@ function ResidentDetail() {
               mr: 1,
               borderRadius: "10px",
             }}
+            onClick={handleOnClickEditResident}
           >
             แก้ไขข้อมูล
           </Button>

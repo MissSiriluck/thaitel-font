@@ -71,7 +71,7 @@ function SubmitButton({ handleSubmit }) {
                   justifyContent: 'start',
                 }}
               >
-                ดำเนินการต่อ
+                บันทึกข้อมูลที่พักของคุณ
               </Typography>
             </CustomButton>
           </Grid>

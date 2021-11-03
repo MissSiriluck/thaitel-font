@@ -244,10 +244,10 @@ function ResidentDetailForm() {
                     label="รายละเอียดที่พัก"
                     multiline
                     rows={4}
-                    value={createResident.optionRoomDetail}
-                    onChange={(e) => handleChange('optionRoomDetail', e)}
-                    helperText= {createResidentError.optionRoomDetail ? createResidentError.optionRoomDetail : ""}
-                    error={createResidentError.optionRoomDetail}
+                    value={createResident.description}
+                    onChange={(e) => handleChange('description', e)}
+                    helperText= {createResidentError.description ? createResidentError.description : ""}
+                    error={createResidentError.description}
                     sx={{
                       width: '100%',
                       // padding: '18px',

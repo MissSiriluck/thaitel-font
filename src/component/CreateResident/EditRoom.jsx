@@ -2,6 +2,7 @@ import { Button, Checkbox, Container, FormControlLabel, Grid, Stack, TextField, 
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
 import { Box, styled } from '@mui/system';
 import React, { useState } from 'react';
+import axios from '../../config/axios'
 
 const CustomButtonRoot = styled('button')(`
       background-color: none;
@@ -35,8 +36,19 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function EditRoomForm({ room, editRoomCollection, index, setIsEdit }) {
-  const [editRoomForm, setEditRoomForm, ] = useState(room); //{optionRoomDetail: '',maxGuest: '',roomSize: '',roomTypeOf: '',roomAmount: '',noSmoking: false,petAllow: false,pricePerNigth: '',roomImageFile: null,roomShowImg: '',}
+function EditRoomForm({ room, editRoomCollection, index,handleClose }) {
+  const [editRoomForm, setEditRoomForm, ] = useState({
+    optionRoomDetail: room.optionalRoomDetail,
+    maxGuest: room.maxGuest,
+    roomSize: room.size,
+    roomTypeOf: room.typeOf,
+    roomAmount: room.roomAmount,
+    pricePerNigth: room.pricePerNight,
+    roomShowImg: room.imgURL,
+    petAllow: room.petAllow,
+    noSmoking: room.noSmoking
+  }); //{optionRoomDetail: '',maxGuest: '',roomSize: '',roomTypeOf: '',roomAmount: '',noSmoking: false,petAllow: false,pricePerNigth: '',roomImageFile: null,roomShowImg: '',}
+  console.log(room)
 
   const [editRoomFormError, setEditRoomFormError] = useState({
     optionRoomDetail: '',
@@ -48,7 +60,7 @@ function EditRoomForm({ room, editRoomCollection, index, setIsEdit }) {
     roomShowImg: '',
   })
 
-  const handleClickSaveRoom = () => {
+  const handleClickSaveRoom = async () => {
 
     let allPass = true // สมมุติว่าทุกตัวผ่าน 
 
@@ -83,7 +95,18 @@ function EditRoomForm({ room, editRoomCollection, index, setIsEdit }) {
 
     if (allPass) { //ถ้าไม่มี err ถึงทำ function นี้
       editRoomCollection(index, editRoomForm);
-      setIsEdit(false);
+      const resRoom = await axios.put(`/rooms/${room.id}`, {
+      typeOf:editRoomForm.roomTypeOf,
+      roomAmount: editRoomForm.roomAmount,
+      size: editRoomForm.roomSize,
+      optionalRoomDetail: editRoomForm.optionRoomDetail,
+      noSmoking: editRoomForm.noSmoking,
+      petAllowed: editRoomForm.petAllowed,
+      pricePerNight: editRoomForm.pricePerNight,
+      imgURL: editRoomForm.roomShowImg,
+      maxGuest: editRoomForm.maxGuest,
+      })
+      handleClose()
     }
 
   };
