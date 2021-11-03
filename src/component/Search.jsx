@@ -10,7 +10,7 @@ import { CustomButton } from "./BookingCfmDetail";
 import { Container, Grid, InputBase, Typography } from "@mui/material";
 import { alpha, Box, styled } from "@mui/system";
 import BtnGuestnRoomForSearch from "./BtnGuestnRoomForSearch";
-
+import { useHistory } from "react-router";
 //customize input box hover focus styles
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
@@ -35,7 +35,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 //customize input date picker
-const RedditTextField = styled(props => (
+const RedditTextField = styled((props) => (
   <TextField InputProps={{ disableUnderline: true }} {...props} />
 ))(({ theme }) => ({
   "& .MuiFilledInput-root": {
@@ -84,8 +84,19 @@ const DateRangePickerDay = styled(MuiDateRangePickerDay)(
 );
 
 function Search() {
+  const history = useHistory();
   const [value, setValue] = useState([null, null]);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [resident, setResident] = useState("");
+  const [checkIn, setCheckIn] = useState([null, null]);
+  // const [guest, setGuest] = useState(1);
+  const [room, setRoom] = useState(1);
+  console.log(checkIn)
+  function HandleSumbit() {
+    // const history = useHistory();
+  console.log('testt')
+    history.push(`/mainmenu/${resident}/${checkIn}/${room}`);
+  }
 
   const renderWeekPickerDay = (date, dateRangePickerDayProps) => {
     return <DateRangePickerDay {...dateRangePickerDayProps} />;
@@ -109,17 +120,18 @@ function Search() {
               จุดหมาย/ชื่อที่พัก
             </Typography>
             <BootstrapInput
-              defaultValue=''
-              id='bootstrap-input'
+              defaultValue=""
+              id="bootstrap-input"
               fullWidth
-              placeholder='เลือกจุดหมายที่คุณต้องการ'
-              size='small'
+              placeholder="เลือกจุดหมายที่คุณต้องการ"
+              size="small"
               sx={{
                 padding: 0,
                 background: "#fff",
                 borderRadius: "4px",
                 mb: 2,
               }}
+              onChange={(e)=>setResident(e.target.value)}
             />
 
             <Typography sx={{ color: "#fff", pb: 1 }}>
@@ -134,19 +146,19 @@ function Search() {
                 }}
               >
                 <DateRangePicker
-                  startText='Check-in'
-                  endText='Check-out'
-                  value={value}
+                  startText="Check-in"
+                  endText="Check-out"
+                  value={checkIn}
                   renderDay={renderWeekPickerDay}
-                  onChange={newValue => {
-                    setValue(newValue);
+                  onChange={(e) => {
+                    setCheckIn(e);
                   }}
                   renderInput={(startProps, endProps) => (
                     <React.Fragment>
                       <RedditTextField
-                        id='filled-basic'
-                        label='Filled'
-                        variant='filled'
+                        id="filled-basic"
+                        label="Filled"
+                        variant="filled"
                         sx={{
                           backgroundColor: "#fff",
                           borderRadius: "4px",
@@ -167,9 +179,9 @@ function Search() {
                         {...startProps}
                       />
                       <RedditTextField
-                        id='filled-basic'
-                        label='Filled'
-                        variant='filled'
+                        id="filled-basic"
+                        label="Filled"
+                        variant="filled"
                         sx={{
                           backgroundColor: "#fff",
                           borderRadius: "4px",
@@ -190,10 +202,13 @@ function Search() {
             </LocalizationProvider>
 
             <Typography sx={{ color: "#fff", pb: 1 }}>ผู้เข้าพัก</Typography>
-            <BtnGuestnRoomForSearch />
+            <BtnGuestnRoomForSearch room={room} setRoom={setRoom}/>
 
             <Container sx={{ textAlign: "center", mb: 3 }}>
-              <CustomButton sx={{ background: "#c62828", color: "#fff" }}>
+              <CustomButton
+                sx={{ background: "#c62828", color: "#fff" }}
+                onClick={HandleSumbit}
+              >
                 Search
               </CustomButton>
             </Container>
