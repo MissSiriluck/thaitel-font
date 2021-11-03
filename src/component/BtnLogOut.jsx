@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { removeToken } from "../service/localStorage";
+import { Typography } from "@mui/material";
 
 function BtnLogOut() {
   const [open, setOpen] = React.useState(false);
@@ -22,17 +23,17 @@ function BtnLogOut() {
   const history = useHistory();
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+    setOpen(prevOpen => !prevOpen);
   };
 
-  const handleClickLogout = (e) => {
+  const handleClickLogout = e => {
     e.preventDefault();
     removeToken();
     setUser(null);
     history.push("/login");
   };
 
-  const handleClose = (event) => {
+  const handleClose = event => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -62,22 +63,23 @@ function BtnLogOut() {
   return (
     <Box>
       <Button
-        color="inherit"
+        color='inherit'
         sx={{ marginLeft: 2, fontFamily: "'Noto Sans Thai', sans-serif" }}
         ref={anchorRef}
-        id="composition-button"
+        id='composition-button'
         aria-controls={open ? "composition-menu" : undefined}
         aria-expanded={open ? "true" : undefined}
-        aria-haspopup="true"
+        aria-haspopup='true'
         onClick={handleToggle}
       >
-        {user.firstName}
+        <Typography sx={{ mr: 1 }}>{user.firstName}</Typography>
+        <Typography>{user.lastName}</Typography>
       </Button>
       <Popper
         open={open}
         anchorEl={anchorRef.current}
         role={undefined}
-        placement="bottom-start"
+        placement='bottom-start'
         transition
         disablePortal
         sx={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)" }}
@@ -94,12 +96,12 @@ function BtnLogOut() {
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList
                   autoFocusItem={open}
-                  id="composition-menu"
-                  aria-labelledby="composition-button"
+                  id='composition-menu'
+                  aria-labelledby='composition-button'
                   onKeyDown={handleListKeyDown}
                 >
                   <Link
-                    to="/history"
+                    to='/history'
                     style={{ textDecoration: "none", color: "#000" }}
                   >
                     <MenuItem onClick={handleClose} sx={{ color: "#fff" }}>

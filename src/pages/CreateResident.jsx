@@ -10,7 +10,7 @@ import Footer from "../component/Footer";
 import Header from "../component/Header";
 import { CreateResidentContext2 } from "../context/CreateResidentContext2";
 import { useHistory } from "react-router";
-
+import SpaceforHead from "../component/SpaceforHead";
 
 function CreateResident() {
   const history = useHistory();
@@ -23,136 +23,145 @@ function CreateResident() {
   } = useContext(CreateResidentContext2);
   // ขาด Handle Submit ด้วย
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     try {
       if (!createResident.residentTypeOf) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           residentTypeOf: "กรุณาเลือกประเภทที่พักของท่าน",
         }));
       }
       if (!createResident.residentName) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           residentName: "กรุณากรอกชื่อที่พักของท่าน",
         }));
       }
       if (!createResident.rateStar) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           rateStar: "กรุณากรอกจำนวนดาวของท่าน",
         }));
       }
       if (!isNaN(createResident.rateStar)) {
-        setCreateResidentError((curr) => ({ ...curr, rateStar: 'กรุณากรอกจำนวนดาวของท่านเป็นข้อมูลประเภทตัวเลข' }))
+        setCreateResidentError(curr => ({
+          ...curr,
+          rateStar: "กรุณากรอกจำนวนดาวของท่านเป็นข้อมูลประเภทตัวเลข",
+        }));
       }
       if (!createResident.address) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           address: "กรุณากรอกที่อยู่ของที่พักของท่าน",
         }));
       }
       if (!createResident.subDistrict) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           subDistrict: "กรุณากรอกตำบล/แขวงของที่พักของท่าน",
         }));
       }
       if (!createResident.district) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           district: "กรุณากรอกอำเภอ/เขตของที่พักของท่าน",
         }));
       }
       if (!createResident.province) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           province: "กรุณากรอกจังหวัดของที่พักของท่าน",
         }));
       }
       if (!createResident.postalCode) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           postalCode: "กรุณากรอกไปรษณีย์ของที่พักของท่าน",
         }));
       }
       if (createResident.postalCode.length !== 5) {
-        setCreateResidentError((curr) => ({ ...curr, postalCode: 'กรุณากรอกไปรษณีย์ของที่พักของท่านให้ถูกต้อง' }))
+        setCreateResidentError(curr => ({
+          ...curr,
+          postalCode: "กรุณากรอกไปรษณีย์ของที่พักของท่านให้ถูกต้อง",
+        }));
       }
       // if (!createResident.optionRoomDetail) {
       //   setCreateResidentError((curr) => ({ ...curr, optionRoomDetail: 'กรุณากรอกรายละเอียดเพิ่มเติมของที่พักของท่าน' }))
       // }
       if (!createResident.residentImageUrl) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           residentImageUrl: "กรุณาเลือกรูปภาพของที่พักของท่าน",
         }));
       }
       if (!createResident.timeCheckInToStart) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           timeCheckInToStart: "กรุณากรอกเวลาเช็คอินเริ่มต้นของที่พักของท่าน",
         }));
       }
       if (!createResident.timeCheckInToEnd) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           timeCheckInToEnd: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
         }));
       }
       if (!createResident.timeCheckOutToStart) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           timeCheckOutToStart: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
         }));
       }
       if (!createResident.timeCheckOutToEnd) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           timeCheckOutToEnd: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
         }));
       }
       if (!createResident.cancelDate) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           cancelDate: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
         }));
       }
       if (!createResident.cancelDate) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           cancelDate: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
         }));
       }
       if (createResident.bankAccept == false) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           bankAccept: "กรุณากดยินยอมข้อตกลง",
         }));
       }
       if (!createResident.accName) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           accName: "กรุณากรอกชื่อธนาคารของบัญชีของท่าน",
         }));
       }
       if (!createResident.accNumber) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           accNumber: "กรุณากรอกเลขบัญชีธนาคารของท่าน",
         }));
       }
-      if (createResident.accNumber.length !== 10 ) {
-        setCreateResidentError((curr) => ({ ...curr, accNumber: 'กรุณากรอกเลขบัญชีธนาคารของท่านให้ถูกต้อง' }))
+      if (createResident.accNumber.length !== 10) {
+        setCreateResidentError(curr => ({
+          ...curr,
+          accNumber: "กรุณากรอกเลขบัญชีธนาคารของท่านให้ถูกต้อง",
+        }));
       }
       if (!createResident.bankName) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           bankName: "กรุณากรอกธนาคารของบัญชีของท่าน",
         }));
       }
       if (!createResident.bankImgUrl) {
-        setCreateResidentError((curr) => ({
+        setCreateResidentError(curr => ({
           ...curr,
           bankImgUrl: "กรุณาเพิ่มรูปภาพหน้าบัญชีของท่าน",
         }));
@@ -183,9 +192,9 @@ function CreateResident() {
 
   return (
     <>
+      <SpaceforHead />
       <Header />
       {/* ยังขาดการเลือก Type ของ Resident */}
-
       <CreateResidentHeader />
       <ResidentDetailForm />
       <ServicesInresident />

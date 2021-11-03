@@ -4,14 +4,14 @@ import SearchingBox from "./SearchingBox";
 import DatePicker from "./DatePicker";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import { useHistory } from "react-router";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
 import BtnGuestnRoom from "./BtnGuestnRoom";
 import { useState } from "react";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
+// import axios from "axios";
 const CustomButtonRoot = styled("span")(`
     background-color: none;
     padding: 12px 35px;
@@ -49,12 +49,13 @@ function SearhchingBar() {
   // const [checkOut, setCheckOut] = useState("");
   const [guest, setGuest] = useState(1);
   const [room, setRoom] = useState(1);
-
   const history = useHistory();
   function HandleSumbit() {
     // const history = useHistory();
-
-    history.push(`/mainmenu/${resident}/${checkIn}/${room}`);
+   
+       history.push(
+      `/mainmenu/${resident}/${checkIn}/${room}`
+    );
   }
 
   return (

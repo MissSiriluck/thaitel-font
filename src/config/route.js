@@ -37,7 +37,11 @@ const route = {
       component: RegisterPage,
     },
     {
-      path: "/mainmenu/:resident/:checkIn/:room",
+      path: `/mainmenu/:resident/:checkIn/:room`,
+      component: ShowResultPage,
+    },
+    {
+      path: `/bottommenu/:province`,
       component: ShowResultPage,
     },
     {
@@ -95,7 +99,7 @@ const route = {
       component: RegisterPage,
     },
     {
-      path: "/mainmenu/:resident/:checkIn/:room",
+      path: `/mainmenu/:resident/:checkIn/:room`,
       component: ShowResultPage,
     },
     {
@@ -131,10 +135,10 @@ const route = {
       path: "/ownerregister",
       component: OwnerRegisterPage,
     },
-    {
-      path: "/ownerdetail",
-      component: OwnerDetailPage,
-    },
+    // {
+    //   path: "/ownerdetail",
+    //   component: OwnerDetailPage,
+    // },
     {
       path: "/residentregisterpage2",
       component: ResidentRegisterPage2Page,
@@ -143,10 +147,10 @@ const route = {
       path: "/residentregisterpage3",
       component: ResidentRegisterPage3Page,
     },
-    {
-      path: "/createresident",
-      component: CreateResident2,
-    },
+    // {
+    //   path: "/createresident",
+    //   component: CreateResident2,
+    // },
     {
       path: "/residentregisterpage4",
       component: ResidentRegisterPage4Page,

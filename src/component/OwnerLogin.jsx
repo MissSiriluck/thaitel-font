@@ -1,20 +1,30 @@
-import React, { useContext } from "react";
-import { BrowserRouter as Router, Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import axios from "../config/axios";
+import { setToken } from "../service/localStorage";
+import { AuthContext } from "../context/AuthContext";
+import jwtDecode from "jwt-decode";
+
 //Material UI
 import Button from "@mui/material/Button";
-import { Container, Grid, TextField } from "@mui/material";
-import { FcGoogle } from "react-icons/fc";
+import {
+  Container,
+  Grid,
+  IconButton,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
-import axios from "../config/axios";
-import { setToken } from "../service/localStorage";
-import { AuthContext } from "../context/AuthContext";
-import jwtDecode from "jwt-decode";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Visibility from "@mui/icons-material/Visibility";
 
+//customize button style
 const CustomButtonRoot = styled("button")(`
     background-color: none;
     padding: 10px 20px;
@@ -48,18 +58,66 @@ function CustomButton(props) {
 
 function OwnerLogin() {
   const history = useHistory();
-
   const { setUser } = useContext(AuthContext);
 
-  const handleSubmit = async event => {
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+    showPassword: false,
+  });
+
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = event => {
     event.preventDefault();
-    console.log('Test')
+  };
+
+  const handleChange = (props, event) => {
+    setValues({ ...values, [props]: event.target.value });
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    // console.log("Test");
     try {
-      const data = new FormData(event.currentTarget);
+      const data = new FormData(e.currentTarget);
       const values = {
         email: data.get("email"),
         password: data.get("password"),
       };
+
+      if (!values.email) {
+        setErrors(curr => ({
+          ...curr,
+          email: "กรุณากรอกอีเมลของท่าน",
+        }));
+      }
+      // else if (
+      //   !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+      // ) {
+      //   setErrors(curr => ({
+      //     ...curr,
+      //     email: "กรุณากรอกอีเมลให้ถูกต้อง",
+      //   }));
+      // }
+
+      if (!values.password) {
+        setErrors(curr => ({
+          ...curr,
+          password: "กรุณากรอกรหัสผ่านของท่าน",
+        }));
+      }
+
       const res = await axios.post("/hotelOwners/login", values);
       setToken(res.data.token);
       setUser(jwtDecode(res.data.token));
@@ -73,10 +131,13 @@ function OwnerLogin() {
       });
     } catch (err) {
       console.dir(err);
+      setErrors(curr => ({
+        ...curr,
+        email: "กรุณากรอกข้อมูลให้ถูกต้อง",
+        password: "กรุณากรอกข้อมูลให้ถูกต้อง",
+      }));
     }
   };
-
-
 
   return (
     <Container
@@ -84,7 +145,7 @@ function OwnerLogin() {
       justifyContent='center'
       alignItems='center'
       direction='column'
-      sx={{ padding: 0, mt: 20 }}
+      sx={{ padding: 0, mt: 18 }}
     >
       <Grid Container sx={{ flexGlow: 1 }}>
         {/* --------------- head --------------- */}
@@ -160,6 +221,7 @@ function OwnerLogin() {
             <Grid
               item
               xs={5.2}
+              i
               sx={{
                 padding: 0,
                 borderBottom: "1px solid #C4C4C4",
@@ -208,6 +270,10 @@ function OwnerLogin() {
               placeholder='กรอกอีเมล์'
               name='email'
               size='small'
+              value={values.email}
+              onChange={e => handleChange("email", e)}
+              helperText={errors.email ? errors.email : ""}
+              error={errors.email}
               sx={{
                 padding: 0,
                 marginBottom: "3px",
@@ -225,67 +291,67 @@ function OwnerLogin() {
             >
               รหัสผ่าน
             </Typography>
+
             <TextField
               fullWidth
-              id='outlined-textarea fullWidth'
+              id='outlined-adornment-password'
               label='รหัสผ่าน'
               placeholder='กรอกรหัสผ่าน'
               name='password'
-              type='password'
+              value={values.password}
+              type={values.showPassword ? "text" : "password"}
+              onChange={e => handleChange("password", e)}
+              helperText={errors.password ? errors.password : ""}
+              error={errors.password}
               size='small'
               sx={{
                 padding: 0,
                 marginBottom: "3px",
               }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='toggle password visibility'
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge='end'
+                    >
+                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
           </Grid>
 
-           {/* --------------- button submit login--------------- */}
-        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-          <CustomButton
-            sx={{
-              background: "#c62828",
-              color: "#fff",
-              display: "flex",
-              justifyContent: "center",
-              width: "100%",
-              mt: 3,
-            }}
-            type='submit'
-          >
-            <Typography
-              style={{
-                fontSize: 16,
-                marginBottom: "1px",
-                justifyContent: "start",
+          {/* --------------- button submit login--------------- */}
+          <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+            <CustomButton
+              type='submit'
+              sx={{
+                background: "#c62828",
+                color: "#fff",
+                display: "flex",
+                justifyContent: "center",
+                width: "100%",
+                mt: 3,
               }}
             >
-              เข้าสู่ระบบ
-            </Typography>
-          </CustomButton>
-        </Grid>
+              <Typography
+                style={{
+                  fontSize: 16,
+                  marginBottom: "1px",
+                  justifyContent: "start",
+                }}
+              >
+                เข้าสู่ระบบ
+              </Typography>
+            </CustomButton>
+          </Grid>
         </Box>
 
         {/* --------------- input email and password --------------- */}
-        {/* <Box
-          container
-          spacing={2}
-          justifyContent='center'
-          alignItems='center'
-          sx={{
-            padding: 0,
-            margin: 0,
-            width: "100%",
-          }}
-          xs={12}
-          md={12}
-          component='form'
-          onSubmit={handleSubmit}
-          noValidate
-        >         
-        </Box> */}
-       
-
         <Grid
           item
           xs={12}

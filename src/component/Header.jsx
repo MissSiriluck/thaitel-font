@@ -80,15 +80,15 @@ function Header() {
             THAITEL
           </Typography>
         </Link>
-        <Link to='/ownerlogin' style={{ textDecoration: "none" }}>
-          <CustomButton sx={{ background: "#c62828", color: "#fff" }}>
-            ลงทะเบียนที่พักของท่าน
-          </CustomButton>
-        </Link>
         {user ? (
           <BtnLogOut />
         ) : (
           <>
+            <Link to='/ownerlogin' style={{ textDecoration: "none" }}>
+              <CustomButton sx={{ background: "#c62828", color: "#fff" }}>
+                ลงทะเบียนที่พักของท่าน
+              </CustomButton>
+            </Link>
             <Link to='/register' style={{ textDecoration: "none" }}>
               <Button
                 color='inherit'
