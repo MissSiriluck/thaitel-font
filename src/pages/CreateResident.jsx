@@ -195,7 +195,6 @@ function CreateResident() {
       <SpaceforHead />
       <Header />
       {/* ยังขาดการเลือก Type ของ Resident */}
-
       <CreateResidentHeader />
       <ResidentDetailForm />
       <ServicesInresident />

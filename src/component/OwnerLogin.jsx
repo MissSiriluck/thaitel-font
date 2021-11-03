@@ -108,22 +108,12 @@ function OwnerLogin() {
           ...curr,
           email: "กรุณากรอกอีเมลให้ถูกต้อง",
         }));
-      } else {
-        setErrors(curr => ({
-          ...curr,
-          email: "กรุณากรอกข้อมูลให้ถูกต้อง",
-        }));
       }
 
       if (!values.password) {
         setErrors(curr => ({
           ...curr,
           password: "กรุณากรอกรหัสผ่านของท่าน",
-        }));
-      } else {
-        setErrors(curr => ({
-          ...curr,
-          password: "กรุณากรอกข้อมูลให้ถูกต้อง",
         }));
       }
 
@@ -140,6 +130,11 @@ function OwnerLogin() {
       });
     } catch (err) {
       console.dir(err);
+      setErrors(curr => ({
+        ...curr,
+        email: "กรุณากรอกข้อมูลให้ถูกต้อง",
+        password: "กรุณากรอกข้อมูลให้ถูกต้อง",
+      }));
     }
   };
 
@@ -356,24 +351,6 @@ function OwnerLogin() {
         </Box>
 
         {/* --------------- input email and password --------------- */}
-        {/* <Box
-          container
-          spacing={2}
-          justifyContent='center'
-          alignItems='center'
-          sx={{
-            padding: 0,
-            margin: 0,
-            width: "100%",
-          }}
-          xs={12}
-          md={12}
-          component='form'
-          onSubmit={handleSubmit}
-          noValidate
-        >         
-        </Box> */}
-
         <Grid
           item
           xs={12}

@@ -18,6 +18,7 @@ import jwtDecode from "jwt-decode";
 import axios from "../config/axios";
 import { setToken } from "../service/localStorage";
 import { AuthContext } from "../context/AuthContext";
+// import InputOwnerDetailBox from "./InputOwnerDetailBox";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -52,7 +53,7 @@ function CustomButton(props) {
 
 function OwnerRegister() {
   const { values, setValues } = useContext(CreateResidentContext);
-  const { setUser } = useContext(AuthContext);
+  // const { setUser } = useContext(AuthContext);
 
   const [showImg, setShowImg] = useState("");
   const [file, setFile] = useState(null);
@@ -105,7 +106,7 @@ function OwnerRegister() {
   return (
     <Container
       maxWidth='lg'
-      sx={{ justifyContent: "center", display: "flex", mt: 15 }}
+      sx={{ justifyContent: "center", display: "flex", mt: 15, mb: 5 }}
     >
       <Grid
         container
@@ -115,7 +116,12 @@ function OwnerRegister() {
       >
         <Grid item>
           <Typography
-            style={{ margin: 0, fontSize: "36px", marginBottom: "20px" }}
+            style={{
+              margin: 0,
+              fontSize: "36px",
+              marginBottom: "20px",
+              fontWeight: 600,
+            }}
             xs={12}
           >
             กรุณาระบุรายละเอียดข้อมูลของคุณ
@@ -226,6 +232,7 @@ function OwnerRegister() {
                 />
               </Grid>
             </Grid>
+            {/* <InputOwnerDetailBox /> */}
             {/*  */}
             <Grid
               container

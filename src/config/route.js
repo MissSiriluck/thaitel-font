@@ -46,18 +46,10 @@ const route = {
       path: "/ownerlogin",
       component: OwnerLoginPage,
     },
-    // -----------------------------------------------------เอาขึ้นมาเทสเฉยๆ
     {
       path: "/ownerregister",
       component: OwnerRegisterPage,
     },
-
-    {
-      path: "/ownerdetail",
-      component: OwnerDetailPage,
-    },
-
-    // -----------------------------------------------------เอาขึ้นมาเทสเฉยๆ
     // {
     //   path: "/ownerhistory",
     //   component: OwnerHistoryPage,
