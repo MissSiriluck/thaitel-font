@@ -15,10 +15,12 @@ import ResidentRegisterPage4Page from "../pages/ResidentRegisterPage4Page";
 import ResidentRegisterPage5Page from "../pages/ResidentRegisterPage5Page";
 import ResidentRegisterPage6Page from "../pages/ResidentRegisterPage6Page";
 import ResidentRegisterPage8Page from "../pages/ResidentRegisterPage8Page";
+import CardOwnerHistoryList from "../component/CardOwnerHistoryList";
 
 // Edit create resident
-import CreateResident2 from "../pages/CreateResident"
-
+import CreateResident2 from "../pages/CreateResident";
+import ResetPasswordPage from "../pages/ResetPasswordPage";
+import ResetForNewPassword from "../pages/ResetForNewPassword";
 
 const route = {
   guest: [
@@ -54,17 +56,30 @@ const route = {
       path: "/ownerregister",
       component: OwnerRegisterPage,
     },
-    {
-      path: "/ownerhistory",
-      component: OwnerHistoryPage,
-    },
+    // {
+    //   path: "/ownerhistory",
+    //   component: OwnerHistoryPage,
+    // },
     {
       path: "/ownerdetail",
       component: OwnerDetailPage,
     },
-    { 
-      path: "/createresident",
-      component: CreateResident2,
+    {
+      path: "/reset",
+      component: ResetPasswordPage,
+    },
+    {
+      path: "/reset/:token",
+      // path: "/ResetForNewPassword",
+      component: ResetForNewPassword,
+    },
+    // {
+    //   path: "/createresident",
+    //   component: CreateResident2,
+    // },
+    {
+      path: "/addcom",
+      component: AddCom,
     },
     {
       redirect: "/",
@@ -100,6 +115,10 @@ const route = {
       component: BookingConfirmationPage,
     },
     {
+      path: "/Reset",
+      component: ResetPasswordPage,
+    },
+    {
       redirect: "/",
     },
   ],
@@ -116,10 +135,10 @@ const route = {
       path: "/ownerregister",
       component: OwnerRegisterPage,
     },
-    {
-      path: "/ownerdetail",
-      component: OwnerDetailPage,
-    },
+    // {
+    //   path: "/ownerdetail",
+    //   component: OwnerDetailPage,
+    // },
     {
       path: "/residentregisterpage2",
       component: ResidentRegisterPage2Page,
@@ -128,6 +147,10 @@ const route = {
       path: "/residentregisterpage3",
       component: ResidentRegisterPage3Page,
     },
+    // {
+    //   path: "/createresident",
+    //   component: CreateResident2,
+    // },
     {
       path: "/residentregisterpage4",
       component: ResidentRegisterPage4Page,
@@ -164,13 +187,19 @@ const route = {
       path: "/ownerdetail",
       component: OwnerDetailPage,
     },
+
     {
       path: "/ownerhistory",
       component: OwnerHistoryPage,
     },
-    {
-      redirect: "/ownerhistory",
-    },
+    // {
+    //   redirect: "/ownerhistory",
+    // },
+
+    // {
+    //   redirect: "/ownerhistory",
+    //   component: OwnerHistoryPage,
+    // },
   ],
 };
 

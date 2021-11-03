@@ -91,7 +91,7 @@ function AddcomDetail() {
   useEffect(() => {
     const fetchResidentByid = async () => {
       // const res = await axios.get(`/residents/${user.id}`);
-      const res = await axios.get(`/residents/residentId/${location.state.id}`);
+      const res = await axios.get(`/residents/${location.state.id}`);
       const roomsFetch = res.data?.rooms?.map((item) => {
         return {
           roomId: item.id,
@@ -109,8 +109,8 @@ function AddcomDetail() {
     fetchResidentByid();
   }, []);
 
-  // console.log("rooms.............................", rooms);
-  // console.log("resident.............................", resident);
+  console.log("rooms.............................", rooms);
+  console.log("resident.............................", resident);
 
   const history = useHistory();
 

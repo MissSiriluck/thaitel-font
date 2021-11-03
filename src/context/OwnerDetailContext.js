@@ -1,9 +1,9 @@
 import { createContext, useState } from "react";
 
-const CreateResidentContext2 = createContext();
+const OwnerDetailContext = createContext();
 
 const CreateResidentProvider2 = ({ children }) => {
-  const [createResidentError, setCreateResidentError] = useState({
+  const [ownerDetailErrors, setOwnerDetailErrors] = useState({
     residentTypeOf: "",
     residentName: "",
     rateStar: "",
@@ -117,7 +117,7 @@ const CreateResidentProvider2 = ({ children }) => {
   });
 
   return (
-    <CreateResidentContext2.Provider
+    <OwnerDetailContext.Provider
       value={{
         createResident,
         setCreateResident,
@@ -126,8 +126,8 @@ const CreateResidentProvider2 = ({ children }) => {
       }}
     >
       {children}
-    </CreateResidentContext2.Provider>
+    </OwnerDetailContext.Provider>
   );
 };
 
-export { CreateResidentProvider2, CreateResidentContext2 };
+export { CreateResidentProvider2, OwnerDetailContext };

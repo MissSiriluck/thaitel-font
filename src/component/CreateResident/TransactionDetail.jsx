@@ -11,7 +11,7 @@ import Select from '@mui/material/Select';
 import { CreateResidentContext2 } from '../../context/CreateResidentContext2';
 
 function TransactionDetail() {
-  const { createResident, setCreateResident } = useContext(CreateResidentContext2);
+  const { createResident, setCreateResident, createResidentError, setCreateResidentError  } = useContext(CreateResidentContext2);
 
   const handleChangeFile = (e) => {
     setCreateResident((cur) => ({ ...cur, bankImageFile: e.target.files[0] }));
@@ -83,8 +83,11 @@ function TransactionDetail() {
                 value={createResident.bankAccept}
                 onChange={handleChangeBankAccept}
                 checked={createResident.bankAccept}
+                helperText= {createResidentError.bankAccept ? createResidentError.bankAccept : ""}
+                error={createResidentError.bankAccept}
               />
             </Grid>
+              {createResidentError.bankAccept ? <Typography sx={{display:"flex", justifyContent:"center", fontSize:"12px", color:"#d32f2f"}}>{createResidentError.bankAccept}</Typography> : ""}
           </Grid>
         </Grid>
       </Grid>
@@ -94,6 +97,9 @@ function TransactionDetail() {
           display: 'flex',
           justifyContent: 'space-between',
           marginTop: '20px',
+          border: '2px solid #c4c4c4',
+          borderRadius: '10px',
+          padding: '20px'
         }}
       >
         <Grid
@@ -125,6 +131,8 @@ function TransactionDetail() {
                 sx={{ width: '100%', alignItems: 'stretch' }}
                 value={createResident.accName}
                 onChange={(e) => handleChange('accName', e)}
+                helperText= {createResidentError.accName ? createResidentError.accName : ""}
+                error={createResidentError.accName}
               />
             </Grid>
           </Grid>
@@ -147,6 +155,8 @@ function TransactionDetail() {
                 sx={{ width: '100%', alignItems: 'stretch' }}
                 value={createResident.accNumber}
                 onChange={(e) => handleChange('accNumber', e)}
+                helperText= {createResidentError.accNumber ? createResidentError.accName : ""}
+                error={createResidentError.accNumber}
               />
             </Grid>
           </Grid>
@@ -180,6 +190,8 @@ function TransactionDetail() {
                   value={createResident.bankName}
                   label='Bank Name'
                   onChange={(e) => handleChange('bankName', e)}
+                  helperText= {createResidentError.bankName ? createResidentError.bankName : ""}
+                error={createResidentError.bankName}
                   size='small'
                   sx={{
                     display: 'flex',
@@ -207,17 +219,18 @@ function TransactionDetail() {
                   <MenuItem value={'Siam Commercial Bank'}>Siam Commercial Bank</MenuItem>
                   <MenuItem value={'Aomsin bank'}>Aomsin bank</MenuItem>
                 </Select>
-                {/* <FormHelperText>With label + helper text</FormHelperText> */}
+                  {createResidentError.bankName ? <Typography sx={{fontSize:"12px", color:"#d32f2f", marginLeft:'14px'}}>{createResidentError.bankName}</Typography> : ""}
               </FormControl>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={5.9} sx={{ display: 'flex' }}>
+        <Grid item xs={5.8} sx={{ display: 'flex', flexDirection:'column' }}>
           <Box
             item
             xs={12}
             sx={{
-              border: '2px dotted #cfcfcf',
+              // border: '2px dotted #cfcfcf',
+              border: createResidentError.bankImgUrl ? '2px dotted #d32f2f' : '2px dotted #cfcfcf',
               width: '100%',
               alignItems: 'center',
               borderRadius: '5px',
@@ -238,10 +251,11 @@ function TransactionDetail() {
                   height: '100%',
                 }}
               >
-                อัพโหลดรูปหน้าบัญชีธนาคารของท่าน 1 รูป
+                อัพโหลดรูปหน้าบัญชีธนาคารของท่าน
               </Typography>
             )}
           </Box>
+            {createResidentError.bankImgUrl ? <Typography sx={{fontSize:"12px", color:"#d32f2f", marginLeft:'14px'}}>{createResidentError.bankImgUrl}</Typography> : ""}
         </Grid>
         <Grid
           item
@@ -256,7 +270,7 @@ function TransactionDetail() {
           <label htmlFor='contained-button-file-bank'>
             <Input accept='image/*' id='contained-button-file-bank' multiple type='file' onChange={handleChangeFile} />
             <Button variant='contained' component='span'>
-              กดเพื่อเพิ่มรูปภาพห้องพักของคุณ
+              กดเพื่อเพิ่มรูปภาพหน้าบัญชีของคุณ
             </Button>
           </label>
         </Grid>

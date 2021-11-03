@@ -57,6 +57,7 @@ function SearhchingBar() {
       `/mainmenu/${resident}/${checkIn}/${room}`
     );
   }
+
   return (
     <Box
       sx={{

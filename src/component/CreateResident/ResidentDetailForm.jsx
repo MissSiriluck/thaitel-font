@@ -2,6 +2,7 @@ import { Button, Container, Grid, TextareaAutosize, TextField, Typography } from
 import { Box, styled } from '@mui/system';
 import React, { useContext } from 'react';
 import { CreateResidentContext2 } from '../../context/CreateResidentContext2';
+import ChooseTypeForm from './ChooseTypeForm';
 
 function ResidentDetailForm() {
   const Input = styled('input')({
@@ -39,7 +40,11 @@ function ResidentDetailForm() {
             width: '100%',
           }}
         >
+
           <Grid item>
+          <Grid item>
+            <ChooseTypeForm createResident={createResident} setCreateResident={setCreateResident} createResidentError={createResidentError} setCreateResidentError={setCreateResidentError} />
+          </Grid>
             <Grid
               item
               sx={{
@@ -307,7 +312,6 @@ function ResidentDetailForm() {
                         item
                         xs={5.9}
                         sx={{
-                          border: '2px dotted #cfcfcf',
                           width: '100%',
                           margin: '5px',
                           alignItems: 'center',
@@ -318,8 +322,7 @@ function ResidentDetailForm() {
                           backgroundSize: 'contain',
                           backgroundRepeat: 'no-repeat',
                         }}
-                        helperText= {createResidentError.residentImageUrl ? createResidentError.residentImageUrl : ""}
-                        error={createResidentError.residentImageUrl}
+                        border={ createResidentError.residentImageUrl ? '2px dotted #ba000d' : '2px dotted #cfcfcf' } 
                       >
                         {createResident.residentImageUrl ? null : (
                           <Typography
@@ -334,6 +337,7 @@ function ResidentDetailForm() {
                             อัพโหลดรูปภาพที่พักของคุณ
                           </Typography>
                         )}
+                        {createResidentError.residentImageUrl ? <Typography style={{ color: '#d32f2f', fontSize: '0.75rem', marginTop: '3px' }}> {createResidentError.residentImageUrl} </Typography> : ""}
                       </Box>
                       <Grid
                         item
