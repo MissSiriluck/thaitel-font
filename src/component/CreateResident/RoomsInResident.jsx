@@ -72,7 +72,7 @@ function RoomsInResident() {
 
   return (
     <Container maxWidth="md">
-      <Stack spacing={2} sx={{ display: "flex", flexDirection: "column" }}>
+      <Stack spacing={2} sx={{ display: "flex", flexDirection: "column", mt: 4 }}>
         <Grid item>
           <Typography sx={{ fontSize: "36px" }}>ห้องทั้งหมดของคุณ</Typography>
         </Grid>

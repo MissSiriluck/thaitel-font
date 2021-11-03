@@ -1,65 +1,56 @@
-import {
-  Button,
-  Checkbox,
-  Container,
-  FormControlLabel,
-  Grid,
-  Input,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Button, Checkbox, Container, FormControlLabel, Grid, Stack, TextField, Typography } from '@mui/material';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
 import { Box, styled } from '@mui/system';
 import React, { useState } from 'react';
+import axios from '../../config/axios'
 
 const CustomButtonRoot = styled('button')(`
-    background-color: none;
-    padding: 10px 20px;
-    border-radius: 30px;
-    color: #fff;
-    font-weight: 600;
-    font-family: 'Noto Sans Thai', sans-serif;
-    font-size: 14px;
-    transition: all 200ms ease;
-    cursor: pointer;
-    box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 0 rgba(0, 127, 255, 0);
-    border: none;
-    
-
-    &:hover {
-        background-color: #4BB543;
-    }
-
-    &.${buttonUnstyledClasses.active} {
-        background-color: #9a2a2c;
-    }
-
-    &.${buttonUnstyledClasses.focusVisible} {
-        box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 5px rgba(0, 127, 255, 0.5);
-        outline: none;
-    }
-`);
+      background-color: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      color: #fff;
+      font-weight: 600;
+      font-family: 'Noto Sans Thai', sans-serif;
+      font-size: 14px;
+      transition: all 200ms ease;
+      cursor: pointer;
+      box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 0 rgba(0, 127, 255, 0);
+      border: none;
+      
+  
+      &:hover {
+          background-color: #4BB543;
+      }
+  
+      &.${buttonUnstyledClasses.active} {
+          background-color: #9a2a2c;
+      }
+  
+      &.${buttonUnstyledClasses.focusVisible} {
+          box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 5px rgba(0, 127, 255, 0.5);
+          outline: none;
+      }
+  `);
 
 function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function AddRoomsForm({ addRoomCollection }) {
-  const [roomForm, setRoomForm] = useState({
-    optionRoomDetail: '',
-    maxGuest: '',
-    roomSize: '',
-    roomTypeOf: '',
-    roomAmount: '',
-    noSmoking: false,
-    petAllow: false,
-    pricePerNigth: '',
-    roomImageFile: null,
-    roomShowImg: '',
-  });
+function EditPartEditRoomForm({ room, editRoomCollection, index,handleClose }) {
+  const [editRoomForm, setEditRoomForm, ] = useState({
+    optionRoomDetail: room.optionalRoomDetail,
+    maxGuest: room.maxGuest,
+    roomSize: room.size,
+    roomTypeOf: room.typeOf,
+    roomAmount: room.roomAmount,
+    pricePerNigth: room.pricePerNight,
+    roomShowImg: room.imgURL,
+    petAllow: room.petAllow,
+    noSmoking: room.noSmoking
+  }); //{optionRoomDetail: '',maxGuest: '',roomSize: '',roomTypeOf: '',roomAmount: '',noSmoking: false,petAllow: false,pricePerNigth: '',roomImageFile: null,roomShowImg: '',}
+  console.log(room)
 
-  const [roomFormError, setRoomFormError] = useState({
+  const [editRoomFormError, setEditRoomFormError] = useState({
     optionRoomDetail: '',
     maxGuest: '',
     roomSize: '',
@@ -69,60 +60,72 @@ function AddRoomsForm({ addRoomCollection }) {
     roomShowImg: '',
   })
 
-  const handleChange = (type, e) => {
-    setRoomForm((cur) => ({ ...cur, [type]: e.target.value }));
-  };
-
-  const handleChangeCheckBox = (type) => {
-    setRoomForm((cur) => ({ ...cur, [type]: !cur[type] }));
-  };
-
-  const handleChangeFileInRoomForm = (e) => {
-    setRoomForm((cur) => ({ ...cur, roomImageFile: e.target.files[0] }));
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setRoomForm((cur) => ({ ...cur, roomShowImg: reader.result }));
-    };
-    reader.readAsDataURL(e.target.files[0]);
-  };
-
-  const handleClickAddRoom = () => {
+  const handleClickSaveRoom = async () => {
 
     let allPass = true // สมมุติว่าทุกตัวผ่าน 
 
-    if (!roomForm.optionRoomDetail) {
+    if (!editRoomForm.optionRoomDetail) {
       allPass = false // สมมุติว่าถ้ามีตัวใดตัวนึงเข้า if ที่ check err, allPass จะมีค่าเป็น false 
-      setRoomFormError((curr) => ({ ...curr, optionRoomDetail: 'กรุณากรอกรายละเอียดที่พักเพิ่มเติม'}))
+      setEditRoomFormError((curr) => ({ ...curr, optionRoomDetail: 'กรุณากรอกรายละเอียดที่พักเพิ่มเติม'}))
     }
-    if (!roomForm.maxGuest) {
+    if (!editRoomForm.maxGuest) {
       allPass = false
-      setRoomFormError((curr) => ({ ...curr, maxGuest: 'กรุณากรอกรายละเอียดที่พักเพิ่มเติม'}))
+      setEditRoomFormError((curr) => ({ ...curr, maxGuest: 'กรุณากรอกรายละเอียดที่พักเพิ่มเติม'}))
     }
-    if (!roomForm.roomSize) {
+    if (!editRoomForm.roomSize) {
       allPass = false
-      setRoomFormError((curr) => ({ ...curr, roomSize: 'กรุณากรอกรายละเอียดขนาดที่พัก'}))
+      setEditRoomFormError((curr) => ({ ...curr, roomSize: 'กรุณากรอกรายละเอียดขนาดที่พัก'}))
     }
-    if (!roomForm.roomTypeOf) {
+    if (!editRoomForm.roomTypeOf) {
       allPass = false
-      setRoomFormError((curr) => ({ ...curr, roomTypeOf: 'กรุณากรอกรายละเอียดชนิดของห้อง'}))
+      setEditRoomFormError((curr) => ({ ...curr, roomTypeOf: 'กรุณากรอกรายละเอียดชนิดของห้อง'}))
     }
-    if (!roomForm.roomAmount) {
+    if (!editRoomForm.roomAmount) {
       allPass = false
-      setRoomFormError((curr) => ({ ...curr, roomAmount: 'กรุณากรอกปริมาณของห้องพัก'}))
+      setEditRoomFormError((curr) => ({ ...curr, roomAmount: 'กรุณากรอกปริมาณของห้องพัก'}))
     }
-    if (!roomForm.pricePerNigth) {
+    if (!editRoomForm.pricePerNigth) {
       allPass = false
-      setRoomFormError((curr) => ({ ...curr, pricePerNigth: 'กรุณากรอกรายละเอียดราคาของห้อง'}))
+      setEditRoomFormError((curr) => ({ ...curr, pricePerNigth: 'กรุณากรอกรายละเอียดราคาของห้อง'}))
     }
-    if (!roomForm.roomShowImg) {
+    if (!editRoomForm.roomShowImg) {
       allPass = false
-      setRoomFormError((curr) => ({ ...curr, roomShowImg: 'กรุณาเพิ่มรูปของห้องพัก'}))
+      setEditRoomFormError((curr) => ({ ...curr, roomShowImg: 'กรุณาเพิ่มรูปของห้องพัก'}))
     }
 
     if (allPass) { //ถ้าไม่มี err ถึงทำ function นี้
-      addRoomCollection(roomForm);
+      editRoomCollection(index, editRoomForm);
+      const resRoom = await axios.put(`/rooms/${room.id}`, {
+      typeOf:editRoomForm.roomTypeOf,
+      roomAmount: editRoomForm.roomAmount,
+      size: editRoomForm.roomSize,
+      optionalRoomDetail: editRoomForm.optionRoomDetail,
+      noSmoking: editRoomForm.noSmoking,
+      petAllowed: editRoomForm.petAllowed,
+      pricePerNight: editRoomForm.pricePerNight,
+      imgURL: editRoomForm.roomShowImg,
+      maxGuest: editRoomForm.maxGuest,
+      })
+      handleClose()
     }
 
+  };
+
+  const handleChange = (type, e) => {
+    setEditRoomForm((cur) => ({ ...cur, [type]: e.target.value }));
+  };
+
+  const handleChangeCheckBox = (type) => {
+    setEditRoomForm((cur) => ({ ...cur, [type]: !cur[type] }));
+  };
+
+  const handleChangeFileInRoomForm = (e) => {
+    setEditRoomForm((cur) => ({ ...cur, roomImageFile: e.target.files[0] }));
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setEditRoomForm((cur) => ({ ...cur, roomShowImg: reader.result }));
+    };
+    reader.readAsDataURL(e.target.files[0]);
   };
 
   const Input = styled('input')({
@@ -137,7 +140,7 @@ function AddRoomsForm({ addRoomCollection }) {
             <Grid item sx={{ display: 'flex', flexDirection: 'column', flexgrow: '1' }}>
               <Typography
                 style={{
-                  fontSize: 20,
+                  fontSize: 27,
                 }}
               >
                 โปรดเลือก
@@ -150,7 +153,6 @@ function AddRoomsForm({ addRoomCollection }) {
                   border: '2px solid #c4c4c4',
                   borderRadius: '5px',
                   padding: '20px',
-                  paddingTop: '10px',
                   width: '100%',
                 }}
                 spacing={2}
@@ -161,6 +163,7 @@ function AddRoomsForm({ addRoomCollection }) {
                   sx={{
                     display: 'flex',
                     flexDirection: 'row',
+
                     width: '100%',
                     alignItems: 'flex-end',
                   }}
@@ -176,7 +179,7 @@ function AddRoomsForm({ addRoomCollection }) {
                   >
                     <Typography
                       style={{
-                        fontSize: 14,
+                        fontSize: 18,
                         marginTop: '10px',
                       }}
                     >
@@ -186,11 +189,11 @@ function AddRoomsForm({ addRoomCollection }) {
                       id='outlined-password-input'
                       label='ประเภทห้องพัก'
                       size='small'
-                      sx={{ width: '100%', marginTop: '0px' }}
-                      value={roomForm.roomTypeOf}
+                      sx={{ width: '100%' }}
+                      value={editRoomForm.roomTypeOf}
                       onChange={(e) => handleChange('roomTypeOf', e)}
-                      helperText= {roomFormError.roomTypeOf ? roomFormError.roomTypeOf : ""}
-                      error={roomFormError.roomTypeOf}
+                      helperText= {editRoomFormError.roomTypeOf ? editRoomFormError.roomTypeOf : ""}
+                      error={editRoomFormError.roomTypeOf}
                     />
                   </Grid>
                 </Grid>
@@ -205,7 +208,7 @@ function AddRoomsForm({ addRoomCollection }) {
                   <Grid item xs={3.5}>
                     <Typography
                       style={{
-                        fontSize: 14,
+                        fontSize: 18,
                         marginTop: '10px',
                       }}
                     >
@@ -216,10 +219,10 @@ function AddRoomsForm({ addRoomCollection }) {
                       label='จำนวนของห้องพัก'
                       size='small'
                       sx={{ width: '100%', alignItems: 'stretch' }}
-                      value={roomForm.roomAmount}
+                      value={editRoomForm.roomAmount}
                       onChange={(e) => handleChange('roomAmount', e)}
-                      helperText= {roomFormError.roomAmount ? roomFormError.roomAmount : ""}
-                      error={roomFormError.roomAmount}
+                      helperText= {editRoomFormError.roomAmount ? editRoomFormError.roomAmount : ""}
+                      error={editRoomFormError.roomAmount}
                     />
                   </Grid>
 
@@ -234,7 +237,7 @@ function AddRoomsForm({ addRoomCollection }) {
                   >
                     <Typography
                       style={{
-                        fontSize: 14,
+                        fontSize: 18,
                         marginTop: '10px',
                       }}
                     >
@@ -245,17 +248,17 @@ function AddRoomsForm({ addRoomCollection }) {
                       label='ขนาดห้องพัก'
                       size='small'
                       sx={{ width: '100%', alignItems: 'stretch' }}
-                      value={roomForm.roomSize}
+                      value={editRoomForm.roomSize}
                       onChange={(e) => handleChange('roomSize', e)}
-                      helperText= {roomFormError.roomSize ? roomFormError.roomSize : ""}
-                      error={roomFormError.roomSize}
+                      helperText= {editRoomFormError.roomSize ? editRoomFormError.roomSize : ""}
+                      error={editRoomFormError.roomSize}
                     />
                   </Grid>
 
                   <Grid item xs={3.8}>
                     <Typography
                       style={{
-                        fontSize: 14,
+                        fontSize: 18,
                         marginTop: '10px',
                       }}
                     >
@@ -263,14 +266,14 @@ function AddRoomsForm({ addRoomCollection }) {
                     </Typography>
                     <TextField
                       id='outlined-password-input'
-                      label='จำนวนแขกสูงสุด'
+                      label='ประเภทห้องพัก'
                       size='small'
                       xs={5}
                       sx={{ width: '100%' }}
-                      value={roomForm.maxGuest}
+                      value={editRoomForm.maxGuest}
                       onChange={(e) => handleChange('maxGuest', e)}
-                      helperText= {roomFormError.maxGuest ? roomFormError.maxGuest : ""}
-                      error={roomFormError.maxGuest}
+                      helperText= {editRoomFormError.maxGuest ? editRoomFormError.maxGuest : ""}
+                      error={editRoomFormError.maxGuest}
                     />
                   </Grid>
                 </Stack>
@@ -278,7 +281,7 @@ function AddRoomsForm({ addRoomCollection }) {
                   <Grid item xs={12}>
                     <Typography
                       style={{
-                        fontSize: 14,
+                        fontSize: 18,
                         marginTop: '10px',
                       }}
                     >
@@ -289,10 +292,10 @@ function AddRoomsForm({ addRoomCollection }) {
                       label='รายละเอียดห้องพักเพิ่มเติม'
                       size='small'
                       sx={{ width: '100%' }}
-                      value={roomForm.optionRoomDetail}
+                      value={editRoomForm.optionRoomDetail}
                       onChange={(e) => handleChange('optionRoomDetail', e)}
-                      helperText= {roomFormError.optionRoomDetail ? roomFormError.optionRoomDetail : ""}
-                      error={roomFormError.optionRoomDetail}
+                      helperText= {editRoomFormError.optionRoomDetail ? editRoomFormError.optionRoomDetail : ""}
+                      error={editRoomFormError.optionRoomDetail}
                     />
                   </Grid>
                 </Grid>
@@ -304,32 +307,32 @@ function AddRoomsForm({ addRoomCollection }) {
             sx={{
               border: '2px solid #c4c4c4',
               borderRadius: '5px',
-              marginTop: '10px',
-              padding: '10px',
+              marginTop: '20px',
+              padding: '12px',
               display: 'flex',
             }}
           >
-            <Grid item xs={7} sx={{ display: 'flex', flexDirection: 'column' ,paddingBottom: '3px' }}>
+            <Grid item xs={7} sx={{ display: 'flex', paddingBottom: '3px' }}>
               <Box
                 item
                 xs={12}
                 sx={{
+                  border: '2px dotted #cfcfcf',
                   width: '100%',
                   margin: '5px',
-                  height: '24vh',
+                  height: '35vh',
                   alignItems: 'center',
                   borderRadius: '5px',
                   justifyContent: 'center',
-                  backgroundImage: `url(${roomForm.roomShowImg})`,
+                  backgroundImage: `url(${editRoomForm.roomShowImg})`,
                   backgroundSize: 'contain',
                   backgroundRepeat: 'no-repeat',
                 }}
-                border={ roomFormError.roomShowImg ? '2px dotted #d32f2f' : '2px dotted #cfcfcf' } 
               >
-                {roomForm.roomShowImg ? null : (
+                {editRoomForm.roomShowImg ? null : (
                   <Typography
                     style={{
-                      fontSize: '14px',
+                      fontSize: '18px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -340,7 +343,6 @@ function AddRoomsForm({ addRoomCollection }) {
                   </Typography>
                 )}
               </Box>
-              {roomFormError.roomShowImg ? <Typography style={{ color: '#d32f2f', fontSize: '0.5rem', marginTop: '3px' }}> {roomFormError.roomShowImg} </Typography> : ""}
             </Grid>
             <Grid
               item
@@ -351,10 +353,10 @@ function AddRoomsForm({ addRoomCollection }) {
                 alignItems: 'center',
               }}
             >
-              <label htmlFor='button-file-room'>
+              <label htmlFor='button-file-room-edit'>
                 <Input
                   accept='image/*'
-                  id='button-file-room'
+                  id='button-file-room-edit'
                   multiple
                   type='file'
                   onChange={handleChangeFileInRoomForm}
@@ -365,7 +367,7 @@ function AddRoomsForm({ addRoomCollection }) {
               </label>
             </Grid>
           </Grid>
-          <Grid item sx={{ marginBottom: '20px', marginTop: '10px' }}>
+          <Grid item sx={{ marginBottom: '50px', marginTop: '15px' }}>
             <Grid container sx={{ justifyContent: 'space-between' }}>
               <Grid
                 item
@@ -376,23 +378,21 @@ function AddRoomsForm({ addRoomCollection }) {
                   padding: '20px',
                 }}
               >
-                <Typography sx={{ fontSize: '16px' }}>นโยบายข้อห้าม และ ข้อกำหนด</Typography>
-                <Grid item sx={{ display: 'flex', flexDirection: 'column', fontSize: '12px'}}>
+                <Typography sx={{ fontSize: '18px' }}>นโยบายข้อห้าม และ ข้อกำหนด</Typography>
+                <Grid item sx={{ display: 'flex', flexDirection: 'column' }}>
                   <FormControlLabel
                     control={<Checkbox />}
                     label='ห้ามสูบบุหรี่'
-                    value={roomForm.noSmoking}
+                    value={editRoomForm.noSmoking}
                     onChange={(e) => handleChangeCheckBox('noSmoking')}
-                    checked={roomForm.noSmoking}
-                    sx={{ fontSize: '12px' }}
+                    checked={editRoomForm.noSmoking}
                   />
                   <FormControlLabel
                     control={<Checkbox />}
                     label='ห้ามนำสัตว์เลี้ยงเข้ามา'
-                    value={roomForm.petAllow}
+                    value={editRoomForm.petAllow}
                     onChange={(e) => handleChangeCheckBox('petAllow')}
-                    checked={roomForm.petAllow}
-                    sx={{ fontSize: '12px' }}
+                    checked={editRoomForm.petAllow}
                   />
                 </Grid>
               </Grid>
@@ -402,7 +402,7 @@ function AddRoomsForm({ addRoomCollection }) {
                 sx={{
                   border: '2px solid #c4c4c4',
                   borderRadius: '5px',
-                  padding: '0px 20px',
+                  padding: '20px',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'center',
@@ -416,16 +416,14 @@ function AddRoomsForm({ addRoomCollection }) {
                     justifyContent: 'center',
                   }}
                 >
-                  <Typography sx={{ fontSize: '14px' }}>ราคาต่อคืน</Typography>
+                  <Typography sx={{ fontSize: '18px' }}>ราคาต่อคืน</Typography>
                   <TextField
                     id='outlined-password-input'
                     label='ราคาต่อคืน(บาท)'
                     size='small'
-                    sx={{ width: '100%', fontSize: '12px', height: "10px" }}
-                    value={roomForm.pricePerNigth}
+                    sx={{ width: '100%' }}
+                    value={editRoomForm.pricePerNigth}
                     onChange={(e) => handleChange('pricePerNigth', e)}
-                    helperText= {roomFormError.pricePerNigth ? roomFormError.pricePerNigth : ""}
-                    error={roomFormError.pricePerNigth}
                   />
                 </Grid>
               </Grid>
@@ -440,7 +438,7 @@ function AddRoomsForm({ addRoomCollection }) {
             sx={{
               display: 'flex',
               justifyContent: 'end',
-              marginBottom: '20px',
+              marginBottom: '25px',
             }}
           >
             <CustomButton
@@ -449,19 +447,19 @@ function AddRoomsForm({ addRoomCollection }) {
                 color: '#fff',
                 display: 'flex',
                 justifyContent: 'center',
-                width: '90%',
-                marginBottom: '10px',
-                height: '35px',
+                width: '100%',
+                marginBottom: '50px',
+                height: '40px',
               }}
-              onClick={handleClickAddRoom}
+              onClick={handleClickSaveRoom}
             >
               <Typography
                 style={{
-                  fontSize: 14,
+                  fontSize: 16,
                   justifyContent: 'start',
                 }}
               >
-                เพิ่ม
+                บันทึก
               </Typography>
             </CustomButton>
           </Grid>
@@ -471,4 +469,4 @@ function AddRoomsForm({ addRoomCollection }) {
   );
 }
 
-export default AddRoomsForm;
+export default EditPartEditRoomForm;

@@ -45,7 +45,7 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function AddRoomsForm({ addRoomCollection }) {
+function EditPartAddRoomsForm({ addRoomCollection }) {
   const [roomForm, setRoomForm] = useState({
     optionRoomDetail: '',
     maxGuest: '',
@@ -120,6 +120,7 @@ function AddRoomsForm({ addRoomCollection }) {
     }
 
     if (allPass) { //ถ้าไม่มี err ถึงทำ function นี้
+      
       addRoomCollection(roomForm);
     }
 
@@ -471,4 +472,4 @@ function AddRoomsForm({ addRoomCollection }) {
   );
 }
 
-export default AddRoomsForm;
+export default EditPartAddRoomsForm;

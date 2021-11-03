@@ -37,17 +37,7 @@ function CustomButton(props) {
 }
 
 function EditRoomForm({ room, editRoomCollection, index,handleClose }) {
-  const [editRoomForm, setEditRoomForm, ] = useState({
-    optionRoomDetail: room.optionalRoomDetail,
-    maxGuest: room.maxGuest,
-    roomSize: room.size,
-    roomTypeOf: room.typeOf,
-    roomAmount: room.roomAmount,
-    pricePerNigth: room.pricePerNight,
-    roomShowImg: room.imgURL,
-    petAllow: room.petAllow,
-    noSmoking: room.noSmoking
-  }); //{optionRoomDetail: '',maxGuest: '',roomSize: '',roomTypeOf: '',roomAmount: '',noSmoking: false,petAllow: false,pricePerNigth: '',roomImageFile: null,roomShowImg: '',}
+  const [editRoomForm, setEditRoomForm, ] = useState(room); //{optionRoomDetail: '',maxGuest: '',roomSize: '',roomTypeOf: '',roomAmount: '',noSmoking: false,petAllow: false,pricePerNigth: '',roomImageFile: null,roomShowImg: '',}
   console.log(room)
 
   const [editRoomFormError, setEditRoomFormError] = useState({
@@ -95,17 +85,6 @@ function EditRoomForm({ room, editRoomCollection, index,handleClose }) {
 
     if (allPass) { //ถ้าไม่มี err ถึงทำ function นี้
       editRoomCollection(index, editRoomForm);
-      const resRoom = await axios.put(`/rooms/${room.id}`, {
-      typeOf:editRoomForm.roomTypeOf,
-      roomAmount: editRoomForm.roomAmount,
-      size: editRoomForm.roomSize,
-      optionalRoomDetail: editRoomForm.optionRoomDetail,
-      noSmoking: editRoomForm.noSmoking,
-      petAllowed: editRoomForm.petAllowed,
-      pricePerNight: editRoomForm.pricePerNight,
-      imgURL: editRoomForm.roomShowImg,
-      maxGuest: editRoomForm.maxGuest,
-      })
       handleClose()
     }
 
@@ -272,8 +251,8 @@ function EditRoomForm({ room, editRoomCollection, index,handleClose }) {
                       sx={{ width: '100%' }}
                       value={editRoomForm.maxGuest}
                       onChange={(e) => handleChange('maxGuest', e)}
-                      helperText= {editRoomFormError.maxGues ? editRoomFormError.maxGues : ""}
-                      error={editRoomFormError.maxGues}
+                      helperText= {editRoomFormError.maxGuest ? editRoomFormError.maxGuest : ""}
+                      error={editRoomFormError.maxGuest}
                     />
                   </Grid>
                 </Stack>

@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
-import EditRoomForm from './EditRoom';
+import EditRoomForm from './EditRoomForm';
 import ModalEditRoomsForm from './ModalEditRoomsForm';
 
 const CustomButtonRoot = styled('button')(`

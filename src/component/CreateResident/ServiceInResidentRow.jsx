@@ -19,6 +19,7 @@ function ServiceInResidentRow({ service, setService, index }) {
     setService(index, newService)
   }
 
+
   return (
     <Stack direction='row' xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '10px 0' }}>
       <FormControl component='fieldset' sx={{ display: 'flex', flexDirection: 'row', width: '100%', alignItems: 'center' }}>
@@ -40,12 +41,14 @@ function ServiceInResidentRow({ service, setService, index }) {
               onChange={(e) => handleChangeHavingService(false)}
               control={<Radio />}
               label='ไม่มีบริการ'
+              checked={service.isHaving === false}
             />
             <FormControlLabel
               value={true}
               control={<Radio />}
               onChange={(e) => handleChangeHavingService(true)}
               label='มีบริการ'
+              checked={service.isHaving === true}
             />
           </RadioGroup>
         </Grid>

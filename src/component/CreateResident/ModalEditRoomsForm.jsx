@@ -3,7 +3,7 @@ import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/core/ModalUnstyled';
 import AddRoomsForm from './AddRoomsForm';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
-import EditRoomForm from './EditRoom';
+import EditRoomForm from './EditRoomForm';
 
 const CustomButtonRoot = styled('button')(`
     background-color: none;
