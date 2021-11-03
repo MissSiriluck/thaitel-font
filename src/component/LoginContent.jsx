@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import FacebookLogin from "react-facebook-login";
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,8 +18,9 @@ import ButtonUnstyled, {
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
 import axios from "../config/axios";
-import { setToken } from "../service/localStorage";
+import { getToken, setToken } from "../service/localStorage";
 import { AuthContext } from "../context/AuthContext";
+import FacebookOAuth from "./FacebookOAuth";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -81,6 +83,62 @@ function LoginContent() {
     } catch (err) {
       console.dir(err);
     }
+  };
+
+  const handleFacebookLogin = async (e) => {
+    //   e.preventDefault();
+    //   try {
+    // const data = new FormData(e.currentTarget);
+    // const values = {
+    //   // email: data.get("email"),
+    //   // role: data.get("role"),
+    //   facebookId: data.get("faceBookId"),
+    //   // firstNane: data.get("firstNane"),
+    //   // lastName: data.get("lastName"),
+    //   // email,
+    //   // facebookId,
+    //   // firstName,
+    //   // lastName,
+    // };
+    //     let x = getToken();
+    //     console.log("x....................", x);
+    //     const resultLogin = await axios.post(
+    //       "/users/facebookLogin"
+    //       // , values
+    //     );
+    //     console.log("res.data...........................", resultLogin);
+    //     setToken(resultLogin.data.token);
+    //     setUser(jwtDecode(resultLogin.data.token));
+    //     history.push({
+    //       pathname: "/",
+    //       state: {
+    //         successMessage: "Already Login.",
+    //         from: " login page ",
+    //       },
+    //     });
+    //   } catch (err) {
+    //     console.dir(err);
+    //   }
+  };
+
+  const responseFacebook = async (res) => {
+    console.log(res);
+
+    const resultLogin = await axios.post("/users/facebookLogin", {
+      email: res.email,
+      facebookId: res.id,
+      firstName: res.first_name,
+      lastName: res.last_name,
+    });
+    setToken(resultLogin.data.token);
+    setUser(jwtDecode(resultLogin.data.token));
+    history.push({
+      pathname: "/",
+      state: {
+        successMessage: "Already Login.",
+        from: " login page ",
+      },
+    });
   };
 
   return (
@@ -174,6 +232,14 @@ function LoginContent() {
               </Grid>
             </Button>
           </Grid>
+
+          <FacebookLogin
+            appId="934707233799748"
+            // autoLoad={true}
+            fields="name,email,picture,first_name,last_name"
+            // onClick={handleFacebookLogin}
+            callback={responseFacebook}
+          />
 
           <Box
             container
