@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 const OwnerDetailContext = createContext();
 
-const CreateResidentProvider2 = ({ children }) => {
+const OwnerDetailProvider = ({ children }) => {
   const [ownerDetailErrors, setOwnerDetailErrors] = useState({
     residentTypeOf: "",
     residentName: "",
@@ -28,7 +28,7 @@ const CreateResidentProvider2 = ({ children }) => {
     bankImageFile: null,
   });
 
-  const [createResident, setCreateResident] = useState({
+  const [ownerDetail, setOwnerDetail] = useState({
     residentTypeOf: "",
     residentName: "",
     rateStar: "",
@@ -71,12 +71,6 @@ const CreateResidentProvider2 = ({ children }) => {
         isFree: true,
         pricePerTime: 0,
       },
-      // {
-      //   serviceName: "แผนกต้อนรับส่วนหน้า 24 ชั่วโมง",
-      //   isFree: true,
-      //   isHaving: false,
-      //   pricePerTime: "",
-      // },
       {
         serviceName: "bar",
         isFree: true,
@@ -119,10 +113,10 @@ const CreateResidentProvider2 = ({ children }) => {
   return (
     <OwnerDetailContext.Provider
       value={{
-        createResident,
-        setCreateResident,
-        createResidentError,
-        setCreateResidentError,
+        ownerDetailErrors,
+        setOwnerDetailErrors,
+        ownerDetail,
+        setOwnerDetail,
       }}
     >
       {children}
@@ -130,4 +124,4 @@ const CreateResidentProvider2 = ({ children }) => {
   );
 };
 
-export { CreateResidentProvider2, OwnerDetailContext };
+export { OwnerDetailProvider, OwnerDetailContext };
