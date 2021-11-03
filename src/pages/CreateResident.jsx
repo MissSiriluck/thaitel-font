@@ -11,6 +11,7 @@ import Header from "../component/Header";
 import { CreateResidentContext2 } from "../context/CreateResidentContext2";
 import { useHistory } from "react-router";
 
+
 function CreateResident() {
   const history = useHistory();
 
@@ -42,6 +43,9 @@ function CreateResident() {
           rateStar: "กรุณากรอกจำนวนดาวของท่าน",
         }));
       }
+      if (!isNaN(createResident.rateStar)) {
+        setCreateResidentError((curr) => ({ ...curr, rateStar: 'กรุณากรอกจำนวนดาวของท่านเป็นข้อมูลประเภทตัวเลข' }))
+      }
       if (!createResident.address) {
         setCreateResidentError((curr) => ({
           ...curr,
@@ -72,12 +76,12 @@ function CreateResident() {
           postalCode: "กรุณากรอกไปรษณีย์ของที่พักของท่าน",
         }));
       }
-      if (!createResident.optionRoomDetail) {
-        setCreateResidentError((curr) => ({
-          ...curr,
-          optionRoomDetail: "กรุณากรอกรายละเอียดเพิ่มเติมของที่พักของท่าน",
-        }));
+      if (createResident.postalCode.length !== 5) {
+        setCreateResidentError((curr) => ({ ...curr, postalCode: 'กรุณากรอกไปรษณีย์ของที่พักของท่านให้ถูกต้อง' }))
       }
+      // if (!createResident.optionRoomDetail) {
+      //   setCreateResidentError((curr) => ({ ...curr, optionRoomDetail: 'กรุณากรอกรายละเอียดเพิ่มเติมของที่พักของท่าน' }))
+      // }
       if (!createResident.residentImageUrl) {
         setCreateResidentError((curr) => ({
           ...curr,
@@ -137,6 +141,9 @@ function CreateResident() {
           ...curr,
           accNumber: "กรุณากรอกเลขบัญชีธนาคารของท่าน",
         }));
+      }
+      if (createResident.accNumber.length !== 10 ) {
+        setCreateResidentError((curr) => ({ ...curr, accNumber: 'กรุณากรอกเลขบัญชีธนาคารของท่านให้ถูกต้อง' }))
       }
       if (!createResident.bankName) {
         setCreateResidentError((curr) => ({

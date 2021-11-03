@@ -37,7 +37,6 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
   z-index: 1300;
@@ -71,25 +70,23 @@ const style = {
 };
 
 
-function ModalEditRoomsForm({openModal,addRoomCollection,handleClose, room, editRoomCollection, index, setIsEdit }) {
+function ModalEditRoomsForm({openModal, handleClose, room, editRoomCollection, index, setIsEdit }) {
   
     return (
-        <div>
-      <StyledModal
-        aria-labelledby="unstyled-modal-title"
-        aria-describedby="unstyled-modal-description"
-        open={openModal}
-        onClose={handleClose}
-        BackdropComponent={Backdrop}
-        sx={{overflow:'auto'}}
-      >
-        <Box sx={{ background: 'white', overflow:'auto', paddingTop: "50px"}}>
-          {/* <h2 id="unstyled-modal-title">Text in a modal</h2>
-          <p id="unstyled-modal-description">Aliquid amet deserunt earum!</p> */}
-          <EditRoomForm room={room} editRoomCollection={editRoomCollection} index={index} setIsEdit/>
-        </Box>
-      </StyledModal>
-    </div>
+      <div>
+        <StyledModal
+          aria-labelledby="unstyled-modal-title"
+          aria-describedby="unstyled-modal-description"
+          open={openModal}
+          onClose={handleClose}
+          BackdropComponent={Backdrop}
+          sx={{overflow:'auto'}}
+        >
+          <Box sx={{ background: 'white', overflow:'auto', paddingTop: "50px"}}>
+            <EditRoomForm room={room} editRoomCollection={editRoomCollection} index={index} setIsEdit/>
+          </Box>
+        </StyledModal>
+      </div>
     )
 }
 

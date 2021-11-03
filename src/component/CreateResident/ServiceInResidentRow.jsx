@@ -29,30 +29,27 @@ function ServiceInResidentRow({ service, setService, index }) {
         </Grid>
 
         <Grid xs={4} sx={{ display: 'flex', flexDirection: 'row', marginLeft: '25px' }}>
-            <RadioGroup
-              aria-label='gender'
-              serviceName='controlled-radio-buttons-group'
-              defaultValue={service.isHaving}
-              sx={{ display: 'flex', flexDirection: 'row' }}
-            >
-              <FormControlLabel
-                value={false}
-                onChange={(e) => handleChangeHavingService(false)}
-                control={<Radio />}
-                label='ไม่มีบริการ'
-              />
-              <FormControlLabel
-                value={true}
-                control={<Radio />}
-                onChange={(e) => handleChangeHavingService(true)}
-                label='มีบริการ'
-              />
-            </RadioGroup>
-          </Grid>
+          <RadioGroup
+            aria-label='gender'
+            serviceName='controlled-radio-buttons-group'
+            defaultValue={service.isHaving}
+            sx={{ display: 'flex', flexDirection: 'row' }}
+          >
+            <FormControlLabel
+              value={false}
+              onChange={(e) => handleChangeHavingService(false)}
+              control={<Radio />}
+              label='ไม่มีบริการ'
+            />
+            <FormControlLabel
+              value={true}
+              control={<Radio />}
+              onChange={(e) => handleChangeHavingService(true)}
+              label='มีบริการ'
+            />
+          </RadioGroup>
+        </Grid>
 
-         
-         
-          {/* <isFreeServiceInResidentRow service={service} setService={setService} index={index}/> */}
         {service.isHaving ? <FreeServiceInResidentRow service={service} setService={setService} index={index}/> : null}
         
       </FormControl>
