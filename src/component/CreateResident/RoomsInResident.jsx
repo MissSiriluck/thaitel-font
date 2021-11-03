@@ -44,10 +44,11 @@ function CustomButton(props) {
 function RoomsInResident() {
   const { createResident, setCreateResident } = useContext(
     CreateResidentContext2
-  );
+  ); 
   const [openModal, setOpenModal] = React.useState(false);
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
+ 
 
   const addRoomCollection = (room) => {
     const clone = [...createResident.roomCollection];
@@ -71,7 +72,7 @@ function RoomsInResident() {
 
   return (
     <Container maxWidth="md">
-      <Stack spacing={2} sx={{ display: "flex", flexDirection: "column" }}>
+      <Stack spacing={2} sx={{ display: "flex", flexDirection: "column", mt: 4 }}>
         <Grid item>
           <Typography sx={{ fontSize: "36px" }}>ห้องทั้งหมดของคุณ</Typography>
         </Grid>

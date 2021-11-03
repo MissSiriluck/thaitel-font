@@ -229,7 +229,6 @@ function TransactionDetail() {
             item
             xs={12}
             sx={{
-              // border: '2px dotted #cfcfcf',
               border: createResidentError.bankImgUrl ? '2px dotted #d32f2f' : '2px dotted #cfcfcf',
               width: '100%',
               alignItems: 'center',

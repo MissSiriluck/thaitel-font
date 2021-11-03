@@ -106,7 +106,7 @@ function OwnerRegister() {
   return (
     <Container
       maxWidth='lg'
-      sx={{ justifyContent: "center", display: "flex", mt: 15, mb: 5 }}
+      sx={{ justifyContent: "center", display: "flex", mt: "17vh", mb: 5 }}
     >
       <Grid
         container
@@ -149,7 +149,7 @@ function OwnerRegister() {
                 marginBottom: "35px",
               }}
             >
-              <Grid item sx={{ width: "90%" }}>
+              <Grid container sx={{ flexGlow: 1, ml: 3, mt: 2 }}>
                 <Typography style={{ margin: 0, fontSize: "24px" }}>
                   ข้อมูลผู้ให้บริการที่พัก
                 </Typography>
@@ -204,7 +204,6 @@ function OwnerRegister() {
                   placeholder='กรอกรหัสผ่าน'
                   type='password'
                   autoComplete='current-password'
-                  autoFocus
                   size='small'
                   sx={{ marginTop: "8px" }}
                   value={values.password}
@@ -224,7 +223,6 @@ function OwnerRegister() {
                   type='password'
                   label='รหัสผ่าน'
                   placeholder='กรอกรหัสผ่าน'
-                  autoFocus
                   size='small'
                   sx={{ marginTop: "8px" }}
                   value={values.confirmPassword}
@@ -264,7 +262,6 @@ function OwnerRegister() {
                     label='ชื่อผู้ติดต่อ'
                     name='email'
                     autoComplete='email'
-                    autoFocus
                     size='small'
                     sx={{ marginTop: "8px" }}
                     value={values.firstName}
@@ -310,7 +307,6 @@ function OwnerRegister() {
                     label='หมายเลขบัตรประชาชน'
                     placeholder='กรอกหมายเลขบัตรประชาชน'
                     autoComplete='current-password'
-                    autoFocus
                     size='small'
                     sx={{ marginTop: "8px" }}
                     value={values.idCard}

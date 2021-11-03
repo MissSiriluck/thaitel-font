@@ -2,6 +2,7 @@ import { Button, Checkbox, Container, FormControlLabel, Grid, Stack, TextField, 
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
 import { Box, styled } from '@mui/system';
 import React, { useState } from 'react';
+import axios from '../../config/axios'
 
 const CustomButtonRoot = styled('button')(`
       background-color: none;
@@ -35,8 +36,9 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function EditRoomForm({ room, editRoomCollection, index, setIsEdit }) {
+function EditRoomForm({ room, editRoomCollection, index,handleClose }) {
   const [editRoomForm, setEditRoomForm, ] = useState(room); //{optionRoomDetail: '',maxGuest: '',roomSize: '',roomTypeOf: '',roomAmount: '',noSmoking: false,petAllow: false,pricePerNigth: '',roomImageFile: null,roomShowImg: '',}
+  console.log(room)
 
   const [editRoomFormError, setEditRoomFormError] = useState({
     optionRoomDetail: '',
@@ -48,7 +50,7 @@ function EditRoomForm({ room, editRoomCollection, index, setIsEdit }) {
     roomShowImg: '',
   })
 
-  const handleClickSaveRoom = () => {
+  const handleClickSaveRoom = async () => {
 
     let allPass = true // สมมุติว่าทุกตัวผ่าน 
 
@@ -83,7 +85,7 @@ function EditRoomForm({ room, editRoomCollection, index, setIsEdit }) {
 
     if (allPass) { //ถ้าไม่มี err ถึงทำ function นี้
       editRoomCollection(index, editRoomForm);
-      setIsEdit(false);
+      handleClose()
     }
 
   };
@@ -249,8 +251,8 @@ function EditRoomForm({ room, editRoomCollection, index, setIsEdit }) {
                       sx={{ width: '100%' }}
                       value={editRoomForm.maxGuest}
                       onChange={(e) => handleChange('maxGuest', e)}
-                      helperText= {editRoomFormError.maxGues ? editRoomFormError.maxGues : ""}
-                      error={editRoomFormError.maxGues}
+                      helperText= {editRoomFormError.maxGuest ? editRoomFormError.maxGuest : ""}
+                      error={editRoomFormError.maxGuest}
                     />
                   </Grid>
                 </Stack>

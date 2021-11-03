@@ -35,6 +35,7 @@ function ServicesInresident() {
               border: "2px solid #c4c4c4",
               borderRadius: "10px",
               padding: "20px",
+              height: "600px"
             }}
           >
             {createResident.serviceCollection.map((service, index) => {
