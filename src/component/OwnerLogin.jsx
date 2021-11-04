@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import axios from "../config/axios";
+import FacebookLogin from "react-facebook-login";
 import { setToken } from "../service/localStorage";
 import { AuthContext } from "../context/AuthContext";
 import jwtDecode from "jwt-decode";
@@ -78,7 +79,7 @@ function OwnerLogin() {
     });
   };
 
-  const handleMouseDownPassword = event => {
+  const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
@@ -86,7 +87,7 @@ function OwnerLogin() {
     setValues({ ...values, [props]: event.target.value });
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("Test");
     try {
@@ -97,7 +98,7 @@ function OwnerLogin() {
       };
 
       if (!values.email) {
-        setErrors(curr => ({
+        setErrors((curr) => ({
           ...curr,
           email: "กรุณากรอกอีเมลของท่าน",
         }));
@@ -112,7 +113,7 @@ function OwnerLogin() {
       // }
 
       if (!values.password) {
-        setErrors(curr => ({
+        setErrors((curr) => ({
           ...curr,
           password: "กรุณากรอกรหัสผ่านของท่าน",
         }));
@@ -131,7 +132,7 @@ function OwnerLogin() {
       });
     } catch (err) {
       console.dir(err);
-      setErrors(curr => ({
+      setErrors((curr) => ({
         ...curr,
         email: "กรุณากรอกข้อมูลให้ถูกต้อง",
         password: "กรุณากรอกข้อมูลให้ถูกต้อง",
@@ -139,28 +140,48 @@ function OwnerLogin() {
     }
   };
 
+  const responseFacebook = async (res) => {
+    console.log(res);
+
+    const resultLogin = await axios.post("/hotelOwners/ownerFacebookLogin", {
+      email: res.email,
+      facebookId: res.id,
+      firstName: res.first_name,
+      lastName: res.last_name,
+    });
+    setToken(resultLogin.data.token);
+    setUser(jwtDecode(resultLogin.data.token));
+    history.push({
+      pathname: "/",
+      state: {
+        successMessage: "Already Login.",
+        from: " login page ",
+      },
+    });
+  };
+
   return (
     <Container
-      maxWidth='sm'
-      justifyContent='center'
-      alignItems='center'
-      direction='column'
+      maxWidth="sm"
+      justifyContent="center"
+      alignItems="center"
+      direction="column"
       sx={{ padding: 0, mt: 18 }}
     >
       <Grid Container sx={{ flexGlow: 1 }}>
         {/* --------------- head --------------- */}
         <Typography
-          variant='h4'
-          component='div'
+          variant="h4"
+          component="div"
           sx={{ fontWeight: 600, mb: 3 }}
         >
           เข้าสู่ระบบสำหรับผู้ปล่อยเช่า
         </Typography>
 
         {/* --------------- button submit by google --------------- */}
-        <Grid container justifyContent='center' alignContent='center'>
+        <Grid container justifyContent="center" alignContent="center">
           <Button
-            variant='contained'
+            variant="contained"
             sx={{
               width: "100%",
               height: "30%",
@@ -195,7 +216,7 @@ function OwnerLogin() {
               }}
             >
               <Typography
-                variant='p'
+                variant="p"
                 sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
               >
                 Sign In With Google
@@ -204,16 +225,25 @@ function OwnerLogin() {
           </Button>
         </Grid>
 
+        {/* facebook login......................... */}
+        <FacebookLogin
+          appId="934707233799748"
+          // autoLoad={true}
+          fields="name,email,picture,first_name,last_name"
+          // onClick={handleFacebookLogin}
+          callback={responseFacebook}
+        />
+
         {/* --------------- line --------------- */}
         <Box
           container
-          justifyContent='center'
-          alignItems='center'
+          justifyContent="center"
+          alignItems="center"
           sx={{
             mt: 2,
             flexGlow: 1,
           }}
-          component='form'
+          component="form"
           onSubmit={handleSubmit}
           noValidate
         >
@@ -266,12 +296,12 @@ function OwnerLogin() {
             </Typography>
             <TextField
               fullWidth
-              label='อีเมล์'
-              placeholder='กรอกอีเมล์'
-              name='email'
-              size='small'
+              label="อีเมล์"
+              placeholder="กรอกอีเมล์"
+              name="email"
+              size="small"
               value={values.email}
-              onChange={e => handleChange("email", e)}
+              onChange={(e) => handleChange("email", e)}
               helperText={errors.email ? errors.email : ""}
               error={errors.email}
               sx={{
@@ -294,28 +324,28 @@ function OwnerLogin() {
 
             <TextField
               fullWidth
-              id='outlined-adornment-password'
-              label='รหัสผ่าน'
-              placeholder='กรอกรหัสผ่าน'
-              name='password'
+              id="outlined-adornment-password"
+              label="รหัสผ่าน"
+              placeholder="กรอกรหัสผ่าน"
+              name="password"
               value={values.password}
               type={values.showPassword ? "text" : "password"}
-              onChange={e => handleChange("password", e)}
+              onChange={(e) => handleChange("password", e)}
               helperText={errors.password ? errors.password : ""}
               error={errors.password}
-              size='small'
+              size="small"
               sx={{
                 padding: 0,
                 marginBottom: "3px",
               }}
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position='end'>
+                  <InputAdornment position="end">
                     <IconButton
-                      aria-label='toggle password visibility'
+                      aria-label="toggle password visibility"
                       onClick={handleClickShowPassword}
                       onMouseDown={handleMouseDownPassword}
-                      edge='end'
+                      edge="end"
                     >
                       {values.showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
@@ -328,7 +358,7 @@ function OwnerLogin() {
           {/* --------------- button submit login--------------- */}
           <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
             <CustomButton
-              type='submit'
+              type="submit"
               sx={{
                 background: "#c62828",
                 color: "#fff",
@@ -368,7 +398,7 @@ function OwnerLogin() {
             </Typography>
           </Grid>
           <Grid mr={1}>
-            <Link to='/ownerregister' style={{ textDecoration: "none" }}>
+            <Link to="/ownerregister" style={{ textDecoration: "none" }}>
               <Typography
                 style={{ color: "#16264D", fontWeight: 700, margin: 0 }}
               >

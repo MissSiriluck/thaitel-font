@@ -49,7 +49,7 @@ function Header() {
 
   return (
     <AppBar
-      position='fixed'
+      position="fixed"
       sx={{
         borderRadius: 2,
         backgroundColor: "#07133C",
@@ -62,7 +62,7 @@ function Header() {
     >
       <Toolbar>
         <Link
-          to='/'
+          to="/"
           style={{
             textDecoration: "none",
             flexGrow: 1,
@@ -70,8 +70,8 @@ function Header() {
           }}
         >
           <Typography
-            variant='h6'
-            component='div'
+            variant="h6"
+            component="div"
             sx={{
               flexGrow: 1,
               fontFamily: "'Noto Sans Thai', sans-serif",
@@ -84,14 +84,14 @@ function Header() {
           <BtnLogOut />
         ) : (
           <>
-            <Link to='/ownerlogin' style={{ textDecoration: "none" }}>
+            <Link to="/ownerlogin" style={{ textDecoration: "none" }}>
               <CustomButton sx={{ background: "#c62828", color: "#fff" }}>
                 ลงทะเบียนที่พักของท่าน
               </CustomButton>
             </Link>
-            <Link to='/register' style={{ textDecoration: "none" }}>
+            <Link to="/register" style={{ textDecoration: "none" }}>
               <Button
-                color='inherit'
+                color="inherit"
                 sx={{
                   marginLeft: 2,
                   fontFamily: "'Noto Sans Thai', sans-serif",
@@ -101,9 +101,9 @@ function Header() {
                 สมัครสมาชิก
               </Button>
             </Link>
-            <Link to='/login' style={{ textDecoration: "none" }}>
+            <Link to="/login" style={{ textDecoration: "none" }}>
               <Button
-                color='inherit'
+                color="inherit"
                 sx={{
                   marginLeft: 2,
                   fontFamily: "'Noto Sans Thai', sans-serif",
