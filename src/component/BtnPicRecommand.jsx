@@ -103,6 +103,7 @@ function BtnPicRecommand() {
   function HandleSumbit(e) {
     console.log(e)
     history.push(`/bottommenu/${e}`);
+    console.log('106')
   }
   return (
     <Box
