@@ -7,7 +7,6 @@ import { AuthContext } from "../context/AuthContext";
 import jwtDecode from "jwt-decode";
 
 //Material UI
-import Button from "@mui/material/Button";
 import {
   Container,
   Grid,
@@ -102,14 +101,6 @@ function OwnerLogin() {
           email: "กรุณากรอกอีเมลของท่าน",
         }));
       }
-      // else if (
-      //   !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-      // ) {
-      //   setErrors(curr => ({
-      //     ...curr,
-      //     email: "กรุณากรอกอีเมลให้ถูกต้อง",
-      //   }));
-      // }
 
       if (!values.password) {
         setErrors(curr => ({

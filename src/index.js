@@ -9,27 +9,25 @@ import { AuthContextProvider } from "./context/AuthContext";
 import { BookingContextProvider } from "./context/BookingContext";
 import { ResidentContextProvider } from "./context/ResidentContext";
 import { CreateResidentProvider2 } from "./context/CreateResidentContext2";
+import { OwnerDetailProvider } from "./context/OwnerDetailContext";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-
     <CreateResidentProvider2>
-      <CreateResidentProvider>
-
-      {/* <React.StrictMode> */}
-      <AuthContextProvider>
-        <ResidentContextProvider>
-          <BookingContextProvider>
-            <App />
-          </BookingContextProvider>
-        </ResidentContextProvider>
-      </AuthContextProvider>
-      {/* </React.StrictMode> */}
-
-      </CreateResidentProvider>
+      <OwnerDetailProvider>
+        <CreateResidentProvider>
+          {/* <React.StrictMode> */}
+          <AuthContextProvider>
+            <ResidentContextProvider>
+              <BookingContextProvider>
+                <App />
+              </BookingContextProvider>
+            </ResidentContextProvider>
+          </AuthContextProvider>
+          {/* </React.StrictMode> */}
+        </CreateResidentProvider>
+      </OwnerDetailProvider>
     </CreateResidentProvider2>
-
-
   </ThemeProvider>,
   document.getElementById("root")
 );
