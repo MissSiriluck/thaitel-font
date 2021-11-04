@@ -62,6 +62,15 @@ function OwnerHistoryPage() {
     fetchResident();
   }, []);
 
+  const deleteResident = (id)=>{
+    const newResidents = [...residents]
+    const idx = residents.findIndex(item => item.id === id);
+    if (idx !== -1) {
+      newResidents.splice(idx, 1);
+      setResidents(newResidents)
+    }
+  }
+
   // console.log("residents.....................", residents);
 
   // let countBookedRoom = residents?.Rooms?.BookingItems?.reduce(
@@ -134,7 +143,7 @@ function OwnerHistoryPage() {
             </Grid>
           </Grid>
           {residents?.map((item) => (
-            <CardOwnerHistoryList resident={item} />
+            <CardOwnerHistoryList resident={item} deleteResident={deleteResident} />
           ))}
           {/* {} */}
           <CardOwnerHistoryList />

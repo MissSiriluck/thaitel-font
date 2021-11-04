@@ -13,11 +13,12 @@ import {
   Grid,
   IconButton,
   InputAdornment,
+  Snackbar,
   TextField,
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
-import ButtonUnstyled, { 
+import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
@@ -174,41 +175,21 @@ function LoginContent() {
     }
   };
 
-  const handleFacebookLogin = async (e) => {
-    //   e.preventDefault();
-    //   try {
-    // const data = new FormData(e.currentTarget);
-    // const values = {
-    //   // email: data.get("email"),
-    //   // role: data.get("role"),
-    //   facebookId: data.get("faceBookId"),
-    //   // firstNane: data.get("firstNane"),
-    //   // lastName: data.get("lastName"),
-    //   // email,
-    //   // facebookId,
-    //   // firstName,
-    //   // lastName,
-    // };
-    //     let x = getToken();
-    //     console.log("x....................", x);
-    //     const resultLogin = await axios.post(
-    //       "/users/facebookLogin"
-    //       // , values
-    //     );
-    //     console.log("res.data...........................", resultLogin);
-    //     setToken(resultLogin.data.token);
-    //     setUser(jwtDecode(resultLogin.data.token));
-    //     history.push({
-    //       pathname: "/",
-    //       state: {
-    //         successMessage: "Already Login.",
-    //         from: " login page ",
-    //       },
-    //     });
-    //   } catch (err) {
-    //     console.dir(err);
-    //   }
-  };
+  // const [snack, setSnack] = useState({
+  //   open: false,
+  //   vertical: "top",
+  //   horizontal: "center",
+  // });
+
+  // const handleClickReset = (newState) => () => {
+  //   setSnack({ open: true, ...newState });
+  // };
+
+  // const handleCloseReset = () => {
+  //   setSnack({ ...snack, open: false });
+  // };
+
+  const handleFacebookLogin = async (e) => {};
 
   const responseFacebook = async (res) => {
     console.log(res);
@@ -370,6 +351,8 @@ function LoginContent() {
             >
               อีเมล์
             </Typography>
+            {/* <p style={{ backgroundColor}}>THAITEL</p> */}
+
             <TextField
               fullWidth
               label="อีเมล์"
@@ -458,6 +441,7 @@ function LoginContent() {
         </Box>
 
         {/* --------------- input email and password --------------- */}
+
         <Grid
           item
           xs={12}
@@ -483,6 +467,37 @@ function LoginContent() {
             </Link>
           </Grid>
         </Grid>
+        {/* ------------------------------- forget password ----------------------------- */}
+        <Grid
+          item
+          xs={12}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            mt: 4,
+          }}
+        >
+          <Grid mr={1}>
+            <Typography style={{ color: "grey", margin: 0 }}>
+              จำรหัสผ่านไม่ได้ ?
+            </Typography>
+          </Grid>
+          <Grid mr={1}>
+            <Link to="/reset" style={{ textDecoration: "none" }}>
+              <Typography
+                // onClick={handleClickReset({
+                //   vertical: "top",
+                //   horizontal: "center",
+                // })}
+                style={{ color: "#16264D", fontWeight: 700, margin: 0 }}
+              >
+                กดที่นี่
+              </Typography>
+            </Link>
+          </Grid>
+        </Grid>
+        {/* ------------------------------- forget password ----------------------------- */}
       </Grid>
     </Container>
   );

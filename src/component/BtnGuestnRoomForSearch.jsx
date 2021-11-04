@@ -36,13 +36,16 @@ export function CustomButton(props) {
 //customize popover
 const PopoverStyle = {};
 
-function BtnGuestnRoomForSearch() {
+function BtnGuestnRoomForSearch(props) {
+  console.log(props);
+  const { room, setRoom } = props;
+
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [room, setRoom] = React.useState(1);
+  // const [room, setRoom] = React.useState(1);
   const [guest, setGuest] = React.useState(1);
 
   //popover
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -52,23 +55,23 @@ function BtnGuestnRoomForSearch() {
 
   //add number of guest
   function handleAddGuest() {
-    setGuest(current => current + 1);
+    setGuest((current) => current + 1);
   }
 
   function handleMinusGuest() {
     if (guest > 1) {
-      setGuest(current => current - 1);
+      setGuest((current) => current - 1);
     }
   }
 
   //add number of room
   function handleAddRoom() {
-    setRoom(current => current + 1);
+    setRoom((current) => current + 1);
   }
 
   function handleMinusRoom() {
     if (room > 1) {
-      setRoom(current => current - 1);
+      setRoom((current) => current - 1);
     }
   }
 
@@ -79,7 +82,7 @@ function BtnGuestnRoomForSearch() {
     <Grid container sx={{ mb: 5 }}>
       <CustomButton
         aria-describedby={id}
-        variant='contained'
+        variant="contained"
         onClick={handleClick}
         sx={{
           background: "#fff",
@@ -107,7 +110,7 @@ function BtnGuestnRoomForSearch() {
         <Grid container sx={{ width: "270px" }}>
           <Grid item xs={6}>
             <Box sx={{ flexGlow: 1 }}>
-              <span className='type' sx={{ pr: 5, mr: 4 }}>
+              <span className="type" sx={{ pr: 5, mr: 4 }}>
                 <Typography sx={{ p: 2, fontSize: "16px", width: "100%" }}>
                   จำนวนผู้เข้าพัก
                 </Typography>
@@ -123,13 +126,13 @@ function BtnGuestnRoomForSearch() {
                 flexGlow: 1,
               }}
             >
-              <Fab color='primary' aria-label='minus' size='small'>
+              <Fab color="primary" aria-label="minus" size="small">
                 <RemoveIcon onClick={handleMinusGuest} />
               </Fab>
               <span>
                 <Typography>{guest}</Typography>
               </span>
-              <Fab color='primary' aria-label='add' size='small'>
+              <Fab color="primary" aria-label="add" size="small">
                 <AddIcon onClick={handleAddGuest} />
               </Fab>
             </Box>
@@ -139,7 +142,7 @@ function BtnGuestnRoomForSearch() {
         <Grid container>
           <Grid item xs={6}>
             <Box>
-              <span className='type' sx={{ pr: 5, mr: 4 }}>
+              <span className="type" sx={{ pr: 5, mr: 4 }}>
                 <Typography sx={{ p: 2, fontSize: "16px", width: "100%" }}>
                   จำนวนห้อง
                 </Typography>
@@ -154,13 +157,13 @@ function BtnGuestnRoomForSearch() {
                 alignItems: "center",
               }}
             >
-              <Fab color='primary' aria-label='minus' size='small'>
+              <Fab color="primary" aria-label="minus" size="small">
                 <RemoveIcon onClick={handleMinusRoom} />
               </Fab>
               <span>
                 <Typography>{room}</Typography>
               </span>
-              <Fab color='primary' aria-label='add' size='small'>
+              <Fab color="primary" aria-label="add" size="small">
                 <AddIcon onClick={handleAddRoom} />
               </Fab>
             </Box>

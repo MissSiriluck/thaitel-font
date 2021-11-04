@@ -1,5 +1,5 @@
 import axios from "../config/axios";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import CreateResidentHeader from "../component/CreateResident/CreateResidentHeader";
 import ResidentDetailForm from "../component/CreateResident/ResidentDetailForm";
 import RoomsInResident from "../component/CreateResident/RoomsInResident";
@@ -21,6 +21,34 @@ function CreateResident() {
     createResidentError,
     setCreateResidentError,
   } = useContext(CreateResidentContext2);
+    
+  useEffect(() => {
+    setCreateResidentError({
+      residentTypeOf: "",
+    residentName: "",
+    rateStar: "",
+    address: "",
+    subDistrict: "",
+    district: "",
+    province: "",
+    postalCode: "",
+    description: "",
+    optionRoomDetail: "",
+    residentImageFile: "",
+    residentImageUrl: "",
+    timeCheckInToStart: "",
+    timeCheckInToEnd: "",
+    timeCheckOutToStart: "",
+    timeCheckOutToEnd: "",
+    cancelDate: "",
+    bankAccept: false,
+    bankName: "",
+    accNumber: "",
+    accName: "",
+    bankImgUrl: "",
+    bankImageFile: null,
+    })
+  }, [])
 
   const handleSubmit = async e => {
     try {
@@ -234,7 +262,7 @@ function CreateResident() {
 
       const resBank = await axios.post('/backAccounts', formBank)
       
-      // history.push("/ownerlogin");
+      history.push("/ownerhistory");
     }
     } catch (err) {
       console.dir(err);
@@ -250,7 +278,7 @@ function CreateResident() {
       <ResidentDetailForm />
       <ServicesInresident />
       <TransactionDetail />
-      <RoomsInResident />
+      <RoomsInResident status='ADD'/>
       <SubmitButton handleSubmit={handleSubmit} />
 
       <Footer />

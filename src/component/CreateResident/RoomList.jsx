@@ -1,6 +1,8 @@
+import React, { useState } from 'react';
+import axios from "../../config/axios"
+
 import { Grid, Stack, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
 import EditRoomForm from './EditRoomForm';
@@ -37,15 +39,24 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function RoomList({ index, room, deleteRoomCollection, editRoomCollection }) {
+function RoomList({status, index, room, deleteRoomCollection, editRoomCollection }) {
 
 
   const [openModal1, setOpenModal1] = React.useState(false);
   const handleOpen1 = () => setOpenModal1(true);
   const handleClose1 = () => setOpenModal1(false);
 
-  const handleClickDeleteRoom = () => {
-    deleteRoomCollection(index);
+  const handleClickDeleteRoom = async () => {
+    if(status === 'EDIT') {
+      deleteRoomCollection(index);
+      try {
+        await axios.delete(`/rooms/${room.id}`);
+      } catch(err) {
+      console.dir(err)
+      }
+    } else {  
+      deleteRoomCollection(index);
+    }
   };
 
   const handleClickEdit = () => {
