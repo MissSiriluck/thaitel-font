@@ -104,6 +104,10 @@ const route = {
       component: ShowResultPage,
     },
     {
+      path: `/bottommenu/:province`,
+      component: ShowResultPage,
+    },
+    {
       path: "/addcom",
       component: AddCom,
     },
@@ -146,12 +150,12 @@ const route = {
     },
     {
       path: "/ownerdetail/:residentId",
-      component: OwnerDetailPage
+      component: OwnerDetailPage,
     },
     {
       path: "/owner_edit_resident/:residentId",
-      component: EditResident
-    }
+      component: EditResident,
+    },
     // {
     //   redirect: "/ownerhistory",
     // },
