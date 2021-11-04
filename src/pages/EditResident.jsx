@@ -323,7 +323,7 @@ function EditResident() {
       <ResidentDetailForm />
       <ServicesInresident />
       <TransactionDetail />
-      <RoomsInResident />
+      <RoomsInResident status='EDIT' />
       <SubmitButton handleSubmit={handleSubmit} />
 
       <Footer />

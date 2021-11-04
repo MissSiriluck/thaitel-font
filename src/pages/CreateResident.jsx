@@ -234,7 +234,7 @@ function CreateResident() {
 
       const resBank = await axios.post('/backAccounts', formBank)
       
-      // history.push("/ownerlogin");
+      history.push("/ownerhistory");
     }
     } catch (err) {
       console.dir(err);
@@ -250,7 +250,7 @@ function CreateResident() {
       <ResidentDetailForm />
       <ServicesInresident />
       <TransactionDetail />
-      <RoomsInResident />
+      <RoomsInResident status='ADD'/>
       <SubmitButton handleSubmit={handleSubmit} />
 
       <Footer />
