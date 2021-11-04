@@ -13,7 +13,7 @@ function ShowResultPage() {
   const [res, setRes] = useState([]);
   let { resident, checkIn, room, province } = useParams();
   // console.log(resident);
-  console.log(province);
+  // console.log(province);
   // console.log(checkin);
   // console.log(roominput);
   useEffect(() => {
@@ -21,7 +21,7 @@ function ShowResultPage() {
       axios
         .get(`http://localhost:7777/search/province?province=${province}`)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setRes(res.data.residents);
         });
     } else {
@@ -31,7 +31,7 @@ function ShowResultPage() {
         )
 
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setRes(res.data.avail);
         });
     }

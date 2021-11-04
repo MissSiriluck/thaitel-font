@@ -1,4 +1,6 @@
 import { Container, Grid, Stack, Typography } from "@mui/material";
+import axios from "../../config/axios"
+
 import { styled } from "@mui/material/styles";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
@@ -41,7 +43,7 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function RoomsInResident() {
+function RoomsInResident({status}) {
   const { createResident, setCreateResident } = useContext(
     CreateResidentContext2
   ); 
@@ -83,6 +85,7 @@ function RoomsInResident() {
             room={room}
             deleteRoomCollection={deleteRoomCollection}
             editRoomCollection={editRoomCollection}
+            status={status}
           />
         ))}
       </Stack>
