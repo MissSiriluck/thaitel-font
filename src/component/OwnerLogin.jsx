@@ -131,11 +131,13 @@ function OwnerLogin() {
       });
     } catch (err) {
       console.dir(err);
-      setErrors(curr => ({
-        ...curr,
-        email: "กรุณากรอกข้อมูลให้ถูกต้อง",
-        password: "กรุณากรอกข้อมูลให้ถูกต้อง",
-      }));
+      if (err.response.status === 400) {
+        setErrors(curr => ({
+          ...curr,
+          email: "กรุณากรอกข้อมูลให้ถูกต้อง",
+          password: "กรุณากรอกข้อมูลให้ถูกต้อง",
+        }));
+      }
     }
   };
 
@@ -145,7 +147,7 @@ function OwnerLogin() {
       justifyContent='center'
       alignItems='center'
       direction='column'
-      sx={{ padding: 0, mt: 18 }}
+      sx={{ padding: 0, mt: "25vh" }}
     >
       <Grid Container sx={{ flexGlow: 1 }}>
         {/* --------------- head --------------- */}
@@ -158,7 +160,7 @@ function OwnerLogin() {
         </Typography>
 
         {/* --------------- button submit by google --------------- */}
-        <Grid container justifyContent='center' alignContent='center'>
+        {/* <Grid container justifyContent='center' alignContent='center'>
           <Button
             variant='contained'
             sx={{
@@ -202,7 +204,7 @@ function OwnerLogin() {
               </Typography>
             </Grid>
           </Button>
-        </Grid>
+        </Grid> */}
 
         {/* --------------- line --------------- */}
         <Box
@@ -217,7 +219,7 @@ function OwnerLogin() {
           onSubmit={handleSubmit}
           noValidate
         >
-          <Grid container>
+          {/* <Grid container>
             <Grid
               item
               xs={5.2}
@@ -246,8 +248,9 @@ function OwnerLogin() {
                 ml: 1,
               }}
             />
-          </Grid>
+          </Grid> */}
 
+          {/* --------------- input email and password --------------- */}
           <Grid
             item
             xs={12}
@@ -351,7 +354,6 @@ function OwnerLogin() {
           </Grid>
         </Box>
 
-        {/* --------------- input email and password --------------- */}
         <Grid
           item
           xs={12}
