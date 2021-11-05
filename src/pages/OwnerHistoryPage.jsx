@@ -62,14 +62,14 @@ function OwnerHistoryPage() {
     fetchResident();
   }, []);
 
-  const deleteResident = (id)=>{
-    const newResidents = [...residents]
+  const deleteResident = id => {
+    const newResidents = [...residents];
     const idx = residents.findIndex(item => item.id === id);
     if (idx !== -1) {
       newResidents.splice(idx, 1);
-      setResidents(newResidents)
+      setResidents(newResidents);
     }
-  }
+  };
 
   // console.log("residents.....................", residents);
 
@@ -82,17 +82,17 @@ function OwnerHistoryPage() {
 
   const history = useHistory();
   const location = useLocation();
-  
-  const handleClickRoomSumary = (e) => {
-    console.log(residents)
+
+  const handleClickRoomSumary = e => {
+    console.log(residents);
     e.preventDefault();
     history.push({
       pathname: "/createresident",
       state: {
         // resident: resident,
-    //   //   checkInDate: "2020-10-11",
-    //   //   checkOutDate: "2020-10-12",
-    //   //   rooms: filterRoom,
+        //   //   checkInDate: "2020-10-11",
+        //   //   checkOutDate: "2020-10-12",
+        //   //   rooms: filterRoom,
       },
     });
   };
@@ -102,13 +102,12 @@ function OwnerHistoryPage() {
       <SpaceforHead />
       <Header />
 
-      <Container maxWidth="xl" sx={{ mt: 18 }}>
+      <Container maxWidth='xl' sx={{ mt: 18, mb: 18 }}>
         <Grid container>
-          <Grid item xs={12} sx={{ display:'flex', flexDirection: 'row'}}>
+          <Grid item xs={12} sx={{ display: "flex", flexDirection: "row" }}>
             <Grid item xs={12}>
               <Grid item xs={12}>
                 <Typography sx={{ fontSize: "25px", mb: 1 }}>
-                  {/* {`สวัสดี คุณ{Owner's name}`} */}
                   สวัสดี คุณ {user.firstName}
                 </Typography>
               </Grid>
@@ -118,35 +117,45 @@ function OwnerHistoryPage() {
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item xs={2} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <CustomButton
-            sx={{
-              background: "#fff",
-              border: "1px solid #07133C",
-              color: "#07133C",
-              fontFamily: "'Noto Sans Thai', sans-serif",
-              fontSize: "14px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              p: 1,
-              width: "100%",
-              height: "60%"
-            }}
-            onClick={handleClickRoomSumary}
-          >
-            เพิ่มที่พักของคุณ
-          </CustomButton>
-        </Grid>
-          <Grid>
-
+            <Grid
+              item
+              xs={2}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <CustomButton
+                sx={{
+                  background: "#fff",
+                  border: "1px solid #07133C",
+                  color: "#07133C",
+                  fontFamily: "'Noto Sans Thai', sans-serif",
+                  fontSize: "14px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  p: 1,
+                  width: "100%",
+                  height: "60%",
+                }}
+                onClick={handleClickRoomSumary}
+              >
+                เพิ่มที่พักของคุณ
+              </CustomButton>
             </Grid>
           </Grid>
-          {residents?.map((item) => (
-            <CardOwnerHistoryList resident={item} deleteResident={deleteResident} />
-          ))}
+          <Grid>
+            {residents?.map(item => (
+              <CardOwnerHistoryList
+                resident={item}
+                deleteResident={deleteResident}
+              />
+            ))}
+          </Grid>
           {/* {} */}
-          <CardOwnerHistoryList />
+          {/* <CardOwnerHistoryList /> */}
         </Grid>
       </Container>
 

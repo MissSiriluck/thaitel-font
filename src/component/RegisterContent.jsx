@@ -83,14 +83,14 @@ function RegisterContent() {
         maxWidth='md'
         justifyContent='center'
         alignItems='center'
-        direction='column'
-        sx={{ padding: 0, mt: 18 }}
+        // direction='column'
+        sx={{ padding: 0, mt: "20vh" }}
       >
         <Box
           alignItems='center'
           justifyContent='center'
           sx={{
-            height: "60vh",
+            // height: "60vh",
             display: "flex",
             flexDirection: "column",
             padding: 0,

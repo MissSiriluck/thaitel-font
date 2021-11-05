@@ -58,34 +58,35 @@ function CustomButton(props) {
 }
 
 function ResidentDetail() {
-  
   const [rooms, setRooms] = useState([]);
   const [resident, setResident] = useState({});
-  const [residentImage, setResidentImage] = useState('')
-  
+  const [residentImage, setResidentImage] = useState("");
+
   const history = useHistory();
   const location = useLocation();
-  const params = useParams()
+  const params = useParams();
 
   useEffect(() => {
     const fetchResidentByid = async () => {
       // const res = await axios.get(`/residents/${user.id}`);
       const res = await axios.get(`/residents/residentId/${params.residentId}`);
-      console.log(`res.data`, res.data)
-      
+      console.log(`res.data`, res.data);
+
       setRooms(res.data.rooms);
       setResident(res.data.resident);
-      setResidentImage(res.data.resident.ResidentImgs[0].imgUrl)
+      setResidentImage(res.data.resident.ResidentImgs[0].imgUrl);
     };
     fetchResidentByid();
-  }, [])
+  }, []);
 
-  console.log(`resident`, resident)
-  console.log(`resident.ServiceItems`, resident.ServiceItems)
-  console.log(`rooms`, rooms)
+  console.log(`resident`, resident);
+  console.log(`resident.ServiceItems`, resident.ServiceItems);
+  console.log(`rooms`, rooms);
 
-  const filterService = resident?.ServiceItems?.filter((item) => item.isHaving === true)
-  console.log(`filterService`, filterService)
+  const filterService = resident?.ServiceItems?.filter(
+    item => item.isHaving === true
+  );
+  console.log(`filterService`, filterService);
 
   const useStyles = makeStyles({
     root: {
@@ -99,21 +100,18 @@ function ResidentDetail() {
   const classes = useStyles();
 
   const handleOnClickEditResident = e => {
-
     e.preventDefault();
-    
-    history.push({ 
-        pathname: `/owner_edit_resident/${resident.id}`,
-        state: {
-          resident: resident, 
-          rooms: rooms,
-        }
-    })
-  }
 
-  const handleDeleteRoom = () => {
-    
-  }
+    history.push({
+      pathname: `/owner_edit_resident/${resident.id}`,
+      state: {
+        resident: resident,
+        rooms: rooms,
+      },
+    });
+  };
+
+  const handleDeleteRoom = () => {};
 
   return (
     <Grid container>
@@ -134,7 +132,7 @@ function ResidentDetail() {
         <Grid container>
           <Grid
             item
-            id=""
+            id=''
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
@@ -149,7 +147,7 @@ function ResidentDetail() {
           {/* Service block */}
           <Grid
             item
-            id=""
+            id=''
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
@@ -158,25 +156,34 @@ function ResidentDetail() {
             </Typography>
 
             <Grid container sx={{ flexWrap: "wrap" }}>
-
-              {filterService?.map((service) => (
+              {filterService?.map(service => (
                 <Grid
-                item
-                xs={3}
-                sx={{ display: "flex", alignItems: "center", mb: 2 }}
-              >
-                {service?.serviceName === 'parking'? <DirectionsCarIcon /> : 
-                service?.serviceName === 'breakFast'? <FastfoodIcon /> : 
-                service?.serviceName === 'wifi'? <WifiIcon /> :                
-                service?.serviceName === 'swimingPool'? <FastfoodIcon /> :                
-                service?.serviceName === 'bar'? <LocalBarIcon /> :                
-                service?.serviceName === 'sauna'? <SpaIcon /> :                
-                service?.serviceName === 'reception'? <RoomServiceIcon /> :                
-                service?.serviceName === 'roomService'? <RoomServiceIcon /> :                
-                service?.serviceName === 'fitnessRoom'? <FitnessCenterIcon /> : null}                
-                <Typography sx={{ ml: 2 }}>{service?.serviceName}</Typography>
-              </Grid>
-               ))} 
+                  item
+                  xs={3}
+                  sx={{ display: "flex", alignItems: "center", mb: 2 }}
+                >
+                  {service?.serviceName === "parking" ? (
+                    <DirectionsCarIcon />
+                  ) : service?.serviceName === "breakFast" ? (
+                    <FastfoodIcon />
+                  ) : service?.serviceName === "wifi" ? (
+                    <WifiIcon />
+                  ) : service?.serviceName === "swimingPool" ? (
+                    <FastfoodIcon />
+                  ) : service?.serviceName === "bar" ? (
+                    <LocalBarIcon />
+                  ) : service?.serviceName === "sauna" ? (
+                    <SpaIcon />
+                  ) : service?.serviceName === "reception" ? (
+                    <RoomServiceIcon />
+                  ) : service?.serviceName === "roomService" ? (
+                    <RoomServiceIcon />
+                  ) : service?.serviceName === "fitnessRoom" ? (
+                    <FitnessCenterIcon />
+                  ) : null}
+                  <Typography sx={{ ml: 2 }}>{service?.serviceName}</Typography>
+                </Grid>
+              ))}
             </Grid>
           </Grid>
         </Grid>
@@ -248,7 +255,7 @@ function ResidentDetail() {
                   Tue, Sep 21
                 </Typography>
                 <Typography sx={{ p: 1, flexGrow: 1 }}>
-                  {resident?.timeCheckInStart} - {resident?.timeCheckInEnd} 
+                  {resident?.timeCheckInStart} - {resident?.timeCheckInEnd}
                 </Typography>
               </Box>
             </Box>
@@ -312,10 +319,10 @@ function ResidentDetail() {
         </Box>
 
         {/* room type block */}
-        {rooms.map((room) => (
+        {rooms.map(room => (
           <Grid
             item
-            id=""
+            id=''
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
@@ -336,21 +343,22 @@ function ResidentDetail() {
                     <Typography sx={{ fontSize: "20px", mb: 1 }}>
                       {room.typeOf}
                     </Typography>
-                    <Typography sx={{ mb: 1 }}>
-                      {resident.province}
-                    </Typography>
+                    <Typography sx={{ mb: 1 }}>{resident.province}</Typography>
                     <Typography sx={{ mb: 1 }}>
                       จำนวนแขกที่เข้าพักได้ {room.maxGuest} คน / ห้อง
                     </Typography>
                   </Grid>
                   <Grid item xs={5}>
                     <Typography sx={{ mb: 1 }}>
-                      จำนวนห้องพักที่เหลือ {room?.roomAmount- room?.countBookedRoom} ห้อง
+                      จำนวนห้องพักที่เหลือ{" "}
+                      {room?.roomAmount - room?.countBookedRoom} ห้อง
                     </Typography>
                     <Typography sx={{ mb: 1 }}>
                       Room size : {room?.size} ตร.ม.
                     </Typography>
-                    <Typography sx={{ mb: 1 }}>Price : {room?.pricePerNight} BATH</Typography>
+                    <Typography sx={{ mb: 1 }}>
+                      Price : {room?.pricePerNight} BATH
+                    </Typography>
                   </Grid>
                 </Grid>
               </Grid>
@@ -360,7 +368,7 @@ function ResidentDetail() {
 
         <Grid item sx={{ display: "flex", justifyContent: "center" }}>
           <Button
-            variant="outlined"
+            variant='outlined'
             sx={{
               width: "240px",
               fontFamily: "'Noto Sans Thai', sans-serif",
@@ -386,6 +394,9 @@ function ResidentDetail() {
               mb: 15,
               p: 2.5,
               width: "200px",
+            }}
+            onClick={e => {
+              history.push({ pathname: "/ownerhistory" });
             }}
           >
             กลับสู่หน้าหลัก
