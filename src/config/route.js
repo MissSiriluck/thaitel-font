@@ -83,7 +83,7 @@ const route = {
       component: AddCom,
     },
     {
-      redirect: "/",
+      redirect: "/login",
     },
   ],
   CUSTOMER: [
@@ -156,9 +156,9 @@ const route = {
       path: "/owner_edit_resident/:residentId",
       component: EditResident,
     },
-    // {
-    //   redirect: "/ownerhistory",
-    // },
+    {
+      redirect: "/ownerhistory",
+    },
 
     // {
     //   redirect: "/ownerhistory",

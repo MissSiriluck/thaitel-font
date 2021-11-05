@@ -282,20 +282,35 @@ function EditResident() {
       const resImageResident = await axios.put('/residentImgs',formImageResident)
 
       createResident.roomCollection.forEach(async(item)=>{
-        const formRoom = new FormData()
+        if('id' in item){
+          const formRoom = new FormData()
+          formRoom.append('cloudInput',item.roomImageFile)
+          formRoom.append('typeOf',item.roomTypeOf)
+          formRoom.append('roomAmount',item.roomAmount)
+          formRoom.append('size',item.roomSize)
+          formRoom.append('optionalRoomDetail', item.optionRoomDetail)
+          formRoom.append('noSmoking', item.noSmoking)
+          formRoom.append('petAllowed', item.petAllowed)
+          formRoom.append('pricePerNight', item.pricePerNigth)
+          formRoom.append('maxGuest', item.maxGuest)
+          formRoom.append('imgURL', item.imgURL)
+          formRoom.append('residentId', resident.id)
+          const resRoom = await axios.put(`/rooms/${item.id}`, formRoom)
+        }else {
+          const formRoom = new FormData()
         formRoom.append('cloudInput',item.roomImageFile)
         formRoom.append('typeOf',item.roomTypeOf)
         formRoom.append('roomAmount',item.roomAmount)
         formRoom.append('size',item.roomSize)
         formRoom.append('optionalRoomDetail', item.optionRoomDetail)
         formRoom.append('noSmoking', item.noSmoking)
-        formRoom.append('petAllowed', item.petAllowed)
+        formRoom.append('petAllowed', item.petAllow)
         formRoom.append('pricePerNight', item.pricePerNigth)
         formRoom.append('maxGuest', item.maxGuest)
-        formRoom.append('imgURL', item.imgURL)
-        formRoom.append('residentId', resident.id)
-        
-        const resRoom = await axios.put(`/rooms/${item.id}`, formRoom)
+        formRoom.append('residentId', location.state.resident.id)
+      
+        const resRoom = await axios.post('/rooms/createRoom', formRoom)
+        }
       })
 
       const formBank = new FormData()
@@ -306,9 +321,10 @@ function EditResident() {
       formBank.append('residentId', resident.id)
 
       const resBank = await axios.put(`/backAccounts/${location.state.resident.BankAccount.id}`, formBank)
-    }
 
-      // history.push("/ownerhistory");
+    history.push({pathname:"/ownerhistory"});
+  }
+
     } catch (err) {
       console.dir(err);
     }

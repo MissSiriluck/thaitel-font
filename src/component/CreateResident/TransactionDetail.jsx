@@ -72,7 +72,7 @@ function TransactionDetail() {
               justifyContent: 'center',
             }}
           >
-            <Typography>ค่าคอมมิชชั่น 15 %</Typography>
+            <Typography>ค่าคอมมิชชั่น 10 %</Typography>
             <Typography>ค่าดำเนินธุรกรรม 2.1 %</Typography>
           </Grid>
           <Grid xs={12} sx={{ marginTop: '10px' }}>

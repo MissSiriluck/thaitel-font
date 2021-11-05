@@ -80,9 +80,9 @@ function ResidentDetail() {
     fetchResidentByid();
   }, [])
 
-  console.log(`resident`, resident)
-  console.log(`resident.ServiceItems`, resident.ServiceItems)
-  console.log(`rooms`, rooms)
+  // console.log(`resident`, resident)
+  // console.log(`resident.ServiceItems`, resident.ServiceItems)
+  // console.log(`rooms`, rooms)
 
   const filterService = resident?.ServiceItems?.filter((item) => item.isHaving === true)
   console.log(`filterService`, filterService)
@@ -111,9 +111,6 @@ function ResidentDetail() {
     })
   }
 
-  const handleDeleteRoom = () => {
-    
-  }
 
   return (
     <Grid container>
@@ -304,7 +301,7 @@ function ResidentDetail() {
                   Tue, Sep 21
                 </Typography>
                 <Typography sx={{ p: 1, flexGrow: 1 }}>
-                  {resident.timeCheckOutStart} - {resident.timeCheckOutEnd}
+                  {resident?.timeCheckOutStart} - {resident?.timeCheckOutEnd}
                 </Typography>
               </Box>
             </Box>
@@ -340,7 +337,7 @@ function ResidentDetail() {
                       {resident.province}
                     </Typography>
                     <Typography sx={{ mb: 1 }}>
-                      จำนวนแขกที่เข้าพักได้ {room.maxGuest} คน / ห้อง
+                      จำนวนแขกที่เข้าพักได้ {room?.maxGuest} คน / ห้อง
                     </Typography>
                   </Grid>
                   <Grid item xs={5}>
@@ -387,6 +384,7 @@ function ResidentDetail() {
               p: 2.5,
               width: "200px",
             }}
+            onClick={e => { history.push({ pathname: '/ownerhistory'})}}
           >
             กลับสู่หน้าหลัก
           </CustomButton>

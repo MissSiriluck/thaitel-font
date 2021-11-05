@@ -73,12 +73,6 @@ const CreateResidentProvider2 = ({ children }) => {
         isFree: true,
         pricePerTime: 0,
       },
-      // {
-      //   serviceName: "แผนกต้อนรับส่วนหน้า 24 ชั่วโมง",
-      //   isFree: true,
-      //   isHaving: false,
-      //   pricePerTime: "",
-      // },
       {
         serviceName: "bar",
         isFree: true,

@@ -146,7 +146,7 @@ function OwnerHistoryPage() {
             <CardOwnerHistoryList resident={item} deleteResident={deleteResident} />
           ))}
           {/* {} */}
-          <CardOwnerHistoryList />
+          {/* <CardOwnerHistoryList /> */}
         </Grid>
       </Container>
 
