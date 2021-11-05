@@ -65,24 +65,14 @@ function LoginContent() {
   console.log(user);
   const responseGoogle = async (response) => {
     try {
-      console.log(response);
-      console.log(response.profileObj);
-      // const response.profileObj
-      // console.log(response.profileObj.email)
-      console.log(response.profileObj.givenName);
-      // console.log(response.profileObj.familyName)
-      // console.log(response.profileObj.googleId)
       const res = await axios.post("/googleLogin", {
         email: response.profileObj.email,
         firstName: response.profileObj.givenName,
         lastName: response.profileObj.familyName,
         googleId: response.profileObj.googleId,
       });
-      console.log(res);
       setToken(res.data.token);
-
       setUser(jwtDecode(res.data.token));
-      console.log(user);
       history.push({
         pathname: "/",
         state: {

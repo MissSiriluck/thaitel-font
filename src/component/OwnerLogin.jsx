@@ -24,7 +24,7 @@ import ButtonUnstyled, {
 import { styled } from "@mui/system";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
-
+import { GoogleLogin } from "react-google-login";
 //customize button style
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -141,6 +141,27 @@ function OwnerLogin() {
       }
     }
   };
+  const responseGoogle = async (response) => {
+    try {
+      const res = await axios.post("/hotelOwners/ownerGoogleLogin", {
+        email: response.profileObj.email,
+        firstName: response.profileObj.givenName,
+        lastName: response.profileObj.familyName,
+        googleId: response.profileObj.googleId,
+      });
+      setToken(res.data.token);
+      setUser(jwtDecode(res.data.token));
+      history.push({
+        pathname: "/",
+        state: {
+          successMessage: "Already Login.",
+          from: " login page ",
+        },
+      });
+    } catch (err) {
+      console.dir(err);
+    }
+  };
 
   const responseFacebook = async (res) => {
     console.log(res);
@@ -226,7 +247,57 @@ function OwnerLogin() {
             </Grid>
           </Button>
         </Grid> */}
-
+        <GoogleLogin
+          clientId="653158791610-ii8s99m412cd01m9lmb9113fjjbocssd.apps.googleusercontent.com"
+          render={(renderProps) => (
+            <Button
+              variant="contained"
+              sx={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+              onClick={renderProps.onClick}
+              disabled={renderProps.disabled}
+            >
+              <Grid
+                item
+                sx={{
+                  backgroundColor: "white",
+                  borderRadius: "50px",
+                  height: "18px",
+                  width: "18px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <FcGoogle />
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  height: "32px",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  variant="p"
+                  sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
+                >
+                  Sign In With Google
+                </Typography>
+              </Grid>
+            </Button>
+          )}
+          buttonText="Login"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={"single_host_origin"}
+        />
         {/* facebook login......................... */}
         <FacebookLogin
           appId="934707233799748"
