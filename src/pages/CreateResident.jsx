@@ -50,6 +50,10 @@ function CreateResident() {
     })
   }, [])
 
+  const [openCreateResidentModal, setOpenCreateResidentModal] = React.useState(false);
+  const handleOpenCreateResidentModal = () => setOpenCreateResidentModal(true);
+  const handleCloseCreateResidentModal = () => setOpenCreateResidentModal(false);
+
   const handleSubmit = async e => {
     try {
       let allPase = true;
@@ -262,6 +266,8 @@ function CreateResident() {
 
       const resBank = await axios.post('/backAccounts', formBank)
       
+      setOpenCreateResidentModal(true)
+
       history.push("/ownerhistory");
     }
     } catch (err) {

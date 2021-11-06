@@ -50,9 +50,6 @@ function CardOwnerHistoryList({ resident, deleteResident }) {
   // const [count, setCount] = useState(0);
   console.log("residents.......", resident);
 
-
-
-  
   // useEffect(() => {
     //   const fetchResident = async () => {
       //     try {
