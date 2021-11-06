@@ -39,7 +39,7 @@ function CustomButton(props) {
 }
 
 function CardHistoryList({ resident, booking }) {
-  console.log("booking........................", booking);
+  // console.log("booking........................", booking);
   return (
     <Grid item xs={12} sx={{ mt: 3, mb: 15 }}>
       {/* {residents.map((resident) => ( */}

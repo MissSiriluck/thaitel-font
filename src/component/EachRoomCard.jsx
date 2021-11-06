@@ -11,12 +11,18 @@ import {
 
 function EachRoomCard({ room, updateRoomAmount }) {
   console.log("room..................................", room);
+
   const [roomBookingAmount, setRoomBookingAmount] = useState(0);
 
   const handleClickIncrease = (e) => {
     e.preventDefault();
-    updateRoomAmount(room.roomId, roomBookingAmount + 1);
-    setRoomBookingAmount(roomBookingAmount + 1);
+    // updateRoomAmount(room.roomId, roomBookingAmount + 1);
+    // setRoomBookingAmount(roomBookingAmount + 1);
+    if (roomBookingAmount < room.roomRemaining) {
+      updateRoomAmount(room.roomId, roomBookingAmount + 1);
+      setRoomBookingAmount(roomBookingAmount + 1);
+    } else {
+    }
   };
 
   const handleClickDecrease = (e) => {
@@ -57,18 +63,6 @@ function EachRoomCard({ room, updateRoomAmount }) {
             <Grid item xs={5}>
               <Grid item xs={4} sx={{ mb: 2 }}>
                 <FormControl fullWidth>
-                  {/* <InputLabel id="demo-simple-select-label">
-                    จำนวนห้อง
-                  </InputLabel> */}
-                  {/* <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    label="จำนวนห้อง"
-                  >
-                    <MenuItem value={1}>1</MenuItem>
-                    <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem>
-                  </Select> */}
                   <button onClick={handleClickDecrease}>-</button>
                   {roomBookingAmount}
                   <button onClick={handleClickIncrease}>+</button>

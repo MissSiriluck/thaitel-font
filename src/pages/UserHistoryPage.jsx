@@ -12,7 +12,7 @@ import { AuthContext } from "../context/AuthContext";
 function UserHistoryPage() {
   const { booking, setBooking } = useContext(BookingContext);
   const { user } = useContext(AuthContext);
-  console.log(user.firstName);
+  // console.log(user.firstName);
 
   useEffect(() => {
     const fetchBookingItem = async () => {
@@ -42,14 +42,30 @@ function UserHistoryPage() {
               สวัสดี คุณ {user.firstName}
             </Typography>
           </Grid>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <Typography sx={{ fontSize: "16px" }}>
               ดูรายละเอียดการจองที่พักของคุณ
             </Typography>
-          </Grid>
-          {booking.map((item) => (
+          </Grid> */}
+          {/* {booking.map((item) => (
             <CardHistoryList booking={item} />
-          ))}
+          ))} */}
+          {booking.length > 0 ? (
+            <>
+              <Grid item xs={12}>
+                <Typography sx={{ fontSize: "16px" }}>
+                  ดูรายละเอียดการจองที่พักของคุณ
+                </Typography>
+              </Grid>
+              {booking.map((item) => (
+                <CardHistoryList booking={item} />
+              ))}
+            </>
+          ) : (
+            <Typography sx={{ fontSize: "25px", mb: 1, mt: 10, color: "red" }}>
+              คุณยังไม่ได้จองที่พัก.....................................
+            </Typography>
+          )}
         </Grid>
       </Container>
 

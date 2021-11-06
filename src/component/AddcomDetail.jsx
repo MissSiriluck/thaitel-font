@@ -25,7 +25,7 @@ import ButtonUnstyled, {
 } from "@mui/core/ButtonUnstyled";
 // import { residents } from "../mocks/residents";
 import axios from "axios";
-import { AuthContext } from "../context/AuthContext";
+// import { AuthContext } from "../context/AuthContext";
 import { useHistory, useLocation } from "react-router";
 // import { makeStyles } from "@material-ui/styles";
 // import CarouselBox from "./CarouselBox";
@@ -86,7 +86,7 @@ function AddcomDetail() {
   // const [roomBookingAmount, setRoomBookingAmount] = useState(0);
 
   const filterRoom = rooms.filter((item) => item.roomBookingAmount > 0);
-  console.log("filterRoom...........", filterRoom);
+  // console.log("filterRoom...........", filterRoom);
 
   useEffect(() => {
     const fetchResidentByid = async () => {
@@ -99,7 +99,9 @@ function AddcomDetail() {
           pricePerNight: item.pricePerNight,
           imgURL: item.imgURL,
           size: item.size,
-          roomDetail: item.roomDetail,
+          // roomDetail: item.roomDetail,
+          optionalRoomDetail: item.optionalRoomDetail,
+          roomRemaining: item.roomAmount - item.countBookedRoom,
         };
       });
       setRooms(roomsFetch);
