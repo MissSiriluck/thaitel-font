@@ -107,8 +107,8 @@ function CardOwnerHistoryList({ resident, deleteResident }) {
         xs={12}
         sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 2, mb: 2 }}
       >
-        <Grid container>
-          <Grid item xs={2}>
+        <Grid container >
+          <Grid item xs={2} >
             {/* {resident?.ResidentImgs?.map((item) => ( */}
             <img
               // src={`${resident.url}`}

@@ -79,9 +79,9 @@ function ResidentDetail() {
     fetchResidentByid();
   }, []);
 
-  console.log(`resident`, resident);
-  console.log(`resident.ServiceItems`, resident.ServiceItems);
-  console.log(`rooms`, rooms);
+  // console.log(`resident`, resident)
+  // console.log(`resident.ServiceItems`, resident.ServiceItems)
+  // console.log(`rooms`, rooms)
 
   const filterService = resident?.ServiceItems?.filter(
     item => item.isHaving === true
@@ -111,7 +111,7 @@ function ResidentDetail() {
     });
   };
 
-  const handleDeleteRoom = () => {};
+  // const handleDeleteRoom = () => {};
 
   return (
     <Grid container xs={11.5} sx={{ justifyContent: 'center', alignItems: "center" }}>
@@ -314,7 +314,7 @@ function ResidentDetail() {
                   Tue, Sep 21
                 </Typography>
                 <Typography sx={{ p: 1, flexGrow: 1 }}>
-                  {resident.timeCheckOutStart} - {resident.timeCheckOutEnd}
+                  {resident?.timeCheckOutStart} - {resident?.timeCheckOutEnd}
                 </Typography>
               </Box>
             </Box>
@@ -349,7 +349,7 @@ function ResidentDetail() {
                     </Typography>
                     <Typography sx={{ mb: 1 }}>{resident.province}</Typography>
                     <Typography sx={{ mb: 1 }}>
-                      จำนวนแขกที่เข้าพักได้ {room.maxGuest} คน / ห้อง
+                      จำนวนแขกที่เข้าพักได้ {room?.maxGuest} คน / ห้อง
                     </Typography>
                   </Grid>
                   <Grid item xs={5.5}>
@@ -405,6 +405,7 @@ function ResidentDetail() {
             onClick={e => {
               history.push({ pathname: "/ownerhistory" });
             }}
+            onClick={e => { history.push({ pathname: '/ownerhistory'})}}
           >
             กลับสู่หน้าหลัก
           </CustomButton>

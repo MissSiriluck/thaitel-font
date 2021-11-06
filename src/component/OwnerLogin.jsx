@@ -133,6 +133,7 @@ function OwnerLogin() {
           password: "กรุณากรอกข้อมูลให้ถูกต้อง",
         }));
       }
+      console.log(`err`, err)
     }
   };
   const responseGoogle = async response => {

@@ -298,22 +298,56 @@ function EditResident() {
           formImageResident
         );
 
-        createResident.roomCollection.forEach(async item => {
-          const formRoom = new FormData();
-          formRoom.append("cloudInput", item.roomImageFile);
-          formRoom.append("typeOf", item.roomTypeOf);
-          formRoom.append("roomAmount", item.roomAmount);
-          formRoom.append("size", item.roomSize);
-          formRoom.append("optionalRoomDetail", item.optionRoomDetail);
-          formRoom.append("noSmoking", item.noSmoking);
-          formRoom.append("petAllowed", item.petAllowed);
-          formRoom.append("pricePerNight", item.pricePerNigth);
-          formRoom.append("maxGuest", item.maxGuest);
-          formRoom.append("imgURL", item.imgURL);
-          formRoom.append("residentId", resident.id);
+        // createResident.roomCollection.forEach(async item => {
+        //   const formRoom = new FormData();
+        //   formRoom.append("cloudInput", item.roomImageFile);
+        //   formRoom.append("typeOf", item.roomTypeOf);
+        //   formRoom.append("roomAmount", item.roomAmount);
+        //   formRoom.append("size", item.roomSize);
+        //   formRoom.append("optionalRoomDetail", item.optionRoomDetail);
+        //   formRoom.append("noSmoking", item.noSmoking);
+        //   formRoom.append("petAllowed", item.petAllowed);
+        //   formRoom.append("pricePerNight", item.pricePerNigth);
+        //   formRoom.append("maxGuest", item.maxGuest);
+        //   formRoom.append("imgURL", item.imgURL);
+        //   formRoom.append("residentId", resident.id);
 
-          const resRoom = await axios.put(`/rooms/${item.id}`, formRoom);
-        });
+        // // conflict1
+        //   const resRoom = await axios.put(`/rooms/${item.id}`, formRoom);
+        // });
+
+        // conflict2
+      createResident.roomCollection.forEach(async(item)=>{
+        if('id' in item){
+          const formRoom = new FormData()
+          formRoom.append('cloudInput',item.roomImageFile)
+          formRoom.append('typeOf',item.roomTypeOf)
+          formRoom.append('roomAmount',item.roomAmount)
+          formRoom.append('size',item.roomSize)
+          formRoom.append('optionalRoomDetail', item.optionRoomDetail)
+          formRoom.append('noSmoking', item.noSmoking)
+          formRoom.append('petAllowed', item.petAllowed)
+          formRoom.append('pricePerNight', item.pricePerNigth)
+          formRoom.append('maxGuest', item.maxGuest)
+          formRoom.append('imgURL', item.imgURL)
+          formRoom.append('residentId', resident.id)
+          const resRoom = await axios.put(`/rooms/${item.id}`, formRoom)
+        }else {
+          const formRoom = new FormData()
+        formRoom.append('cloudInput',item.roomImageFile)
+        formRoom.append('typeOf',item.roomTypeOf)
+        formRoom.append('roomAmount',item.roomAmount)
+        formRoom.append('size',item.roomSize)
+        formRoom.append('optionalRoomDetail', item.optionRoomDetail)
+        formRoom.append('noSmoking', item.noSmoking)
+        formRoom.append('petAllowed', item.petAllow)
+        formRoom.append('pricePerNight', item.pricePerNigth)
+        formRoom.append('maxGuest', item.maxGuest)
+        formRoom.append('residentId', location.state.resident.id)
+      
+        const resRoom = await axios.post('/rooms/createRoom', formRoom)
+        }
+      })
 
         const formBank = new FormData();
         formBank.append("bankName", createResident.bankName);
@@ -322,13 +356,18 @@ function EditResident() {
         formBank.append("cloudInput", createResident.bankImageFile);
         formBank.append("residentId", resident.id);
 
-        const resBank = await axios.put(
-          `/backAccounts/${location.state.resident.BankAccount.id}`,
-          formBank
-        );
-      }
+      //   const resBank = await axios.put(
+      //     `/backAccounts/${location.state.resident.BankAccount.id}`,
+      //     formBank
+      //   );
+      // }
 
-      history.push("/ownerhistory");
+      // history.push("/ownerhistory");
+      const resBank = await axios.put(`/backAccounts/${location.state.resident.BankAccount.id}`, formBank)
+
+    history.push({pathname:"/ownerhistory"});
+  }
+
     } catch (err) {
       console.dir(err);
     }

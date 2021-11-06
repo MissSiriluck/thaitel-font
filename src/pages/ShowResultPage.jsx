@@ -36,6 +36,7 @@ function ShowResultPage() {
         });
     }
   }, [resident, checkIn, room, province]);
+  
   return (
     <>
       <SpaceforHead />

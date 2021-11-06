@@ -7,7 +7,7 @@ import { styled } from "@mui/system";
 import { useHistory } from "react-router";
 
 //customize button blue
-const CustomButtonRoot = styled("span")(`
+const CustomButtonRoot = styled("button")(`
     background-color: none;
     padding: 12px 35px;
     border-radius: 10px;
@@ -79,7 +79,7 @@ function HotelCardList({ resident }) {
           <Grid item xs={2.2}>
             <img
               // src={`${resident.url}`}
-              src={resident.ResidentImgs[0]?.imgUrl}
+              src={resident?.ResidentImgs[0]?.imgUrl}
               style={{
                 width: "170px",
                 height: "170px",
@@ -114,8 +114,9 @@ function HotelCardList({ resident }) {
                     justifyContent: "flex-end",
                     fontSize: "22px",
                   }}
-                >
-                  {`${result[1]} - ${result[0]}`} บาท
+                > 
+                {result[1] === result[0] ? result[0] : `${result[1]} - ${result[0]}`}
+                 บาท
                 </Typography>
                 <Typography
                   sx={{

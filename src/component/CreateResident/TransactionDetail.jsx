@@ -24,6 +24,7 @@ function TransactionDetail() {
 
   const handleChange = (type, event) => {
     setCreateResident((cur) => ({ ...cur, [type]: event.target.value }));
+    setCreateResidentError({ ...createResidentError, [type]: '' })
   };
 
   const handleChangeBankAccept = () => {
@@ -72,7 +73,7 @@ function TransactionDetail() {
               justifyContent: 'center',
             }}
           >
-            <Typography>ค่าคอมมิชชั่น 15 %</Typography>
+            <Typography>ค่าคอมมิชชั่น 10 %</Typography>
             <Typography>ค่าดำเนินธุรกรรม 2.1 %</Typography>
           </Grid>
           <Grid xs={12} sx={{ marginTop: '10px' }}>
@@ -191,7 +192,7 @@ function TransactionDetail() {
                   label='Bank Name'
                   onChange={(e) => handleChange('bankName', e)}
                   helperText= {createResidentError.bankName ? createResidentError.bankName : ""}
-                error={createResidentError.bankName}
+                  error={createResidentError.bankName}
                   size='small'
                   sx={{
                     display: 'flex',

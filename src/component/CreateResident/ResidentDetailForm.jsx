@@ -22,7 +22,7 @@ function ResidentDetailForm() {
 
   const handleChange = (props, event) => {
     setCreateResident({ ...createResident, [props]: event.target.value });
-    
+    setCreateResidentError({ ...createResidentError, [props]: '' })
   };
 
   return (
