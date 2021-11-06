@@ -8,6 +8,7 @@ import {
   Select,
   Typography,
 } from "@mui/material";
+import { CustomButton } from "./BookingCfmDetail";
 
 function EachRoomCard({ room, updateRoomAmount }) {
   console.log("room..................................", room);
@@ -61,13 +62,48 @@ function EachRoomCard({ room, updateRoomAmount }) {
               <Typography>{`${room.roomDetail}`}</Typography>
             </Grid>
             <Grid item xs={5}>
-              <Grid item xs={4} sx={{ mb: 2 }}>
-                <FormControl fullWidth>
-                  <button onClick={handleClickDecrease}>-</button>
+              <Box item xs={4} sx={{ mb: 2, display: "flex" }}>
+                <CustomButton
+                  sx={{
+                    background: "#c62828",
+                    color: "#fff",
+                    fontFamily: "'Noto Sans Thai', sans-serif",
+                    fontSize: "20px",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                  onClick={handleClickDecrease}
+                >
+                  -
+                </CustomButton>
+                <Box
+                  sx={{
+                    display: "inline-flex",
+                    // display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                    mx: 2,
+                    px: 1,
+                    fontSize: "20px",
+                  }}
+                >
                   {roomBookingAmount}
-                  <button onClick={handleClickIncrease}>+</button>
-                </FormControl>
-              </Grid>
+                </Box>
+
+                <CustomButton
+                  sx={{
+                    background: "#c62828",
+                    color: "#fff",
+                    fontFamily: "'Noto Sans Thai', sans-serif",
+                    fontSize: "20px",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                  onClick={handleClickIncrease}
+                >
+                  +
+                </CustomButton>
+              </Box>
               <Typography sx={{ mb: 1 }}>
                 Room size : {room.size} ตารางเมตร
               </Typography>

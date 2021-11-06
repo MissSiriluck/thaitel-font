@@ -8,6 +8,7 @@ import { BookingContext } from "../context/BookingContext";
 import { useContext, useEffect } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
+import { Box } from "@mui/system";
 
 function UserHistoryPage() {
   const { booking, setBooking } = useContext(BookingContext);
@@ -62,9 +63,28 @@ function UserHistoryPage() {
               ))}
             </>
           ) : (
-            <Typography sx={{ fontSize: "25px", mb: 1, mt: 10, color: "red" }}>
-              คุณยังไม่ได้จองที่พัก.....................................
-            </Typography>
+            <Grid
+              container
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Box>
+                <Box>
+                  <img src="ownerHistory.jpg" width="600" height="400" />
+                </Box>
+                <Typography
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    fontSize: "25px",
+                  }}
+                >
+                  คุณยังไม่ได้จองห้องพัก
+                </Typography>
+              </Box>
+            </Grid>
           )}
         </Grid>
       </Container>

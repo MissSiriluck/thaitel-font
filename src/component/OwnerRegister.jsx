@@ -1,7 +1,9 @@
+import "../App.css";
 import * as React from "react";
 import { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
-import "../App.css";
+import { CreateResidentContext } from "../context/createResidentContext";
+import { OwnerDetailContext } from "../context/OwnerDetailContext";
+
 //Material Ui
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -13,12 +15,6 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
-import { CreateResidentContext } from "../context/createResidentContext";
-import jwtDecode from "jwt-decode";
-import axios from "../config/axios";
-import { setToken } from "../service/localStorage";
-import { AuthContext } from "../context/AuthContext";
-// import InputOwnerDetailBox from "./InputOwnerDetailBox";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -51,39 +47,13 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function OwnerRegister() {
+function OwnerRegister({ handleSubmitOwnerRegister }) {
   const { values, setValues } = useContext(CreateResidentContext);
-  // const { setUser } = useContext(AuthContext);
+  const { ownerDetailErrors, setOwnerDetailErrors } =
+    useContext(OwnerDetailContext);
 
   const [showImg, setShowImg] = useState("");
   const [file, setFile] = useState(null);
-
-  const history = useHistory();
-
-  const handleSubmitOwnerRegister = async e => {
-    console.log("test");
-    e.preventDefault();
-    try {
-      const res = await axios.post("/hotelOwners/register", {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.email,
-        telephone: values.phone,
-        password: values.password,
-        idCard: values.idCard,
-        idCardImgUrl: values.file,
-      });
-
-      // console.log(`token`, res.data.token)
-
-      // setToken(res.data.token);
-      // setUser(jwtDecode(res.data.token));
-
-      history.push("/ownerlogin");
-    } catch (err) {
-      console.dir(err);
-    }
-  };
 
   const handleChange = (props, event) => {
     setValues({ ...values, [props]: event.target.value });
@@ -171,6 +141,10 @@ function OwnerRegister() {
                   sx={{ marginTop: "8px" }}
                   value={values.email}
                   onChange={e => handleChange("email", e)}
+                  helperText={
+                    ownerDetailErrors.email ? ownerDetailErrors.email : ""
+                  }
+                  error={ownerDetailErrors.email}
                 />
               </Grid>
               <Grid item xs={5.8}>
@@ -187,6 +161,10 @@ function OwnerRegister() {
                   sx={{ marginTop: "8px" }}
                   value={values.phone}
                   onChange={e => handleChange("phone", e)}
+                  helperText={
+                    ownerDetailErrors.phone ? ownerDetailErrors.phone : ""
+                  }
+                  error={ownerDetailErrors.phone}
                 />
               </Grid>
 
@@ -208,6 +186,10 @@ function OwnerRegister() {
                   sx={{ marginTop: "8px" }}
                   value={values.password}
                   onChange={e => handleChange("password", e)}
+                  helperText={
+                    ownerDetailErrors.password ? ownerDetailErrors.password : ""
+                  }
+                  error={ownerDetailErrors.password}
                 />
               </Grid>
 
@@ -227,6 +209,12 @@ function OwnerRegister() {
                   sx={{ marginTop: "8px" }}
                   value={values.confirmPassword}
                   onChange={e => handleChange("confirmPassword", e)}
+                  helperText={
+                    ownerDetailErrors.confirmPassword
+                      ? ownerDetailErrors.confirmPassword
+                      : ""
+                  }
+                  error={ownerDetailErrors.confirmPassword}
                 />
               </Grid>
             </Grid>
@@ -266,6 +254,12 @@ function OwnerRegister() {
                     sx={{ marginTop: "8px" }}
                     value={values.firstName}
                     onChange={e => handleChange("firstName", e)}
+                    helperText={
+                      ownerDetailErrors.firstName
+                        ? ownerDetailErrors.firstName
+                        : ""
+                    }
+                    error={ownerDetailErrors.firstName}
                   />
                 </Grid>
                 <Grid
@@ -287,6 +281,12 @@ function OwnerRegister() {
                     sx={{ marginTop: "8px" }}
                     value={values.lastName}
                     onChange={e => handleChange("lastName", e)}
+                    helperText={
+                      ownerDetailErrors.lastName
+                        ? ownerDetailErrors.lastName
+                        : ""
+                    }
+                    error={ownerDetailErrors.lastName}
                   />
                 </Grid>
 
@@ -311,6 +311,10 @@ function OwnerRegister() {
                     sx={{ marginTop: "8px" }}
                     value={values.idCard}
                     onChange={e => handleChange("idCard", e)}
+                    helperText={
+                      ownerDetailErrors.idCard ? ownerDetailErrors.idCard : ""
+                    }
+                    error={ownerDetailErrors.idCard}
                   />
                 </Grid>
               </Grid>
@@ -323,7 +327,9 @@ function OwnerRegister() {
                   item
                   xs={12}
                   sx={{
-                    border: "2px dotted #cfcfcf",
+                    border: ownerDetailErrors.idCardImgUrl
+                      ? "2px dotted #d32f2f"
+                      : "2px dotted #cfcfcf",
                     width: "100%",
                     margin: "5px",
                     alignItems: "center",
@@ -349,6 +355,19 @@ function OwnerRegister() {
                     </Typography>
                   )}
                 </Box>
+                {ownerDetailErrors.idCardImgUrl ? (
+                  <Typography
+                    sx={{
+                      fontSize: "12px",
+                      color: "#d32f2f",
+                      marginLeft: "14px",
+                    }}
+                  >
+                    {ownerDetailErrors.idCardImgUrl}
+                  </Typography>
+                ) : (
+                  ""
+                )}
                 {/* <Grid
                   item
                   xs={12}

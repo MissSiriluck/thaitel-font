@@ -60,6 +60,8 @@ function BtnLogOut() {
     prevOpen.current = open;
   }, [open]);
 
+  console.log(user.firstName);
+
   return (
     <Box>
       <Button

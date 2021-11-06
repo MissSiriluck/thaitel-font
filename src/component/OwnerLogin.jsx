@@ -2,10 +2,12 @@ import React, { useContext, useState } from "react";
 import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import axios from "../config/axios";
-import FacebookLogin from "react-facebook-login";
+// import FacebookLogin from "react-facebook-login";
 import { setToken } from "../service/localStorage";
 import { AuthContext } from "../context/AuthContext";
 import jwtDecode from "jwt-decode";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import { GoogleLogin } from "react-google-login";
 
 //Material UI
 import Button from "@mui/material/Button";
@@ -79,7 +81,7 @@ function OwnerLogin() {
     });
   };
 
-  const handleMouseDownPassword = (event) => {
+  const handleMouseDownPassword = event => {
     event.preventDefault();
   };
 
@@ -87,7 +89,7 @@ function OwnerLogin() {
     setValues({ ...values, [props]: event.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     // console.log("Test");
     try {
@@ -98,22 +100,14 @@ function OwnerLogin() {
       };
 
       if (!values.email) {
-        setErrors((curr) => ({
+        setErrors(curr => ({
           ...curr,
           email: "กรุณากรอกอีเมลของท่าน",
         }));
       }
-      // else if (
-      //   !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-      // ) {
-      //   setErrors(curr => ({
-      //     ...curr,
-      //     email: "กรุณากรอกอีเมลให้ถูกต้อง",
-      //   }));
-      // }
 
       if (!values.password) {
-        setErrors((curr) => ({
+        setErrors(curr => ({
           ...curr,
           password: "กรุณากรอกรหัสผ่านของท่าน",
         }));
@@ -133,7 +127,7 @@ function OwnerLogin() {
     } catch (err) {
       console.dir(err);
       if (err.response.status === 400) {
-        setErrors((curr) => ({
+        setErrors(curr => ({
           ...curr,
           email: "กรุณากรอกข้อมูลให้ถูกต้อง",
           password: "กรุณากรอกข้อมูลให้ถูกต้อง",
@@ -141,8 +135,29 @@ function OwnerLogin() {
       }
     }
   };
+  const responseGoogle = async response => {
+    try {
+      const res = await axios.post("/hotelOwners/ownerGoogleLogin", {
+        email: response.profileObj.email,
+        firstName: response.profileObj.givenName,
+        lastName: response.profileObj.familyName,
+        googleId: response.profileObj.googleId,
+      });
+      setToken(res.data.token);
+      setUser(jwtDecode(res.data.token));
+      history.push({
+        pathname: "/",
+        state: {
+          successMessage: "Already Login.",
+          from: " login page ",
+        },
+      });
+    } catch (err) {
+      console.dir(err);
+    }
+  };
 
-  const responseFacebook = async (res) => {
+  const responseFacebook = async res => {
     console.log(res);
 
     const resultLogin = await axios.post("/hotelOwners/ownerFacebookLogin", {
@@ -154,7 +169,7 @@ function OwnerLogin() {
     setToken(resultLogin.data.token);
     setUser(jwtDecode(resultLogin.data.token));
     history.push({
-      pathname: "/",
+      pathname: "/ownerhistory",
       state: {
         successMessage: "Already Login.",
         from: " login page ",
@@ -164,92 +179,149 @@ function OwnerLogin() {
 
   return (
     <Container
-      maxWidth="sm"
-      justifyContent="center"
-      alignItems="center"
-      direction="column"
-      sx={{ padding: 0, mt: "25vh" }}
+      maxWidth='sm'
+      justifyContent='center'
+      alignItems='center'
+      direction='column'
+      sx={{ padding: 0, mt: "20vh" }}
     >
       <Grid Container sx={{ flexGlow: 1 }}>
         {/* --------------- head --------------- */}
         <Typography
-          variant="h4"
-          component="div"
+          variant='h4'
+          component='div'
           sx={{ fontWeight: 600, mb: 3 }}
         >
           เข้าสู่ระบบสำหรับผู้ปล่อยเช่า
         </Typography>
 
         {/* --------------- button submit by google --------------- */}
-        {/* <Grid container justifyContent='center' alignContent='center'>
-          <Button
-            variant="contained"
-            sx={{
-              width: "100%",
-              height: "30%",
-              display: "flex",
-              justifyContent: "space-between",
-              p: 1.5,
-            }}
-          >
-            <Grid
-              item
-              sx={{
-                backgroundColor: "white",
-                borderRadius: "50px",
-                height: "18px",
-                width: "18px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <FcGoogle />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                height: "32px",
-                alignItems: "center",
-                height: "100%",
-              }}
-            >
-              <Typography
-                variant="p"
-                sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
-              >
-                Sign In With Google
-              </Typography>
-            </Grid>
-          </Button>
-        </Grid> */}
+        <Grid container justifyContent='space-between' alignContent='center'>
+          <Grid item xs={5.8}>
+            <GoogleLogin
+              clientId='653158791610-ii8s99m412cd01m9lmb9113fjjbocssd.apps.googleusercontent.com'
+              render={renderProps => (
+                <Button
+                  variant='contained'
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                >
+                  <Grid
+                    item
+                    sx={{
+                      backgroundColor: "white",
+                      borderRadius: "50px",
+                      height: "18px",
+                      width: "18px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <FcGoogle />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      height: "32px",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography
+                      variant='p'
+                      sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
+                    >
+                      Sign In With Google
+                    </Typography>
+                  </Grid>
+                </Button>
+              )}
+              buttonText='Login'
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy={"single_host_origin"}
+            />
+          </Grid>
 
-        {/* facebook login......................... */}
-        <FacebookLogin
-          appId="934707233799748"
-          // autoLoad={true}
-          fields="name,email,picture,first_name,last_name"
-          // onClick={handleFacebookLogin}
-          callback={responseFacebook}
-        />
+          {/* facebook login......................... */}
+          <Grid item xs={5.8}>
+            <FacebookLogin
+              appId='934707233799748'
+              // autoLoad={true}
+              fields='name,email,picture,first_name,last_name'
+              // onClick={handleFacebookLogin}
+              callback={responseFacebook}
+              render={renderProps => (
+                <Button
+                  variant='contained'
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    // background: "#4c69ba",
+                  }}
+                  onClick={renderProps.onClick}
+                  // disabled={renderProps.disabled}
+                >
+                  {/* <Grid
+                  item
+                  sx={{
+                    backgroundColor: "white",
+                    borderRadius: "50px",
+                    height: "18px",
+                    width: "18px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <i class='fab fa-facebook'></i>
+                </Grid> */}
+                  <Grid
+                    item
+                    xs={12}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      height: "32px",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography
+                      variant='p'
+                      sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
+                    >
+                      Sign In With Facebook
+                    </Typography>
+                  </Grid>
+                </Button>
+              )}
+            />
+          </Grid>
+        </Grid>
 
         {/* --------------- line --------------- */}
         <Box
           container
-          justifyContent="center"
-          alignItems="center"
+          justifyContent='center'
+          alignItems='center'
           sx={{
             mt: 2,
             flexGlow: 1,
           }}
-          component="form"
+          component='form'
           onSubmit={handleSubmit}
           noValidate
         >
-          {/* <Grid container>
+          <Grid container>
             <Grid
               item
               xs={5.2}
@@ -278,7 +350,7 @@ function OwnerLogin() {
                 ml: 1,
               }}
             />
-          </Grid> */}
+          </Grid>
 
           {/* --------------- input email and password --------------- */}
           <Grid
@@ -299,12 +371,12 @@ function OwnerLogin() {
             </Typography>
             <TextField
               fullWidth
-              label="อีเมล์"
-              placeholder="กรอกอีเมล์"
-              name="email"
-              size="small"
+              label='อีเมล์'
+              placeholder='กรอกอีเมล์'
+              name='email'
+              size='small'
               value={values.email}
-              onChange={(e) => handleChange("email", e)}
+              onChange={e => handleChange("email", e)}
               helperText={errors.email ? errors.email : ""}
               error={errors.email}
               sx={{
@@ -327,28 +399,28 @@ function OwnerLogin() {
 
             <TextField
               fullWidth
-              id="outlined-adornment-password"
-              label="รหัสผ่าน"
-              placeholder="กรอกรหัสผ่าน"
-              name="password"
+              id='outlined-adornment-password'
+              label='รหัสผ่าน'
+              placeholder='กรอกรหัสผ่าน'
+              name='password'
               value={values.password}
               type={values.showPassword ? "text" : "password"}
-              onChange={(e) => handleChange("password", e)}
+              onChange={e => handleChange("password", e)}
               helperText={errors.password ? errors.password : ""}
               error={errors.password}
-              size="small"
+              size='small'
               sx={{
                 padding: 0,
                 marginBottom: "3px",
               }}
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position="end">
+                  <InputAdornment position='end'>
                     <IconButton
-                      aria-label="toggle password visibility"
+                      aria-label='toggle password visibility'
                       onClick={handleClickShowPassword}
                       onMouseDown={handleMouseDownPassword}
-                      edge="end"
+                      edge='end'
                     >
                       {values.showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
@@ -361,7 +433,7 @@ function OwnerLogin() {
           {/* --------------- button submit login--------------- */}
           <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
             <CustomButton
-              type="submit"
+              type='submit'
               sx={{
                 background: "#c62828",
                 color: "#fff",
@@ -400,7 +472,7 @@ function OwnerLogin() {
             </Typography>
           </Grid>
           <Grid mr={1}>
-            <Link to="/ownerregister" style={{ textDecoration: "none" }}>
+            <Link to='/ownerregister' style={{ textDecoration: "none" }}>
               <Typography
                 style={{ color: "#16264D", fontWeight: 700, margin: 0 }}
               >

@@ -12,6 +12,7 @@ import { styled } from "@mui/system";
 import BtnGuestnRoom from "./BtnGuestnRoom";
 import { useState } from "react";
 // import axios from "axios";
+
 const CustomButtonRoot = styled("span")(`
     background-color: none;
     padding: 12px 35px;
@@ -52,10 +53,8 @@ function SearhchingBar() {
   const history = useHistory();
   function HandleSumbit() {
     // const history = useHistory();
-   
-       history.push(
-      `/mainmenu/${resident}/${checkIn}/${room}`
-    );
+
+    history.push(`/mainmenu/${resident}/${checkIn}/${room}`);
   }
 
   return (
@@ -66,7 +65,7 @@ function SearhchingBar() {
       }}
     >
       <AppBar
-        position="static"
+        position='static'
         sx={{
           backgroundColor: "#ffffff60",
           borderRadius: 2,

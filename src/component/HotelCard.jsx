@@ -25,13 +25,16 @@ function HotelCard({ data }) {
 
   return (
     <Grid container>
-      <Grid item>
-        <Typography sx={{ mb: 4 }}>
+      <Grid item xs={12}>
+        <Typography sx={{ mb: 2 }}>
           ที่พักทั้งหมด ：พบที่พัก {residents.length} แห่ง
         </Typography>
       </Grid>
-      {residents.map((item) => (
-        <HotelCardList resident={item} />
+
+      {residents.map(item => (
+        <Grid item xs={12}>
+          <HotelCardList resident={item} />
+        </Grid>
       ))}
     </Grid>
   );

@@ -57,10 +57,6 @@ const route = {
       path: "/ownerregister",
       component: OwnerRegisterPage,
     },
-    // {
-    //   path: "/ownerhistory",
-    //   component: OwnerHistoryPage,
-    // },
     {
       path: "/ownerdetail",
       component: OwnerDetailPage,
@@ -104,6 +100,10 @@ const route = {
       component: ShowResultPage,
     },
     {
+      path: `/bottommenu/:province`,
+      component: ShowResultPage,
+    },
+    {
       path: "/addcom",
       component: AddCom,
     },
@@ -120,18 +120,10 @@ const route = {
       component: ResetPasswordPage,
     },
     {
-      redirect: "/",
+      redirect: "/login",
     },
   ],
   OWNER: [
-    {
-      path: "/",
-      component: Homepage,
-    },
-    // {
-    //   path: "/ownerlogin",
-    //   component: OwnerLoginPage,
-    // },
     {
       path: "/ownerregister",
       component: OwnerRegisterPage,
@@ -146,16 +138,15 @@ const route = {
     },
     {
       path: "/ownerdetail/:residentId",
-      component: OwnerDetailPage
+      component: OwnerDetailPage,
     },
     {
       path: "/owner_edit_resident/:residentId",
-      component: EditResident
-    }
-    // {
-    //   redirect: "/ownerhistory",
-    // },
-
+      component: EditResident,
+    },
+    {
+      redirect: "/ownerhistory",
+    },
     // {
     //   redirect: "/ownerhistory",
     //   component: OwnerHistoryPage,

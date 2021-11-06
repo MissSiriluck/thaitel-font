@@ -1,10 +1,12 @@
-import React from 'react';
-import { Container, Grid, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import React from "react";
+import { Container, Grid, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
-import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
+import ButtonUnstyled, {
+  buttonUnstyledClasses,
+} from "@mui/core/ButtonUnstyled";
 
-const CustomButtonRoot = styled('button')(`
+const CustomButtonRoot = styled("button")(`
       background-color: none;
       padding: 10px 20px;
       border-radius: 30px;
@@ -36,39 +38,38 @@ function CustomButton(props) {
 }
 
 function SubmitButton({ handleSubmit }) {
-
   return (
     <Container maxWidth='md'>
-      <Grid item sx={{ display: 'flex', justifyContent: 'end' }}>
+      <Grid item sx={{ display: "flex", justifyContent: "end" }}>
         <Grid container xs={12} justifyContent='end'>
           <Grid
             item
             xs={3}
             md={3}
             sx={{
-              display: 'flex',
-              justifyContent: 'end',
-              marginBottom: '25px',
+              display: "flex",
+              justifyContent: "end",
+              marginBottom: "25px",
             }}
           >
             <CustomButton
               sx={{
-                background: '#c62828',
-                color: '#fff',
-                display: 'flex',
-                justifyContent: 'center',
-                width: '90%',
-                marginBottom: '50px',
-                marginTop: '20px',
+                background: "#c62828",
+                color: "#fff",
+                display: "flex",
+                justifyContent: "center",
+                // width: '90%',
+                marginBottom: "50px",
+                marginTop: "20px",
 
-                height: '40px',
+                height: "40px",
               }}
               onClick={handleSubmit}
             >
               <Typography
                 style={{
                   fontSize: 16,
-                  justifyContent: 'start',
+                  justifyContent: "start",
                 }}
               >
                 บันทึกข้อมูลที่พักของคุณ

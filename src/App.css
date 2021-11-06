@@ -4,6 +4,11 @@
   margin: 0;
 }
 
+/* div {
+  outline: 1px dashed lime;
+  font-family: "Prompt", sans-serif;
+} */
+
 .container_head_search {
   background-image: url(../src/assets/images/bg_main.jpg);
   background-repeat: no-repeat;
