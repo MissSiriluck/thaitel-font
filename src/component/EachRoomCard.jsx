@@ -8,15 +8,22 @@ import {
   Select,
   Typography,
 } from "@mui/material";
+import { CustomButton } from "./BookingCfmDetail";
 
 function EachRoomCard({ room, updateRoomAmount }) {
   console.log("room..................................", room);
+
   const [roomBookingAmount, setRoomBookingAmount] = useState(0);
 
   const handleClickIncrease = (e) => {
     e.preventDefault();
-    updateRoomAmount(room.roomId, roomBookingAmount + 1);
-    setRoomBookingAmount(roomBookingAmount + 1);
+    // updateRoomAmount(room.roomId, roomBookingAmount + 1);
+    // setRoomBookingAmount(roomBookingAmount + 1);
+    if (roomBookingAmount < room.roomRemaining) {
+      updateRoomAmount(room.roomId, roomBookingAmount + 1);
+      setRoomBookingAmount(roomBookingAmount + 1);
+    } else {
+    }
   };
 
   const handleClickDecrease = (e) => {
@@ -55,25 +62,48 @@ function EachRoomCard({ room, updateRoomAmount }) {
               <Typography>{`${room.roomDetail}`}</Typography>
             </Grid>
             <Grid item xs={5}>
-              <Grid item xs={4} sx={{ mb: 2 }}>
-                <FormControl fullWidth>
-                  {/* <InputLabel id="demo-simple-select-label">
-                    จำนวนห้อง
-                  </InputLabel> */}
-                  {/* <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    label="จำนวนห้อง"
-                  >
-                    <MenuItem value={1}>1</MenuItem>
-                    <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem>
-                  </Select> */}
-                  <button onClick={handleClickDecrease}>-</button>
+              <Box item xs={4} sx={{ mb: 2, display: "flex" }}>
+                <CustomButton
+                  sx={{
+                    background: "#c62828",
+                    color: "#fff",
+                    fontFamily: "'Noto Sans Thai', sans-serif",
+                    fontSize: "20px",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                  onClick={handleClickDecrease}
+                >
+                  -
+                </CustomButton>
+                <Box
+                  sx={{
+                    display: "inline-flex",
+                    // display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                    mx: 2,
+                    px: 1,
+                    fontSize: "20px",
+                  }}
+                >
                   {roomBookingAmount}
-                  <button onClick={handleClickIncrease}>+</button>
-                </FormControl>
-              </Grid>
+                </Box>
+
+                <CustomButton
+                  sx={{
+                    background: "#c62828",
+                    color: "#fff",
+                    fontFamily: "'Noto Sans Thai', sans-serif",
+                    fontSize: "20px",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                  onClick={handleClickIncrease}
+                >
+                  +
+                </CustomButton>
+              </Box>
               <Typography sx={{ mb: 1 }}>
                 Room size : {room.size} ตารางเมตร
               </Typography>

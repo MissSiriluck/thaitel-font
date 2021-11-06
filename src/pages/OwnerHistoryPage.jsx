@@ -61,29 +61,21 @@ function OwnerHistoryPage() {
     };
     fetchResident();
   }, []);
+  // console.log("residents................", residents);
 
-  const deleteResident = id => {
+  const deleteResident = (id) => {
     const newResidents = [...residents];
-    const idx = residents.findIndex(item => item.id === id);
+    const idx = residents.findIndex((item) => item.id === id);
     if (idx !== -1) {
       newResidents.splice(idx, 1);
       setResidents(newResidents);
     }
   };
 
-  // console.log("residents.....................", residents);
-
-  // let countBookedRoom = residents?.Rooms?.BookingItems?.reduce(
-  //   (a, c) => a + c.roomBookingAmount,
-  //   0
-  // );
-
-  // console.log("countBookedRoom..............", countBookedRoom);
-
   const history = useHistory();
-  const location = useLocation();
+  // const location = useLocation();
 
-  const handleClickRoomSumary = e => {
+  const handleClickRoomSumary = (e) => {
     console.log(residents);
     e.preventDefault();
     history.push({
@@ -102,7 +94,7 @@ function OwnerHistoryPage() {
       <SpaceforHead />
       <Header />
 
-      <Container maxWidth='xl' sx={{ mt: 18, mb: 18 }}>
+      <Container maxWidth="xl" sx={{ mt: 18, mb: 18 }}>
         <Grid container>
           <Grid item xs={12} sx={{ display: "flex", flexDirection: "row" }}>
             <Grid item xs={12}>
@@ -146,14 +138,41 @@ function OwnerHistoryPage() {
               </CustomButton>
             </Grid>
           </Grid>
-          <Grid>
-            {residents?.map(item => (
-              <CardOwnerHistoryList
-                resident={item}
-                deleteResident={deleteResident}
-              />
-            ))}
-          </Grid>
+          {residents.length > 0 ? (
+            <>
+              <Grid>
+                {residents?.map((item) => (
+                  <CardOwnerHistoryList
+                    resident={item}
+                    deleteResident={deleteResident}
+                  />
+                ))}
+              </Grid>
+            </>
+          ) : (
+            <Grid
+              container
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Box>
+                <Box>
+                  <img src="ownerHistory.jpg" width="600" height="400" />
+                </Box>
+                <Typography
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    fontSize: "25px",
+                  }}
+                >
+                  คุณยังไม่ได้ลงที่พัก ....
+                </Typography>
+              </Box>
+            </Grid>
+          )}
           {/* {} */}
           {/* <CardOwnerHistoryList /> */}
         </Grid>
