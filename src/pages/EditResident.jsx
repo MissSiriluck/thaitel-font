@@ -10,9 +10,37 @@ import TransactionDetail from "../component/CreateResident/TransactionDetail";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
 import { CreateResidentContext2 } from "../context/CreateResidentContext2";
+// MuI
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function EditResident() {
   const [resident, setResident] = useState({});
+
+  const [openSnackEditResident, setOpenSnackEditResident] = React.useState(false);
+
+  const [snackEditResident, setSnackEditResident] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+
+  const { vertical, horizontal, open } = snackEditResident;
+
+  
+  const handleClose = () => {
+    setSnackEditResident({ ...snackEditResident, open: false });
+  };
+  
+  const handleOpenSnackBar = (newState) => () => {
+    setSnackEditResident({ open: true, ...newState });
+  };
 
   const {
     createResident,
@@ -169,14 +197,20 @@ function EditResident() {
         allPase = false;
         setCreateResidentError(curr => ({
           ...curr,
-          postalCode: "กรุณากรอกไปรษณีย์ของที่พักของท่าน",
+          postalCode: "กรุณากรอกรหัสไปรษณีย์ของที่พักของท่าน",
+        }));
+      } else if (isNaN(createResident.postalCode)) {
+        allPase = false;
+        setCreateResidentError(curr => ({
+          ...curr,
+          postalCode: "กรุณากรอกรหัสไปรษณีย์ของที่พักของท่านเป็นข้อมูลประเภทตัวเลข",
         }));
       }
       if (createResident.postalCode.length !== 5) {
         allPase = false;
         setCreateResidentError(curr => ({
           ...curr,
-          postalCode: "กรุณากรอกไปรษณีย์ของที่พักของท่านให้ถูกต้อง",
+          postalCode: 'กรุณากรอกไปรษณีย์ของที่พักของท่านให้ครบ 5 หลัก',
         }));
       }
       if (!createResident.residentImageUrl) {
@@ -193,12 +227,20 @@ function EditResident() {
           timeCheckInToStart: "กรุณากรอกเวลาเช็คอินเริ่มต้นของที่พักของท่าน",
         }));
       }
+      else if (isNaN(createResident.timeCheckInToStart)) {
+        allPase= false;
+        setCreateResidentError((curr) => ({ ...curr, timeCheckInToStart: 'กรุณากรอกเวลาเช็คอินเริ่มต้นของที่พักของท่านเป็นข้อมูลประเภทตัวเลข' }))
+      }
       if (!createResident.timeCheckInToEnd) {
         allPase = false;
         setCreateResidentError(curr => ({
           ...curr,
           timeCheckInToEnd: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
         }));
+      }
+      else if (isNaN(createResident.timeCheckInToEnd)) {
+        allPase= false;
+        setCreateResidentError((curr) => ({ ...curr, timeCheckInToEnd: 'กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่านเป็นข้อมูลประเภทตัวเลข' }))
       }
       if (!createResident.timeCheckOutToStart) {
         allPase = false;
@@ -207,6 +249,10 @@ function EditResident() {
           timeCheckOutToStart: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
         }));
       }
+      else if (isNaN(createResident.timeCheckOutToStart)) {
+        allPase= false;
+        setCreateResidentError((curr) => ({ ...curr, timeCheckOutToStart: 'กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่านเป็นข้อมูลประเภทตัวเลข' }))
+      }
       if (!createResident.timeCheckOutToEnd) {
         allPase = false;
         setCreateResidentError(curr => ({
@@ -214,12 +260,20 @@ function EditResident() {
           timeCheckOutToEnd: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
         }));
       }
+      else if (isNaN(createResident.timeCheckOutToEnd)) {
+        allPase= false;
+        setCreateResidentError((curr) => ({ ...curr, timeCheckOutToEnd: 'กรุณากรอกจำนวนวันที่สามารถยกเลิกการจองก่อนหน้าการยกเลิกที่ไม่มีเสียค่าธรรมเนียมของที่พักของท่านเป็นข้อมูลประเภทตัวเลข' }))
+      }
       if (!createResident.cancelDate) {
         allPase = false;
         setCreateResidentError(curr => ({
           ...curr,
-          cancelDate: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
+          cancelDate: "กรุณากรอกจำนวนวันที่สามารถยกเลิกการจองก่อนหน้าการยกเลิกที่ไม่มีเสียค่าธรรมเนียมของที่พักของท่าน",
         }));
+      }
+      else if (isNaN(createResident.cancelDate)) {
+        allPase= false;
+        setCreateResidentError((curr) => ({ ...curr, cancelDate: 'กรุณากรอกจำนวนวันที่สามารถยกเลิกการจองก่อนหน้าการยกเลิกที่ไม่มีเสียค่าธรรมเนียมของที่พักของท่านเป็นข้อมูลประเภทตัวเลข' }))
       }
       if (createResident.bankAccept === false) {
         allPase = false;
@@ -242,6 +296,10 @@ function EditResident() {
           accNumber: "กรุณากรอกเลขบัญชีธนาคารของท่าน",
         }));
       }
+      else if (isNaN(createResident.accNumber)) {
+        allPase= false;
+        setCreateResidentError((curr) => ({ ...curr, accNumber: 'กรุณากรอกเลขบัญชีธนาคารของท่านเป็นข้อมูลประเภทตัวเลข' }))
+      }
       if (createResident.accNumber.length !== 10) {
         allPase = false;
         setCreateResidentError(curr => ({
@@ -253,7 +311,7 @@ function EditResident() {
         allPase = false;
         setCreateResidentError(curr => ({
           ...curr,
-          bankName: "กรุณากรอกธนาคารของบัญชีของท่าน",
+          bankName: "กรุณากรอกชื่อธนาคารของบัญชีของท่าน",
         }));
       }
       if (!createResident.bankImgUrl) {
@@ -365,7 +423,14 @@ function EditResident() {
       // history.push("/ownerhistory");
       const resBank = await axios.put(`/backAccounts/${location.state.resident.BankAccount.id}`, formBank)
 
-    history.push({pathname:"/ownerhistory"});
+      handleOpenSnackBar({
+        vertical: 'top',
+        horizontal: 'center',
+      })
+      setOpenSnackEditResident(true)
+  
+      history.push({pathname:"/ownerhistory"});
+      
   }
 
     } catch (err) {
@@ -376,7 +441,13 @@ function EditResident() {
   return (
     <>
       <Header />
-      {/* ยังขาดการเลือก Type ของ Resident */}
+      
+      <Snackbar 
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message="I love snacks"
+        key={vertical + horizontal} />
 
       <CreateResidentHeader />
       <ResidentDetailForm />

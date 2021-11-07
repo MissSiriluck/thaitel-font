@@ -71,6 +71,7 @@ function AddRoomsForm({ addRoomCollection }) {
 
   const handleChange = (type, e) => {
     setRoomForm((cur) => ({ ...cur, [type]: e.target.value }));
+    setRoomFormError((curr) => ({ ...curr, [type]: ''}));
   };
 
   const handleChangeCheckBox = (type) => {
@@ -84,6 +85,8 @@ function AddRoomsForm({ addRoomCollection }) {
       setRoomForm((cur) => ({ ...cur, roomShowImg: reader.result }));
     };
     reader.readAsDataURL(e.target.files[0]);
+
+    setRoomFormError({ ...setRoomFormError, roomShowImg: '' })
   };
 
   const handleClickAddRoom = () => {

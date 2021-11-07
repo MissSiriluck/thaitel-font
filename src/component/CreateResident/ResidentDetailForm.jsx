@@ -18,7 +18,11 @@ function ResidentDetailForm() {
       setCreateResident((cur) => ({ ...cur, residentImageUrl: reader.result }));
     };
     reader.readAsDataURL(e.target.files[0]);
+
+    setCreateResidentError({ ...createResidentError, residentImageUrl: '' })
   };
+
+  console.log(`createResidentError.residentImageUrl`, createResidentError.residentImageUrl)
 
   const handleChange = (props, event) => {
     setCreateResident({ ...createResident, [props]: event.target.value });
@@ -309,10 +313,12 @@ function ResidentDetailForm() {
                 >
                   <Grid xs={12} sx={{ display: 'flex', height: '240px' }}>
                     <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Grid item xs={12} sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                       <Box
                         item
                         xs={5.9}
                         sx={{
+
                           width: '100%',
                           margin: '5px',
                           alignItems: 'center',
@@ -338,8 +344,9 @@ function ResidentDetailForm() {
                             อัพโหลดรูปภาพที่พักของคุณ
                           </Typography>
                         )}
-                        {createResidentError.residentImageUrl ? <Typography style={{ color: '#d32f2f', fontSize: '0.75rem', marginTop: '3px' }}> {createResidentError.residentImageUrl} </Typography> : ""}
                       </Box>
+                        {createResidentError.residentImageUrl ? <Typography style={{ color: '#d32f2f', fontSize: '0.75rem', marginTop: '3px' }}> {createResidentError.residentImageUrl} </Typography> : ""}
+                      </Grid>
                       <Grid
                         item
                         xs={12}
@@ -638,8 +645,8 @@ function ResidentDetailForm() {
                   <Grid item xs={10}>
                     <Typography>สามารถยกเลิกการจองได้โดยมีเสียค่าธรรมเนียมก่อน :</Typography>
                   </Grid>
-                  <Grid xs={12}>
-                    <Grid item xs={12}>
+                  <Grid xs={12} >
+                    <Grid item xs={12} >
                       <TextField
                         id='outlined-password-input'
                         label='สามารถยกเลิกการจองได้โดยมีเสียค่าธรรมเนียมก่อน (วัน)'
@@ -647,7 +654,7 @@ function ResidentDetailForm() {
                         sx={{
                           width: '100%',
                           alignItems: 'stretch',
-                          marginBottom: '12px',
+                          marginBottom: '2px',
                         }}
                         value={createResident.cancelDate}
                         onChange={(e) => handleChange('cancelDate', e)}
@@ -655,6 +662,14 @@ function ResidentDetailForm() {
                         error={createResidentError.cancelDate}
                       />
                     </Grid>
+                    <Typography
+                          style={{
+                            fontSize: 14,
+                            color: '#c4c4c4',
+                          }}
+                        >
+                          ตัวอย่างการกรอกรายละเอียด เช่น 3
+                        </Typography>
                   </Grid>
                 </Grid>
               </Grid>

@@ -172,13 +172,13 @@ function ResidentDetail() {
                   ) : service?.serviceName === "wifi" ? (
                     <WifiIcon />
                   ) : service?.serviceName === "swimingPool" ? (
-                    <FastfoodIcon />
+                    <PoolIcon />
                   ) : service?.serviceName === "bar" ? (
                     <LocalBarIcon />
                   ) : service?.serviceName === "sauna" ? (
                     <SpaIcon />
                   ) : service?.serviceName === "reception" ? (
-                    <RoomServiceIcon />
+                    <AlarmOnIcon />
                   ) : service?.serviceName === "roomService" ? (
                     <RoomServiceIcon />
                   ) : service?.serviceName === "fitnessRoom" ? (
