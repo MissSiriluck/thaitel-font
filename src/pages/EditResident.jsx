@@ -52,7 +52,7 @@ function EditResident() {
         timeCheckOutToStart: res.data.resident.timeCheckOutStart,
         timeCheckOutToEnd: res.data.resident.timeCheckOutEnd,
         cancelDate: res.data.resident.canCancle,
-        roomCollection: res.data.rooms.map(item => ({
+        roomCollection: res.data.rooms.map((item) => ({
           ...item,
           roomTypeOf: item.typeOf,
           optionRoomDetail: item.optionalRoomDetail,
@@ -105,160 +105,160 @@ function EditResident() {
   //   }
   // }, [])
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     try {
       let allPase = true;
 
       if (!createResident.residentTypeOf) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           residentTypeOf: "กรุณาเลือกประเภทที่พักของท่าน",
         }));
       }
       if (!createResident.residentName) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           residentName: "กรุณากรอกชื่อที่พักของท่าน",
         }));
       }
       if (!createResident.rateStar) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           rateStar: "กรุณากรอกจำนวนดาวของท่าน",
         }));
       }
       if (isNaN(createResident.rateStar)) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           rateStar: "กรุณากรอกจำนวนดาวของท่านเป็นข้อมูลประเภทตัวเลข",
         }));
       }
       if (!createResident.address) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           address: "กรุณากรอกที่อยู่ของที่พักของท่าน",
         }));
       }
       if (!createResident.subDistrict) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           subDistrict: "กรุณากรอกตำบล/แขวงของที่พักของท่าน",
         }));
       }
       if (!createResident.district) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           district: "กรุณากรอกอำเภอ/เขตของที่พักของท่าน",
         }));
       }
       if (!createResident.province) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           province: "กรุณากรอกจังหวัดของที่พักของท่าน",
         }));
       }
       if (!createResident.postalCode) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           postalCode: "กรุณากรอกไปรษณีย์ของที่พักของท่าน",
         }));
       }
       if (createResident.postalCode.length !== 5) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           postalCode: "กรุณากรอกไปรษณีย์ของที่พักของท่านให้ถูกต้อง",
         }));
       }
       if (!createResident.residentImageUrl) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           residentImageUrl: "กรุณาเลือกรูปภาพของที่พักของท่าน",
         }));
       }
       if (!createResident.timeCheckInToStart) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           timeCheckInToStart: "กรุณากรอกเวลาเช็คอินเริ่มต้นของที่พักของท่าน",
         }));
       }
       if (!createResident.timeCheckInToEnd) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           timeCheckInToEnd: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
         }));
       }
       if (!createResident.timeCheckOutToStart) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           timeCheckOutToStart: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
         }));
       }
       if (!createResident.timeCheckOutToEnd) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           timeCheckOutToEnd: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
         }));
       }
       if (!createResident.cancelDate) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           cancelDate: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
         }));
       }
       if (createResident.bankAccept === false) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           bankAccept: "กรุณากดยินยอมข้อตกลง",
         }));
       }
       if (!createResident.accName) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           accName: "กรุณากรอกชื่อธนาคารของบัญชีของท่าน",
         }));
       }
       if (!createResident.accNumber) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           accNumber: "กรุณากรอกเลขบัญชีธนาคารของท่าน",
         }));
       }
       if (createResident.accNumber.length !== 10) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           accNumber: "กรุณากรอกเลขบัญชีธนาคารของท่านให้ถูกต้อง",
         }));
       }
       if (!createResident.bankName) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           bankName: "กรุณากรอกธนาคารของบัญชีของท่าน",
         }));
       }
       if (!createResident.bankImgUrl) {
         allPase = false;
-        setCreateResidentError(curr => ({
+        setCreateResidentError((curr) => ({
           ...curr,
           bankImgUrl: "กรุณาเพิ่มรูปภาพหน้าบัญชีของท่าน",
         }));
@@ -317,37 +317,37 @@ function EditResident() {
         // });
 
         // conflict2
-      createResident.roomCollection.forEach(async(item)=>{
-        if('id' in item){
-          const formRoom = new FormData()
-          formRoom.append('cloudInput',item.roomImageFile)
-          formRoom.append('typeOf',item.roomTypeOf)
-          formRoom.append('roomAmount',item.roomAmount)
-          formRoom.append('size',item.roomSize)
-          formRoom.append('optionalRoomDetail', item.optionRoomDetail)
-          formRoom.append('noSmoking', item.noSmoking)
-          formRoom.append('petAllowed', item.petAllowed)
-          formRoom.append('pricePerNight', item.pricePerNigth)
-          formRoom.append('maxGuest', item.maxGuest)
-          formRoom.append('imgURL', item.imgURL)
-          formRoom.append('residentId', resident.id)
-          const resRoom = await axios.put(`/rooms/${item.id}`, formRoom)
-        }else {
-          const formRoom = new FormData()
-        formRoom.append('cloudInput',item.roomImageFile)
-        formRoom.append('typeOf',item.roomTypeOf)
-        formRoom.append('roomAmount',item.roomAmount)
-        formRoom.append('size',item.roomSize)
-        formRoom.append('optionalRoomDetail', item.optionRoomDetail)
-        formRoom.append('noSmoking', item.noSmoking)
-        formRoom.append('petAllowed', item.petAllow)
-        formRoom.append('pricePerNight', item.pricePerNigth)
-        formRoom.append('maxGuest', item.maxGuest)
-        formRoom.append('residentId', location.state.resident.id)
-      
-        const resRoom = await axios.post('/rooms/createRoom', formRoom)
-        }
-      })
+        createResident.roomCollection.forEach(async (item) => {
+          if ("id" in item) {
+            const formRoom = new FormData();
+            formRoom.append("cloudInput", item.roomImageFile);
+            formRoom.append("typeOf", item.roomTypeOf);
+            formRoom.append("roomAmount", item.roomAmount);
+            formRoom.append("size", item.roomSize);
+            formRoom.append("optionalRoomDetail", item.optionRoomDetail);
+            formRoom.append("noSmoking", item.noSmoking);
+            formRoom.append("petAllowed", item.petAllowed);
+            formRoom.append("pricePerNight", item.pricePerNigth);
+            formRoom.append("maxGuest", item.maxGuest);
+            formRoom.append("imgURL", item.imgURL);
+            formRoom.append("residentId", resident.id);
+            const resRoom = await axios.put(`/rooms/${item.id}`, formRoom);
+          } else {
+            const formRoom = new FormData();
+            formRoom.append("cloudInput", item.roomImageFile);
+            formRoom.append("typeOf", item.roomTypeOf);
+            formRoom.append("roomAmount", item.roomAmount);
+            formRoom.append("size", item.roomSize);
+            formRoom.append("optionalRoomDetail", item.optionRoomDetail);
+            formRoom.append("noSmoking", item.noSmoking);
+            formRoom.append("petAllowed", item.petAllow);
+            formRoom.append("pricePerNight", item.pricePerNigth);
+            formRoom.append("maxGuest", item.maxGuest);
+            formRoom.append("residentId", location.state.resident.id);
+
+            const resRoom = await axios.post("/rooms/createRoom", formRoom);
+          }
+        });
 
         const formBank = new FormData();
         formBank.append("bankName", createResident.bankName);
@@ -356,18 +356,20 @@ function EditResident() {
         formBank.append("cloudInput", createResident.bankImageFile);
         formBank.append("residentId", resident.id);
 
-      //   const resBank = await axios.put(
-      //     `/backAccounts/${location.state.resident.BankAccount.id}`,
-      //     formBank
-      //   );
-      // }
+        //   const resBank = await axios.put(
+        //     `/backAccounts/${location.state.resident.BankAccount.id}`,
+        //     formBank
+        //   );
+        // }
 
-      // history.push("/ownerhistory");
-      const resBank = await axios.put(`/backAccounts/${location.state.resident.BankAccount.id}`, formBank)
+        // history.push("/ownerhistory");
+        const resBank = await axios.put(
+          `/backAccounts/${location.state.resident.BankAccount.id}`,
+          formBank
+        );
 
-    history.push({pathname:"/ownerhistory"});
-  }
-
+        history.push({ pathname: "/ownerhistory" });
+      }
     } catch (err) {
       console.dir(err);
     }
@@ -382,7 +384,7 @@ function EditResident() {
       <ResidentDetailForm />
       <ServicesInresident />
       <TransactionDetail />
-      <RoomsInResident status='EDIT' />
+      <RoomsInResident status="EDIT" />
       <SubmitButton handleSubmit={handleSubmit} />
 
       <Footer />

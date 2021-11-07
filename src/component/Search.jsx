@@ -83,7 +83,7 @@ const DateRangePickerDay = styled(MuiDateRangePickerDay)(
   })
 );
 
-function Search() {
+function Search({ residentSearch }) {
   const history = useHistory();
   const [value, setValue] = useState([null, null]);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -91,10 +91,10 @@ function Search() {
   const [checkIn, setCheckIn] = useState([null, null]);
   // const [guest, setGuest] = useState(1);
   const [room, setRoom] = useState(1);
-  console.log(checkIn)
+  console.log(checkIn);
   function HandleSumbit() {
     // const history = useHistory();
-  console.log('testt')
+    console.log("testt");
     history.push(`/mainmenu/${resident}/${checkIn}/${room}`);
   }
 
@@ -108,9 +108,10 @@ function Search() {
   return (
     <Grid container xs={2.3} sx={{ position: "fixed" }}>
       <Grid item xs={11}>
-        <Typography
-          sx={{ mb: 2 }}
-        >{`หน้าหลัก > ผลการค้นหา > ที่พักทั้งหมด`}</Typography>
+        <Typography sx={{ mb: 2 }}>
+          หน้าหลัก &gt; ผลการค้นหา &gt;
+          <span style={{ color: "#c62828" }}> {residentSearch}</span>
+        </Typography>
         <Box sx={{ background: "#07133C", flexGlow: 1, borderRadius: 2 }}>
           <Grid item sx={{ p: 4 }}>
             <Typography sx={{ color: "#fff", fontSize: "20px", pb: 2 }}>
@@ -131,7 +132,7 @@ function Search() {
                 borderRadius: "4px",
                 mb: 2,
               }}
-              onChange={(e)=>setResident(e.target.value)}
+              onChange={(e) => setResident(e.target.value)}
             />
 
             <Typography sx={{ color: "#fff", pb: 1 }}>
@@ -202,7 +203,7 @@ function Search() {
             </LocalizationProvider>
 
             <Typography sx={{ color: "#fff", pb: 1 }}>ผู้เข้าพัก</Typography>
-            <BtnGuestnRoomForSearch room={room} setRoom={setRoom}/>
+            <BtnGuestnRoomForSearch room={room} setRoom={setRoom} />
 
             <Container sx={{ textAlign: "center", mb: 3 }}>
               <CustomButton

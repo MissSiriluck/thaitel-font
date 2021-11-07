@@ -8,10 +8,45 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import { CustomButton } from "./BookingCfmDetail";
+import ButtonUnstyled, {
+  buttonUnstyledClasses,
+} from "@mui/core/ButtonUnstyled";
+// import { CustomButton } from "./BookingCfmDetail";
 
-function EachRoomCard({ room, updateRoomAmount }) {
-  console.log("room..................................", room);
+const CustomButtonRoot = styled("span")(`
+    background-color: none;
+    padding: 12px 35px;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    font-family: 'Noto Sans Thai', sans-serif;
+    font-size: 14px;
+    transition: all 200ms ease;
+    cursor: pointer;
+    box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 0 rgba(0, 127, 255, 0);
+    border: none;
+
+    &:hover {
+        background-color: #64CEEF;
+    }
+
+    &.${buttonUnstyledClasses.active} {
+        background-color: #0276aa;
+    }
+
+    &.${buttonUnstyledClasses.focusVisible} {
+        box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 5px rgba(0, 127, 255, 0.5);
+        outline: none;
+    }
+`);
+
+function CustomButton(props) {
+  return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
+}
+
+function EachRoomCard({ room, updateRoomAmount, resident }) {
+  // console.log("room..................................", room);
+  // console.log("resident..................................", resident);
 
   const [roomBookingAmount, setRoomBookingAmount] = useState(0);
 
@@ -59,7 +94,7 @@ function EachRoomCard({ room, updateRoomAmount }) {
                 {room.typeOf}
                 {/* {`ห้องมาตราฐานเตียงเดี่ยว`} */}
               </Typography>
-              <Typography>{`${room.roomDetail}`}</Typography>
+              <Typography>{`${room.optionalRoomDetail}`}</Typography>
             </Grid>
             <Grid item xs={5}>
               <Box item xs={4} sx={{ mb: 2, display: "flex" }}>
@@ -69,6 +104,7 @@ function EachRoomCard({ room, updateRoomAmount }) {
                     color: "#fff",
                     fontFamily: "'Noto Sans Thai', sans-serif",
                     fontSize: "20px",
+                    width: "2px",
                     display: "flex",
                     justifyContent: "center",
                   }}
@@ -96,6 +132,7 @@ function EachRoomCard({ room, updateRoomAmount }) {
                     color: "#fff",
                     fontFamily: "'Noto Sans Thai', sans-serif",
                     fontSize: "20px",
+                    width: "2px",
                     display: "flex",
                     justifyContent: "center",
                   }}
@@ -108,7 +145,7 @@ function EachRoomCard({ room, updateRoomAmount }) {
                 Room size : {room.size} ตารางเมตร
               </Typography>
               <Typography sx={{ mb: 1 }}>
-                Price : {room.pricePerNight} BATH
+                Price : {room.pricePerNight} BAHT
               </Typography>
             </Grid>
           </Grid>

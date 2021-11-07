@@ -36,7 +36,7 @@ function TransactionDetail() {
 
   const handleChange = (type, event) => {
     setCreateResident((cur) => ({ ...cur, [type]: event.target.value }));
-    setCreateResidentError({ ...createResidentError, [type]: '' })
+    setCreateResidentError({ ...createResidentError, [type]: '' });
   };
 
   const handleChangeBankAccept = () => {
