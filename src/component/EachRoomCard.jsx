@@ -69,6 +69,7 @@ function EachRoomCard({ room, updateRoomAmount }) {
                     color: "#fff",
                     fontFamily: "'Noto Sans Thai', sans-serif",
                     fontSize: "20px",
+                    width: "2px",
                     display: "flex",
                     justifyContent: "center",
                   }}
@@ -96,6 +97,7 @@ function EachRoomCard({ room, updateRoomAmount }) {
                     color: "#fff",
                     fontFamily: "'Noto Sans Thai', sans-serif",
                     fontSize: "20px",
+                    width: "2px",
                     display: "flex",
                     justifyContent: "center",
                   }}
