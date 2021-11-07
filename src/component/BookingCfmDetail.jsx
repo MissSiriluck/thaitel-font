@@ -92,6 +92,7 @@ function BookingCfmDetail() {
     day: "numeric",
   });
   // console.log("fullDateCheckIn...", fullDateCheckIn);
+  console.log("getCheckInDate...", getCheckInDate);
 
   const getCheckOut = new Date(location.state.checkOutDate);
   const fullDateCheckOut = getCheckOut.toLocaleString("en-US", {
@@ -102,6 +103,8 @@ function BookingCfmDetail() {
   });
   // console.log("fullDateCheckOut...", fullDateCheckOut);
   const getCheckOutDate = getCheckOut.getDate();
+  console.log("getCheckOutDate...", getCheckOutDate);
+
   const totalNight = getCheckOutDate - getCheckInDate;
   const allTotalPrice = total * totalNight + totalService;
 

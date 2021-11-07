@@ -77,9 +77,31 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function AddcomDetail() {
+function AddcomDetail({ checkIn }) {
   const location = useLocation();
   // console.log("location...................................", location);
+  // console.log("checkIn...................................", checkIn);
+
+  // console.log(`object`, checkIn.split(",")[0]);
+  const getCheckIn = new Date(checkIn.split(",")[0]);
+  const fullDateCheckIn = getCheckIn.toLocaleString("en-US", {
+    weekday: "short",
+    // year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  // console.log(`fullDateCheckIn`, fullDateCheckIn);
+
+  console.log(`object`, checkIn.split(",")[1]);
+  const getCheckOut = new Date(checkIn.split(",")[1]);
+  const fullDateCheckOut = getCheckOut.toLocaleString("en-US", {
+    weekday: "short",
+    // year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  // console.log(`fullDateCheckOut`, fullDateCheckOut);
+
   // const { user } = useContext(AuthContext);
 
   // const [room, setRoom] = useState("");
@@ -124,29 +146,33 @@ function AddcomDetail() {
 
   const handleClickRoomSumary = (e) => {
     e.preventDefault();
-    history.push({
-      pathname: "/BookingConfirmation",
-      state: {
-        resident: resident,
-        checkInDate: "2020-10-11",
-        checkOutDate: "2020-10-12",
-        rooms: filterRoom,
-        // [
-        // {
-        //   roomId: 1,
-        //   typeOf: "two bed",
-        //   pricePerNight: 1000,
-        //   roomBookingAmount: filterRoom,
-        // },
-        // {
-        //   roomId: 1,
-        //   typeOf: "one bed",
-        //   pricePerNight: 2000,
-        //   roomBookingAmount: 1,
-        // },
-        // ],
-      },
-    });
+    if (filterRoom.length > 0) {
+      history.push({
+        pathname: "/BookingConfirmation",
+        state: {
+          resident: resident,
+          rooms: filterRoom,
+          checkInDate: fullDateCheckIn,
+          checkOutDate: fullDateCheckOut,
+          // [
+          // {
+          //   roomId: 1,
+          //   typeOf: "two bed",
+          //   pricePerNight: 1000,
+          //   roomBookingAmount: filterRoom,
+          // },
+          // {
+          //   roomId: 1,
+          //   typeOf: "one bed",
+          //   pricePerNight: 2000,
+          //   roomBookingAmount: 1,
+          // },
+          // ],
+        },
+      });
+    } else {
+      alert("คุณยังไม่ได้เลือกห้องพัก");
+    }
   };
 
   const updateRoomAmount = (roomId, roomBookingAmount) => {
@@ -295,7 +321,7 @@ function AddcomDetail() {
                     width: "7rem",
                   }}
                 >
-                  Tue, Sep 21
+                  {fullDateCheckIn}
                 </Typography>
                 <Typography sx={{ p: 1, flexGrow: 1 }}>
                   {resident?.resident?.timeCheckInStart} AM -
@@ -353,7 +379,8 @@ function AddcomDetail() {
                     width: "7rem",
                   }}
                 >
-                  Tue, Sep 21
+                  {/* Tue, Sep 21 */}
+                  {fullDateCheckOut}
                 </Typography>
                 <Typography sx={{ p: 1, flexGrow: 1 }}>
                   {resident?.resident?.timeCheckOutStart} AM -
@@ -367,7 +394,11 @@ function AddcomDetail() {
         {/* {resident.rooms.map(item) => ()} */}
         {/* {resident?.rooms?.map((resident) => ( */}
         {rooms?.map((room) => (
-          <EachRoomCard room={room} updateRoomAmount={updateRoomAmount} />
+          <EachRoomCard
+            room={room}
+            updateRoomAmount={updateRoomAmount}
+            resident={resident}
+          />
         ))}
 
         <Grid item sx={{ display: "flex", justifyContent: "center" }}>

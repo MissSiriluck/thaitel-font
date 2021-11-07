@@ -1,5 +1,5 @@
 import { Container, Grid, Stack, Typography } from "@mui/material";
-import axios from "../../config/axios"
+import axios from "../../config/axios";
 
 import { styled } from "@mui/material/styles";
 import ButtonUnstyled, {
@@ -10,6 +10,7 @@ import { CreateResidentContext2 } from "../../context/CreateResidentContext2";
 import AddRoomsForm from "./AddRoomsForm";
 import RoomList from "./RoomList";
 import ModalAddRoomsForm from "./ModalAddRoomsForm";
+import { Box } from "@mui/system";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -43,14 +44,13 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function RoomsInResident({status}) {
+function RoomsInResident({ status }) {
   const { createResident, setCreateResident } = useContext(
     CreateResidentContext2
-  ); 
+  );
   const [openModal, setOpenModal] = React.useState(false);
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
- 
 
   const addRoomCollection = (room) => {
     const clone = [...createResident.roomCollection];
@@ -72,23 +72,53 @@ function RoomsInResident({status}) {
     clone[index] = editRoom;
     setCreateResident((cur) => ({ ...cur, roomCollection: clone }));
   };
-
+  // console.log(`createResident.roomCollection`, createResident.roomCollection);
   return (
     <Container maxWidth="md">
-      <Stack spacing={2} sx={{ display: "flex", flexDirection: "column", mt: 4 }}>
+      <Stack
+        spacing={2}
+        sx={{ display: "flex", flexDirection: "column", mt: 4 }}
+      >
         <Grid item>
           <Typography sx={{ fontSize: "36px" }}>ห้องทั้งหมดของคุณ</Typography>
         </Grid>
-        {createResident.roomCollection.map((room, index) => (
-          <RoomList
-            key={index}
-            index={index}
-            room={room}
-            deleteRoomCollection={deleteRoomCollection}
-            editRoomCollection={editRoomCollection}
-            status={status}
-          />
-        ))}
+        {createResident.roomCollection?.length > 0 ? (
+          <>
+            {createResident.roomCollection.map((room, index) => (
+              <RoomList
+                key={index}
+                index={index}
+                room={room}
+                deleteRoomCollection={deleteRoomCollection}
+                editRoomCollection={editRoomCollection}
+                status={status}
+              />
+            ))}
+          </>
+        ) : (
+          <Grid
+            container
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Box>
+              <Box>
+                <img src="hotelRoom.jpg" width="500" height="300" />
+              </Box>
+              <Typography
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: "20px",
+                }}
+              >
+                คุณยังไม่ได้ลงห้องพักของคุณ ....
+              </Typography>
+            </Box>
+          </Grid>
+        )}
       </Stack>
 
       <ModalAddRoomsForm

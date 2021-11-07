@@ -12,9 +12,9 @@ import axios from "axios";
 function ShowResultPage() {
   const [res, setRes] = useState([]);
   let { resident, checkIn, room, province } = useParams();
-  // console.log(resident);
+  // console.log("resident.................", resident);
   // console.log(province);
-  // console.log(checkin);
+  // console.log("checkIn..................", checkIn);
   // console.log(roominput);
   useEffect(() => {
     if (province) {
@@ -36,7 +36,7 @@ function ShowResultPage() {
         });
     }
   }, [resident, checkIn, room, province]);
-  
+
   return (
     <>
       <SpaceforHead />
@@ -45,10 +45,10 @@ function ShowResultPage() {
       <Container maxWidth="xl" sx={{ mt: 18 }}>
         <Grid container>
           <Grid item xs={3}>
-            <Search />
+            <Search residentSearch={resident} />
           </Grid>
           <Grid item xs={9}>
-            <HotelCard data={res} />
+            <HotelCard data={res} residentSearch={resident} checkIn={checkIn} />
           </Grid>
         </Grid>
       </Container>
