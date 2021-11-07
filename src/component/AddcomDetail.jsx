@@ -86,7 +86,7 @@ function AddcomDetail() {
   // const [roomBookingAmount, setRoomBookingAmount] = useState(0);
 
   const filterRoom = rooms.filter((item) => item.roomBookingAmount > 0);
-  // console.log("filterRoom...........", filterRoom);
+  console.log("filterRoom...........", filterRoom);
 
   useEffect(() => {
     const fetchResidentByid = async () => {
@@ -121,6 +121,7 @@ function AddcomDetail() {
 
   const handleClickRoomSumary = (e) => {
     e.preventDefault();
+    // if () {
     history.push({
       pathname: "/BookingConfirmation",
       state: {
@@ -144,6 +145,7 @@ function AddcomDetail() {
         // ],
       },
     });
+    // }
   };
 
   const updateRoomAmount = (roomId, roomBookingAmount) => {

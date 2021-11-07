@@ -38,7 +38,8 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function HotelCardList({ resident }) {
+function HotelCardList({ resident, residentSearch }) {
+  // console.log("residentSearch............", residentSearch);
   const result = resident.Rooms?.reduce(
     (acc, cur, index) => {
       if (index === 0) {
@@ -58,11 +59,11 @@ function HotelCardList({ resident }) {
 
   const history = useHistory();
 
-  const handleClicklookRoom = e => {
+  const handleClicklookRoom = (e) => {
     e.preventDefault();
     history.push({
       pathname: "/addcom",
-      state: { id: resident.id },
+      state: { id: resident.id, residentSearch: residentSearch },
     });
   };
 
@@ -71,7 +72,7 @@ function HotelCardList({ resident }) {
     <Grid container sx={{ mb: 1 }}>
       <Grid
         item
-        id=''
+        id=""
         xs={12}
         sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 2, mb: 1 }}
       >
@@ -85,7 +86,7 @@ function HotelCardList({ resident }) {
                 height: "170px",
                 borderRadius: 8,
               }}
-              alt='resident-img'
+              alt="resident-img"
             />
           </Grid>
           <Grid item xs={9.8} sx={{ flexGlow: 1, mt: 2 }}>
@@ -98,7 +99,7 @@ function HotelCardList({ resident }) {
               </Grid>
               <Grid item xs={3.5}>
                 <Rating
-                  name='rate_star'
+                  name="rate_star"
                   defaultValue={resident.rateStar}
                   precision={0.5}
                   readOnly

@@ -14,15 +14,15 @@ function OwnerRegisterPage() {
   const { ownerDetailErrors, setOwnerDetailErrors } =
     useContext(OwnerDetailContext);
 
-  const handleSubmitOwnerRegister = async e => {
-    console.log("test");
+  const handleSubmitOwnerRegister = async (e) => {
+    // console.log("test");
     e.preventDefault();
     try {
       let allPase = true;
 
       if (!values.email) {
         allPase = false;
-        setOwnerDetailErrors(curr => ({
+        setOwnerDetailErrors((curr) => ({
           ...curr,
           email: "กรุณากรอกอีเมลของท่าน",
         }));
@@ -30,7 +30,7 @@ function OwnerRegisterPage() {
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
       ) {
         allPase = false;
-        setOwnerDetailErrors(curr => ({
+        setOwnerDetailErrors((curr) => ({
           ...curr,
           email: "กรุณากรอกอีเมลให้ถูกต้อง",
         }));
@@ -38,7 +38,7 @@ function OwnerRegisterPage() {
 
       if (!values.phone) {
         allPase = false;
-        setOwnerDetailErrors(curr => ({
+        setOwnerDetailErrors((curr) => ({
           ...curr,
           phone: "กรุณากรอกเบอร์โทรศัพย์ของท่าน",
         }));
@@ -46,7 +46,7 @@ function OwnerRegisterPage() {
 
       if (!values.password) {
         allPase = false;
-        setOwnerDetailErrors(curr => ({
+        setOwnerDetailErrors((curr) => ({
           ...curr,
           password: "กรุณากรอกรหัสผ่านของท่าน",
         }));
@@ -54,7 +54,7 @@ function OwnerRegisterPage() {
 
       if (!values.confirmPassword) {
         allPase = false;
-        setOwnerDetailErrors(curr => ({
+        setOwnerDetailErrors((curr) => ({
           ...curr,
           confirmPassword: "กรุณายืนยันรหัสผ่านของท่าน",
         }));
@@ -62,7 +62,7 @@ function OwnerRegisterPage() {
 
       if (!values.firstName) {
         allPase = false;
-        setOwnerDetailErrors(curr => ({
+        setOwnerDetailErrors((curr) => ({
           ...curr,
           firstName: "กรุณากรอกชื่อจริงของท่าน",
         }));
@@ -70,7 +70,7 @@ function OwnerRegisterPage() {
 
       if (!values.lastName) {
         allPase = false;
-        setOwnerDetailErrors(curr => ({
+        setOwnerDetailErrors((curr) => ({
           ...curr,
           lastName: "กรุณากรอกนามสกุลของท่าน",
         }));
@@ -78,7 +78,7 @@ function OwnerRegisterPage() {
 
       if (!values.idCard) {
         allPase = false;
-        setOwnerDetailErrors(curr => ({
+        setOwnerDetailErrors((curr) => ({
           ...curr,
           idCard: "กรุณากรอกเลขบัตรประจำตัวประชาชนของท่าน",
         }));
@@ -86,19 +86,19 @@ function OwnerRegisterPage() {
 
       if (!values.idCard) {
         allPase = false;
-        setOwnerDetailErrors(curr => ({
+        setOwnerDetailErrors((curr) => ({
           ...curr,
           idCard: "กรุณากรอกเลขบัตรประจำตัวประชาชนของท่าน",
         }));
       }
 
-      if (!values.idCardImgUrl) {
-        allPase = false;
-        setOwnerDetailErrors(curr => ({
-          ...curr,
-          idCardImgUrl: "กรุณาเพิ่มรูปภาพบัตรประจำตัวประชาชนของท่าน",
-        }));
-      }
+      // if (!values.idCardImgUrl) {
+      //   allPase = false;
+      //   setOwnerDetailErrors((curr) => ({
+      //     ...curr,
+      //     idCardImgUrl: "กรุณาเพิ่มรูปภาพบัตรประจำตัวประชาชนของท่าน",
+      //   }));
+      // }
 
       if (allPase) {
         const res = await axios.post("/hotelOwners/register", {

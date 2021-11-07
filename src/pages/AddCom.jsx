@@ -5,8 +5,13 @@ import Header from "../component/Header";
 import Search from "../component/Search";
 import Footer from "../component/Footer";
 import AddcomDetail from "../component/AddcomDetail";
+import { useLocation } from "react-router";
 
 function AddCom() {
+  const {
+    state: { residentSearch },
+  } = useLocation();
+  // console.log("residentSearch...........", residentSearch);
   return (
     <>
       <SpaceforHead />
@@ -15,7 +20,7 @@ function AddCom() {
       <Container maxWidth="xl" sx={{ mt: 18 }}>
         <Grid container>
           <Grid item xs={3}>
-            <Search />
+            <Search residentSearch={residentSearch} />
           </Grid>
           <Grid item xs={9}>
             <AddcomDetail />
