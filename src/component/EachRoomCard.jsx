@@ -44,8 +44,9 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function EachRoomCard({ room, updateRoomAmount }) {
+function EachRoomCard({ room, updateRoomAmount, resident }) {
   // console.log("room..................................", room);
+  // console.log("resident..................................", resident);
 
   const [roomBookingAmount, setRoomBookingAmount] = useState(0);
 
@@ -93,7 +94,7 @@ function EachRoomCard({ room, updateRoomAmount }) {
                 {room.typeOf}
                 {/* {`ห้องมาตราฐานเตียงเดี่ยว`} */}
               </Typography>
-              <Typography>{`${room.roomDetail}`}</Typography>
+              <Typography>{`${room.optionalRoomDetail}`}</Typography>
             </Grid>
             <Grid item xs={5}>
               <Box item xs={4} sx={{ mb: 2, display: "flex" }}>
@@ -103,6 +104,7 @@ function EachRoomCard({ room, updateRoomAmount }) {
                     color: "#fff",
                     fontFamily: "'Noto Sans Thai', sans-serif",
                     fontSize: "20px",
+                    width: "2px",
                     display: "flex",
                     justifyContent: "center",
                   }}
@@ -130,6 +132,7 @@ function EachRoomCard({ room, updateRoomAmount }) {
                     color: "#fff",
                     fontFamily: "'Noto Sans Thai', sans-serif",
                     fontSize: "20px",
+                    width: "2px",
                     display: "flex",
                     justifyContent: "center",
                   }}

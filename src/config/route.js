@@ -79,7 +79,7 @@ const route = {
       component: AddCom,
     },
     {
-      redirect: "/",
+      redirect: "/login",
     },
   ],
   CUSTOMER: [
@@ -147,6 +147,7 @@ const route = {
     {
       redirect: "/ownerhistory",
     },
+
     // {
     //   redirect: "/ownerhistory",
     //   component: OwnerHistoryPage,

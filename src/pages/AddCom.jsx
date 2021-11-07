@@ -9,9 +9,10 @@ import { useLocation } from "react-router";
 
 function AddCom() {
   const {
-    state: { residentSearch },
+    state: { residentSearch, checkIn },
   } = useLocation();
   // console.log("residentSearch...........", residentSearch);
+  // console.log(`checkIn`, checkIn);
   return (
     <>
       <SpaceforHead />
@@ -23,7 +24,7 @@ function AddCom() {
             <Search residentSearch={residentSearch} />
           </Grid>
           <Grid item xs={9}>
-            <AddcomDetail />
+            <AddcomDetail checkIn={checkIn} />
           </Grid>
         </Grid>
       </Container>

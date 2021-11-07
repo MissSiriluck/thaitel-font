@@ -113,6 +113,7 @@ function EditPartEditRoomForm({ room, editRoomCollection, index,handleClose }) {
 
   const handleChange = (type, e) => {
     setEditRoomForm((cur) => ({ ...cur, [type]: e.target.value }));
+    setEditRoomFormError((cur) => ({ ...cur, [type]: '' }))
   };
 
   const handleChangeCheckBox = (type) => {

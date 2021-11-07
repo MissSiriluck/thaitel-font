@@ -26,7 +26,7 @@ import res_1 from "../assets/images/residents/hotel-1.jpeg";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 
 //customize button blue
-const CustomButtonRoot = styled("span")(`
+const CustomButtonRoot = styled("button")(`
     background-color: none;
     padding: 12px 35px;
     border-radius: 10px;
@@ -79,9 +79,9 @@ function ResidentDetail() {
     fetchResidentByid();
   }, []);
 
-  console.log(`resident`, resident);
-  console.log(`resident.ServiceItems`, resident.ServiceItems);
-  console.log(`rooms`, rooms);
+  // console.log(`resident`, resident)
+  // console.log(`resident.ServiceItems`, resident.ServiceItems)
+  // console.log(`rooms`, rooms)
 
   const filterService = resident?.ServiceItems?.filter(
     item => item.isHaving === true
@@ -111,20 +111,23 @@ function ResidentDetail() {
     });
   };
 
-  const handleDeleteRoom = () => {};
+  // const handleDeleteRoom = () => {};
 
   return (
-    <Grid container>
+    <Grid container xs={11.5} sx={{ justifyContent: 'center', alignItems: "center" }}>
       <Grid item>
         {/* <CarouselBox /> */}
         <img
           src={residentImage}
           style={{
-            width: "1152px",
+            maxWidth: "1152px",
+            width: "100%",
             height: "450px",
             marginBottom: "10px",
             borderRadius: "10px",
+            backgroundSize: "cover"
           }}
+          xs={12}
           alt=''
         />
 
@@ -134,7 +137,7 @@ function ResidentDetail() {
             item
             id=''
             xs={12}
-            sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
+            sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2, paddingLeft: '45px', paddingRight: '45px' }}
           >
             <Typography sx={{ fontSize: "24px", pb: 2 }}>
               {resident?.name}
@@ -149,13 +152,13 @@ function ResidentDetail() {
             item
             id=''
             xs={12}
-            sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
+            sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2, paddingLeft: '45px', paddingRight: '45px' }}
           >
             <Typography sx={{ fontSize: "24px", pb: 2 }}>
               บริการภายในโรงแรม
             </Typography>
 
-            <Grid container sx={{ flexWrap: "wrap" }}>
+            <Grid container sx={{ flexWrap: "wrap", alignItems: 'center', paddingLeft: '20px' }}>
               {filterService?.map(service => (
                 <Grid
                   item
@@ -195,7 +198,7 @@ function ResidentDetail() {
             border: "1px solid #BFBFBF",
             borderRadius: "10px",
             flexGrow: 1,
-            p: 1,
+            p: 2,
             mb: 2,
           }}
         >
@@ -206,7 +209,7 @@ function ResidentDetail() {
               flexGrow: 1,
             }}
           >
-            <Box sx={{ p: 1 }}>
+            <Box sx={{ p: 2 }}>
               <CalendarTodayIcon />
             </Box>
             <Box
@@ -262,7 +265,7 @@ function ResidentDetail() {
           </Box>
 
           <Box sx={{ display: "flex", flexGrow: 1 }}>
-            <Box sx={{ p: 1 }}>
+            <Box sx={{ p: 2 }}>
               <CalendarTodayIcon />
             </Box>
             <Box
@@ -311,7 +314,7 @@ function ResidentDetail() {
                   Tue, Sep 21
                 </Typography>
                 <Typography sx={{ p: 1, flexGrow: 1 }}>
-                  {resident.timeCheckOutStart} - {resident.timeCheckOutEnd}
+                  {resident?.timeCheckOutStart} - {resident?.timeCheckOutEnd}
                 </Typography>
               </Box>
             </Box>
@@ -326,29 +329,30 @@ function ResidentDetail() {
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
-            <Grid container>
-              <Grid item xs={2.2}>
+            <Grid container >
+              <Grid item xs={2.2} >
                 <img
                   src={room.imgURL}
                   style={{
                     width: "170px",
                     height: "170px",
                     borderRadius: 8,
+                    objectFit: "cover"
                   }}
                 />
               </Grid>
-              <Grid item xs={9.8} sx={{ flexGlow: 1 }} sx={{ mt: 2 }}>
-                <Grid container>
-                  <Grid item xs={5}>
+              <Grid item xs={9.8} sx={{ flexGlow: 1 }} sx={{ mt: 2 }} >
+                <Grid container sx={{display: 'flex', justifyContent: 'flex-end' }}>
+                  <Grid item xs={5.8}>
                     <Typography sx={{ fontSize: "20px", mb: 1 }}>
                       {room.typeOf}
                     </Typography>
                     <Typography sx={{ mb: 1 }}>{resident.province}</Typography>
                     <Typography sx={{ mb: 1 }}>
-                      จำนวนแขกที่เข้าพักได้ {room.maxGuest} คน / ห้อง
+                      จำนวนแขกที่เข้าพักได้ {room?.maxGuest} คน / ห้อง
                     </Typography>
                   </Grid>
-                  <Grid item xs={5}>
+                  <Grid item xs={5.5}>
                     <Typography sx={{ mb: 1 }}>
                       จำนวนห้องพักที่เหลือ{" "}
                       {room?.roomAmount - room?.countBookedRoom} ห้อง
@@ -370,13 +374,14 @@ function ResidentDetail() {
           <Button
             variant='outlined'
             sx={{
-              width: "240px",
+              width: "250px",
               fontFamily: "'Noto Sans Thai', sans-serif",
-              fontSize: "20px",
+              fontSize: "18px",
               mt: 3,
               mb: 15,
               mr: 1,
               borderRadius: "10px",
+              height: "50px"
             }}
             onClick={handleOnClickEditResident}
           >
@@ -384,20 +389,23 @@ function ResidentDetail() {
           </Button>
           <CustomButton
             sx={{
+              width: "250px",
               background: "#03a9f4",
               color: "#fff",
               fontFamily: "'Noto Sans Thai', sans-serif",
-              fontSize: "20px",
+              fontSize: "18px",
+              fontWeight: 400,
               display: "flex",
               justifyContent: "center",
               mt: 3,
               mb: 15,
-              p: 2.5,
-              width: "200px",
+              width: "250px",
+              height: '50px'
             }}
             onClick={e => {
               history.push({ pathname: "/ownerhistory" });
             }}
+            onClick={e => { history.push({ pathname: '/ownerhistory'})}}
           >
             กลับสู่หน้าหลัก
           </CustomButton>

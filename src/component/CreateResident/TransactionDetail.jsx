@@ -36,6 +36,7 @@ function TransactionDetail() {
 
   const handleChange = (type, event) => {
     setCreateResident((cur) => ({ ...cur, [type]: event.target.value }));
+    setCreateResidentError({ ...createResidentError, [type]: '' });
   };
 
   const handleChangeBankAccept = () => {
@@ -224,15 +225,11 @@ function TransactionDetail() {
                   labelId="demo-simple-select-helper-label"
                   id="demo-simple-select-helper"
                   value={createResident.bankName}
-                  label="Bank Name"
-                  onChange={(e) => handleChange("bankName", e)}
-                  helperText={
-                    createResidentError.bankName
-                      ? createResidentError.bankName
-                      : ""
-                  }
+                  label='Bank Name'
+                  onChange={(e) => handleChange('bankName', e)}
+                  helperText= {createResidentError.bankName ? createResidentError.bankName : ""}
                   error={createResidentError.bankName}
-                  size="small"
+                  size='small'
                   sx={{
                     display: "flex",
                     width: "100%",

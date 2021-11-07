@@ -7,7 +7,7 @@ import { styled } from "@mui/system";
 import { useHistory } from "react-router";
 
 //customize button blue
-const CustomButtonRoot = styled("span")(`
+const CustomButtonRoot = styled("button")(`
     background-color: none;
     padding: 12px 35px;
     border-radius: 10px;
@@ -38,8 +38,9 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-function HotelCardList({ resident, residentSearch }) {
+function HotelCardList({ resident, residentSearch, checkIn }) {
   // console.log("residentSearch............", residentSearch);
+  // console.log(`checkIn`, checkIn);
   const result = resident.Rooms?.reduce(
     (acc, cur, index) => {
       if (index === 0) {
@@ -63,7 +64,11 @@ function HotelCardList({ resident, residentSearch }) {
     e.preventDefault();
     history.push({
       pathname: "/addcom",
-      state: { id: resident.id, residentSearch: residentSearch },
+      state: {
+        id: resident.id,
+        residentSearch: residentSearch,
+        checkIn: checkIn,
+      },
     });
   };
 
@@ -80,7 +85,7 @@ function HotelCardList({ resident, residentSearch }) {
           <Grid item xs={2.2}>
             <img
               // src={`${resident.url}`}
-              src={resident.ResidentImgs[0]?.imgUrl}
+              src={resident?.ResidentImgs[0]?.imgUrl}
               style={{
                 width: "170px",
                 height: "170px",
@@ -116,7 +121,10 @@ function HotelCardList({ resident, residentSearch }) {
                     fontSize: "22px",
                   }}
                 >
-                  {`${result[1]} - ${result[0]}`} บาท
+                  {result[1] === result[0]
+                    ? result[0]
+                    : `${result[1]} - ${result[0]}`}
+                  บาท
                 </Typography>
                 <Typography
                   sx={{

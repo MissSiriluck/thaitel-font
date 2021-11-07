@@ -56,6 +56,9 @@ function RoomsInResident({status}) {
     const clone = [...createResident.roomCollection];
     clone.push(room);
     setCreateResident((cur) => ({ ...cur, roomCollection: clone }));
+
+    
+
     setOpenModal(false);
   };
 

@@ -4,7 +4,7 @@ import { useContext, useEffect } from "react";
 import { ResidentContext } from "../context/ResidentContext";
 import HotelCardList from "./HotelCardList";
 
-function HotelCard({ data, residentSearch }) {
+function HotelCard({ data, residentSearch, checkIn }) {
   const { residents, setResidents } = useContext(ResidentContext);
 
   useEffect(() => {
@@ -33,7 +33,11 @@ function HotelCard({ data, residentSearch }) {
 
       {residents.map((item) => (
         <Grid item xs={12}>
-          <HotelCardList resident={item} residentSearch={residentSearch} />
+          <HotelCardList
+            resident={item}
+            residentSearch={residentSearch}
+            checkIn={checkIn}
+          />
         </Grid>
       ))}
     </Grid>

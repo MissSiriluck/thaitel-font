@@ -1,5 +1,5 @@
 import axios from "../config/axios";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CreateResidentHeader from "../component/CreateResident/CreateResidentHeader";
 import ResidentDetailForm from "../component/CreateResident/ResidentDetailForm";
 import RoomsInResident from "../component/CreateResident/RoomsInResident";
@@ -48,7 +48,94 @@ function CreateResident() {
     bankImgUrl: "",
     bankImageFile: null,
     })
+    
+    setCreateResident({
+      residentTypeOf: "",
+      residentName: "",
+      rateStar: "",
+      address: "",
+      subDistrict: "",
+      district: "",
+      province: "",
+      postalCode: "",
+      description: "",
+      optionRoomDetail: "",
+      residentImageFile: null,
+      residentImageUrl: null,
+      timeCheckInToStart: "",
+      timeCheckInToEnd: "",
+      timeCheckOutToStart: "",
+      timeCheckOutToEnd: "",
+      cancelDate: "",
+      roomCollection: [],
+      serviceCollection: [
+        {
+          serviceName: "parking",
+          isHaving: false,
+          isFree: true,
+          pricePerTime: 0,
+        },
+        {
+          serviceName: "breakFast",
+          isFree: true,
+          isHaving: false,
+          pricePerTime: 0,
+        },
+        {
+          serviceName: "wifi",
+          isFree: true,
+          isHaving: false,
+          pricePerTime: 0,
+        },
+        {
+          serviceName: "swimingPool",
+          isHaving: false,
+          isFree: true,
+          pricePerTime: 0,
+        },
+        {
+          serviceName: "bar",
+          isFree: true,
+          isHaving: false,
+          pricePerTime: 0,
+        },
+        {
+          serviceName: "sauna",
+          isFree: true,
+          isHaving: false,
+          pricePerTime: 0,
+        },
+        {
+          serviceName: "reception",
+          isFree: true,
+          isHaving: false,
+          pricePerTime: 0,
+        },
+        {
+          serviceName: "roomService",
+          isFree: true,
+          isHaving: false,
+          pricePerTime: 0,
+        },
+        {
+          serviceName: "fitnessRoom",
+          isFree: true,
+          isHaving: false,
+          pricePerTime: 0,
+        },
+      ],
+      bankAccept: false,
+      bankName: "",
+      accNumber: "",
+      accName: "",
+      bankImgUrl: "",
+      bankImageFile: null,
+    })
   }, [])
+
+  const [openCreateResidentModal, setOpenCreateResidentModal] = React.useState(false);
+  const handleOpenCreateResidentModal = () => setOpenCreateResidentModal(true);
+  const handleCloseCreateResidentModal = () => setOpenCreateResidentModal(false);
 
   const handleSubmit = async e => {
     try {
@@ -68,17 +155,18 @@ function CreateResident() {
           residentName: "กรุณากรอกชื่อที่พักของท่าน",
         }));
       }
+      
       if (!createResident.rateStar) {
         allPase= false;
         setCreateResidentError((curr) => ({
           ...curr,
           rateStar: "กรุณากรอกจำนวนดาวของท่าน",
         }));
-      }
-      if (isNaN(createResident.rateStar)) {
+      }else if (isNaN(createResident.rateStar)) {
         allPase= false;
         setCreateResidentError((curr) => ({ ...curr, rateStar: 'กรุณากรอกจำนวนดาวของท่านเป็นข้อมูลประเภทตัวเลข' }))
       }
+
       if (!createResident.address) {
         allPase= false;
         setCreateResidentError((curr) => ({
@@ -200,7 +288,7 @@ function CreateResident() {
         }));
       }
 
-      if(allPase){
+      if(allPase) {
 
       const resResident = await axios.post("/residents/createResident", {
         typeOf: createResident.residentTypeOf,
@@ -262,6 +350,97 @@ function CreateResident() {
 
       const resBank = await axios.post('/backAccounts', formBank)
       
+      setOpenCreateResidentModal(true)
+
+       setCreateResident ({
+        residentTypeOf: "",
+        residentName: "",
+        rateStar: "",
+        address: "",
+        subDistrict: "",
+        district: "",
+        province: "",
+        postalCode: "",
+        description: "",
+        optionRoomDetail: "",
+        residentImageFile: null,
+        residentImageUrl: null,
+        timeCheckInToStart: "",
+        timeCheckInToEnd: "",
+        timeCheckOutToStart: "",
+        timeCheckOutToEnd: "",
+        cancelDate: "",
+        roomCollection: [],
+        serviceCollection: [
+          {
+            serviceName: "parking",
+            isHaving: false,
+            isFree: true,
+            pricePerTime: 0,
+          },
+          {
+            serviceName: "breakFast",
+            isFree: true,
+            isHaving: false,
+            pricePerTime: 0,
+          },
+          {
+            serviceName: "wifi",
+            isFree: true,
+            isHaving: false,
+            pricePerTime: 0,
+          },
+          {
+            serviceName: "swimingPool",
+            isHaving: false,
+            isFree: true,
+            pricePerTime: 0,
+          },
+          // {
+          //   serviceName: "แผนกต้อนรับส่วนหน้า 24 ชั่วโมง",
+          //   isFree: true,
+          //   isHaving: false,
+          //   pricePerTime: "",
+          // },
+          {
+            serviceName: "bar",
+            isFree: true,
+            isHaving: false,
+            pricePerTime: 0,
+          },
+          {
+            serviceName: "sauna",
+            isFree: true,
+            isHaving: false,
+            pricePerTime: 0,
+          },
+          {
+            serviceName: "reception",
+            isFree: true,
+            isHaving: false,
+            pricePerTime: 0,
+          },
+          {
+            serviceName: "roomService",
+            isFree: true,
+            isHaving: false,
+            pricePerTime: 0,
+          },
+          {
+            serviceName: "fitnessRoom",
+            isFree: true,
+            isHaving: false,
+            pricePerTime: 0,
+          },
+        ],
+        bankAccept: false,
+        bankName: "",
+        accNumber: "",
+        accName: "",
+        bankImgUrl: "",
+        bankImageFile: null,
+      });
+
       history.push("/ownerhistory");
     }
     } catch (err) {

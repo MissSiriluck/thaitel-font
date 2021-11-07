@@ -12,7 +12,7 @@ function OwnerDetailPage() {
       <Header />
 
       <Container maxWidth='lg' sx={{ mt: 18 }}>
-        <Grid container>
+        <Grid container sx={{ justifyContent: 'center' }}>
           <ResidentDetail />
         </Grid>
       </Container>
