@@ -31,7 +31,7 @@ function HotelCard({ data, residentSearch, checkIn }) {
         </Typography>
       </Grid>
 
-      {residents.map((item) => (
+      {residents.map(item => (
         <Grid item xs={12}>
           <HotelCardList
             resident={item}
