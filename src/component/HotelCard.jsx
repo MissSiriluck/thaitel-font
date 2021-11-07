@@ -24,7 +24,7 @@ function HotelCard({ data }) {
   // console.log("residents....................", residents.length);
 
   return (
-    <Grid container>
+    <Grid container sx={{ mb: 10 }}>
       <Grid item xs={12}>
         <Typography sx={{ mb: 2 }}>
           ที่พักทั้งหมด ：พบที่พัก {residents.length} แห่ง

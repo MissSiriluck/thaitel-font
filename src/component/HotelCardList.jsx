@@ -114,9 +114,11 @@ function HotelCardList({ resident }) {
                     justifyContent: "flex-end",
                     fontSize: "22px",
                   }}
-                > 
-                {result[1] === result[0] ? result[0] : `${result[1]} - ${result[0]}`}
-                 บาท
+                >
+                  {result[1] === result[0]
+                    ? result[0]
+                    : `${result[1]} - ${result[0]}`}
+                  บาท
                 </Typography>
                 <Typography
                   sx={{
