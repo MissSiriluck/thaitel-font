@@ -1,18 +1,18 @@
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+// import InputLabel from "@mui/material/InputLabel";
+// import MenuItem from "@mui/material/MenuItem";
+// import FormControl from "@mui/material/FormControl";
+// import Select from "@mui/material/Select";
 import axios from "../config/axios";
 import { Box, styled } from "@mui/system";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Button, Grid, Rating, Typography } from "@mui/material";
-import CarouselBox from "./CarouselBox";
+// import CarouselBox from "./CarouselBox";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import WifiIcon from "@mui/icons-material/Wifi";
-import PoolIcon from "@mui/icons-material/Pool";
+// import PoolIcon from "@mui/icons-material/Pool";
 import LocalBarIcon from "@mui/icons-material/LocalBar";
 import SpaIcon from "@mui/icons-material/Spa";
 import AlarmOnIcon from "@mui/icons-material/AlarmOn";
@@ -22,7 +22,7 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 // import { residents } from "../mocks/residents";
-import res_1 from "../assets/images/residents/hotel-1.jpeg";
+// import res_1 from "../assets/images/residents/hotel-1.jpeg";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 
 //customize button blue
@@ -84,7 +84,7 @@ function ResidentDetail() {
   // console.log(`rooms`, rooms)
 
   const filterService = resident?.ServiceItems?.filter(
-    item => item.isHaving === true
+    (item) => item.isHaving === true
   );
   console.log(`filterService`, filterService);
 
@@ -99,7 +99,7 @@ function ResidentDetail() {
   });
   const classes = useStyles();
 
-  const handleOnClickEditResident = e => {
+  const handleOnClickEditResident = (e) => {
     e.preventDefault();
 
     history.push({
@@ -114,7 +114,11 @@ function ResidentDetail() {
   // const handleDeleteRoom = () => {};
 
   return (
-    <Grid container xs={11.5} sx={{ justifyContent: 'center', alignItems: "center" }}>
+    <Grid
+      container
+      xs={11.5}
+      sx={{ justifyContent: "center", alignItems: "center" }}
+    >
       <Grid item>
         {/* <CarouselBox /> */}
         <img
@@ -125,19 +129,26 @@ function ResidentDetail() {
             height: "450px",
             marginBottom: "10px",
             borderRadius: "10px",
-            backgroundSize: "cover"
+            backgroundSize: "cover",
           }}
           xs={12}
-          alt=''
+          alt=""
         />
 
         {/* Name hotel and other detail */}
         <Grid container>
           <Grid
             item
-            id=''
+            id=""
             xs={12}
-            sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2, paddingLeft: '45px', paddingRight: '45px' }}
+            sx={{
+              border: "1px solid #BFBFBF",
+              borderRadius: 2,
+              p: 4,
+              mb: 2,
+              paddingLeft: "45px",
+              paddingRight: "45px",
+            }}
           >
             <Typography sx={{ fontSize: "24px", pb: 2 }}>
               {resident?.name}
@@ -150,44 +161,92 @@ function ResidentDetail() {
           {/* Service block */}
           <Grid
             item
-            id=''
+            id=""
             xs={12}
-            sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2, paddingLeft: '45px', paddingRight: '45px' }}
+            sx={{
+              border: "1px solid #BFBFBF",
+              borderRadius: 2,
+              p: 4,
+              mb: 2,
+              paddingLeft: "45px",
+              paddingRight: "45px",
+            }}
           >
             <Typography sx={{ fontSize: "24px", pb: 2 }}>
               บริการภายในโรงแรม
             </Typography>
 
-            <Grid container sx={{ flexWrap: "wrap", alignItems: 'center', paddingLeft: '20px' }}>
-              {filterService?.map(service => (
+            {filterService?.length > 0 ? (
+              <>
                 <Grid
-                  item
-                  xs={3}
-                  sx={{ display: "flex", alignItems: "center", mb: 2 }}
+                  container
+                  sx={{
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    paddingLeft: "20px",
+                  }}
                 >
-                  {service?.serviceName === "parking" ? (
-                    <DirectionsCarIcon />
-                  ) : service?.serviceName === "breakFast" ? (
-                    <FastfoodIcon />
-                  ) : service?.serviceName === "wifi" ? (
-                    <WifiIcon />
-                  ) : service?.serviceName === "swimingPool" ? (
-                    <FastfoodIcon />
-                  ) : service?.serviceName === "bar" ? (
-                    <LocalBarIcon />
-                  ) : service?.serviceName === "sauna" ? (
-                    <SpaIcon />
-                  ) : service?.serviceName === "reception" ? (
-                    <RoomServiceIcon />
-                  ) : service?.serviceName === "roomService" ? (
-                    <RoomServiceIcon />
-                  ) : service?.serviceName === "fitnessRoom" ? (
-                    <FitnessCenterIcon />
-                  ) : null}
-                  <Typography sx={{ ml: 2 }}>{service?.serviceName}</Typography>
+                  {filterService?.map((service) => (
+                    <Grid
+                      item
+                      xs={3}
+                      sx={{ display: "flex", alignItems: "center", mb: 2 }}
+                    >
+                      {service?.serviceName === "parking" ? (
+                        <DirectionsCarIcon />
+                      ) : service?.serviceName === "breakFast" ? (
+                        <FastfoodIcon />
+                      ) : service?.serviceName === "wifi" ? (
+                        <WifiIcon />
+                      ) : service?.serviceName === "swimingPool" ? (
+                        <FastfoodIcon />
+                      ) : service?.serviceName === "bar" ? (
+                        <LocalBarIcon />
+                      ) : service?.serviceName === "sauna" ? (
+                        <SpaIcon />
+                      ) : service?.serviceName === "reception" ? (
+                        <RoomServiceIcon />
+                      ) : service?.serviceName === "roomService" ? (
+                        <RoomServiceIcon />
+                      ) : service?.serviceName === "fitnessRoom" ? (
+                        <FitnessCenterIcon />
+                      ) : null}
+                      <Typography sx={{ ml: 2 }}>
+                        {service?.serviceName}
+                      </Typography>
+                    </Grid>
+                  ))}
                 </Grid>
-              ))}
-            </Grid>
+              </>
+            ) : (
+              <Grid
+                container
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Box>
+                  <Box>
+                    <img
+                      src="no-service-pic.jpg"
+                      alt=""
+                      width="500"
+                      height="300"
+                    />
+                  </Box>
+                  <Typography
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      fontSize: "20px",
+                    }}
+                  >
+                    ที่พักของคุณไม่มีบริการเสริมอื่น ๆ
+                  </Typography>
+                </Box>
+              </Grid>
+            )}
           </Grid>
         </Grid>
 
@@ -322,57 +381,94 @@ function ResidentDetail() {
         </Box>
 
         {/* room type block */}
-        {rooms.map(room => (
-          <Grid
-            item
-            id=''
-            xs={12}
-            sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
-          >
-            <Grid container >
-              <Grid item xs={2.2} >
-                <img
-                  src={room.imgURL}
-                  style={{
-                    width: "170px",
-                    height: "170px",
-                    borderRadius: 8,
-                    objectFit: "cover"
-                  }}
-                />
-              </Grid>
-              <Grid item xs={9.8} sx={{ flexGlow: 1 }} sx={{ mt: 2 }} >
-                <Grid container sx={{display: 'flex', justifyContent: 'flex-end' }}>
-                  <Grid item xs={5.8}>
-                    <Typography sx={{ fontSize: "20px", mb: 1 }}>
-                      {room.typeOf}
-                    </Typography>
-                    <Typography sx={{ mb: 1 }}>{resident.province}</Typography>
-                    <Typography sx={{ mb: 1 }}>
-                      จำนวนแขกที่เข้าพักได้ {room?.maxGuest} คน / ห้อง
-                    </Typography>
+        {rooms.length > 0 ? (
+          <>
+            {rooms.map((room) => (
+              <Grid
+                item
+                id=""
+                xs={12}
+                sx={{
+                  border: "1px solid #BFBFBF",
+                  borderRadius: 2,
+                  p: 4,
+                  mb: 2,
+                }}
+              >
+                <Grid container>
+                  <Grid item xs={2.2}>
+                    <img
+                      src={room.imgURL}
+                      style={{
+                        width: "170px",
+                        height: "170px",
+                        borderRadius: 8,
+                        objectFit: "cover",
+                      }}
+                    />
                   </Grid>
-                  <Grid item xs={5.5}>
-                    <Typography sx={{ mb: 1 }}>
-                      จำนวนห้องพักที่เหลือ{" "}
-                      {room?.roomAmount - room?.countBookedRoom} ห้อง
-                    </Typography>
-                    <Typography sx={{ mb: 1 }}>
-                      Room size : {room?.size} ตร.ม.
-                    </Typography>
-                    <Typography sx={{ mb: 1 }}>
-                      Price : {room?.pricePerNight} BATH
-                    </Typography>
+                  <Grid item xs={9.8} sx={{ flexGlow: 1 }} sx={{ mt: 2 }}>
+                    <Grid
+                      container
+                      sx={{ display: "flex", justifyContent: "flex-end" }}
+                    >
+                      <Grid item xs={5.8}>
+                        <Typography sx={{ fontSize: "20px", mb: 1 }}>
+                          {room.typeOf}
+                        </Typography>
+                        <Typography sx={{ mb: 1 }}>
+                          {resident.province}
+                        </Typography>
+                        <Typography sx={{ mb: 1 }}>
+                          จำนวนแขกที่เข้าพักได้ {room?.maxGuest} คน / ห้อง
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={5.5}>
+                        <Typography sx={{ mb: 1 }}>
+                          จำนวนห้องพักที่เหลือ{" "}
+                          {room?.roomAmount - room?.countBookedRoom} ห้อง
+                        </Typography>
+                        <Typography sx={{ mb: 1 }}>
+                          Room size : {room?.size} ตร.ม.
+                        </Typography>
+                        <Typography sx={{ mb: 1 }}>
+                          Price : {room?.pricePerNight} BATH
+                        </Typography>
+                      </Grid>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-            </Grid>
+            ))}
+          </>
+        ) : (
+          <Grid
+            container
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Box>
+              <Box>
+                <img src="hotelRoom.jpg" width="500" height="300" />
+              </Box>
+              <Typography
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: "20px",
+                }}
+              >
+                คุณยังไม่ได้ลงห้องพักของคุณ ....
+              </Typography>
+            </Box>
           </Grid>
-        ))}
+        )}
 
         <Grid item sx={{ display: "flex", justifyContent: "center" }}>
           <Button
-            variant='outlined'
+            variant="outlined"
             sx={{
               width: "250px",
               fontFamily: "'Noto Sans Thai', sans-serif",
@@ -381,7 +477,7 @@ function ResidentDetail() {
               mb: 15,
               mr: 1,
               borderRadius: "10px",
-              height: "50px"
+              height: "50px",
             }}
             onClick={handleOnClickEditResident}
           >
@@ -400,12 +496,14 @@ function ResidentDetail() {
               mt: 3,
               mb: 15,
               width: "250px",
-              height: '50px'
+              height: "50px",
             }}
-            onClick={e => {
+            onClick={(e) => {
               history.push({ pathname: "/ownerhistory" });
             }}
-            onClick={e => { history.push({ pathname: '/ownerhistory'})}}
+            onClick={(e) => {
+              history.push({ pathname: "/ownerhistory" });
+            }}
           >
             กลับสู่หน้าหลัก
           </CustomButton>
