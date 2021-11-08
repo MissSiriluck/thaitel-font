@@ -228,6 +228,7 @@ function LoginContent() {
       state: {
         successMessage: "Already Login.",
         from: " login page ",
+        message: ''
       },
     });
   };

@@ -326,7 +326,7 @@ function ResidentDetailForm() {
                           height: '100%',
                           justifyContent: 'center',
                           backgroundImage: `url(${createResident.residentImageUrl})`,
-                          backgroundSize: 'contain',
+                          backgroundSize: 'cover',
                           backgroundRepeat: 'no-repeat',
                         }}
                         border={ createResidentError.residentImageUrl ? '2px dotted #ba000d' : '2px dotted #cfcfcf' } 
