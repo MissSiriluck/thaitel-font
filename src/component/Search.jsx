@@ -83,7 +83,7 @@ const DateRangePickerDay = styled(MuiDateRangePickerDay)(
   })
 );
 
-function Search({ residentSearch }) {
+function Search({ residentSearch, province }) {
   const history = useHistory();
   const [value, setValue] = useState([null, null]);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -92,6 +92,7 @@ function Search({ residentSearch }) {
   // const [guest, setGuest] = useState(1);
   const [room, setRoom] = useState(1);
   console.log(checkIn);
+  console.log(`province`, province)
   function HandleSumbit() {
     // const history = useHistory();
     console.log("testt");
@@ -110,7 +111,7 @@ function Search({ residentSearch }) {
       <Grid item xs={11}>
         <Typography sx={{ mb: 2 }}>
           หน้าหลัก &gt; ผลการค้นหา &gt;
-          <span style={{ color: "#c62828" }}> {residentSearch}</span>
+          <span style={{ color: "#c62828" }}> { residentSearch?residentSearch:province } </span>
         </Typography>
         <Box sx={{ background: "#07133C", flexGlow: 1, borderRadius: 2 }}>
           <Grid item sx={{ p: 4 }}>

@@ -442,6 +442,16 @@ function ResidentDetailForm() {
                           error={createResidentError.timeCheckInToStart}
                         />
                       </Grid>
+                      <Grid xs={3}>
+                        <Typography
+                          style={{
+                            fontSize: 18,
+                            marginLeft: '10px',
+                          }}
+                        >
+                          นาฬิกา
+                        </Typography>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -459,6 +469,7 @@ function ResidentDetailForm() {
                           ถึง :
                         </Typography>
                       </Grid>
+                      
                       <Grid xs={9}>
                         <TextField
                           id='outlined-password-input'
@@ -482,6 +493,16 @@ function ResidentDetailForm() {
                           }}
                         >
                           ตัวอย่างการกรอกรายละเอียด เช่น 9.00
+                        </Typography>
+                      </Grid>
+                      <Grid xs={3}>
+                        <Typography
+                          style={{
+                            fontSize: 18,
+                            marginLeft: '10px',
+                          }}
+                        >
+                          นาฬิกา
                         </Typography>
                       </Grid>
                     </Grid>
@@ -550,6 +571,16 @@ function ResidentDetailForm() {
                           error={createResidentError.timeCheckOutToStart}
                         />
                       </Grid>
+                      <Grid xs={3}>
+                        <Typography
+                          style={{
+                            fontSize: 18,
+                            marginLeft: '10px',
+                          }}
+                        >
+                          นาฬิกา
+                        </Typography>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -589,6 +620,16 @@ function ResidentDetailForm() {
                           }}
                         >
                           ตัวอย่างการกรอกรายละเอียด เช่น 16.00
+                        </Typography>
+                      </Grid>
+                      <Grid xs={3}>
+                        <Typography
+                          style={{
+                            fontSize: 18,
+                            marginLeft: '10px',
+                          }}
+                        >
+                          นาฬิกา
                         </Typography>
                       </Grid>
                     </Grid>

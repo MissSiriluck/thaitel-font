@@ -12,8 +12,8 @@ import axios from "axios";
 function ShowResultPage() {
   const [res, setRes] = useState([]);
   let { resident, checkIn, room, province } = useParams();
-  // console.log("resident.................", resident);
-  // console.log(province);
+  console.log("resident.................", resident);
+  console.log(province);
   // console.log("checkIn..................", checkIn);
   // console.log(roominput);
   useEffect(() => {
@@ -45,7 +45,7 @@ function ShowResultPage() {
       <Container maxWidth="xl" sx={{ mt: 18 }}>
         <Grid container>
           <Grid item xs={3}>
-            <Search residentSearch={resident} />
+            <Search residentSearch={resident} province={province} />
           </Grid>
           <Grid item xs={9}>
             <HotelCard data={res} residentSearch={resident} checkIn={checkIn} />

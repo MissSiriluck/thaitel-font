@@ -59,8 +59,9 @@ function ResetPasswordContent() {
 
   const { setUser } = useContext(AuthContext);
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log("wwwwwwwwwww");
     try {
       const data = new FormData(event.currentTarget);
       const values = {
@@ -86,80 +87,82 @@ function ResetPasswordContent() {
 
   return (
     <Container
-      maxWidth='sm'
-      justifyContent='center'
-      alignItems='center'
+      maxWidth="sm"
+      justifyContent="center"
+      alignItems="center"
       sx={{ padding: 0, mt: "30vh" }}
     >
-      <Grid
-        Container
-        alignItems='center'
-        justifyContent='center'
-        sx={{
-          height: "293px",
-          padding: 0,
-          border: "1px solid #BFBFBF",
-          borderRadius: 2,
-          p: 5,
-        }}
-      >
-        <Grid item xs={12} sx={{ width: "100%" }}>
-          <Typography variant='h4' sx={{ fontWeight: 600 }}>
-            กรอกอีเมลเพื่อเปลี่ยนรหัสผ่าน
-          </Typography>
-        </Grid>
-        <Grid item xs={12} sx={{ mt: 2 }}>
-          <Typography
-            style={{
-              fontSize: "16px",
-              marginBottom: 8,
-              justifyContent: "start",
-            }}
-          >
-            อีเมล์
-          </Typography>
-          <TextField
-            fullWidth
-            label='อีเมล์'
-            placeholder='กรอกอีเมล์'
-            id='email'
-            name='email'
-            multiline
-            size='small'
-            sx={{
-              padding: 0,
-              marginBottom: "3px",
-            }}
-          />
-        </Grid>
+      <Box Container component="form" onSubmit={handleSubmit}>
         <Grid
-          item
-          xs={12}
-          sx={{ display: "flex", justifyContent: "center", mt: 2 }}
+          Container
+          alignItems="center"
+          justifyContent="center"
+          sx={{
+            height: "293px",
+            padding: 0,
+            border: "1px solid #BFBFBF",
+            borderRadius: 2,
+            p: 5,
+          }}
         >
-          <CustomButton
-            sx={{
-              background: "#c62828",
-              color: "#fff",
-              display: "flex",
-              justifyContent: "center",
-              width: "50%",
-              marginTop: "10px",
-            }}
-            type='submit'
-          >
+          <Grid item xs={12} sx={{ width: "100%" }}>
+            <Typography variant="h4" sx={{ fontWeight: 600 }}>
+              กรอกอีเมลเพื่อเปลี่ยนรหัสผ่าน
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sx={{ mt: 2 }}>
             <Typography
               style={{
-                fontSize: 16,
-                marginBottom: "1px",
+                fontSize: "16px",
+                marginBottom: 8,
                 justifyContent: "start",
               }}
             >
-              เปลี่ยนรหัสผ่าน
+              อีเมล์
             </Typography>
-          </CustomButton>
+            <TextField
+              fullWidth
+              label="อีเมล์"
+              placeholder="กรอกอีเมล์"
+              id="email"
+              name="email"
+              multiline
+              size="small"
+              sx={{
+                padding: 0,
+                marginBottom: "3px",
+              }}
+            />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sx={{ display: "flex", justifyContent: "center", mt: 2 }}
+          >
+            <CustomButton
+              sx={{
+                background: "#c62828",
+                color: "#fff",
+                display: "flex",
+                justifyContent: "center",
+                width: "50%",
+                marginTop: "10px",
+              }}
+              type="submit"
+            >
+              <Typography
+                style={{
+                  fontSize: 16,
+                  marginBottom: "1px",
+                  justifyContent: "start",
+                }}
+              >
+                เปลี่ยนรหัสผ่าน
+              </Typography>
+            </CustomButton>
+          </Grid>
         </Grid>
-      </Grid>
+      </Box>
     </Container>
   );
 }

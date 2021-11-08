@@ -59,6 +59,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 function OwnerHistoryPage() {
   const { user } = useContext(AuthContext);
   const { residents, setResidents } = useContext(ResidentContext);
+  const location = useLocation()
   // console.log(user);
 
   const [openSnackDeleteResident, setOpenSnackDeleteResident] = useState(false);
@@ -70,6 +71,12 @@ function OwnerHistoryPage() {
 
     setOpenSnackDeleteResident(false);
   };
+
+  useEffect(() => {
+    if(location?.state?.message){
+      setOpenSnackDeleteResident(true)
+    }
+  }, [location])
 
   useEffect(() => {
     const fetchResident = async () => {
@@ -160,20 +167,7 @@ function OwnerHistoryPage() {
                     deleteResident={deleteResident}
                   />
                 ))}
-              </Grid>
-              <Snackbar
-                open={openSnackDeleteResident}
-                autoHideDuration={6000}
-                onClose={handleClose}
-              >
-                <Alert
-                  onClose={handleClose}
-                  severity='success'
-                  sx={{ width: "100%" }}
-                >
-                  การลบที่พักของคุณได้ดำเนินการสำเร็จแล้ว
-                </Alert>
-              </Snackbar>
+              </Grid> 
             </>
           ) : (
             <Grid
@@ -185,7 +179,7 @@ function OwnerHistoryPage() {
             >
               <Box>
                 <Box>
-                  <img src='ownerHistory.jpg' width='600' height='400' />
+                  <img src='ownerHistory.jpg' width='600' height='400' alt='Noresult Img' />
                 </Box>
                 <Typography
                   sx={{
@@ -199,6 +193,12 @@ function OwnerHistoryPage() {
               </Box>
             </Grid>
           )}
+
+        <Snackbar open={openSnackDeleteResident} anchorOrigin={{ vertical:'top', horizontal:'center' }} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            {location?.state?.message? location?.state?.message:'การแก้ไขที่พักของคุณได้ดำเนินการสำเร็จแล้ว'}
+          </Alert>
+        </Snackbar>
           {/* {} */}
           {/* <CardOwnerHistoryList /> */}
         </Grid>
