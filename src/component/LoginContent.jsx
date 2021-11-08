@@ -1,5 +1,10 @@
 import React, { useContext, useState } from "react";
-import { BrowserRouter as Router, Link, useHistory, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  useHistory,
+  useLocation,
+} from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import axios from "../config/axios";
@@ -32,8 +37,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import { GoogleCustomButton } from "../style/button/GoogleCustomButton";
 import { FacebookCustomButton } from "../style/button/FacebookCustomButton";
-import Stack from '@mui/material/Stack';
-import MuiAlert from '@mui/material/Alert';
+import Stack from "@mui/material/Stack";
+import MuiAlert from "@mui/material/Alert";
 
 //customize button style
 const CustomButtonRoot = styled("button")(`
@@ -68,7 +73,7 @@ function CustomButton(props) {
 }
 
 const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
 });
 
 function LoginContent() {
@@ -101,13 +106,12 @@ function LoginContent() {
 
   const { setUser } = useContext(AuthContext);
 
-  
   const [openSnackLogin, setOpenSnackLogin] = React.useState(false);
 
   const [snackEditResident, setSnackEditResident] = React.useState({
     open: false,
-    vertical: 'top',
-    horizontal: 'center',
+    vertical: "top",
+    horizontal: "center",
   });
 
   const { vertical, horizontal, open } = snackEditResident;
@@ -115,11 +119,10 @@ function LoginContent() {
   const handleClose = () => {
     setOpenSnackLogin({ ...snackEditResident, open: false });
   };
-  
-  const handleOpenSnackBar = (newState) => () => {
+
+  const handleOpenSnackBar = newState => () => {
     setOpenSnackLogin({ open: true, ...newState });
   };
-
 
   const [values, setValues] = useState({
     email: "",
@@ -174,7 +177,7 @@ function LoginContent() {
       setToken(res.data.token);
       setUser(jwtDecode(res.data.token));
 
-      setOpenSnackLogin(true)
+      setOpenSnackLogin(true);
 
       history.push({
         pathname: "/",
@@ -263,26 +266,34 @@ function LoginContent() {
                   onClick={renderProps.onClick}
                   // disabled={renderProps.disabled}
                 >
-                  <Grid item xs={1} sx={{ fontSize: "25px" }}>
-                    <FcGoogle />
-                  </Grid>
-
                   <Grid
-                    item
-                    xs={11}
+                    container
                     sx={{
                       display: "flex",
                       justifyContent: "center",
-                      height: "32px",
                       alignItems: "center",
                     }}
                   >
-                    <Typography
-                      variant='p'
-                      sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
+                    <Grid item xs={1} sx={{ fontSize: "25px" }}>
+                      <FcGoogle />
+                    </Grid>
+
+                    <Grid
+                      item
+                      xs={11}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
                     >
-                      Sign In With Google
-                    </Typography>
+                      <Typography
+                        variant='p'
+                        sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
+                      >
+                        Sign In With Google
+                      </Typography>
+                    </Grid>
                   </Grid>
                 </GoogleCustomButton>
               )}
@@ -558,17 +569,15 @@ function LoginContent() {
 
       {/* ยังแก้อยู่ */}
       <Snackbar
-          open={openSnackLogin}
-          autoHideDuration={6000}
-          onClose={handleClose}
-        >
-          <Alert
-            onClose={handleClose}
-            severity='success'
-            sx={{ width: "100%" }}
-          >
-            {location?.state?.message?location.state.message:'การเข้าสู่ระบบของคุณได้ดำเนินการสำเร็จแล้ว'} 
-          </Alert>
+        open={openSnackLogin}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity='success' sx={{ width: "100%" }}>
+          {location?.state?.message
+            ? location.state.message
+            : "การเข้าสู่ระบบของคุณได้ดำเนินการสำเร็จแล้ว"}
+        </Alert>
       </Snackbar>
     </Container>
   );
