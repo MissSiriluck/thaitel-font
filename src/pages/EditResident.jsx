@@ -418,10 +418,7 @@ function EditResident() {
             `/backAccounts/${location.state.resident.BankAccount.id}`,
             formBank
           );
-          handleOpenSnackBar({
-            vertical: 'top',
-            horizontal: 'center',
-          })
+          
           setOpenSnackEditResident(true)
     
           history.push({ pathname: "/ownerhistory" ,state:{message:'การแก้ไขที่พักของคุณสำเร้จแล้ว'}});
@@ -435,13 +432,6 @@ function EditResident() {
   return (
     <>
       <Header />
-      
-      <Snackbar 
-        anchorOrigin={{ vertical, horizontal }}
-        open={open}
-        onClose={handleClose}
-        key={vertical + horizontal} />
-
       <CreateResidentHeader />
       <ResidentDetailForm />
       <ServicesInresident />
