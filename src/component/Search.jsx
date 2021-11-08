@@ -35,7 +35,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 //customize input date picker
-const RedditTextField = styled((props) => (
+const RedditTextField = styled(props => (
   <TextField InputProps={{ disableUnderline: true }} {...props} />
 ))(({ theme }) => ({
   "& .MuiFilledInput-root": {
@@ -121,18 +121,18 @@ function Search({ residentSearch }) {
               จุดหมาย/ชื่อที่พัก
             </Typography>
             <BootstrapInput
-              defaultValue=""
-              id="bootstrap-input"
+              defaultValue=''
+              id='bootstrap-input'
               fullWidth
-              placeholder="เลือกจุดหมายที่คุณต้องการ"
-              size="small"
+              placeholder='เลือกจุดหมายที่คุณต้องการ'
+              size='small'
               sx={{
                 padding: 0,
                 background: "#fff",
                 borderRadius: "4px",
                 mb: 2,
               }}
-              onChange={(e) => setResident(e.target.value)}
+              onChange={e => setResident(e.target.value)}
             />
 
             <Typography sx={{ color: "#fff", pb: 1 }}>
@@ -147,19 +147,19 @@ function Search({ residentSearch }) {
                 }}
               >
                 <DateRangePicker
-                  startText="Check-in"
-                  endText="Check-out"
+                  startText='Check-in'
+                  endText='Check-out'
                   value={checkIn}
                   renderDay={renderWeekPickerDay}
-                  onChange={(e) => {
+                  onChange={e => {
                     setCheckIn(e);
                   }}
                   renderInput={(startProps, endProps) => (
                     <React.Fragment>
                       <RedditTextField
-                        id="filled-basic"
-                        label="Filled"
-                        variant="filled"
+                        id='filled-basic'
+                        label='Filled'
+                        variant='filled'
                         sx={{
                           backgroundColor: "#fff",
                           borderRadius: "4px",
@@ -180,9 +180,9 @@ function Search({ residentSearch }) {
                         {...startProps}
                       />
                       <RedditTextField
-                        id="filled-basic"
-                        label="Filled"
-                        variant="filled"
+                        id='filled-basic'
+                        label='Filled'
+                        variant='filled'
                         sx={{
                           backgroundColor: "#fff",
                           borderRadius: "4px",

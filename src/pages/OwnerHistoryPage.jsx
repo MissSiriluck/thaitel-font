@@ -21,17 +21,18 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 //customize button blue
 const CustomButtonRoot = styled("button")(`
-    background-color: none;
+    background-color: #03A9F4;
     padding: 12px 35px;
     border-radius: 10px;
     color: #fff;
     font-weight: 600;
     font-family: 'Noto Sans Thai', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     transition: all 200ms ease;
     cursor: pointer;
     box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 0 rgba(0, 127, 255, 0);
     border: none;
+    width: 100%;
 
     &:hover {
         background-color: #64CEEF;
@@ -115,9 +116,13 @@ function OwnerHistoryPage() {
       <SpaceforHead />
       <Header />
 
-      <Container maxWidth='lg' sx={{ mt: 18, mb: 18 }}>
+      <Container maxWidth='lg' sx={{ mt: 18, mb: 12 }}>
         <Grid container>
-          <Grid item xs={12} sx={{ display: "flex", flexDirection: "row" }}>
+          <Grid
+            item
+            xs={12}
+            sx={{ display: "flex", flexDirection: "row", mb: 3 }}
+          >
             <Grid item xs={12}>
               <Grid item xs={12}>
                 <Typography sx={{ fontSize: "25px", mb: 1 }}>
@@ -130,38 +135,25 @@ function OwnerHistoryPage() {
                 </Typography>
               </Grid>
             </Grid>
+
             <Grid
               item
-              xs={2}
+              xs={3}
               sx={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <CustomButton
-                sx={{
-                  background: "#fff",
-                  border: "1px solid #07133C",
-                  color: "#07133C",
-                  fontFamily: "'Noto Sans Thai', sans-serif",
-                  fontSize: "14px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  p: 1,
-                  width: "100%",
-                  height: "60%",
-                }}
-                onClick={handleClickRoomSumary}
-              >
+              <CustomButton onClick={handleClickRoomSumary}>
                 เพิ่มที่พักของคุณ
               </CustomButton>
             </Grid>
           </Grid>
+
           {residents.length > 0 ? (
             <>
-              <Grid>
+              <Grid container>
                 {residents?.map(item => (
                   <CardOwnerHistoryList
                     resident={item}

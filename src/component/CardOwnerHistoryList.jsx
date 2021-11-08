@@ -97,7 +97,7 @@ function CardOwnerHistoryList({ resident, deleteResident }) {
   // }
 
   return (
-    <Grid item xs={12} sx={{ mt: 3 }}>
+    <Grid item xs={12}>
       {/* {resident.map((resident) => ( */}
       <Grid
         item
@@ -107,9 +107,7 @@ function CardOwnerHistoryList({ resident, deleteResident }) {
       >
         <Grid container>
           <Grid item xs={2}>
-            {/* {resident?.ResidentImgs?.map((item) => ( */}
             <img
-              // src={`${resident.url}`}
               src={resident?.imgUrl}
               style={{
                 width: "170px",
@@ -118,99 +116,126 @@ function CardOwnerHistoryList({ resident, deleteResident }) {
               }}
               alt='resident-img'
             />
-            {/* ))} */}
           </Grid>
-          <Grid item xs={8} sx={{ flexGlow: 1, mt: 2 }}>
+
+          <Grid item xs={7} sx={{ flexGlow: 1, mt: 1, ml: 3 }}>
             <Grid container>
-              <Grid item xs={2}>
-                <Typography sx={{ mb: 1 }}>ชื่อที่พัก</Typography>
+              <Grid item xs={3}>
+                <Typography sx={{ mb: 1, fontWeight: "bold" }}>
+                  ชื่อที่พัก
+                </Typography>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={9}>
                 <Typography sx={{ mb: 1 }}>{resident?.name}</Typography>
               </Grid>
-              {/* <Grid item xs={6}>
-                <Typography sx={{ mb: 1 }}>
-                  {`จำนวนห้องพักที่เหลือ {qty rooms} ห้อง`}
-                </Typography>
-              </Grid> */}
             </Grid>
 
-            {resident?.rooms?.map(item => (
-              <Grid container>
-                <Grid item xs={2}>
-                  <Typography sx={{ mb: 1 }}>ชื่อห้องพัก</Typography>
-                </Grid>
-                <Box sx={{ display: "flex" }}>
-                  <Grid item xs={10}>
+            {/* {resident?.rooms?.map(item => (
+              <>
+                <Grid container>
+                  <Grid item xs={3}>
+                    <Typography sx={{ mb: 1, fontWeight: "bold" }}>
+                      ชื่อห้องพัก
+                    </Typography>
+                  </Grid>
+
+                  <Grid item xs={9}>
                     <Typography sx={{ mb: 1 }}>{item.typeOf}</Typography>
                   </Grid>
-                  <Grid item xs={12} sx={{ width: "500px" }}>
+                </Grid>
+
+                <Grid container>
+                  <Grid item xs={3}>
+                    <Typography sx={{ mb: 1, fontWeight: "bold" }}>
+                      จำนวนห้องพักที่เหลือ
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={9} sx={{ width: "500px" }}>
                     <Typography sx={{ mb: 1 }}>
-                      {/* จำนวนห้องพักที่เหลือ {item.roomAmount} ลบด้วย */}
-                      จำนวนห้องพักที่เหลือ{" "}
                       {item.roomAmount - item.countBookedRoom} ห้อง จาก{" "}
                       {item.roomAmount} ห้อง
                     </Typography>
                   </Grid>
-                </Box>
-              </Grid>
-            ))}
+                </Grid>
+              </>
+            ))} */}
 
             <Grid container>
-              <Grid item xs={2}>
-                <Typography sx={{ mb: 1 }}>จังหวัด</Typography>
+              <Grid item xs={3}>
+                <Typography sx={{ mb: 1, fontWeight: "bold" }}>
+                  จังหวัด
+                </Typography>
               </Grid>
-              <Grid item xs={10}>
+              <Grid item xs={9}>
                 <Typography sx={{ mb: 1 }}>{resident?.province}</Typography>
               </Grid>
             </Grid>
 
             <Grid container>
-              <Grid item>
-                <Typography sx={{ mb: 1 }}>รายละเอียดอื่นๆ </Typography>
+              <Grid item xs={3}>
+                <Typography sx={{ mb: 1, fontWeight: "bold" }}>
+                  รายละเอียดอื่นๆ{" "}
+                </Typography>
               </Grid>
-              <Grid item xs={4} sx={{ marginLeft: "10px" }}>
-                <Typography sx={{ mb: 1 }}> {resident?.description}</Typography>
+              <Grid item xs={9}>
+                <Typography
+                  sx={{
+                    mb: 1,
+                    textOverflow: "ellipsis",
+                    // maxWidth: 8,
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                  }}
+                >
+                  {" "}
+                  {resident?.description}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
 
-          <Grid item xs={3}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "flex-end",
-                mt: 20,
-              }}
-            >
-              <Button
-                variant='outlined'
+          <Grid item xs={2.7} sx={{ justifyContent: "flex-end" }}>
+            <Grid item sx={{ justifyContent: "flex-end" }}>
+              <Box
                 sx={{
-                  mr: 1,
-                  borderRadius: "10px",
-                  fontFamily: "'Noto Sans Thai', sans-serif",
-                  width: "120px",
-                }}
-                onClick={handleClickEditResidents}
-              >
-                DETAIL
-              </Button>
-              <CustomButton
-                sx={{
-                  background: "#c62828",
-                  color: "#fff",
-                  fontFamily: "'Noto Sans Thai', sans-serif",
-                  fontSize: "18px",
                   display: "flex",
-                  justifyContent: "center",
-                  width: "100px",
-                  p: 2,
+                  justifyContent: "flex-end",
+                  alignContent: "flex-end",
+                  bottom: "0",
+                  right: "0",
                 }}
-                onClick={handleDeleteResident}
               >
-                ลบข้อมูล
-              </CustomButton>
-            </Box>
+                <Button
+                  variant='outlined'
+                  sx={{
+                    mr: 1,
+                    borderRadius: "10px",
+                    fontFamily: "'Noto Sans Thai', sans-serif",
+                    width: "100px",
+                    boxShadow:
+                      "0 4px 20px 0 rgb(61 71 82 / 10%), 0 0 0 0 rgb(0 127 255 / 0%)",
+                  }}
+                  onClick={handleClickEditResidents}
+                >
+                  DETAIL
+                </Button>
+                <CustomButton
+                  sx={{
+                    background: "#c62828",
+                    color: "#fff",
+                    fontFamily: "'Noto Sans Thai', sans-serif",
+                    fontSize: "18px",
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "100px",
+                    p: 2,
+                  }}
+                  onClick={handleDeleteResident}
+                >
+                  ลบข้อมูล
+                </CustomButton>
+              </Box>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

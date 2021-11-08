@@ -416,7 +416,7 @@ function OwnerRegister({ handleSubmitOwnerRegister }) {
                       onChange={handleChangeFile}
                     />
                     <Button variant='contained' component='span'>
-                      กดเพื่อเพิ่มรูปภาพห้องพักของคุณ
+                      กดเพื่อเพิ่มรูปภาพบัตรประชาชนของคุณ
                     </Button>
                   </label>
                 </Grid>
