@@ -11,6 +11,10 @@ import Header from "../component/Header";
 import { CreateResidentContext2 } from "../context/CreateResidentContext2";
 import { useHistory } from "react-router";
 import SpaceforHead from "../component/SpaceforHead";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 function CreateResident() {
   const history = useHistory();
@@ -21,6 +25,16 @@ function CreateResident() {
     createResidentError,
     setCreateResidentError,
   } = useContext(CreateResidentContext2);
+
+  const [openModalCreateResident, setOpenModalCreateResident] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenModalCreateResident(false);
+  };
     
   useEffect(() => {
     setCreateResidentError({
@@ -162,7 +176,7 @@ function CreateResident() {
           ...curr,
           rateStar: "กรุณากรอกจำนวนดาวของท่าน",
         }));
-      }else if (isNaN(createResident.rateStar)) {
+      } else if (isNaN(createResident.rateStar)) {
         allPase= false;
         setCreateResidentError((curr) => ({ ...curr, rateStar: 'กรุณากรอกจำนวนดาวของท่านเป็นข้อมูลประเภทตัวเลข' }))
       }
@@ -199,12 +213,19 @@ function CreateResident() {
         allPase= false;
         setCreateResidentError((curr) => ({
           ...curr,
-          postalCode: "กรุณากรอกไปรษณีย์ของที่พักของท่าน",
+          postalCode: "กรุณากรอกรหัสไปรษณีย์ของที่พักของท่าน",
+        }));
+      } 
+      if (isNaN(createResident.postalCode)) {
+        allPase = false;
+        setCreateResidentError(curr => ({
+          ...curr,
+          rateStar: "กรุณากรอกรหัสไปรษณีย์ของที่พักของท่านเป็นข้อมูลประเภทตัวเลข",
         }));
       }
       if (createResident.postalCode.length !== 5) {
         allPase= false;
-        setCreateResidentError((curr) => ({ ...curr, postalCode: 'กรุณากรอกไปรษณีย์ของที่พักของท่านให้ถูกต้อง' }))
+        setCreateResidentError((curr) => ({ ...curr, postalCode: 'กรุณากรอกไปรษณีย์ของที่พักของท่านให้ครบ 5 หลัก' }))
       }
       if (!createResident.residentImageUrl) {
         allPase= false;
@@ -220,12 +241,20 @@ function CreateResident() {
           timeCheckInToStart: "กรุณากรอกเวลาเช็คอินเริ่มต้นของที่พักของท่าน",
         }));
       }
+      else if (isNaN(createResident.timeCheckInToStart)) {
+        allPase= false;
+        setCreateResidentError((curr) => ({ ...curr, timeCheckInToStart: 'กรุณากรอกเวลาเช็คอินเริ่มต้นของที่พักของท่านเป็นข้อมูลประเภทตัวเลข' }))
+      }
       if (!createResident.timeCheckInToEnd) {
         allPase= false;
         setCreateResidentError((curr) => ({
           ...curr,
           timeCheckInToEnd: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
         }));
+      }
+      else if (isNaN(createResident.timeCheckInToEnd)) {
+        allPase= false;
+        setCreateResidentError((curr) => ({ ...curr, timeCheckInToEnd: 'กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่านเป็นข้อมูลประเภทตัวเลข' }))
       }
       if (!createResident.timeCheckOutToStart) {
         allPase= false;
@@ -234,12 +263,19 @@ function CreateResident() {
           timeCheckOutToStart: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
         }));
       }
+      else if (isNaN(createResident.timeCheckOutToStart)) {
+        allPase= false;
+        setCreateResidentError((curr) => ({ ...curr, timeCheckOutToStart: 'กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่านเป็นข้อมูลประเภทตัวเลข' }))
+      }
       if (!createResident.timeCheckOutToEnd) {
         allPase= false;
         setCreateResidentError((curr) => ({
           ...curr,
-          timeCheckOutToEnd: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
+          timeCheckOutToEnd: "กรุณากรอกจำนวนวันที่สามารถยกเลิกการจองก่อนหน้าการยกเลิกที่ไม่มีเสียค่าธรรมเนียมของที่พักของท่าน",
         }));
+      } else if (isNaN(createResident.timeCheckOutToEnd)) {
+        allPase= false;
+        setCreateResidentError((curr) => ({ ...curr, timeCheckOutToEnd: 'กรุณากรอกจำนวนวันที่สามารถยกเลิกการจองก่อนหน้าการยกเลิกที่ไม่มีเสียค่าธรรมเนียมของที่พักของท่านเป็นข้อมูลประเภทตัวเลข' }))
       }
       if (!createResident.cancelDate) {
         allPase= false;
@@ -247,6 +283,9 @@ function CreateResident() {
           ...curr,
           cancelDate: "กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่าน",
         }));
+      } else if (isNaN(createResident.cancelDate)) {
+        allPase= false;
+        setCreateResidentError((curr) => ({ ...curr, cancelDate: 'กรุณากรอกเวลาเช็คอินสิ้นสุดของที่พักของท่านเป็นข้อมูลประเภทตัวเลข' }))
       }
       if (createResident.bankAccept === false) {
         allPase= false;
@@ -269,15 +308,19 @@ function CreateResident() {
           accNumber: "กรุณากรอกเลขบัญชีธนาคารของท่าน",
         }));
       }
+        else if (isNaN(createResident.accNumber)) {
+        allPase= false;
+        setCreateResidentError((curr) => ({ ...curr, accNumber: 'กรุณากรอกเลขบัญชีธนาคารของท่านเป็นข้อมูลประเภทตัวเลข' }))
+      }
       if (createResident.accNumber.length !== 10 ) {
         allPase= false;
-        setCreateResidentError((curr) => ({ ...curr, accNumber: 'กรุณากรอกเลขบัญชีธนาคารของท่านให้ถูกต้อง' }))
+        setCreateResidentError((curr) => ({ ...curr, accNumber: 'กรุณากรอกเลขบัญชีธนาคารของท่านเป็นจำนวน 10 หลัก' }))
       }
       if (!createResident.bankName) {
         allPase= false;
         setCreateResidentError((curr) => ({
           ...curr,
-          bankName: "กรุณากรอกธนาคารของบัญชีของท่าน",
+          bankName: "กรุณากรอกชื่อธนาคารของบัญชีของท่าน",
         }));
       }
       if (!createResident.bankImgUrl) {
@@ -441,6 +484,7 @@ function CreateResident() {
         bankImageFile: null,
       });
 
+      setOpenModalCreateResident(true)
       history.push("/ownerhistory");
     }
     } catch (err) {
@@ -452,7 +496,13 @@ function CreateResident() {
     <>
       <SpaceforHead />
       <Header />
-      {/* ยังขาดการเลือก Type ของ Resident */}
+      
+      {/* <Snackbar open={openSnackEditResident} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          การแก้ไขที่พักของคุณได้ดำเนินการสำเร็จแล้ว
+        </Alert>
+      </Snackbar> */}
+
       <CreateResidentHeader />
       <ResidentDetailForm />
       <ServicesInresident />

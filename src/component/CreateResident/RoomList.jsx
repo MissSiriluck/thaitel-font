@@ -41,7 +41,6 @@ function CustomButton(props) {
 
 function RoomList({status, index, room, deleteRoomCollection, editRoomCollection }) {
 
-
   const [openModal1, setOpenModal1] = React.useState(false);
   const handleOpen1 = () => setOpenModal1(true);
   const handleClose1 = () => setOpenModal1(false);

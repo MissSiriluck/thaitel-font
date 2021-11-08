@@ -1,4 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory, useLocation } from "react-router";
+// Mui
 import { Container, Grid, Typography } from "@mui/material";
 import SpaceforHead from "../component/SpaceforHead";
 import Header from "../component/Header";
@@ -11,7 +13,10 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { Box, styled } from "@mui/system";
-import { useHistory, useLocation } from "react-router";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 //customize button blue
 const CustomButtonRoot = styled("button")(`
@@ -45,10 +50,24 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 function OwnerHistoryPage() {
   const { user } = useContext(AuthContext);
   const { residents, setResidents } = useContext(ResidentContext);
   // console.log(user);
+
+  const [openSnackDeleteResident, setOpenSnackDeleteResident] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSnackDeleteResident(false);
+  };
 
   useEffect(() => {
     const fetchResident = async () => {
@@ -69,6 +88,7 @@ function OwnerHistoryPage() {
     if (idx !== -1) {
       newResidents.splice(idx, 1);
       setResidents(newResidents);
+      setOpenSnackDeleteResident(true)
     }
   };
 
@@ -148,6 +168,11 @@ function OwnerHistoryPage() {
                   />
                 ))}
               </Grid>
+              <Snackbar open={openSnackDeleteResident} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                  การลบที่พักของคุณได้ดำเนินการสำเร็จแล้ว
+                </Alert>
+              </Snackbar>
             </>
           ) : (
             <Grid
