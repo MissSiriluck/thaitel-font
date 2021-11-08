@@ -12,7 +12,7 @@ import { Button, Grid, Rating, Typography } from "@mui/material";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import WifiIcon from "@mui/icons-material/Wifi";
-// import PoolIcon from "@mui/icons-material/Pool";
+import PoolIcon from "@mui/icons-material/Pool";
 import LocalBarIcon from "@mui/icons-material/LocalBar";
 import SpaIcon from "@mui/icons-material/Spa";
 import AlarmOnIcon from "@mui/icons-material/AlarmOn";
@@ -199,13 +199,13 @@ function ResidentDetail() {
                       ) : service?.serviceName === "wifi" ? (
                         <WifiIcon />
                       ) : service?.serviceName === "swimingPool" ? (
-                        <FastfoodIcon />
+                        <PoolIcon />
                       ) : service?.serviceName === "bar" ? (
                         <LocalBarIcon />
                       ) : service?.serviceName === "sauna" ? (
                         <SpaIcon />
                       ) : service?.serviceName === "reception" ? (
-                        <RoomServiceIcon />
+                        <AlarmOnIcon />
                       ) : service?.serviceName === "roomService" ? (
                         <RoomServiceIcon />
                       ) : service?.serviceName === "fitnessRoom" ? (

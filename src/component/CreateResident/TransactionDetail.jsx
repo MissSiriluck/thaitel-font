@@ -70,10 +70,7 @@ function TransactionDetail() {
             }}
           >
             <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et,
-              molestiae vel! Natus iusto voluptates voluptatum aliquam voluptas
-              numquam ad mollitia obcaecati deleniti? Repudiandae doloribus
-              voluptatum possimus quasi hic veniam temporibus.
+            การชำระเงินจะกระทำโดยการโอนเข้าบัญชีธนาคารโดยตรง ท่านจะได้รับการชำระเงินในเดือนถัดมาหลังจากวันที่ลูกค้าเช็คเอาต์ออกจากที่พัก เช่น ถ้าลูกค้าเข้าพักระหว่างวันที่ 28 มีนาคม - 4 เมษายน ท่านจะได้รับการชำระเงินในเดือนพฤษภาคม การคำนวณค่าคอมมิชชั่นจะกระทำทุกวันที่ 1 ของเดือน และจะชำระเงินในวันที่ 15 ของเดือน โดยมียอดการชำระค่าคอมมิชชั่นขั้นต่ำที่ 1000 บาท ถ้าค่าคอมมิชชั่นค้างชำระมียอดต่ำกว่า 1000 บาท จะมีการยกยอดไปจนกว่ายอดค้างชำระจะสูงถึง 1000 บาท
             </Typography>
           </Grid>
 
@@ -190,7 +187,7 @@ function TransactionDetail() {
                 onChange={(e) => handleChange("accNumber", e)}
                 helperText={
                   createResidentError.accNumber
-                    ? createResidentError.accName
+                    ? createResidentError.accNumber
                     : ""
                 }
                 error={createResidentError.accNumber}

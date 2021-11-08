@@ -11,15 +11,7 @@ import { useEffect, useState } from "react";
 import { Grid, Typography } from "@mui/material";
 // import CarouselBox from "./CarouselBox";
 // import CarouselBox from "./CarouselBox";
-import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
-// import FastfoodIcon from "@mui/icons-material/Fastfood";
-// import WifiIcon from "@mui/icons-material/Wifi";
-// import PoolIcon from "@mui/icons-material/Pool";
-// import LocalBarIcon from "@mui/icons-material/LocalBar";
-// import SpaIcon from "@mui/icons-material/Spa";
-// import AlarmOnIcon from "@mui/icons-material/AlarmOn";
-// import RoomServiceIcon from "@mui/icons-material/RoomService";
-// import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
@@ -41,6 +33,17 @@ import { useHistory, useLocation } from "react-router";
 // import { residents } from "../mocks/residents";
 // import Image from "material-ui-image";
 import EachRoomCard from "./EachRoomCard";
+
+//Icon
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import FastfoodIcon from "@mui/icons-material/Fastfood";
+import WifiIcon from "@mui/icons-material/Wifi";
+import PoolIcon from "@mui/icons-material/Pool";
+import LocalBarIcon from "@mui/icons-material/LocalBar";
+import SpaIcon from "@mui/icons-material/Spa";
+import AlarmOnIcon from "@mui/icons-material/AlarmOn";
+import RoomServiceIcon from "@mui/icons-material/RoomService";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 
 //customize button blue
 const CustomButtonRoot = styled("span")(`
@@ -221,19 +224,37 @@ function AddcomDetail({ checkIn }) {
               บริการภายในโรงแรม
             </Typography>
 
-            {resident?.resident?.ServiceItems?.map((resident) => (
-              <Grid container sx={{ flexWrap: "wrap" }}>
+              <Grid container sx={{ flexWrap: "wrap", display: 'flex', flexDirection: 'row' }}>
+                {resident?.resident?.ServiceItems?.map((resident) => (
                 <Grid
                   item
                   xs={3}
-                  sx={{ display: "flex", alignItems: "center", mb: 2 }}
-                >
-                  <DirectionsCarIcon />
+                  sx={{ display: "flex", alignItems: "center", mb: 2, flexDirection: 'row' }}
+                  >
+                  {resident.serviceName === "parking" ? (
+                    <DirectionsCarIcon />
+                  ) : resident.serviceName === "breakFast" ? (
+                    <FastfoodIcon />
+                    ) : resident.serviceName === "wifi" ? (
+                      <WifiIcon />
+                  ) : resident.serviceName === "swimingPool" ? (
+                    <PoolIcon />
+                  ) : resident.serviceName === "bar" ? (
+                    <LocalBarIcon />
+                  ) : resident.serviceName === "sauna" ? (
+                    <SpaIcon />
+                  ) : resident.serviceName === "reception" ? (
+                    <AlarmOnIcon />
+                  ) : resident.serviceName === "roomService" ? (
+                    <RoomServiceIcon />
+                  ) : resident.serviceName === "fitnessRoom" ? (
+                    <FitnessCenterIcon />
+                  ) : null }
                   {/* <Typography sx={{ ml: 2 }}>ที่จอดรถ</Typography> */}
                   <Typography sx={{ ml: 2 }}>{resident.serviceName}</Typography>
-                </Grid>
+                  </Grid>
+                  ))}
               </Grid>
-            ))}
           </Grid>
         </Grid>
         {/* check-in & check-out block */}
