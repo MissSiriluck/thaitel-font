@@ -319,7 +319,16 @@ function ResidentDetail() {
                 <Typography sx={{ p: 1, flexGrow: 1 }}>
                   {resident?.timeCheckInStart} - {resident?.timeCheckInEnd}
                 </Typography>
-              </Box>
+               
+                        <Typography
+                          style={{
+                            fontSize: 18,
+                            alignItems: 'center'
+                          }}
+                        >
+                          นาฬิกา
+                        </Typography>
+               </Box>
             </Box>
           </Box>
 

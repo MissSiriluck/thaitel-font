@@ -58,6 +58,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 function OwnerHistoryPage() {
   const { user } = useContext(AuthContext);
   const { residents, setResidents } = useContext(ResidentContext);
+  const location = useLocation()
   // console.log(user);
 
   const [openSnackDeleteResident, setOpenSnackDeleteResident] = useState(false);
@@ -69,6 +70,12 @@ function OwnerHistoryPage() {
 
     setOpenSnackDeleteResident(false);
   };
+
+  useEffect(() => {
+    if(location?.state?.message){
+      setOpenSnackDeleteResident(true)
+    }
+  }, [location])
 
   useEffect(() => {
     const fetchResident = async () => {
@@ -179,7 +186,7 @@ function OwnerHistoryPage() {
                   severity='success'
                   sx={{ width: "100%" }}
                 >
-                  การลบที่พักของคุณได้ดำเนินการสำเร็จแล้ว
+                 {location.state.message?location.state.message:'การลบที่พักของคุณได้ดำเนินการสำเร็จแล้ว'} 
                 </Alert>
               </Snackbar>
             </>
@@ -193,7 +200,7 @@ function OwnerHistoryPage() {
             >
               <Box>
                 <Box>
-                  <img src='ownerHistory.jpg' width='600' height='400' />
+                  <img src='ownerHistory.jpg' width='600' height='400' alt='Noresult Img' />
                 </Box>
                 <Typography
                   sx={{
