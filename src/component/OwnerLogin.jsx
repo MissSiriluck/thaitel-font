@@ -500,7 +500,8 @@ function OwnerLogin() {
             </Typography>
           </Grid> */}
         <Grid mr={1}>
-          <Link to="/reset" style={{ textDecoration: "none" }}>
+          {/* <Link to="/reset" style={{ textDecoration: "none" }}> */}
+          <Link to="/resetOwner" style={{ textDecoration: "none" }}>
             <Typography
               // onClick={handleClickReset({
               //   vertical: "top",
