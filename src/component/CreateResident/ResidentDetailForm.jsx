@@ -550,6 +550,16 @@ function ResidentDetailForm() {
                           error={createResidentError.timeCheckOutToStart}
                         />
                       </Grid>
+                      <Grid xs={3}>
+                        <Typography
+                          style={{
+                            fontSize: 18,
+                            marginBottom: '10px',
+                          }}
+                        >
+                          นาฬิกา
+                        </Typography>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>

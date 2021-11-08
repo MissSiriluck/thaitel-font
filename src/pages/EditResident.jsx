@@ -424,7 +424,7 @@ function EditResident() {
           })
           setOpenSnackEditResident(true)
     
-          history.push({ pathname: "/ownerhistory" });
+          history.push({ pathname: "/ownerhistory" ,state:{message:'การแก้ไขที่พักของคุณสำเร้จแล้ว'}});
         }
 
     } catch (err) {
