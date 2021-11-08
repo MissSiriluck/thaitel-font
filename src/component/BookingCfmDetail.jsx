@@ -180,19 +180,18 @@ function BookingCfmDetail() {
                         <Box
                           sx={{
                             display: "flex",
-                            width: "400px",
+                            width: "200px",
                           }}
                         >
                           <Typography
                             sx={{ fontSize: "20px", p: 1, flexGrow: 1 }}
                           >
                             {resident?.typeOf}
-                            <Typography
-                              sx={{ fontSize: "20px", p: 1, flexGrow: 1 }}
-                            >
-                              {resident?.roomBookingAmount} ห้อง
-                            </Typography>
-                            {/* ห้องมาตรฐานเตียงเดี่ยว */}
+                          </Typography>
+                          <Typography
+                            sx={{ fontSize: "20px", p: 1, flexGrow: 1 }}
+                          >
+                            {resident?.roomBookingAmount} ห้อง
                           </Typography>
                         </Box>
                       </Box>

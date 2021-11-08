@@ -86,7 +86,7 @@ function ResidentDetail() {
   // console.log(`rooms`, rooms)
 
   const filterService = resident?.ServiceItems?.filter(
-    (item) => item.isHaving === true
+    item => item.isHaving === true
   );
   console.log(`filterService`, filterService);
 
@@ -101,7 +101,7 @@ function ResidentDetail() {
   });
   const classes = useStyles();
 
-  const handleOnClickEditResident = (e) => {
+  const handleOnClickEditResident = e => {
     e.preventDefault();
 
     history.push({
@@ -134,14 +134,14 @@ function ResidentDetail() {
             backgroundSize: "cover",
           }}
           xs={12}
-          alt=""
+          alt=''
         />
 
         {/* Name hotel and other detail */}
         <Grid container>
           <Grid
             item
-            id=""
+            id=''
             xs={12}
             sx={{
               border: "1px solid #BFBFBF",
@@ -163,7 +163,7 @@ function ResidentDetail() {
           {/* Service block */}
           <Grid
             item
-            id=""
+            id=''
             xs={12}
             sx={{
               border: "1px solid #BFBFBF",
@@ -188,7 +188,7 @@ function ResidentDetail() {
                     paddingLeft: "20px",
                   }}
                 >
-                  {filterService?.map((service) => (
+                  {filterService?.map(service => (
                     <Grid
                       item
                       xs={3}
@@ -233,8 +233,8 @@ function ResidentDetail() {
                     <img
                       // src="no-service-pic.jpg"
                       src={noService}
-                      width="500"
-                      height="300"
+                      width='500'
+                      height='300'
                     />
                   </Box>
                   <Typography
@@ -321,16 +321,16 @@ function ResidentDetail() {
                 <Typography sx={{ p: 1, flexGrow: 1 }}>
                   {resident?.timeCheckInStart} - {resident?.timeCheckInEnd}
                 </Typography>
-               
-                        <Typography
-                          style={{
-                            fontSize: 18,
-                            alignItems: 'center'
-                          }}
-                        >
-                          นาฬิกา
-                        </Typography>
-               </Box>
+
+                <Typography
+                  style={{
+                    fontSize: 18,
+                    alignItems: "center",
+                  }}
+                >
+                  นาฬิกา
+                </Typography>
+              </Box>
             </Box>
           </Box>
 
@@ -394,10 +394,10 @@ function ResidentDetail() {
         {/* room type block */}
         {rooms.length > 0 ? (
           <>
-            {rooms.map((room) => (
+            {rooms.map(room => (
               <Grid
                 item
-                id=""
+                id=''
                 xs={12}
                 sx={{
                   border: "1px solid #BFBFBF",
@@ -463,10 +463,11 @@ function ResidentDetail() {
             <Box>
               <Box>
                 <img
-                  src=// "hotelRoom.jpg"
-                  {hotelRoom}
-                  width="500"
-                  height="300"
+                  src={ // "hotelRoom.jpg"
+                    hotelRoom
+                  }
+                  width='500'
+                  height='300'
                 />
               </Box>
               <Typography
@@ -484,7 +485,7 @@ function ResidentDetail() {
 
         <Grid item sx={{ display: "flex", justifyContent: "center" }}>
           <Button
-            variant="outlined"
+            variant='outlined'
             sx={{
               width: "250px",
               fontFamily: "'Noto Sans Thai', sans-serif",
@@ -494,6 +495,8 @@ function ResidentDetail() {
               mr: 1,
               borderRadius: "10px",
               height: "50px",
+              boxShadow:
+                "0 4px 20px 0 rgb(61 71 82 / 10%), 0 0 0 0 rgb(0 127 255 / 0%)",
             }}
             onClick={handleOnClickEditResident}
           >
@@ -514,10 +517,10 @@ function ResidentDetail() {
               width: "250px",
               height: "50px",
             }}
-            onClick={(e) => {
+            onClick={e => {
               history.push({ pathname: "/ownerhistory" });
             }}
-            onClick={(e) => {
+            onClick={e => {
               history.push({ pathname: "/ownerhistory" });
             }}
           >

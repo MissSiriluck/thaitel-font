@@ -72,31 +72,12 @@ function ResetPasswordContent() {
         // password: data.get("password"),
       };
       console.log(`values.email`, values.email);
-      // if (values.email) {
-      //   setSanackBarMessage("อีเมลถูกต้อง");
-      //   setColorSnackBar("success");
-      //   setOpen(true);
-      // } else {
-      //   setSanackBarMessage("อีเมลไม่ถูกต้อง");
-      //   setColorSnackBar("error");
-      //   setOpen(true);
-      // }
 
       const res = await axios.post("/users/reset-password", values);
-      //   setToken(res.data.token);
-      //   console.log("res.data.token...................", res.data.token);
-      //   setUser(jwtDecode(res.data.token));
 
-      //   history.push({
-      //     pathname: "/",
-      //     state: {
-      //       successMessage: "Already Login.",
-      //       from: " login page ",
-      //     },
       setSanackBarMessage("อีเมลถูกต้อง");
       setColorSnackBar("success");
       setOpen(true);
-      //   });
     } catch (err) {
       console.dir(err.response.status);
       if (err.response.status === 422) {

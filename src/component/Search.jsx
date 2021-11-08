@@ -10,7 +10,7 @@ import { CustomButton } from "./BookingCfmDetail";
 import { Container, Grid, InputBase, Typography } from "@mui/material";
 import { alpha, Box, styled } from "@mui/system";
 import BtnGuestnRoomForSearch from "./BtnGuestnRoomForSearch";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 //customize input box hover focus styles
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
@@ -83,20 +83,46 @@ const DateRangePickerDay = styled(MuiDateRangePickerDay)(
   })
 );
 
-function Search({ residentSearch, province }) {
+function Search({ residentSearch, province, checkIn: cI, rooms }) {
   const history = useHistory();
+  const location = useLocation();
+  console.log(`location`, location);
+
   const [value, setValue] = useState([null, null]);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [resident, setResident] = useState("");
-  const [checkIn, setCheckIn] = useState([null, null]);
+  const [resident, setResident] = useState(residentSearch);
+  const [checkIn, setCheckIn] = useState([
+    new Date(cI.split(",")[0]),
+    new Date(cI.split(",")[1]),
+  ]);
+
   // const [guest, setGuest] = useState(1);
   const [room, setRoom] = useState(1);
   console.log(checkIn);
-  console.log(`province`, province)
+  console.log(cI);
+  console.log(`province`, province);
+
   function HandleSumbit() {
     // const history = useHistory();
     console.log("testt");
-    history.push(`/mainmenu/${resident}/${checkIn}/${room}`);
+
+    let allPass = true;
+
+    if (!province) {
+      allPass = false;
+      alert("กรุณาใส่ข้อมูลสำหรับการค้นหา");
+    }
+    if (!resident) {
+      allPass = false;
+      alert("กรุณาใส่ข้อมูลสำหรับการค้นหา");
+    }
+    if (!checkIn) {
+      allPass = false;
+      alert("กรุณาใส่วันที่เช็คอินหรือเช็คเอาท์");
+    }
+    if (allPass) {
+      history.push(`/mainmenu/${resident}/${checkIn}/${room}`);
+    }
   }
 
   const renderWeekPickerDay = (date, dateRangePickerDayProps) => {
@@ -111,7 +137,10 @@ function Search({ residentSearch, province }) {
       <Grid item xs={11}>
         <Typography sx={{ mb: 2 }}>
           หน้าหลัก &gt; ผลการค้นหา &gt;
-          <span style={{ color: "#c62828" }}> { residentSearch?residentSearch:province } </span>
+          <span style={{ color: "#c62828" }}>
+            {" "}
+            {residentSearch ? residentSearch : province}{" "}
+          </span>
         </Typography>
         <Box sx={{ background: "#07133C", flexGlow: 1, borderRadius: 2 }}>
           <Grid item sx={{ p: 4 }}>
@@ -127,6 +156,7 @@ function Search({ residentSearch, province }) {
               fullWidth
               placeholder="เลือกจุดหมายที่คุณต้องการ"
               size="small"
+              value={resident}
               sx={{
                 padding: 0,
                 background: "#fff",
