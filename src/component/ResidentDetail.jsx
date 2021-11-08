@@ -2,6 +2,8 @@
 // import MenuItem from "@mui/material/MenuItem";
 // import FormControl from "@mui/material/FormControl";
 // import Select from "@mui/material/Select";
+import noService from "../pic/no-service-pic.jpg";
+import hotelRoom from "../pic/hotelRoom.jpg";
 import axios from "../config/axios";
 import { Box, styled } from "@mui/system";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
@@ -229,8 +231,8 @@ function ResidentDetail() {
                 <Box>
                   <Box>
                     <img
-                      src="no-service-pic.jpg"
-                      alt=""
+                      // src="no-service-pic.jpg"
+                      src={noService}
                       width="500"
                       height="300"
                     />
@@ -451,7 +453,12 @@ function ResidentDetail() {
           >
             <Box>
               <Box>
-                <img src="hotelRoom.jpg" width="500" height="300" />
+                <img
+                  src=// "hotelRoom.jpg"
+                  {hotelRoom}
+                  width="500"
+                  height="300"
+                />
               </Box>
               <Typography
                 sx={{
