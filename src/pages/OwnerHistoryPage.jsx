@@ -13,10 +13,11 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { Box, styled } from "@mui/system";
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
 
 //customize button blue
 const CustomButtonRoot = styled("button")(`
@@ -51,7 +52,7 @@ function CustomButton(props) {
 }
 
 const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
 });
 
 function OwnerHistoryPage() {
@@ -62,7 +63,7 @@ function OwnerHistoryPage() {
   const [openSnackDeleteResident, setOpenSnackDeleteResident] = useState(false);
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -82,20 +83,20 @@ function OwnerHistoryPage() {
   }, []);
   // console.log("residents................", residents);
 
-  const deleteResident = (id) => {
+  const deleteResident = id => {
     const newResidents = [...residents];
-    const idx = residents.findIndex((item) => item.id === id);
+    const idx = residents.findIndex(item => item.id === id);
     if (idx !== -1) {
       newResidents.splice(idx, 1);
       setResidents(newResidents);
-      setOpenSnackDeleteResident(true)
+      setOpenSnackDeleteResident(true);
     }
   };
 
   const history = useHistory();
   // const location = useLocation();
 
-  const handleClickRoomSumary = (e) => {
+  const handleClickRoomSumary = e => {
     console.log(residents);
     e.preventDefault();
     history.push({
@@ -114,7 +115,7 @@ function OwnerHistoryPage() {
       <SpaceforHead />
       <Header />
 
-      <Container maxWidth="xl" sx={{ mt: 18, mb: 18 }}>
+      <Container maxWidth='lg' sx={{ mt: 18, mb: 18 }}>
         <Grid container>
           <Grid item xs={12} sx={{ display: "flex", flexDirection: "row" }}>
             <Grid item xs={12}>
@@ -161,15 +162,23 @@ function OwnerHistoryPage() {
           {residents.length > 0 ? (
             <>
               <Grid>
-                {residents?.map((item) => (
+                {residents?.map(item => (
                   <CardOwnerHistoryList
                     resident={item}
                     deleteResident={deleteResident}
                   />
                 ))}
               </Grid>
-              <Snackbar open={openSnackDeleteResident} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+              <Snackbar
+                open={openSnackDeleteResident}
+                autoHideDuration={6000}
+                onClose={handleClose}
+              >
+                <Alert
+                  onClose={handleClose}
+                  severity='success'
+                  sx={{ width: "100%" }}
+                >
                   การลบที่พักของคุณได้ดำเนินการสำเร็จแล้ว
                 </Alert>
               </Snackbar>
@@ -184,7 +193,7 @@ function OwnerHistoryPage() {
             >
               <Box>
                 <Box>
-                  <img src="ownerHistory.jpg" width="600" height="400" />
+                  <img src='ownerHistory.jpg' width='600' height='400' />
                 </Box>
                 <Typography
                   sx={{

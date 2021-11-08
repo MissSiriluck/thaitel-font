@@ -187,7 +187,7 @@ function OwnerLogin() {
       justifyContent='center'
       alignItems='center'
       direction='column'
-      sx={{ padding: 0, mt: "20vh" }}
+      sx={{ padding: 0, mt: "23vh" }}
     >
       <Grid Container sx={{ flexGlow: 1 }}>
         {/* --------------- head --------------- */}
