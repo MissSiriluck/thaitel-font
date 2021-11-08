@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Link, useHistory, useLocation } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import axios from "../config/axios";
@@ -32,6 +32,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import { GoogleCustomButton } from "../style/button/GoogleCustomButton";
 import { FacebookCustomButton } from "../style/button/FacebookCustomButton";
+import Stack from '@mui/material/Stack';
+import MuiAlert from '@mui/material/Alert';
 
 //customize button style
 const CustomButtonRoot = styled("button")(`
@@ -65,8 +67,15 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 function LoginContent() {
   const history = useHistory();
+
+  const location = useLocation();
+
   console.log(user);
   const responseGoogle = async response => {
     try {
@@ -91,6 +100,26 @@ function LoginContent() {
   };
 
   const { setUser } = useContext(AuthContext);
+
+  
+  const [openSnackLogin, setOpenSnackLogin] = React.useState(false);
+
+  const [snackEditResident, setSnackEditResident] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+
+  const { vertical, horizontal, open } = snackEditResident;
+
+  const handleClose = () => {
+    setOpenSnackLogin({ ...snackEditResident, open: false });
+  };
+  
+  const handleOpenSnackBar = (newState) => () => {
+    setOpenSnackLogin({ open: true, ...newState });
+  };
+
 
   const [values, setValues] = useState({
     email: "",
@@ -144,6 +173,8 @@ function LoginContent() {
       const res = await axios.post("/users/login", values);
       setToken(res.data.token);
       setUser(jwtDecode(res.data.token));
+
+      setOpenSnackLogin(true)
 
       history.push({
         pathname: "/",
@@ -524,6 +555,21 @@ function LoginContent() {
         </Grid>
         {/* ------------------------------- forget password ----------------------------- */}
       </Grid>
+
+      {/* ยังแก้อยู่ */}
+      <Snackbar
+          open={openSnackLogin}
+          autoHideDuration={6000}
+          onClose={handleClose}
+        >
+          <Alert
+            onClose={handleClose}
+            severity='success'
+            sx={{ width: "100%" }}
+          >
+            {location?.state?.message?location.state.message:'การเข้าสู่ระบบของคุณได้ดำเนินการสำเร็จแล้ว'} 
+          </Alert>
+      </Snackbar>
     </Container>
   );
 }

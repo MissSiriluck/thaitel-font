@@ -16,6 +16,10 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 function CreateResident() {
   const history = useHistory();
   
@@ -26,14 +30,14 @@ function CreateResident() {
     setCreateResidentError,
   } = useContext(CreateResidentContext2);
 
-  const [openModalCreateResident, setOpenModalCreateResident] = React.useState(false);
+  const [openCreateResident, setOpenCreateResident] = React.useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
 
-    setOpenModalCreateResident(false);
+    setOpenCreateResident(false);
   };
     
   useEffect(() => {
@@ -484,7 +488,7 @@ function CreateResident() {
         bankImageFile: null,
       });
 
-      setOpenModalCreateResident(true)
+      setOpenCreateResident(true)
       history.push("/ownerhistory");
     }
     } catch (err) {
@@ -497,11 +501,11 @@ function CreateResident() {
       <SpaceforHead />
       <Header />
       
-      {/* <Snackbar open={openSnackEditResident} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar open={openCreateResident} anchorOrigin={{horizontal: 'center',vertical: 'top'}} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-          การแก้ไขที่พักของคุณได้ดำเนินการสำเร็จแล้ว
+          การสร้างที่พักของคุณได้ดำเนินการสำเร็จแล้ว
         </Alert>
-      </Snackbar> */}
+      </Snackbar>
 
       <CreateResidentHeader />
       <ResidentDetailForm />
