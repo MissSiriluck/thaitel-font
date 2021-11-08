@@ -508,11 +508,6 @@ function LoginContent() {
             mt: 1,
           }}
         >
-          {/* <Grid mr={1}>
-            <Typography style={{ color: "grey", margin: 0 }}>
-              จำรหัสผ่านไม่ได้ ?
-            </Typography>
-          </Grid> */}
           <Grid mr={1}>
             <Link to='/reset' style={{ textDecoration: "none" }}>
               <Typography
