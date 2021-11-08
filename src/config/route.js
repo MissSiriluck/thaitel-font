@@ -22,6 +22,8 @@ import CreateResident2 from "../pages/CreateResident";
 import EditResident from "../pages/EditResident";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
 import ResetForNewPassword from "../pages/ResetForNewPassword";
+import ResetPasswordOwnerPage from "../pages/ResetPasswordOwnerPage";
+import ResetForNewOwnerPassword from "../pages/ResetForNewOwnerPassword";
 
 const route = {
   guest: [
@@ -67,8 +69,15 @@ const route = {
     },
     {
       path: "/reset/:token",
-      // path: "/ResetForNewPassword",
       component: ResetForNewPassword,
+    },
+    {
+      path: "/resetOwner/:token",
+      component: ResetForNewOwnerPassword,
+    },
+    {
+      path: "/resetOwner",
+      component: ResetPasswordOwnerPage,
     },
     // {
     //   path: "/createresident",
@@ -144,6 +153,7 @@ const route = {
       path: "/owner_edit_resident/:residentId",
       component: EditResident,
     },
+
     {
       redirect: "/ownerhistory",
     },
