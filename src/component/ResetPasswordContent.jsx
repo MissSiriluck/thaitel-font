@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,7 +10,7 @@ import jwtDecode from "jwt-decode";
 import { FcGoogle } from "react-icons/fc";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Container, Grid, TextField } from "@mui/material";
+import { Alert, Container, Grid, Snackbar, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
@@ -56,18 +56,32 @@ function CustomButton(props) {
 
 function ResetPasswordContent() {
   const history = useHistory();
+  const [open, setOpen] = useState(false);
+  const [colorSnackBar, setColorSnackBar] = useState("success");
+  const [sanackBarMessage, setSanackBarMessage] = useState("");
 
   const { setUser } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("wwwwwwwwwww");
+    // console.log("wwwwwwwwwww");
     try {
       const data = new FormData(event.currentTarget);
       const values = {
         email: data.get("email"),
         // password: data.get("password"),
       };
+      console.log(`values.email`, values.email);
+      // if (values.email) {
+      //   setSanackBarMessage("อีเมลถูกต้อง");
+      //   setColorSnackBar("success");
+      //   setOpen(true);
+      // } else {
+      //   setSanackBarMessage("อีเมลไม่ถูกต้อง");
+      //   setColorSnackBar("error");
+      //   setOpen(true);
+      // }
+
       const res = await axios.post("/users/reset-password", values);
       //   setToken(res.data.token);
       //   console.log("res.data.token...................", res.data.token);
@@ -79,10 +93,30 @@ function ResetPasswordContent() {
       //       successMessage: "Already Login.",
       //       from: " login page ",
       //     },
+      setSanackBarMessage("อีเมลถูกต้อง");
+      setColorSnackBar("success");
+      setOpen(true);
       //   });
     } catch (err) {
-      console.dir(err);
+      console.dir(err.response.status);
+      if (err.response.status === 422) {
+        setSanackBarMessage("อีเมลไม่ถูกต้อง");
+        setColorSnackBar("error");
+        setOpen(true);
+      } else {
+        setSanackBarMessage("อีเมลถูกต้อง");
+        setColorSnackBar("success");
+        setOpen(true);
+      }
     }
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -160,6 +194,22 @@ function ResetPasswordContent() {
                 เปลี่ยนรหัสผ่าน
               </Typography>
             </CustomButton>
+            <Snackbar
+              open={open}
+              anchorOrigin={{ vertical: "top", horizontal: "center" }}
+              autoHideDuration={6000}
+              onClose={handleClose}
+            >
+              <Alert
+                onClose={handleClose}
+                // severity="success"
+                severity={colorSnackBar}
+                sx={{ width: "100%" }}
+              >
+                {/* This is a success message! */}
+                {sanackBarMessage}
+              </Alert>
+            </Snackbar>
           </Grid>
         </Grid>
       </Box>

@@ -11,6 +11,7 @@ import ButtonUnstyled, {
 import { styled } from "@mui/system";
 import BtnGuestnRoom from "./BtnGuestnRoom";
 import { useState } from "react";
+import { Alert, Snackbar } from "@mui/material";
 // import axios from "axios";
 
 const CustomButtonRoot = styled("span")(`
@@ -50,16 +51,25 @@ function SearhchingBar() {
   // const [checkOut, setCheckOut] = useState("");
   const [guest, setGuest] = useState(1);
   const [room, setRoom] = useState(1);
+  const [open, setOpen] = useState(false);
   const history = useHistory();
   console.log(`resident`, resident);
 
   function HandleSumbit() {
     if (checkIn[0] === null || checkIn[1] === null) {
-      alert("กรุณาเลือกวันที่เช็คอิน");
+      setOpen(true);
     } else {
       history.push(`/mainmenu/${resident}/${checkIn}/${room}`);
     }
   }
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   return (
     <Box
@@ -95,6 +105,21 @@ function SearhchingBar() {
           >
             Search
           </CustomButton>
+          <Snackbar
+            open={open}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            autoHideDuration={6000}
+            onClose={handleClose}
+          >
+            <Alert
+              severity="error"
+              onClose={handleClose}
+              sx={{ width: "100%" }}
+            >
+              {/* This is a success message! */}
+              กรุณาเลือกวันที่เช็คอิน
+            </Alert>
+          </Snackbar>
         </Toolbar>
       </AppBar>
     </Box>
