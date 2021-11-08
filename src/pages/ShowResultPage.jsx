@@ -45,7 +45,7 @@ function ShowResultPage() {
       <Container maxWidth="xl" sx={{ mt: 18 }}>
         <Grid container>
           <Grid item xs={3}>
-            <Search residentSearch={resident} province={province}/>
+            <Search residentSearch={resident} province={province} />
           </Grid>
           <Grid item xs={9}>
             <HotelCard data={res} residentSearch={resident} checkIn={checkIn} />

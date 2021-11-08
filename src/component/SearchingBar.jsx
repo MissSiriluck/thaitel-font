@@ -51,10 +51,14 @@ function SearhchingBar() {
   const [guest, setGuest] = useState(1);
   const [room, setRoom] = useState(1);
   const history = useHistory();
-  function HandleSumbit() {
-    // const history = useHistory();
+  console.log(`resident`, resident);
 
-    history.push(`/mainmenu/${resident}/${checkIn}/${room}`);
+  function HandleSumbit() {
+    if (checkIn[0] === null || checkIn[1] === null) {
+      alert("กรุณาเลือกวันที่เช็คอิน");
+    } else {
+      history.push(`/mainmenu/${resident}/${checkIn}/${room}`);
+    }
   }
 
   return (
@@ -65,7 +69,7 @@ function SearhchingBar() {
       }}
     >
       <AppBar
-        position='static'
+        position="static"
         sx={{
           backgroundColor: "#ffffff60",
           borderRadius: 2,

@@ -1,6 +1,7 @@
 import { Container, Grid, Stack, Typography } from "@mui/material";
 import axios from "../../config/axios";
 
+import hotelRoom from "../../pic/hotelRoom.jpg";
 import { styled } from "@mui/material/styles";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
@@ -105,7 +106,12 @@ function RoomsInResident({ status }) {
           >
             <Box>
               <Box>
-                <img src="hotelRoom.jpg" width="500" height="300" />
+                <img
+                  src=// "hotelRoom.jpg"
+                  {hotelRoom}
+                  width="500"
+                  height="300"
+                />
               </Box>
               <Typography
                 sx={{
