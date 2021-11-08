@@ -60,7 +60,7 @@ function ResetPasswordOwnerContent() {
   const [open, setOpen] = useState(false);
   const { setUser } = useContext(AuthContext);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
     event.preventDefault();
     try {
       const data = new FormData(event.currentTarget);
@@ -96,209 +96,302 @@ function ResetPasswordOwnerContent() {
   };
 
   return (
-    <div>
-      <Container
-        maxWidth="md"
-        justifyContent="center"
-        alignItems="center"
-        direction="column"
-        sx={{ padding: 0, mt: 23 }}
-      >
-        <Box
-          alignItems="center"
-          justifyContent="center"
+    <Container
+      maxWidth='sm'
+      justifyContent='center'
+      alignItems='center'
+      sx={{ padding: 0, mt: "30vh" }}
+    >
+      <Box Container component='form' onSubmit={handleSubmit}>
+        <Grid
+          Container
+          alignItems='center'
+          justifyContent='center'
           sx={{
-            height: "60vh",
-            display: "flex",
-            flexDirection: "column",
+            height: "293px",
             padding: 0,
+            border: "1px solid #BFBFBF",
+            borderRadius: 2,
+            p: 5,
           }}
         >
-          <Box
-            alignItems="center"
-            justifyContent="center"
-            sx={{ width: "80%", display: "flex" }}
-            xs={8}
-            sm={8}
-          >
-            <Grid
-              container
-              justifyContent="start"
-              alignItems="center"
-              xs={9}
-              sx={{ height: "40px" }}
+          <Grid item xs={12} sx={{ width: "100%" }}>
+            <Typography variant='h4' sx={{ fontWeight: 600 }}>
+              กรอกอีเมลเพื่อเปลี่ยนรหัสผ่าน
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sx={{ mt: 2 }}>
+            <Typography
+              style={{
+                fontSize: "16px",
+                marginBottom: 8,
+                justifyContent: "start",
+              }}
             >
-              <Typography variant="h4" component="div" sx={{ fontWeight: 600 }}>
-                {/* เปลี่ยนรหัสผ่าน */}
-                กรอกอีเมลเพื่อเปลี่ยนรหัสผ่าน
-              </Typography>
-            </Grid>
-          </Box>
-          {/*  */}
-
-          <Box
-            container
-            spacing={2}
-            justifyContent="center"
-            alignItems="center"
-            sx={{
-              padding: 0,
-              margin: 0,
-              width: "100%",
-            }}
-            xs={12}
-            md={12}
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-          >
-            <Grid container justifyContent="center">
-              <Grid
-                container
-                spacing={2}
-                justifyContent="space-around"
-                alignContent="center"
-                sx={{
-                  padding: 0,
-                  marginTop: "0s",
-                }}
-                xs={7}
-                md={7}
-              >
-                <Grid
-                  container
-                  spacing={2}
-                  justifyContent="center"
-                  alignItems="center"
-                  sx={
-                    {
-                      // padding: 0,
-                      // borderBottom: "2px solid #C4C4C4",
-                      // height: 15,
-                      // margin: 0,
-                    }
-                  }
-                  xs={5}
-                  md={5}
-                />
-              </Grid>
-              {/*  */}
-
-              <Grid
-                container
-                spacing={2}
-                justifyContent="center"
-                alignItems="center"
-                sx={{
-                  padding: 0,
-                }}
-                xs={12}
-                md={12}
-              >
-                <Grid
-                  item
-                  xs={7}
-                  md={7}
-                  sx={{
-                    padding: 0,
-                  }}
-                >
-                  <Typography
-                    style={{
-                      fontSize: 16,
-                      marginBottom: 8,
-                      justifyContent: "start",
-                    }}
-                  >
-                    อีเมล์
-                  </Typography>
-                  <TextField
-                    fullWidth
-                    label="อีเมล์"
-                    placeholder="กรอกอีเมล์"
-                    id="email"
-                    name="email"
-                    multiline
-                    size="small"
-                    sx={{
-                      padding: 0,
-                      marginBottom: "3px",
-                    }}
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              spacing={2}
-              justifyContent="center"
-              alignItems="center"
+              อีเมล์
+            </Typography>
+            <TextField
+              fullWidth
+              label='อีเมล์'
+              placeholder='กรอกอีเมล์'
+              id='email'
+              name='email'
+              multiline
+              size='small'
               sx={{
                 padding: 0,
                 marginBottom: "3px",
               }}
-              xs={12}
-              md={12}
-            ></Grid>
-            <Grid
-              container
-              spacing={2}
-              justifyContent="center"
-              alignItems="center"
+            />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sx={{ display: "flex", justifyContent: "center", mt: 2 }}
+          >
+            <CustomButton
               sx={{
-                padding: 0,
+                background: "#c62828",
+                color: "#fff",
+                display: "flex",
+                justifyContent: "center",
+                width: "50%",
+                marginTop: "10px",
               }}
-              xs={12}
-              md={12}
+              type='submit'
             >
-              <Grid
-                item
-                xs={8}
-                md={8}
-                sx={{ display: "flex", justifyContent: "center" }}
+              <Typography
+                style={{
+                  fontSize: 16,
+                  marginBottom: "1px",
+                  justifyContent: "start",
+                }}
               >
-                <CustomButton
-                  sx={{
-                    background: "#c62828",
-                    color: "#fff",
-                    display: "flex",
-                    justifyContent: "center",
-                    width: "80%",
-                    marginTop: "10px",
-                  }}
-                  type="submit"
-                >
-                  <Typography
-                    style={{
-                      fontSize: 16,
-                      marginBottom: "1px",
-                      justifyContent: "start",
-                    }}
-                  >
-                    เปลี่ยนรหัสผ่าน
-                  </Typography>
-                </CustomButton>
-                <Snackbar
-                  open={open}
-                  anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                  autoHideDuration={6000}
-                  onClose={handleClose}
-                >
-                  <Alert
-                    onClose={handleClose}
-                    severity="success"
-                    sx={{ width: "100%" }}
-                  >
-                    {/* This is a success message! */}
-                    อีเมลได้ถูกส่งไปแล้ว
-                  </Alert>
-                </Snackbar>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Container>
-    </div>
+                เปลี่ยนรหัสผ่าน
+              </Typography>
+            </CustomButton>
+            <Snackbar
+              open={open}
+              anchorOrigin={{ vertical: "top", horizontal: "center" }}
+              autoHideDuration={6000}
+              onClose={handleClose}
+            >
+              <Alert
+                onClose={handleClose}
+                severity='success'
+                sx={{ width: "100%" }}
+              >
+                {/* This is a success message! */}
+                อีเมลได้ถูกส่งไปแล้ว
+              </Alert>
+            </Snackbar>
+          </Grid>
+        </Grid>
+      </Box>
+    </Container>
+    // <div>
+    //   <Container
+    //     maxWidth="md"
+    //     justifyContent="center"
+    //     alignItems="center"
+    //     direction="column"
+    //     sx={{ padding: 0, mt: 23 }}
+    //   >
+    //     <Box
+    //       alignItems="center"
+    //       justifyContent="center"
+    //       sx={{
+    //         height: "60vh",
+    //         display: "flex",
+    //         flexDirection: "column",
+    //         padding: 0,
+    //       }}
+    //     >
+    //       <Box
+    //         alignItems="center"
+    //         justifyContent="center"
+    //         sx={{ width: "80%", display: "flex" }}
+    //         xs={8}
+    //         sm={8}
+    //       >
+    //         <Grid
+    //           container
+    //           justifyContent="start"
+    //           alignItems="center"
+    //           xs={9}
+    //           sx={{ height: "40px" }}
+    //         >
+    //           <Typography variant="h4" component="div" sx={{ fontWeight: 600 }}>
+    //             {/* เปลี่ยนรหัสผ่าน */}
+    //             กรอกอีเมลเพื่อเปลี่ยนรหัสผ่าน
+    //           </Typography>
+    //         </Grid>
+    //       </Box>
+    //       {/*  */}
+
+    //       <Box
+    //         container
+    //         spacing={2}
+    //         justifyContent="center"
+    //         alignItems="center"
+    //         sx={{
+    //           padding: 0,
+    //           margin: 0,
+    //           width: "100%",
+    //         }}
+    //         xs={12}
+    //         md={12}
+    //         component="form"
+    //         onSubmit={handleSubmit}
+    //         noValidate
+    //       >
+    //         <Grid container justifyContent="center">
+    //           <Grid
+    //             container
+    //             spacing={2}
+    //             justifyContent="space-around"
+    //             alignContent="center"
+    //             sx={{
+    //               padding: 0,
+    //               marginTop: "0s",
+    //             }}
+    //             xs={7}
+    //             md={7}
+    //           >
+    //             <Grid
+    //               container
+    //               spacing={2}
+    //               justifyContent="center"
+    //               alignItems="center"
+    //               sx={
+    //                 {
+    //                   // padding: 0,
+    //                   // borderBottom: "2px solid #C4C4C4",
+    //                   // height: 15,
+    //                   // margin: 0,
+    //                 }
+    //               }
+    //               xs={5}
+    //               md={5}
+    //             />
+    //           </Grid>
+    //           {/*  */}
+
+    //           <Grid
+    //             container
+    //             spacing={2}
+    //             justifyContent="center"
+    //             alignItems="center"
+    //             sx={{
+    //               padding: 0,
+    //             }}
+    //             xs={12}
+    //             md={12}
+    //           >
+    //             <Grid
+    //               item
+    //               xs={7}
+    //               md={7}
+    //               sx={{
+    //                 padding: 0,
+    //               }}
+    //             >
+    //               <Typography
+    //                 style={{
+    //                   fontSize: 16,
+    //                   marginBottom: 8,
+    //                   justifyContent: "start",
+    //                 }}
+    //               >
+    //                 อีเมล์
+    //               </Typography>
+    //               <TextField
+    //                 fullWidth
+    //                 label="อีเมล์"
+    //                 placeholder="กรอกอีเมล์"
+    //                 id="email"
+    //                 name="email"
+    //                 multiline
+    //                 size="small"
+    //                 sx={{
+    //                   padding: 0,
+    //                   marginBottom: "3px",
+    //                 }}
+    //               />
+    //             </Grid>
+    //           </Grid>
+    //         </Grid>
+    //         <Grid
+    //           container
+    //           spacing={2}
+    //           justifyContent="center"
+    //           alignItems="center"
+    //           sx={{
+    //             padding: 0,
+    //             marginBottom: "3px",
+    //           }}
+    //           xs={12}
+    //           md={12}
+    //         ></Grid>
+    //         <Grid
+    //           container
+    //           spacing={2}
+    //           justifyContent="center"
+    //           alignItems="center"
+    //           sx={{
+    //             padding: 0,
+    //           }}
+    //           xs={12}
+    //           md={12}
+    //         >
+    //           <Grid
+    //             item
+    //             xs={8}
+    //             md={8}
+    //             sx={{ display: "flex", justifyContent: "center" }}
+    //           >
+    //             <CustomButton
+    //               sx={{
+    //                 background: "#c62828",
+    //                 color: "#fff",
+    //                 display: "flex",
+    //                 justifyContent: "center",
+    //                 width: "80%",
+    //                 marginTop: "10px",
+    //               }}
+    //               type="submit"
+    //             >
+    //               <Typography
+    //                 style={{
+    //                   fontSize: 16,
+    //                   marginBottom: "1px",
+    //                   justifyContent: "start",
+    //                 }}
+    //               >
+    //                 เปลี่ยนรหัสผ่าน
+    //               </Typography>
+    //             </CustomButton>
+    //             <Snackbar
+    //               open={open}
+    //               anchorOrigin={{ vertical: "top", horizontal: "center" }}
+    //               autoHideDuration={6000}
+    //               onClose={handleClose}
+    //             >
+    //               <Alert
+    //                 onClose={handleClose}
+    //                 severity="success"
+    //                 sx={{ width: "100%" }}
+    //               >
+    //                 {/* This is a success message! */}
+    //                 อีเมลได้ถูกส่งไปแล้ว
+    //               </Alert>
+    //             </Snackbar>
+    //           </Grid>
+    //         </Grid>
+    //       </Box>
+    //     </Box>
+    //   </Container>
+    // </div>
   );
 }
 
