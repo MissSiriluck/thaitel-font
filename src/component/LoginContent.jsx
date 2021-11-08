@@ -30,6 +30,8 @@ import { GoogleLogin } from "react-google-login";
 import { user } from "../service/localStorage";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
+import { GoogleCustomButton } from "../style/button/GoogleCustomButton";
+import { FacebookCustomButton } from "../style/button/FacebookCustomButton";
 
 //customize button style
 const CustomButtonRoot = styled("button")(`
@@ -216,11 +218,11 @@ function LoginContent() {
 
         {/* --------------- button submit by google --------------- */}
         <Grid container justifyContent='space-between' alignContent='center'>
-          <Grid item xs={5.8}>
+          <Grid item xs={5.9}>
             <GoogleLogin
               clientId='653158791610-ii8s99m412cd01m9lmb9113fjjbocssd.apps.googleusercontent.com'
               render={renderProps => (
-                <Button
+                <GoogleCustomButton
                   variant='contained'
                   sx={{
                     width: "100%",
@@ -230,23 +232,13 @@ function LoginContent() {
                   onClick={renderProps.onClick}
                   // disabled={renderProps.disabled}
                 >
-                  <Grid
-                    item
-                    sx={{
-                      backgroundColor: "white",
-                      borderRadius: "50px",
-                      height: "18px",
-                      width: "18px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
+                  <Grid item xs={1} sx={{ fontSize: "25px" }}>
                     <FcGoogle />
                   </Grid>
+
                   <Grid
                     item
-                    xs={12}
+                    xs={11}
                     sx={{
                       display: "flex",
                       justifyContent: "center",
@@ -261,7 +253,7 @@ function LoginContent() {
                       Sign In With Google
                     </Typography>
                   </Grid>
-                </Button>
+                </GoogleCustomButton>
               )}
               buttonText='Login'
               onSuccess={responseGoogle}
@@ -271,7 +263,7 @@ function LoginContent() {
           </Grid>
 
           {/* facebook login............... */}
-          <Grid item xs={5.8}>
+          <Grid item xs={5.9}>
             <FacebookLogin
               appId='934707233799748'
               // autoLoad={true}
@@ -279,7 +271,7 @@ function LoginContent() {
               // onClick={handleFacebookLogin}
               callback={responseFacebook}
               render={renderProps => (
-                <Button
+                <FacebookCustomButton
                   variant='contained'
                   sx={{
                     width: "100%",
@@ -290,38 +282,37 @@ function LoginContent() {
                   onClick={renderProps.onClick}
                   // disabled={renderProps.disabled}
                 >
-                  {/* <Grid
-                    item
-                    sx={{
-                      backgroundColor: "white",
-                      borderRadius: "50px",
-                      height: "18px",
-                      width: "18px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <i class='fab fa-facebook'></i>
-                  </Grid> */}
-                  <Grid
-                    item
-                    xs={12}
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      height: "32px",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Typography
-                      variant='p'
-                      sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
+                  <Grid container>
+                    <Grid
+                      item
+                      xs={1}
+                      sx={{
+                        justifyContent: "center",
+                        alignItems: "center",
+                        fontSize: "30px",
+                      }}
                     >
-                      Sign In With Facebook
-                    </Typography>
+                      <FacebookIcon />
+                    </Grid>
+                    <Grid
+                      item
+                      xs={11}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        height: "32px",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Typography
+                        variant='p'
+                        sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
+                      >
+                        Sign In With Facebook
+                      </Typography>
+                    </Grid>
                   </Grid>
-                </Button>
+                </FacebookCustomButton>
                 // <button onClick={renderProps.onClick}>
                 //   This is my custom FB button
                 // </button>
@@ -517,11 +508,6 @@ function LoginContent() {
             mt: 1,
           }}
         >
-          {/* <Grid mr={1}>
-            <Typography style={{ color: "grey", margin: 0 }}>
-              จำรหัสผ่านไม่ได้ ?
-            </Typography>
-          </Grid> */}
           <Grid mr={1}>
             <Link to='/reset' style={{ textDecoration: "none" }}>
               <Typography

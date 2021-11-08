@@ -24,14 +24,14 @@ function HotelCard({ data, residentSearch, checkIn }) {
   // console.log("residents....................", residents.length);
 
   return (
-    <Grid container>
+    <Grid container sx={{ mb: 10 }}>
       <Grid item xs={12}>
         <Typography sx={{ mb: 2 }}>
           ที่พักทั้งหมด ：พบที่พัก {residents.length} แห่ง
         </Typography>
       </Grid>
 
-      {residents.map((item) => (
+      {residents.map(item => (
         <Grid item xs={12}>
           <HotelCardList
             resident={item}

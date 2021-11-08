@@ -42,49 +42,47 @@ function CustomButton(props) {
 }
 
 function CardOwnerHistoryList({ resident, deleteResident }) {
-
   const { createResident, setCreateResident } = useContext(
     CreateResidentContext2
-  ); 
+  );
 
   // const [count, setCount] = useState(0);
   console.log("residents.......", resident);
 
   // useEffect(() => {
-    //   const fetchResident = async () => {
-      //     try {
-        //       const res = await axios.get(`/bookings/getByUserId`);
-        //       setCount(res.data.count);
-        //       // console.log(res.data.count);
-        //     } catch (err) {
-          //       console.log(err);
-          //     }
-          //   };
-          //   fetchResident();
-          // }, []);
-          
+  //   const fetchResident = async () => {
+  //     try {
+  //       const res = await axios.get(`/bookings/getByUserId`);
+  //       setCount(res.data.count);
+  //       // console.log(res.data.count);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchResident();
+  // }, []);
+
   const history = useHistory();
-  
+
   const handleClickEditResidents = () => {
-    history.push(`/ownerdetail/${resident.id}`)
-  }
-  
+    history.push(`/ownerdetail/${resident.id}`);
+  };
+
   // console.log(count);
-  
+
   const handleDeleteResident = async () => {
-    deleteResident(resident.id)
+    deleteResident(resident.id);
     try {
       await axios.delete(`/residents/deleteResident/${resident.id}`);
-    } catch(err) {
-    console.dir(err)
+    } catch (err) {
+      console.dir(err);
     }
     // const clone = {...resident};
     // clone.splice(index, 1);
     // try {
     //   await axios.delete(`campaign/${id}`)
     // }
-  
-  }
+  };
 
   // try {
   //   await axios.delete(`campaign/${id}`);
@@ -103,26 +101,26 @@ function CardOwnerHistoryList({ resident, deleteResident }) {
       {/* {resident.map((resident) => ( */}
       <Grid
         item
-        id=""
+        id=''
         xs={12}
         sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 2, mb: 2 }}
       >
-        <Grid container >
-          <Grid item xs={2} >
+        <Grid container>
+          <Grid item xs={2}>
             {/* {resident?.ResidentImgs?.map((item) => ( */}
             <img
               // src={`${resident.url}`}
               src={resident?.imgUrl}
               style={{
-                width: "200px",
-                height: "200px",
+                width: "170px",
+                height: "170px",
                 borderRadius: 8,
               }}
               alt='resident-img'
             />
             {/* ))} */}
           </Grid>
-          <Grid item xs={8} sx={{ flexGlow: 1,mt: 2 }}>
+          <Grid item xs={8} sx={{ flexGlow: 1, mt: 2 }}>
             <Grid container>
               <Grid item xs={2}>
                 <Typography sx={{ mb: 1 }}>ชื่อที่พัก</Typography>
@@ -137,7 +135,7 @@ function CardOwnerHistoryList({ resident, deleteResident }) {
               </Grid> */}
             </Grid>
 
-            {resident?.rooms?.map((item) => (
+            {resident?.rooms?.map(item => (
               <Grid container>
                 <Grid item xs={2}>
                   <Typography sx={{ mb: 1 }}>ชื่อห้องพัก</Typography>
@@ -184,7 +182,7 @@ function CardOwnerHistoryList({ resident, deleteResident }) {
               }}
             >
               <Button
-                variant="outlined"
+                variant='outlined'
                 sx={{
                   mr: 1,
                   borderRadius: "10px",
