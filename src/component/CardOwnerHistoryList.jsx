@@ -155,6 +155,7 @@ function CardOwnerHistoryList({ resident, deleteResident }) {
                 </Box>
               </Grid>
             ))}
+
             <Grid container>
               <Grid item xs={2}>
                 <Typography sx={{ mb: 1 }}>จังหวัด</Typography>
@@ -173,7 +174,8 @@ function CardOwnerHistoryList({ resident, deleteResident }) {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={2}>
+
+          <Grid item xs={3}>
             <Box
               sx={{
                 display: "flex",
