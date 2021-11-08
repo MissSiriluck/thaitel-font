@@ -440,7 +440,6 @@ function EditResident() {
         anchorOrigin={{ vertical, horizontal }}
         open={open}
         onClose={handleClose}
-        message="I love snacks"
         key={vertical + horizontal} />
 
       <CreateResidentHeader />
