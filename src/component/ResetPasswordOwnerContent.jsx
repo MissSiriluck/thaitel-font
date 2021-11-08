@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,7 +10,7 @@ import jwtDecode from "jwt-decode";
 import { FcGoogle } from "react-icons/fc";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Container, Grid, TextField } from "@mui/material";
+import { Alert, Container, Grid, Snackbar, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
@@ -57,6 +57,7 @@ function CustomButton(props) {
 function ResetPasswordOwnerContent() {
   const history = useHistory();
 
+  const [open, setOpen] = useState(false);
   const { setUser } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
@@ -80,9 +81,18 @@ function ResetPasswordOwnerContent() {
       //       from: " login page ",
       //     },
       //   });
+      setOpen(true);
     } catch (err) {
       console.dir(err);
     }
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -268,6 +278,21 @@ function ResetPasswordOwnerContent() {
                     เปลี่ยนรหัสผ่าน
                   </Typography>
                 </CustomButton>
+                <Snackbar
+                  open={open}
+                  anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                  autoHideDuration={6000}
+                  onClose={handleClose}
+                >
+                  <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    sx={{ width: "100%" }}
+                  >
+                    {/* This is a success message! */}
+                    อีเมลได้ถูกส่งไปแล้ว
+                  </Alert>
+                </Snackbar>
               </Grid>
             </Grid>
           </Box>
