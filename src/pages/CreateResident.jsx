@@ -224,7 +224,7 @@ function CreateResident() {
         allPase = false;
         setCreateResidentError(curr => ({
           ...curr,
-          rateStar: "กรุณากรอกรหัสไปรษณีย์ของที่พักของท่านเป็นข้อมูลประเภทตัวเลข",
+          postalCode: "กรุณากรอกรหัสไปรษณีย์ของที่พักของท่านเป็นข้อมูลประเภทตัวเลข",
         }));
       }
       if (createResident.postalCode.length !== 5) {
