@@ -113,6 +113,7 @@ function CardOwnerHistoryList({ resident, deleteResident }) {
                 width: "170px",
                 height: "170px",
                 borderRadius: 8,
+                objectFit: 'cover'
               }}
               alt='resident-img'
             />

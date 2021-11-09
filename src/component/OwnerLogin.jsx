@@ -129,7 +129,7 @@ function OwnerLogin() {
         state: {
           successMessage: "Already Login.",
           from: " login page ",
-          message: 'การเข้าระบบของคุณสำเร้จแล้ว'
+          message: 'การเข้าระบบของคุณสำเร็จแล้ว'
         },
       });
     } catch (err) {
@@ -159,6 +159,7 @@ function OwnerLogin() {
         state: {
           successMessage: "Already Login.",
           from: " login page ",
+          message: 'การเข้าระบบของคุณสำเร็จแล้ว'
         },
       });
     } catch (err) {
@@ -182,7 +183,7 @@ function OwnerLogin() {
       state: {
         successMessage: "Already Login.",
         from: " login page ",
-        message: 'การเข้าระบบของคุณสำเร้จแล้ว'
+        message: 'การเข้าระบบของคุณสำเร็จแล้ว'
       },
     });
   };

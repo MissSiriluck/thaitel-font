@@ -250,8 +250,29 @@ function AddcomDetail({ checkIn }) {
                   ) : resident.serviceName === "fitnessRoom" ? (
                     <FitnessCenterIcon />
                   ) : null }
-                  {/* <Typography sx={{ ml: 2 }}>ที่จอดรถ</Typography> */}
-                  <Typography sx={{ ml: 2 }}>{resident.serviceName}</Typography>
+                 
+                  <Typography sx={{ ml: 2 }}>
+                    
+                    {resident?.serviceName === "parking" ? (
+                    "ที่จอดรถ"
+                  ) : resident?.serviceName === "breakFast" ? (
+                    "อาหารเช้า"
+                  ) : resident?.serviceName === "wifi" ? (
+                    "Wifi"
+                  ) : resident?.serviceName === "swimingPool" ? (
+                    "สระว่ายน้ำ"
+                  ) : resident?.serviceName === "bar" ? (
+                    "บาร์"
+                  ) : resident?.serviceName === "sauna" ? (
+                    "ห้องซาวน่า"
+                  ) : resident?.serviceName === "reception" ? (
+                    "แผนกต้อนรับ 24 ชั่วโมง"
+                  ) : resident?.serviceName === "roomService" ? (
+                    "Room Service"
+                  ) : resident?.serviceName === "fitnessRoom" ? (
+                    "ห้องฟิตเนส"
+                  ) : null}
+                    </Typography>
                   </Grid>
                   ))}
               </Grid>

@@ -184,6 +184,7 @@ function LoginContent() {
         state: {
           successMessage: "Already Login.",
           from: " login page ",
+          message: 'การเข้าระบบของคุณสำเร็จแล้ว'
         },
       });
     } catch (err) {
@@ -228,7 +229,7 @@ function LoginContent() {
       state: {
         successMessage: "Already Login.",
         from: " login page ",
-        message: ''
+        message: 'การเข้าระบบของคุณสำเร็จแล้ว'
       },
     });
   };
@@ -569,17 +570,7 @@ function LoginContent() {
       </Grid>
 
       {/* ยังแก้อยู่ */}
-      <Snackbar
-        open={openSnackLogin}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
-        <Alert onClose={handleClose} severity='success' sx={{ width: "100%" }}>
-          {location?.state?.message
-            ? location.state.message
-            : "การเข้าสู่ระบบของคุณได้ดำเนินการสำเร็จแล้ว"}
-        </Alert>
-      </Snackbar>
+      
     </Container>
   );
 }
