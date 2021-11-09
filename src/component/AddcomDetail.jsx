@@ -393,8 +393,7 @@ function AddcomDetail({ checkIn }) {
         </Box>
         {/* {resident.rooms.map(item) => ()} */}
         {/* {resident?.rooms?.map((resident) => ( */}
-        <Box>
-          
+        
         {rooms?.map((room) => (
           <EachRoomCard
             room={room}
@@ -402,7 +401,6 @@ function AddcomDetail({ checkIn }) {
             resident={resident}
           />  
           ))}
-        </Box>
 
         <Grid item sx={{ display: "flex", justifyContent: "center" }}>
           <CustomButton
