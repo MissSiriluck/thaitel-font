@@ -44,7 +44,7 @@ const route = {
       component: ShowResultPage,
     },
     {
-      path: `/bottommenu/:province`,
+      path: `/bottommenu/:province/:checkIn`,
       component: ShowResultPage,
     },
     {
@@ -109,7 +109,7 @@ const route = {
       component: ShowResultPage,
     },
     {
-      path: `/bottommenu/:province`,
+      path: `/bottommenu/:province/:checkIn`,
       component: ShowResultPage,
     },
     {

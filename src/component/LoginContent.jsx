@@ -163,7 +163,7 @@ function LoginContent() {
         state: {
           successMessage: "Already Login.",
           from: " login page ",
-          message: 'การเข้าระบบของคุณสำเร็จแล้ว'
+          message: "การเข้าระบบของคุณสำเร็จแล้ว",
         },
       });
     } catch (err) {
@@ -208,11 +208,7 @@ function LoginContent() {
       state: {
         successMessage: "Already Login.",
         from: " login page ",
-<<<<<<< HEAD
-        message: "",
-=======
-        message: 'การเข้าระบบของคุณสำเร็จแล้ว'
->>>>>>> 91bcb2e464c6fb0dce7a6e27509ce7d02d7bac9b
+        message: "การเข้าระบบของคุณสำเร็จแล้ว",
       },
     });
   };
@@ -579,21 +575,6 @@ function LoginContent() {
       </Grid>
 
       {/* ยังแก้อยู่ */}
-<<<<<<< HEAD
-      <Snackbar
-        open={openSnackLogin}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          {location?.state?.message
-            ? location.state.message
-            : "การเข้าสู่ระบบของคุณได้ดำเนินการสำเร็จแล้ว"}
-        </Alert>
-      </Snackbar>
-=======
-      
->>>>>>> 91bcb2e464c6fb0dce7a6e27509ce7d02d7bac9b
     </Container>
   );
 }

@@ -222,27 +222,27 @@ function AddcomDetail({ checkIn }) {
               บริการภายในโรงแรม
             </Typography>
 
-<<<<<<< HEAD
             <Grid
               container
               sx={{ flexWrap: "wrap", display: "flex", flexDirection: "row" }}
             >
               {resident?.resident?.ServiceItems?.map((resident) => (
-=======
-              <Grid container sx={{ flexWrap: "wrap", display: 'flex', flexDirection: 'row' }}>
-                {resident?.resident?.ServiceItems?.map((resident) => (
->>>>>>> 91bcb2e464c6fb0dce7a6e27509ce7d02d7bac9b
                 <Grid
                   item
                   xs={3}
-                  sx={{ display: "flex", alignItems: "center", mb: 2, flexDirection: 'row' }}
-                  >
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    mb: 2,
+                    flexDirection: "row",
+                  }}
+                >
                   {resident.serviceName === "parking" ? (
                     <DirectionsCarIcon />
                   ) : resident.serviceName === "breakFast" ? (
                     <FastfoodIcon />
-                    ) : resident.serviceName === "wifi" ? (
-                      <WifiIcon />
+                  ) : resident.serviceName === "wifi" ? (
+                    <WifiIcon />
                   ) : resident.serviceName === "swimingPool" ? (
                     <PoolIcon />
                   ) : resident.serviceName === "bar" ? (
@@ -255,33 +255,32 @@ function AddcomDetail({ checkIn }) {
                     <RoomServiceIcon />
                   ) : resident.serviceName === "fitnessRoom" ? (
                     <FitnessCenterIcon />
-                  ) : null }
-                 
-                  <Typography sx={{ ml: 2 }}>
-                    
-                    {resident?.serviceName === "parking" ? (
-                    "ที่จอดรถ"
-                  ) : resident?.serviceName === "breakFast" ? (
-                    "อาหารเช้า"
-                  ) : resident?.serviceName === "wifi" ? (
-                    "Wifi"
-                  ) : resident?.serviceName === "swimingPool" ? (
-                    "สระว่ายน้ำ"
-                  ) : resident?.serviceName === "bar" ? (
-                    "บาร์"
-                  ) : resident?.serviceName === "sauna" ? (
-                    "ห้องซาวน่า"
-                  ) : resident?.serviceName === "reception" ? (
-                    "แผนกต้อนรับ 24 ชั่วโมง"
-                  ) : resident?.serviceName === "roomService" ? (
-                    "Room Service"
-                  ) : resident?.serviceName === "fitnessRoom" ? (
-                    "ห้องฟิตเนส"
                   ) : null}
-                    </Typography>
-                  </Grid>
-                  ))}
-              </Grid>
+
+                  <Typography sx={{ ml: 2 }}>
+                    {resident?.serviceName === "parking"
+                      ? "ที่จอดรถ"
+                      : resident?.serviceName === "breakFast"
+                      ? "อาหารเช้า"
+                      : resident?.serviceName === "wifi"
+                      ? "Wifi"
+                      : resident?.serviceName === "swimingPool"
+                      ? "สระว่ายน้ำ"
+                      : resident?.serviceName === "bar"
+                      ? "บาร์"
+                      : resident?.serviceName === "sauna"
+                      ? "ห้องซาวน่า"
+                      : resident?.serviceName === "reception"
+                      ? "แผนกต้อนรับ 24 ชั่วโมง"
+                      : resident?.serviceName === "roomService"
+                      ? "Room Service"
+                      : resident?.serviceName === "fitnessRoom"
+                      ? "ห้องฟิตเนส"
+                      : null}
+                  </Typography>
+                </Grid>
+              ))}
+            </Grid>
           </Grid>
         </Grid>
         {/* check-in & check-out block */}
@@ -420,17 +419,14 @@ function AddcomDetail({ checkIn }) {
         </Box>
         {/* {resident.rooms.map(item) => ()} */}
         {/* {resident?.rooms?.map((resident) => ( */}
-<<<<<<< HEAD
-=======
-        
->>>>>>> 91bcb2e464c6fb0dce7a6e27509ce7d02d7bac9b
+
         {rooms?.map((room) => (
           <EachRoomCard
             room={room}
             updateRoomAmount={updateRoomAmount}
             resident={resident}
-          />  
-          ))}
+          />
+        ))}
 
         <Grid item sx={{ display: "flex", justifyContent: "center" }}>
           <CustomButton

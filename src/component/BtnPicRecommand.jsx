@@ -101,9 +101,14 @@ const ImageMarked = styled("span")(({ theme }) => ({
 function BtnPicRecommand() {
   const history = useHistory();
   function HandleSumbit(e) {
-    console.log(e)
-    history.push(`/bottommenu/${e}`);
-    console.log('106')
+    var today = new Date();
+    var tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    tomorrow.toLocaleDateString();
+    const checkIn = today + "," + tomorrow;
+    console.log(e);
+    history.push(`/bottommenu/${e}/${checkIn}`);
+    console.log("106");
   }
   return (
     <Box
@@ -148,7 +153,7 @@ function BtnPicRecommand() {
                 width: image.width,
               }}
               className="img_btn_homepage"
-              onClick={()=>HandleSumbit(image.title)}
+              onClick={() => HandleSumbit(image.title)}
             >
               <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
               <ImageBackdrop className="MuiImageBackdrop-root" />
