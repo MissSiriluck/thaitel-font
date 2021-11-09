@@ -73,7 +73,7 @@ function CustomButton(props) {
 }
 
 const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 function LoginContent() {
@@ -82,27 +82,6 @@ function LoginContent() {
   const location = useLocation();
 
   console.log(user);
-  const responseGoogle = async response => {
-    try {
-      const res = await axios.post("/googleLogin", {
-        email: response.profileObj.email,
-        firstName: response.profileObj.givenName,
-        lastName: response.profileObj.familyName,
-        googleId: response.profileObj.googleId,
-      });
-      setToken(res.data.token);
-      setUser(jwtDecode(res.data.token));
-      history.push({
-        pathname: "/",
-        state: {
-          successMessage: "Already Login.",
-          from: " login page ",
-        },
-      });
-    } catch (err) {
-      console.dir(err);
-    }
-  };
 
   const { setUser } = useContext(AuthContext);
 
@@ -120,7 +99,7 @@ function LoginContent() {
     setOpenSnackLogin({ ...snackEditResident, open: false });
   };
 
-  const handleOpenSnackBar = newState => () => {
+  const handleOpenSnackBar = (newState) => () => {
     setOpenSnackLogin({ open: true, ...newState });
   };
 
@@ -142,7 +121,7 @@ function LoginContent() {
     });
   };
 
-  const handleMouseDownPassword = event => {
+  const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
@@ -150,7 +129,7 @@ function LoginContent() {
     setValues({ ...values, [props]: event.target.value });
   };
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const data = new FormData(event.currentTarget);
@@ -160,14 +139,14 @@ function LoginContent() {
       };
 
       if (!values.email) {
-        setErrors(curr => ({
+        setErrors((curr) => ({
           ...curr,
           email: "กรุณากรอกอีเมลของท่าน",
         }));
       }
 
       if (!values.password) {
-        setErrors(curr => ({
+        setErrors((curr) => ({
           ...curr,
           password: "กรุณากรอกรหัสผ่านของท่าน",
         }));
@@ -188,7 +167,7 @@ function LoginContent() {
       });
     } catch (err) {
       console.dir(err);
-      setErrors(curr => ({
+      setErrors((curr) => ({
         ...curr,
         email: "กรุณากรอกข้อมูลให้ถูกต้อง",
         password: "กรุณากรอกข้อมูลให้ถูกต้อง",
@@ -210,9 +189,9 @@ function LoginContent() {
   //   setSnack({ ...snack, open: false });
   // };
 
-  const handleFacebookLogin = async e => {};
+  const handleFacebookLogin = async (e) => {};
 
-  const responseFacebook = async res => {
+  const responseFacebook = async (res) => {
     console.log(res);
 
     const resultLogin = await axios.post("/users/facebookLogin", {
@@ -228,37 +207,63 @@ function LoginContent() {
       state: {
         successMessage: "Already Login.",
         from: " login page ",
-        message: ''
+        message: "",
       },
     });
   };
 
+  const responseGoogle = async (response) => {
+    try {
+      const res = await axios.post("/users/googleLogin", {
+        // email: response.profileObj.email,
+        // firstName: response.profileObj.givenName,
+        // lastName: response.profileObj.familyName,
+        // googleId: response.profileObj.googleId,
+        email: response.profileObj.email,
+        googleId: response.profileObj.googleId,
+        firstName: response.profileObj.givenName,
+        lastName: response.profileObj.familyName,
+      });
+      setToken(res.data.token);
+      setUser(jwtDecode(res.data.token));
+      history.push({
+        pathname: "/",
+        state: {
+          successMessage: "Already Login.",
+          from: " login page ",
+        },
+      });
+    } catch (err) {
+      console.dir(err);
+    }
+  };
+
   return (
     <Container
-      maxWidth='sm'
-      justifyContent='center'
-      alignItems='center'
-      direction='column'
+      maxWidth="sm"
+      justifyContent="center"
+      alignItems="center"
+      direction="column"
       sx={{ padding: 0, mt: "23vh" }}
     >
       <Grid Container sx={{ flexGlow: 1 }}>
         {/* --------------- head --------------- */}
         <Typography
-          variant='h4'
-          component='div'
+          variant="h4"
+          component="div"
           sx={{ fontWeight: 600, mb: 3 }}
         >
           เข้าสู่ระบบ
         </Typography>
 
         {/* --------------- button submit by google --------------- */}
-        <Grid container justifyContent='space-between' alignContent='center'>
+        <Grid container justifyContent="space-between" alignContent="center">
           <Grid item xs={5.9}>
             <GoogleLogin
-              clientId='653158791610-ii8s99m412cd01m9lmb9113fjjbocssd.apps.googleusercontent.com'
-              render={renderProps => (
+              clientId="653158791610-ii8s99m412cd01m9lmb9113fjjbocssd.apps.googleusercontent.com"
+              render={(renderProps) => (
                 <GoogleCustomButton
-                  variant='contained'
+                  variant="contained"
                   sx={{
                     width: "100%",
                     display: "flex",
@@ -289,7 +294,7 @@ function LoginContent() {
                       }}
                     >
                       <Typography
-                        variant='p'
+                        variant="p"
                         sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
                       >
                         Sign In With Google
@@ -298,7 +303,7 @@ function LoginContent() {
                   </Grid>
                 </GoogleCustomButton>
               )}
-              buttonText='Login'
+              buttonText="Login"
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
               cookiePolicy={"single_host_origin"}
@@ -308,14 +313,14 @@ function LoginContent() {
           {/* facebook login............... */}
           <Grid item xs={5.9}>
             <FacebookLogin
-              appId='934707233799748'
+              appId="934707233799748"
               // autoLoad={true}
-              fields='name,email,picture,first_name,last_name'
+              fields="name,email,picture,first_name,last_name"
               // onClick={handleFacebookLogin}
               callback={responseFacebook}
-              render={renderProps => (
+              render={(renderProps) => (
                 <FacebookCustomButton
-                  variant='contained'
+                  variant="contained"
                   sx={{
                     width: "100%",
                     display: "flex",
@@ -348,7 +353,7 @@ function LoginContent() {
                       }}
                     >
                       <Typography
-                        variant='p'
+                        variant="p"
                         sx={{ fontFamily: '"Noto Sans Thai", sans-serif' }}
                       >
                         Sign In With Facebook
@@ -367,13 +372,13 @@ function LoginContent() {
         {/* --------------- line --------------- */}
         <Box
           container
-          justifyContent='center'
-          alignItems='center'
+          justifyContent="center"
+          alignItems="center"
           sx={{
             mt: 2,
             flexGlow: 1,
           }}
-          component='form'
+          component="form"
           onSubmit={handleSubmit}
           noValidate
         >
@@ -428,12 +433,12 @@ function LoginContent() {
 
             <TextField
               fullWidth
-              label='อีเมล์'
-              placeholder='กรอกอีเมล์'
-              name='email'
-              size='small'
+              label="อีเมล์"
+              placeholder="กรอกอีเมล์"
+              name="email"
+              size="small"
               value={values.email}
-              onChange={e => handleChange("email", e)}
+              onChange={(e) => handleChange("email", e)}
               helperText={errors.email ? errors.email : ""}
               error={errors.email}
               sx={{
@@ -456,28 +461,28 @@ function LoginContent() {
 
             <TextField
               fullWidth
-              id='outlined-adornment-password'
-              label='รหัสผ่าน'
-              placeholder='กรอกรหัสผ่าน'
-              name='password'
+              id="outlined-adornment-password"
+              label="รหัสผ่าน"
+              placeholder="กรอกรหัสผ่าน"
+              name="password"
               value={values.password}
               type={values.showPassword ? "text" : "password"}
-              onChange={e => handleChange("password", e)}
+              onChange={(e) => handleChange("password", e)}
               helperText={errors.password ? errors.password : ""}
               error={errors.password}
-              size='small'
+              size="small"
               sx={{
                 padding: 0,
                 marginBottom: "3px",
               }}
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position='end'>
+                  <InputAdornment position="end">
                     <IconButton
-                      aria-label='toggle password visibility'
+                      aria-label="toggle password visibility"
                       onClick={handleClickShowPassword}
                       onMouseDown={handleMouseDownPassword}
-                      edge='end'
+                      edge="end"
                     >
                       {values.showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
@@ -490,7 +495,7 @@ function LoginContent() {
           {/* --------------- button submit login--------------- */}
           <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
             <CustomButton
-              type='submit'
+              type="submit"
               sx={{
                 background: "#c62828",
                 color: "#fff",
@@ -531,7 +536,7 @@ function LoginContent() {
             </Typography>
           </Grid>
           <Grid mr={1}>
-            <Link to='/register' style={{ textDecoration: "none" }}>
+            <Link to="/register" style={{ textDecoration: "none" }}>
               <Typography
                 style={{ color: "#16264D", fontWeight: 700, margin: 0 }}
               >
@@ -552,7 +557,7 @@ function LoginContent() {
           }}
         >
           <Grid mr={1}>
-            <Link to='/reset' style={{ textDecoration: "none" }}>
+            <Link to="/reset" style={{ textDecoration: "none" }}>
               <Typography
                 // onClick={handleClickReset({
                 //   vertical: "top",
@@ -574,7 +579,7 @@ function LoginContent() {
         autoHideDuration={6000}
         onClose={handleClose}
       >
-        <Alert onClose={handleClose} severity='success' sx={{ width: "100%" }}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
           {location?.state?.message
             ? location.state.message
             : "การเข้าสู่ระบบของคุณได้ดำเนินการสำเร็จแล้ว"}

@@ -115,7 +115,8 @@ function BookingCfmDetail() {
         userId: user.id,
         checkInDate: location.state.checkInDate,
         checkOutDate: location.state.checkOutDate,
-        totalPrice: total,
+        totalPrice: allTotalPrice,
+        // allTotalPrice: allTotalPrice,
         serviceFee: totalService,
         rooms: location.state.rooms,
       });

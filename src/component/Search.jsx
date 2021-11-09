@@ -98,9 +98,9 @@ function Search({ residentSearch, province, checkIn: cI, rooms }) {
 
   // const [guest, setGuest] = useState(1);
   const [room, setRoom] = useState(1);
-  console.log(checkIn);
-  console.log(cI);
-  console.log(`province`, province);
+  // console.log(checkIn);
+  // console.log(cI);
+  // console.log(`province`, province);
 
   function HandleSumbit() {
     // const history = useHistory();

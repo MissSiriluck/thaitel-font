@@ -1,5 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { BrowserRouter as Router, Link, useHistory, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  useHistory,
+  useLocation,
+} from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import axios from "../config/axios";
 // import FacebookLogin from "react-facebook-login";
@@ -29,7 +34,6 @@ import Visibility from "@mui/icons-material/Visibility";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { GoogleCustomButton } from "../style/button/GoogleCustomButton";
 import { FacebookCustomButton } from "../style/button/FacebookCustomButton";
-
 
 //customize button style
 const CustomButtonRoot = styled("button")(`
@@ -63,11 +67,10 @@ function CustomButton(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
 }
 
-
 function OwnerLogin() {
   const history = useHistory();
-  const location = useLocation()
-  
+  const location = useLocation();
+
   const { setUser } = useContext(AuthContext);
 
   const [values, setValues] = useState({
@@ -129,7 +132,7 @@ function OwnerLogin() {
         state: {
           successMessage: "Already Login.",
           from: " login page ",
-          message: 'การเข้าระบบของคุณสำเร้จแล้ว'
+          message: "การเข้าระบบของคุณสำเร้จแล้ว",
         },
       });
     } catch (err) {
@@ -182,7 +185,7 @@ function OwnerLogin() {
       state: {
         successMessage: "Already Login.",
         from: " login page ",
-        message: 'การเข้าระบบของคุณสำเร้จแล้ว'
+        message: "การเข้าระบบของคุณสำเร้จแล้ว",
       },
     });
   };
@@ -514,7 +517,7 @@ function OwnerLogin() {
           </Link>
         </Grid>
       </Grid>
-      
+
       {/* ------------------------------- forget password ----------------------------- */}
     </Container>
   );
