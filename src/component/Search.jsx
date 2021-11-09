@@ -35,7 +35,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 //customize input date picker
-const RedditTextField = styled(props => (
+const RedditTextField = styled((props) => (
   <TextField InputProps={{ disableUnderline: true }} {...props} />
 ))(({ theme }) => ({
   "& .MuiFilledInput-root": {
@@ -83,40 +83,42 @@ const DateRangePickerDay = styled(MuiDateRangePickerDay)(
   })
 );
 
-function Search({ residentSearch, province, checkIn:cI,rooms }) {
+function Search({ residentSearch, province, checkIn: cI, rooms }) {
   const history = useHistory();
   const location = useLocation();
-  console.log(`location`, location)
+  console.log(`location`, location);
 
   const [value, setValue] = useState([null, null]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [resident, setResident] = useState(residentSearch);
-  const [checkIn, setCheckIn] = useState([new Date(cI.split(',')[0]), new Date(cI.split(',')[1])]); 
-  
+  const [checkIn, setCheckIn] = useState([
+    new Date(cI.split(",")[0]),
+    new Date(cI.split(",")[1]),
+  ]);
 
   // const [guest, setGuest] = useState(1);
   const [room, setRoom] = useState(1);
   console.log(checkIn);
   console.log(cI);
-  console.log(`province`, province)
+  console.log(`province`, province);
 
   function HandleSumbit() {
     // const history = useHistory();
     console.log("testt");
 
-    let allPass = true
+    let allPass = true;
 
     if (!province) {
-      allPass = false
-      alert('กรุณาใส่ข้อมูลสำหรับการค้นหา')
+      allPass = false;
+      alert("กรุณาใส่ข้อมูลสำหรับการค้นหา");
     }
     if (!resident) {
-      allPass = false
-      alert('กรุณาใส่ข้อมูลสำหรับการค้นหา')
+      allPass = false;
+      alert("กรุณาใส่ข้อมูลสำหรับการค้นหา");
     }
     if (!checkIn) {
-      allPass = false
-      alert('กรุณาใส่วันที่เช็คอินหรือเช็คเอาท์')
+      allPass = false;
+      alert("กรุณาใส่วันที่เช็คอินหรือเช็คเอาท์");
     }
     if (allPass) {
       history.push(`/mainmenu/${resident}/${checkIn}/${room}`);
@@ -135,7 +137,10 @@ function Search({ residentSearch, province, checkIn:cI,rooms }) {
       <Grid item xs={11}>
         <Typography sx={{ mb: 2 }}>
           หน้าหลัก &gt; ผลการค้นหา &gt;
-          <span style={{ color: "#c62828" }}> { residentSearch?residentSearch:province } </span>
+          <span style={{ color: "#c62828" }}>
+            {" "}
+            {residentSearch ? residentSearch : province}{" "}
+          </span>
         </Typography>
         <Box sx={{ background: "#07133C", flexGlow: 1, borderRadius: 2 }}>
           <Grid item sx={{ p: 4 }}>
@@ -146,8 +151,8 @@ function Search({ residentSearch, province, checkIn:cI,rooms }) {
               จุดหมาย/ชื่อที่พัก
             </Typography>
             <BootstrapInput
-              defaultValue=''
-              id='bootstrap-input'
+              defaultValue=""
+              id="bootstrap-input"
               fullWidth
               placeholder="เลือกจุดหมายที่คุณต้องการ"
               size="small"
@@ -158,7 +163,7 @@ function Search({ residentSearch, province, checkIn:cI,rooms }) {
                 borderRadius: "4px",
                 mb: 2,
               }}
-              onChange={e => setResident(e.target.value)}
+              onChange={(e) => setResident(e.target.value)}
             />
 
             <Typography sx={{ color: "#fff", pb: 1 }}>
@@ -173,19 +178,19 @@ function Search({ residentSearch, province, checkIn:cI,rooms }) {
                 }}
               >
                 <DateRangePicker
-                  startText='Check-in'
-                  endText='Check-out'
+                  startText="Check-in"
+                  endText="Check-out"
                   value={checkIn}
                   renderDay={renderWeekPickerDay}
-                  onChange={e => {
+                  onChange={(e) => {
                     setCheckIn(e);
                   }}
                   renderInput={(startProps, endProps) => (
                     <React.Fragment>
                       <RedditTextField
-                        id='filled-basic'
-                        label='Filled'
-                        variant='filled'
+                        id="filled-basic"
+                        label="Filled"
+                        variant="filled"
                         sx={{
                           backgroundColor: "#fff",
                           borderRadius: "4px",
@@ -206,9 +211,9 @@ function Search({ residentSearch, province, checkIn:cI,rooms }) {
                         {...startProps}
                       />
                       <RedditTextField
-                        id='filled-basic'
-                        label='Filled'
-                        variant='filled'
+                        id="filled-basic"
+                        label="Filled"
+                        variant="filled"
                         sx={{
                           backgroundColor: "#fff",
                           borderRadius: "4px",

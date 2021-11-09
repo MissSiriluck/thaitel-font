@@ -394,7 +394,6 @@ function AddcomDetail({ checkIn }) {
         {/* {resident.rooms.map(item) => ()} */}
         {/* {resident?.rooms?.map((resident) => ( */}
         <Box>
-          <Typography> กดเพื่อเลือกจำนวนห้องพักที่ต้องการจอง </Typography>
         {rooms?.map((room) => (
           <EachRoomCard
             room={room}

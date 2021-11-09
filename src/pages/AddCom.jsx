@@ -21,7 +21,7 @@ function AddCom() {
       <Container maxWidth="xl" sx={{ mt: 18 }}>
         <Grid container>
           <Grid item xs={3}>
-            <Search residentSearch={residentSearch} />
+            <Search residentSearch={residentSearch} checkIn={checkIn} />
           </Grid>
           <Grid item xs={9}>
             <AddcomDetail checkIn={checkIn} />

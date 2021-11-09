@@ -74,9 +74,9 @@ function EachRoomCard({ room, updateRoomAmount, resident }) {
       item
       id=""
       xs={12}
-      sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
+      sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2, display: 'flex', justifyContent: 'space-between' }}
     >
-      <Grid container>
+      <Grid container sx={{justifyContent: 'space-between'}}>
         <Grid item xs={2.2}>
           <img
             src={room.imgURL}
@@ -88,15 +88,16 @@ function EachRoomCard({ room, updateRoomAmount, resident }) {
           />
         </Grid>
         <Grid item xs={9.8} sx={{ flexGlow: 1 }} sx={{ mt: 2 }}>
-          <Grid container>
-            <Grid item xs={5}>
+          <Grid container sx={{justifyContent: 'space-between'}}>
+            <Grid item xs={5} sx={{background: 'green'}}>
               <Typography sx={{ fontSize: "20px", mb: 1 }}>
                 {room.typeOf}
                 {/* {`ห้องมาตราฐานเตียงเดี่ยว`} */}
               </Typography>
               <Typography>{`${room.optionalRoomDetail}`}</Typography>
             </Grid>
-            <Grid item xs={5}>
+            <Grid item xs={5} >
+              <Typography sx={{ display: 'flex', }}> กดเพื่อเลือกจำนวนห้องพักที่ต้องการจอง </Typography>
               <Box item xs={4} sx={{ mb: 2, display: "flex" }}>
                 <CustomButton
                   sx={{

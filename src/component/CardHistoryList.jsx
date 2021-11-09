@@ -41,7 +41,7 @@ function CustomButton(props) {
 function CardHistoryList({ resident, booking }) {
   // console.log("booking........................", booking);
   return (
-    <Grid item xs={12} sx={{ mt: 3, mb: 15 }}>
+    <Grid item xs={12} sx={{ mt: 3 }}>
       {/* {residents.map((resident) => ( */}
       <Grid
         item
@@ -64,11 +64,13 @@ function CardHistoryList({ resident, booking }) {
           <Grid item xs={8} sx={{ flexGlow: 1 }} sx={{ mt: 2 }}>
             <Grid container>
               <Grid item xs={2}>
-                <Typography sx={{ mb: 1 }}>ชื่อที่พัก</Typography>
+                <Typography sx={{ mb: 1, p: 1 }}>ชื่อที่พัก</Typography>
                 {/* <Typography sx={{ mb: 1 }}>{booking.resident}</Typography> */}
               </Grid>
               <Grid item xs={5}>
-                <Typography sx={{ mb: 1 }}>{booking.resident.name}</Typography>
+                <Typography sx={{ mb: 1, p: 1 }}>
+                  {booking.resident.name}
+                </Typography>
               </Grid>
               {/* <Grid item xs={5}>
                 <Typography sx={{ mb: 1 }}>
@@ -78,23 +80,27 @@ function CardHistoryList({ resident, booking }) {
             </Grid>
 
             {booking?.rooms?.map((item) => (
-              <Grid container sx={{ mb: 2 }}>
+              <Grid container sx={{}}>
                 <Grid item xs={2}>
-                  <Typography sx={{ mb: 1 }}>ชื่อห้องพัก</Typography>
+                  <Typography sx={{ mb: 1, p: 1 }}>ชื่อห้องพัก</Typography>
                 </Grid>
+
                 <Box
                   sx={{
                     display: "flex",
                   }}
                 >
-                  <Grid item xs={10}>
-                    <Typography sx={{ mb: 1 }}>{item?.typeOf}</Typography>
-                  </Grid>
-                  <Grid item xs={5}>
-                    <Typography sx={{ mb: 1 }}>
-                      จำนวน {item?.roomBookingAmount} ห้อง
-                    </Typography>
-                  </Grid>
+                  {/* <Grid item xs={10}> */}
+                  <Typography sx={{ mb: 1, p: 1, flexGrow: 1 }}>
+                    {item?.typeOf}
+                  </Typography>
+                  {/* </Grid> */}
+
+                  {/* <Grid item xs={5}> */}
+                  <Typography sx={{ mb: 1, p: 1, flexGrow: 1 }}>
+                    จำนวน {item?.roomBookingAmount} ห้อง
+                  </Typography>
+                  {/* </Grid> */}
                 </Box>
               </Grid>
             ))}

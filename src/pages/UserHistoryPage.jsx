@@ -43,14 +43,6 @@ function UserHistoryPage() {
               สวัสดี คุณ {user.firstName}
             </Typography>
           </Grid>
-          {/* <Grid item xs={12}>
-            <Typography sx={{ fontSize: "16px" }}>
-              ดูรายละเอียดการจองที่พักของคุณ
-            </Typography>
-          </Grid> */}
-          {/* {booking.map((item) => (
-            <CardHistoryList booking={item} />
-          ))} */}
           {booking.length > 0 ? (
             <>
               <Grid item xs={12}>
