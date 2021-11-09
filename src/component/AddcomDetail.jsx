@@ -394,6 +394,7 @@ function AddcomDetail({ checkIn }) {
         {/* {resident.rooms.map(item) => ()} */}
         {/* {resident?.rooms?.map((resident) => ( */}
         <Box>
+          
         {rooms?.map((room) => (
           <EachRoomCard
             room={room}

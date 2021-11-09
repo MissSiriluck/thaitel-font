@@ -18,7 +18,7 @@ function AddCom() {
       <SpaceforHead />
       <Header />
 
-      <Container maxWidth="xl" sx={{ mt: 18 }}>
+      <Container maxWidth='xl' sx={{ mt: 16 }}>
         <Grid container>
           <Grid item xs={3}>
             <Search residentSearch={residentSearch} checkIn={checkIn} />
