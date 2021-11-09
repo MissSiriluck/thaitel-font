@@ -134,7 +134,8 @@ function AddRoomsForm({ addRoomCollection }) {
 
   return (
     <Container maxWidth='md' sx={{ padding: 0 }}>
-      <Grid container direction='column' sx={8} spacing={2}>
+      <Grid container direction='column' sx={8} spacing={2} >
+                  
         <Grid item sx={{ display: 'flex', flexDirection: 'column' }}>
           <Grid item sx={{ display: 'flex', flexDirection: 'column' }}>
             <Grid item sx={{ display: 'flex', flexDirection: 'column', flexgrow: '1' }}>

@@ -41,6 +41,7 @@ function CustomButton(props) {
 
 function RoomList({status, index, room, deleteRoomCollection, editRoomCollection }) {
 
+
   const [openModal1, setOpenModal1] = React.useState(false);
   const handleOpen1 = () => setOpenModal1(true);
   const handleClose1 = () => setOpenModal1(false);
@@ -62,7 +63,7 @@ function RoomList({status, index, room, deleteRoomCollection, editRoomCollection
     handleOpen1()
   };
 
-  
+  console.log(`room`, room)
 
   return (
     <Stack
@@ -75,13 +76,28 @@ function RoomList({status, index, room, deleteRoomCollection, editRoomCollection
         borderRadius: '10px',
         justifyContent: 'space-between',
         height: '14vh',
+        marginBottom: '20px'
       }}
     >
-      <ModalEditRoomsForm index={index}  room={room} editRoomCollection={editRoomCollection}  openModal={openModal1} handleOpen={handleOpen1} handleClose={handleClose1}/>
-      <Grid item>
-        <Typography sx={{ fontSize: '18px' }}>
-          {room.roomTypeOf}
-        </Typography>
+      <Grid item sx={{display: 'flex', flexDirection: 'row'}}>
+        <Grid item>
+          <img
+            src={room?.imgUrl || room?.roomShowImg}
+            style={{
+              width: "100px",
+              height: "100px",
+              borderRadius: 8,
+              objectFit: 'cover'
+            }}
+            alt='resident-img'
+          />
+        </Grid>
+            
+        <Grid item sx={{ margin: '20px'}}>
+          <Typography sx={{ fontSize: '18px', margin: '20' }}>
+            {room.roomTypeOf}
+          </Typography>
+        </Grid>
       </Grid>
 
       <Grid
@@ -132,7 +148,7 @@ function RoomList({status, index, room, deleteRoomCollection, editRoomCollection
           </Box>
         </Grid>
       </Grid>
-
+         <ModalEditRoomsForm index={index}  room={room} editRoomCollection={editRoomCollection}  openModal={openModal1} handleOpen={handleOpen1} handleClose={handleClose1}/>
       <Grid
         container
         xs={3}

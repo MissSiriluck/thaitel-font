@@ -132,7 +132,11 @@ function OwnerLogin() {
         state: {
           successMessage: "Already Login.",
           from: " login page ",
+<<<<<<< HEAD
           message: "การเข้าระบบของคุณสำเร้จแล้ว",
+=======
+          message: 'การเข้าระบบของคุณสำเร็จแล้ว'
+>>>>>>> 91bcb2e464c6fb0dce7a6e27509ce7d02d7bac9b
         },
       });
     } catch (err) {
@@ -162,6 +166,7 @@ function OwnerLogin() {
         state: {
           successMessage: "Already Login.",
           from: " login page ",
+          message: 'การเข้าระบบของคุณสำเร็จแล้ว'
         },
       });
     } catch (err) {
@@ -185,7 +190,11 @@ function OwnerLogin() {
       state: {
         successMessage: "Already Login.",
         from: " login page ",
+<<<<<<< HEAD
         message: "การเข้าระบบของคุณสำเร้จแล้ว",
+=======
+        message: 'การเข้าระบบของคุณสำเร็จแล้ว'
+>>>>>>> 91bcb2e464c6fb0dce7a6e27509ce7d02d7bac9b
       },
     });
   };
