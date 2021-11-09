@@ -86,21 +86,17 @@ function AddcomDetail({ checkIn }) {
   const getCheckIn = new Date(checkIn.split(",")[0]);
   const fullDateCheckIn = getCheckIn.toLocaleString("en-US", {
     weekday: "short",
-    // year: "numeric",
     month: "short",
     day: "numeric",
   });
-  // console.log(`fullDateCheckIn`, fullDateCheckIn);
 
   console.log(`object`, checkIn.split(",")[1]);
   const getCheckOut = new Date(checkIn.split(",")[1]);
   const fullDateCheckOut = getCheckOut.toLocaleString("en-US", {
     weekday: "short",
-    // year: "numeric",
     month: "short",
     day: "numeric",
   });
-  // console.log(`fullDateCheckOut`, fullDateCheckOut);
 
   // const { user } = useContext(AuthContext);
 
@@ -152,8 +148,10 @@ function AddcomDetail({ checkIn }) {
         state: {
           resident: resident,
           rooms: filterRoom,
-          checkInDate: fullDateCheckIn,
-          checkOutDate: fullDateCheckOut,
+          // checkInDate: fullDateCheckIn,
+          // checkOutDate: fullDateCheckOut,
+          checkInDate: getCheckIn,
+          checkOutDate: getCheckOut,
           // [
           // {
           //   roomId: 1,
@@ -192,7 +190,14 @@ function AddcomDetail({ checkIn }) {
         {resident?.resident?.ResidentImgs?.map((resident) => (
           <img
             src={resident.imgUrl}
-            style={{ width: "1116px", height: "450px", mb: 2 }}
+            style={{
+              width: "100%",
+              height: "55vh",
+              marginBottom: "10px",
+              objectFit: "cover",
+              borderRadius: 8,
+              objectPosition: "center",
+            }}
           />
         ))}
 
@@ -224,19 +229,27 @@ function AddcomDetail({ checkIn }) {
               บริการภายในโรงแรม
             </Typography>
 
-              <Grid container sx={{ flexWrap: "wrap", display: 'flex', flexDirection: 'row' }}>
-                {resident?.resident?.ServiceItems?.map((resident) => (
+            <Grid
+              container
+              sx={{ flexWrap: "wrap", display: "flex", flexDirection: "row" }}
+            >
+              {resident?.resident?.ServiceItems?.map((resident) => (
                 <Grid
                   item
                   xs={3}
-                  sx={{ display: "flex", alignItems: "center", mb: 2, flexDirection: 'row' }}
-                  >
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    mb: 2,
+                    flexDirection: "row",
+                  }}
+                >
                   {resident.serviceName === "parking" ? (
                     <DirectionsCarIcon />
                   ) : resident.serviceName === "breakFast" ? (
                     <FastfoodIcon />
-                    ) : resident.serviceName === "wifi" ? (
-                      <WifiIcon />
+                  ) : resident.serviceName === "wifi" ? (
+                    <WifiIcon />
                   ) : resident.serviceName === "swimingPool" ? (
                     <PoolIcon />
                   ) : resident.serviceName === "bar" ? (
@@ -249,12 +262,12 @@ function AddcomDetail({ checkIn }) {
                     <RoomServiceIcon />
                   ) : resident.serviceName === "fitnessRoom" ? (
                     <FitnessCenterIcon />
-                  ) : null }
+                  ) : null}
                   {/* <Typography sx={{ ml: 2 }}>ที่จอดรถ</Typography> */}
                   <Typography sx={{ ml: 2 }}>{resident.serviceName}</Typography>
-                  </Grid>
-                  ))}
-              </Grid>
+                </Grid>
+              ))}
+            </Grid>
           </Grid>
         </Grid>
         {/* check-in & check-out block */}

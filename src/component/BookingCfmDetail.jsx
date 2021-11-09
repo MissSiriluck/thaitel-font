@@ -45,31 +45,16 @@ export function CustomButton(props) {
 function BookingCfmDetail() {
   const { user } = useContext(AuthContext);
   const location = useLocation();
-  console.log("location...................................", location.state);
+  console.log(
+    "location...................................",
+    location.state.checkInDate
+  );
 
   const hotelName = location.state.resident.resident.name;
   const timeCheckInStart = location.state.resident.resident.timeCheckInStart;
   const timeCheckInEnd = location.state.resident.resident.timeCheckInEnd;
   const timeCheckOutStart = location.state.resident.resident.timeCheckOutStart;
   const timeCheckOutEnd = location.state.resident.resident.timeCheckOutEnd;
-
-  // const price = location.state.rooms
-  // const fetchRoomSummary = location.state.resident;
-  // console.log(fetchRoomSummary);
-
-  // const [resident, setResident] = useState({});
-
-  // useEffect(() => {
-  //   const fetchResidentByid = async () => {
-  //     // const res = await axios.get(`/residents/${user.id}`);
-  //     const res = await axios.get(`/residents/${location.state.id}`);
-  //     setResident(res.data);
-  //     // console.log("res.data.......................", res.data);
-  //   };
-  //   fetchResidentByid();
-  // }, []);
-
-  // console.log("resident.............................", resident.resident);
 
   let totalService = location.state.resident.resident.ServiceItems.reduce(
     (a, c) => a + +c.pricePerTime,
@@ -107,6 +92,8 @@ function BookingCfmDetail() {
 
   const totalNight = getCheckOutDate - getCheckInDate;
   const allTotalPrice = total * totalNight + totalService;
+
+  // console.log(`location.state.checkInDate`, location.state.checkInDate);
 
   const handleClickToPayment = async (e) => {
     e.preventDefault();

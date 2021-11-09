@@ -35,7 +35,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 //customize input date picker
-const RedditTextField = styled((props) => (
+const RedditTextField = styled(props => (
   <TextField InputProps={{ disableUnderline: true }} {...props} />
 ))(({ theme }) => ({
   "& .MuiFilledInput-root": {
@@ -133,8 +133,12 @@ function Search({ residentSearch, province, checkIn: cI, rooms }) {
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <Grid container xs={2.3} sx={{ position: "fixed" }}>
-      <Grid item xs={11}>
+    <Grid
+      container
+      className='search_nav'
+      sx={{ position: "fixed", width: "350px", justifyContent: "flex-end" }}
+    >
+      <Grid item xs={10.5}>
         <Typography sx={{ mb: 2 }}>
           หน้าหลัก &gt; ผลการค้นหา &gt;
           <span style={{ color: "#c62828" }}>
@@ -142,8 +146,8 @@ function Search({ residentSearch, province, checkIn: cI, rooms }) {
             {residentSearch ? residentSearch : province}{" "}
           </span>
         </Typography>
-        <Box sx={{ background: "#07133C", flexGlow: 1, borderRadius: 2 }}>
-          <Grid item sx={{ p: 4 }}>
+        <Box sx={{ background: "#16264D", flexGlow: 1, borderRadius: 2 }}>
+          <Grid item sx={{ p: 3 }}>
             <Typography sx={{ color: "#fff", fontSize: "20px", pb: 2 }}>
               ค้นหา
             </Typography>
@@ -151,11 +155,11 @@ function Search({ residentSearch, province, checkIn: cI, rooms }) {
               จุดหมาย/ชื่อที่พัก
             </Typography>
             <BootstrapInput
-              defaultValue=""
-              id="bootstrap-input"
+              defaultValue=''
+              id='bootstrap-input'
               fullWidth
-              placeholder="เลือกจุดหมายที่คุณต้องการ"
-              size="small"
+              placeholder='เลือกจุดหมายที่คุณต้องการ'
+              size='small'
               value={resident}
               sx={{
                 padding: 0,
@@ -163,7 +167,7 @@ function Search({ residentSearch, province, checkIn: cI, rooms }) {
                 borderRadius: "4px",
                 mb: 2,
               }}
-              onChange={(e) => setResident(e.target.value)}
+              onChange={e => setResident(e.target.value)}
             />
 
             <Typography sx={{ color: "#fff", pb: 1 }}>
@@ -178,19 +182,19 @@ function Search({ residentSearch, province, checkIn: cI, rooms }) {
                 }}
               >
                 <DateRangePicker
-                  startText="Check-in"
-                  endText="Check-out"
+                  startText='Check-in'
+                  endText='Check-out'
                   value={checkIn}
                   renderDay={renderWeekPickerDay}
-                  onChange={(e) => {
+                  onChange={e => {
                     setCheckIn(e);
                   }}
                   renderInput={(startProps, endProps) => (
                     <React.Fragment>
                       <RedditTextField
-                        id="filled-basic"
-                        label="Filled"
-                        variant="filled"
+                        id='filled-basic'
+                        label='Filled'
+                        variant='filled'
                         sx={{
                           backgroundColor: "#fff",
                           borderRadius: "4px",
@@ -211,9 +215,9 @@ function Search({ residentSearch, province, checkIn: cI, rooms }) {
                         {...startProps}
                       />
                       <RedditTextField
-                        id="filled-basic"
-                        label="Filled"
-                        variant="filled"
+                        id='filled-basic'
+                        label='Filled'
+                        variant='filled'
                         sx={{
                           backgroundColor: "#fff",
                           borderRadius: "4px",
