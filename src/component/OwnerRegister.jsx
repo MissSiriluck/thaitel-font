@@ -15,6 +15,9 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Visibility from "@mui/icons-material/Visibility";
+import { IconButton, InputAdornment } from "@mui/material";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -55,6 +58,17 @@ function OwnerRegister({ handleSubmitOwnerRegister }) {
   const [showImg, setShowImg] = useState("");
   const [file, setFile] = useState(null);
 
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
+
   const handleChange = (props, event) => {
     setValues({ ...values, [props]: event.target.value });
   };
@@ -76,7 +90,7 @@ function OwnerRegister({ handleSubmitOwnerRegister }) {
   return (
     <Container
       maxWidth='lg'
-      sx={{ justifyContent: "center", display: "flex", mt: "17vh", mb: 5 }}
+      sx={{ justifyContent: "center", display: "flex", mt: 15, mb: 1 }}
     >
       <Grid
         container
@@ -186,10 +200,29 @@ function OwnerRegister({ handleSubmitOwnerRegister }) {
                   sx={{ marginTop: "8px" }}
                   value={values.password}
                   onChange={e => handleChange("password", e)}
+                  type={values.showPassword ? "text" : "password"}
                   helperText={
                     ownerDetailErrors.password ? ownerDetailErrors.password : ""
                   }
                   error={ownerDetailErrors.password}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position='end'>
+                        <IconButton
+                          aria-label='toggle password visibility'
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge='end'
+                        >
+                          {values.showPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </Grid>
 
@@ -208,6 +241,7 @@ function OwnerRegister({ handleSubmitOwnerRegister }) {
                   size='small'
                   sx={{ marginTop: "8px" }}
                   value={values.confirmPassword}
+                  type={values.showPassword ? "text" : "password"}
                   onChange={e => handleChange("confirmPassword", e)}
                   helperText={
                     ownerDetailErrors.confirmPassword
@@ -215,6 +249,24 @@ function OwnerRegister({ handleSubmitOwnerRegister }) {
                       : ""
                   }
                   error={ownerDetailErrors.confirmPassword}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position='end'>
+                        <IconButton
+                          aria-label='toggle password visibility'
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge='end'
+                        >
+                          {values.showPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </Grid>
             </Grid>

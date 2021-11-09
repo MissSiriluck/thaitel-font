@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,15 +6,24 @@ import {
   Link,
   useHistory,
 } from "react-router-dom";
+import axios from "../config/axios";
+
 import Button from "@mui/material/Button";
-import { Container, Grid, TextField } from "@mui/material";
+import {
+  Container,
+  Grid,
+  TextField,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/core/ButtonUnstyled";
 import { styled } from "@mui/system";
-import axios from "../config/axios";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Visibility from "@mui/icons-material/Visibility";
 
 const CustomButtonRoot = styled("button")(`
     background-color: none;
@@ -50,6 +59,26 @@ function CustomButton(props) {
 function RegisterContent() {
   const history = useHistory();
 
+  const [values, setValues] = useState({
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
+
+  const handleChange = (props, event) => {
+    setValues({ ...values, [props]: event.target.value });
+  };
+
   const handleSubmit = async event => {
     try {
       event.preventDefault();
@@ -84,7 +113,7 @@ function RegisterContent() {
         justifyContent='center'
         alignItems='center'
         // direction='column'
-        sx={{ padding: 0, mt: "20vh" }}
+        sx={{ padding: 0, mt: "23vh" }}
       >
         <Box
           alignItems='center'
@@ -319,12 +348,33 @@ function RegisterContent() {
                     id='password'
                     name='password'
                     type='password'
+                    value={values.password}
+                    type={values.showPassword ? "text" : "password"}
+                    onChange={e => handleChange("password", e)}
                     // value={values.password}
                     // onChange={handleChange("password")}
                     size='small'
                     sx={{
                       padding: 0,
                       marginBottom: "3px",
+                    }}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position='end'>
+                          <IconButton
+                            aria-label='toggle password visibility'
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge='end'
+                          >
+                            {values.showPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
                     }}
                   />
                 </Grid>
@@ -359,12 +409,33 @@ function RegisterContent() {
                     id='confirmPassword'
                     name='confirmPassword'
                     type='password'
+                    value={values.confirmPassword}
+                    type={values.showPassword ? "text" : "password"}
+                    onChange={e => handleChange("confirmPassword", e)}
                     // value={values.confirmPassword}
                     // onChange={handleChange("confirmPassword")}
                     size='small'
                     sx={{
                       padding: 0,
                       marginBottom: "3px",
+                    }}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position='end'>
+                          <IconButton
+                            aria-label='toggle password visibility'
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge='end'
+                          >
+                            {values.showPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
                     }}
                   />
                 </Grid>

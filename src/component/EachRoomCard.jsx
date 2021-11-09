@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, styled } from "@mui/system";
 import {
+  Button,
   FormControl,
   Grid,
   InputLabel,
@@ -50,7 +51,7 @@ function EachRoomCard({ room, updateRoomAmount, resident }) {
 
   const [roomBookingAmount, setRoomBookingAmount] = useState(0);
 
-  const handleClickIncrease = (e) => {
+  const handleClickIncrease = e => {
     e.preventDefault();
     // updateRoomAmount(room.roomId, roomBookingAmount + 1);
     // setRoomBookingAmount(roomBookingAmount + 1);
@@ -61,7 +62,7 @@ function EachRoomCard({ room, updateRoomAmount, resident }) {
     }
   };
 
-  const handleClickDecrease = (e) => {
+  const handleClickDecrease = e => {
     e.preventDefault();
     if (roomBookingAmount > 0) {
       updateRoomAmount(room.roomId, roomBookingAmount - 1);
@@ -72,46 +73,56 @@ function EachRoomCard({ room, updateRoomAmount, resident }) {
   return (
     <Grid
       item
-      id=""
+      id=''
       xs={12}
-      sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
+      sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 3, mb: 2 }}
     >
       <Grid container>
-        <Grid item xs={2.2}>
+        <Grid item xs={2} sx={{ position: "relative", width: "50%" }}>
           <img
             src={room.imgURL}
             style={{
-              width: "170px",
-              height: "170px",
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
               borderRadius: 8,
+              objectPosition: "center",
             }}
           />
         </Grid>
-        <Grid item xs={9.8} sx={{ flexGlow: 1 }} sx={{ mt: 2 }}>
+        <Grid item xs={9.5} sx={{ flexGlow: 1 }} sx={{ mt: 1, ml: 3 }}>
           <Grid container>
-            <Grid item xs={5}>
+            <Grid item xs={6} sx={{ mr: 3 }}>
               <Typography sx={{ fontSize: "20px", mb: 1 }}>
                 {room.typeOf}
                 {/* {`ห้องมาตราฐานเตียงเดี่ยว`} */}
               </Typography>
-              <Typography>{`${room.optionalRoomDetail}`}</Typography>
+              <Typography
+                sx={{ mb: 1 }}
+              >{`${room.optionalRoomDetail}`}</Typography>
+              <Typography>Room size : {room.size} ตารางเมตร</Typography>
             </Grid>
             <Grid item xs={5}>
+              <Typography sx={{ mb: 1 }}>
+                กรุณาเลือกจำนวนห้องที่ต้องการ
+              </Typography>
               <Box item xs={4} sx={{ mb: 2, display: "flex" }}>
-                <CustomButton
+                <Button
+                  variant='outlined'
                   sx={{
-                    background: "#c62828",
-                    color: "#fff",
+                    mr: 1,
+                    fontSize: "22px",
+                    borderRadius: "10px",
                     fontFamily: "'Noto Sans Thai', sans-serif",
-                    fontSize: "20px",
-                    width: "2px",
-                    display: "flex",
-                    justifyContent: "center",
+                    width: "50px",
+                    boxShadow:
+                      "0 4px 20px 0 rgb(61 71 82 / 10%), 0 0 0 0 rgb(0 127 255 / 0%)",
                   }}
                   onClick={handleClickDecrease}
                 >
                   -
-                </CustomButton>
+                </Button>
                 <Box
                   sx={{
                     display: "inline-flex",
@@ -126,24 +137,24 @@ function EachRoomCard({ room, updateRoomAmount, resident }) {
                   {roomBookingAmount}
                 </Box>
 
-                <CustomButton
+                <Button
+                  variant='outlined'
                   sx={{
-                    background: "#c62828",
-                    color: "#fff",
+                    ml: 1,
+                    fontSize: "22px",
+                    textAlign: "center",
+                    borderRadius: "10px",
                     fontFamily: "'Noto Sans Thai', sans-serif",
-                    fontSize: "20px",
-                    width: "2px",
-                    display: "flex",
-                    justifyContent: "center",
+                    width: "50px",
+                    boxShadow:
+                      "0 4px 20px 0 rgb(61 71 82 / 10%), 0 0 0 0 rgb(0 127 255 / 0%)",
                   }}
                   onClick={handleClickIncrease}
                 >
                   +
-                </CustomButton>
+                </Button>
               </Box>
-              <Typography sx={{ mb: 1 }}>
-                Room size : {room.size} ตารางเมตร
-              </Typography>
+
               <Typography sx={{ mb: 1 }}>
                 Price : {room.pricePerNight} BAHT
               </Typography>

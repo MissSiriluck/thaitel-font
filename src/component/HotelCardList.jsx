@@ -13,6 +13,7 @@ const CustomButtonRoot = styled("button")(`
     border-radius: 10px;
     color: #fff;
     font-weight: 600;
+    width: 100%;
     font-family: 'Noto Sans Thai', sans-serif;
     font-size: 14px;
     transition: all 200ms ease;
@@ -60,7 +61,7 @@ function HotelCardList({ resident, residentSearch, checkIn }) {
 
   const history = useHistory();
 
-  const handleClicklookRoom = (e) => {
+  const handleClicklookRoom = e => {
     e.preventDefault();
     history.push({
       pathname: "/addcom",
@@ -77,24 +78,27 @@ function HotelCardList({ resident, residentSearch, checkIn }) {
     <Grid container sx={{ mb: 1 }}>
       <Grid
         item
-        id=""
+        id=''
         xs={12}
         sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 2, mb: 1 }}
       >
         <Grid container>
-          <Grid item xs={2.2}>
+          <Grid item xs={2.2} sx={{ position: "relative", width: "50%" }}>
             <img
               // src={`${resident.url}`}
               src={resident?.ResidentImgs[0]?.imgUrl}
               style={{
-                width: "170px",
-                height: "170px",
+                position: "absolute",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
                 borderRadius: 8,
+                objectPosition: "center",
               }}
-              alt="resident-img"
+              alt='resident-img'
             />
           </Grid>
-          <Grid item xs={9.8} sx={{ flexGlow: 1, mt: 2 }}>
+          <Grid item xs={9.6} sx={{ flexGlow: 1, mt: 2, ml: 2 }}>
             <Grid container>
               <Grid item xs={8}>
                 <Typography sx={{ fontSize: "20px", mb: 1 }}>
@@ -102,9 +106,9 @@ function HotelCardList({ resident, residentSearch, checkIn }) {
                 </Typography>
                 <Typography>{`${resident.province}`}</Typography>
               </Grid>
-              <Grid item xs={3.5}>
+              <Grid item xs={3.8} sx={{ mr: 1 }}>
                 <Rating
-                  name="rate_star"
+                  name='rate_star'
                   defaultValue={resident.rateStar}
                   precision={0.5}
                   readOnly

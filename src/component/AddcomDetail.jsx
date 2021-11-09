@@ -110,14 +110,14 @@ function AddcomDetail({ checkIn }) {
   const [resident, setResident] = useState({});
   // const [roomBookingAmount, setRoomBookingAmount] = useState(0);
 
-  const filterRoom = rooms.filter((item) => item.roomBookingAmount > 0);
+  const filterRoom = rooms.filter(item => item.roomBookingAmount > 0);
   // console.log("filterRoom...........", filterRoom);
 
   useEffect(() => {
     const fetchResidentByid = async () => {
       // const res = await axios.get(`/residents/${user.id}`);
       const res = await axios.get(`/residents/residentId/${location.state.id}`);
-      const roomsFetch = res.data?.rooms?.map((item) => {
+      const roomsFetch = res.data?.rooms?.map(item => {
         return {
           roomId: item.id,
           typeOf: item.typeOf,
@@ -141,10 +141,10 @@ function AddcomDetail({ checkIn }) {
 
   const history = useHistory();
 
-  const roomEachInfo = rooms.map((item) => item.typeOf);
+  const roomEachInfo = rooms.map(item => item.typeOf);
   console.log(roomEachInfo);
 
-  const handleClickRoomSumary = (e) => {
+  const handleClickRoomSumary = e => {
     e.preventDefault();
     if (filterRoom.length > 0) {
       history.push({
@@ -177,7 +177,7 @@ function AddcomDetail({ checkIn }) {
 
   const updateRoomAmount = (roomId, roomBookingAmount) => {
     const newRoom = [...rooms];
-    const idx = newRoom.findIndex((item) => item.roomId === roomId);
+    const idx = newRoom.findIndex(item => item.roomId === roomId);
     if (idx !== -1) {
       newRoom[idx].roomBookingAmount = roomBookingAmount;
       setRooms(newRoom);
@@ -189,10 +189,17 @@ function AddcomDetail({ checkIn }) {
     <Grid container>
       <Grid item>
         {/* <CarouselBox /> */}
-        {resident?.resident?.ResidentImgs?.map((resident) => (
+        {resident?.resident?.ResidentImgs?.map(resident => (
           <img
             src={resident.imgUrl}
-            style={{ width: "1116px", height: "450px", mb: 2 }}
+            style={{
+              width: "100%",
+              height: "55vh",
+              marginBottom: "10px",
+              objectFit: "cover",
+              borderRadius: 8,
+              objectPosition: "center",
+            }}
           />
         ))}
 
@@ -200,7 +207,7 @@ function AddcomDetail({ checkIn }) {
         <Grid container>
           <Grid
             item
-            id=""
+            id=''
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
@@ -216,7 +223,7 @@ function AddcomDetail({ checkIn }) {
           {/* Service block */}
           <Grid
             item
-            id=""
+            id=''
             xs={12}
             sx={{ border: "1px solid #BFBFBF", borderRadius: 2, p: 4, mb: 2 }}
           >
@@ -224,19 +231,27 @@ function AddcomDetail({ checkIn }) {
               บริการภายในโรงแรม
             </Typography>
 
-              <Grid container sx={{ flexWrap: "wrap", display: 'flex', flexDirection: 'row' }}>
-                {resident?.resident?.ServiceItems?.map((resident) => (
+            <Grid
+              container
+              sx={{ flexWrap: "wrap", display: "flex", flexDirection: "row" }}
+            >
+              {resident?.resident?.ServiceItems?.map(resident => (
                 <Grid
                   item
                   xs={3}
-                  sx={{ display: "flex", alignItems: "center", mb: 2, flexDirection: 'row' }}
-                  >
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    mb: 2,
+                    flexDirection: "row",
+                  }}
+                >
                   {resident.serviceName === "parking" ? (
                     <DirectionsCarIcon />
                   ) : resident.serviceName === "breakFast" ? (
                     <FastfoodIcon />
-                    ) : resident.serviceName === "wifi" ? (
-                      <WifiIcon />
+                  ) : resident.serviceName === "wifi" ? (
+                    <WifiIcon />
                   ) : resident.serviceName === "swimingPool" ? (
                     <PoolIcon />
                   ) : resident.serviceName === "bar" ? (
@@ -249,12 +264,12 @@ function AddcomDetail({ checkIn }) {
                     <RoomServiceIcon />
                   ) : resident.serviceName === "fitnessRoom" ? (
                     <FitnessCenterIcon />
-                  ) : null }
+                  ) : null}
                   {/* <Typography sx={{ ml: 2 }}>ที่จอดรถ</Typography> */}
                   <Typography sx={{ ml: 2 }}>{resident.serviceName}</Typography>
-                  </Grid>
-                  ))}
-              </Grid>
+                </Grid>
+              ))}
+            </Grid>
           </Grid>
         </Grid>
         {/* check-in & check-out block */}
@@ -393,7 +408,7 @@ function AddcomDetail({ checkIn }) {
         </Box>
         {/* {resident.rooms.map(item) => ()} */}
         {/* {resident?.rooms?.map((resident) => ( */}
-        {rooms?.map((room) => (
+        {rooms?.map(room => (
           <EachRoomCard
             room={room}
             updateRoomAmount={updateRoomAmount}

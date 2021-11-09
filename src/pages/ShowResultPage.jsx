@@ -20,7 +20,7 @@ function ShowResultPage() {
     if (province) {
       axios
         .get(`http://localhost:7777/search/province?province=${province}`)
-        .then((res) => {
+        .then(res => {
           // console.log(res);
           setRes(res.data.residents);
         });
@@ -30,7 +30,7 @@ function ShowResultPage() {
           `http://localhost:7777/search?resident=${resident}&&checkin=${checkIn}&&roominput=${room}`
         )
 
-        .then((res) => {
+        .then(res => {
           // console.log(res);
           setRes(res.data.avail);
         });
@@ -42,10 +42,15 @@ function ShowResultPage() {
       <SpaceforHead />
       <Header />
 
-      <Container maxWidth="xl" sx={{ mt: 18 }}>
+      <Container maxWidth='xl' sx={{ mt: 16 }}>
         <Grid container>
           <Grid item xs={3}>
-            <Search residentSearch={resident} province={province}  checkIn={checkIn} room={room}/>
+            <Search
+              residentSearch={resident}
+              province={province}
+              checkIn={checkIn}
+              room={room}
+            />
           </Grid>
           <Grid item xs={9}>
             <HotelCard data={res} residentSearch={resident} checkIn={checkIn} />
