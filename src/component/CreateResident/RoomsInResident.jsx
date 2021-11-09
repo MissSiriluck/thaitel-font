@@ -25,7 +25,8 @@ const CustomButtonRoot = styled("button")(`
     cursor: pointer;
     box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 0 rgba(0, 127, 255, 0);
     border: none;
-    
+    height: 40px
+    margin: 0px
 
     &:hover {
         background-color: #FF0005;
@@ -75,7 +76,7 @@ function RoomsInResident({ status }) {
   };
   // console.log(`createResident.roomCollection`, createResident.roomCollection);
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" sx={{ marginBottom: '30px'}}>
       <Stack
         spacing={2}
         sx={{ display: "flex", flexDirection: "column", mt: 4 }}
@@ -83,6 +84,8 @@ function RoomsInResident({ status }) {
         <Grid item>
           <Typography sx={{ fontSize: "36px" }}>ห้องทั้งหมดของคุณ</Typography>
         </Grid>
+        <Grid item sx={{ padding: '20px', border: '2px solid #c4c4c4', borderRadius: '10px', marginBottom: '30px'}}>
+        <Grid item >
         {createResident.roomCollection?.length > 0 ? (
           <>
             {createResident.roomCollection.map((room, index) => (
@@ -125,7 +128,8 @@ function RoomsInResident({ status }) {
             </Box>
           </Grid>
         )}
-      </Stack>
+        </Grid>
+
 
       <ModalAddRoomsForm
         addRoomCollection={addRoomCollection}
@@ -143,7 +147,7 @@ function RoomsInResident({ status }) {
             sx={{
               display: "flex",
               justifyContent: "end",
-              marginBottom: "25px",
+              // marginBottom: "25px",
             }}
           >
             <CustomButton
@@ -156,6 +160,8 @@ function RoomsInResident({ status }) {
                 marginBottom: "50px",
                 marginTop: "20px",
                 height: "40px",
+                margin: "0px"
+
               }}
               onClick={handleOpen}
             >
@@ -171,6 +177,9 @@ function RoomsInResident({ status }) {
           </Grid>
         </Grid>
       </Grid>
+      </Grid>
+      </Stack>
+      
     </Container>
   );
 }

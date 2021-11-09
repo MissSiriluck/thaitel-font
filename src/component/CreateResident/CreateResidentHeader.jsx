@@ -1,4 +1,5 @@
 import { Grid, Typography } from '@mui/material';
+import ImageCreateResident from '../../assets/images/bg_container_residentregisterpage2.jpeg'
 import React from 'react';
 
 function CreateResidentHeader() {
@@ -13,6 +14,9 @@ function CreateResidentHeader() {
           padding: '45px',
           background: 'black',
           marginBottom: '30px',
+          backgroundImage: `url(${ImageCreateResident})`,
+          backgroundSize: 'cover',
+          backgroundPositionY: '42%'
         }}
         xs={12}
       >

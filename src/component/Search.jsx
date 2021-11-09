@@ -92,6 +92,7 @@ function Search({ residentSearch, province, checkIn:cI,rooms }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [resident, setResident] = useState(residentSearch);
   const [checkIn, setCheckIn] = useState([new Date(cI.split(',')[0]), new Date(cI.split(',')[1])]); 
+  
 
   // const [guest, setGuest] = useState(1);
   const [room, setRoom] = useState(1);
